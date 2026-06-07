@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staatliches Bauhaus — Sleek Interactive Landing Page</title>
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts: Space Grotesk (sans) & JetBrains Mono (mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --font-sans: "Space Grotesk", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+      }
+      body {
+        font-family: var(--font-sans);
+        background-color: #F4F4F2;
+        color: #0F172A;
+        -webkit-font-smoothing: antialiased;
+      }
+      /* Drafting paper grid lines */
+      .bauhaus-grid {
+        background-image: 
+          linear-gradient(to right, #CBD5E1 1px, transparent 1px),
+          linear-gradient(to bottom, #CBD5E1 1px, transparent 1px);
+        background-size: 80px 80px;
+      }
+      .bauhaus-grid-fine {
+        background-image: 
+          linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      /* Text stroke for kinetic marquee */
+      .text-stroke-bauhaus {
+        -webkit-text-stroke: 1.5px #E23B25;
+        color: transparent;
+      }
+      @media (min-width: 768px) {
+        .text-stroke-bauhaus {
+          -webkit-text-stroke: 2px #E11D48;
+        }
+      }
+      /* Aesthetic solid elevations */
+      .shadow-bauhaus-sm { box-shadow: 4px 4px 0px 0px #0F172A; }
+      .shadow-bauhaus { box-shadow: 8px 8px 0px 0px #0F172A; }
+      .shadow-bauhaus-lg { box-shadow: 16px 16px 0px 0px #0F172A; }
+      .shadow-bauhaus-blue { box-shadow: 8px 8px 0px 0px #2563EB; }
+      .shadow-bauhaus-yellow { box-shadow: 8px 8px 0px 0px #FDE047; }
+      .shadow-shadow-red { box-shadow: 8px 8px 0px 0px #E11D48; }
+      
+      /* Rotator animations for coordinate tags */
+      @keyframes spin-slow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .animate-spin-slow {
+        animation: spin-slow 15s linear infinite;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden min-h-screen">
+
+    <!-- Progress Alignment Bar Indicator -->
+    <div id="scroll-progress-indicator" class="fixed top-0 left-0 lg:left-20 h-1.5 bg-[#E11D48] z-[60] transition-all duration-75 origin-left" style="width: 0%;"></div>
+
+    <!-- Floating Structural Blueprint Lines -->
+    <div class="fixed inset-0 pointer-events-none z-30 opacity-[0.02] bauhaus-grid"></div>
+
+    <!-- SIDE PANEL DRAFTING INDICATOR (LEFT RAIL on Desktop) -->
+    <nav class="hidden lg:flex fixed left-0 top-0 h-screen w-20 border-r border-[#CBD5E1] flex-col items-center justify-between py-8 bg-[#F4F4F2] z-50 select-none">
+      <div class="flex flex-col items-center gap-1">
+        <div class="w-10 h-10 border border-slate-200 flex items-center justify-center font-mono font-bold text-lg bg-[#E11D48] text-white shadow-bauhaus-sm">B</div>
+        <span class="font-mono text-[10px] tracking-widest text-[#0F172A] font-bold mt-1">1919</span>
+      </div>
+
+      <!-- Navigation Tick Lines -->
+      <div class="flex flex-col gap-8 rotate-18 -translate-x-[2px]">
+        <a href="#intro" class="group flex items-center justify-end gap-3 text-right">
+          <span class="font-mono text-[11px] font-bold text-[#E11D48]">01</span>
+          <span class="font-mono text-[10px] tracking-wider font-bold text-[#0F172A] uppercase">INTRO</span>
+        </a>
+        <a href="#manifesto" class="group flex items-center justify-end gap-3 text-right">
+          <span class="font-mono text-[11px] font-bold text-slate-400 group-hover:text-[#0F172A]">02</span>
+          <span class="font-mono text-[10px] tracking-wider font-bold text-transparent group-hover:text-[#0F172A] uppercase">MANIF</span>
+        </a>
+        <a href="#shapes" class="group flex items-center justify-end gap-3 text-right">
+          <span class="font-mono text-[11px] font-bold text-slate-400 group-hover:text-[#0F172A]">03</span>
+          <span class="font-mono text-[10px] tracking-wider font-bold text-transparent group-hover:text-[#0F172A] uppercase">SHAPE</span>
+        </a>
+        <a href="#exhibition" class="group flex items-center justify-end gap-3 text-right">
+          <span class="font-mono text-[11px] font-bold text-slate-400 group-hover:text-[#0F172A]">04</span>
+          <span class="font-mono text-[10px] tracking-wider font-bold text-transparent group-hover:text-[#0F172A] uppercase">EXHIB</span>
+        </a>
+        <a href="#workshop" class="group flex items-center justify-end gap-3 text-right">
+          <span class="font-mono text-[11px] font-bold text-slate-400 group-hover:text-[#0F172A]">05</span>
+          <span class="font-mono text-[10px] tracking-wider font-bold text-transparent group-hover:text-[#0F172A] uppercase">WORK</span>
+        </a>
+      </div>
+
+      <!-- Live Coordinates Tracker -->
+      <div class="flex flex-col items-center gap-4">
+        <div class="flex flex-col items-center font-mono text-[10px] text-slate-500 font-bold uppercase leading-tight text-center">
+          <span id="tracker-y">Y: 0px</span>
+        </div>
+        <div class="w-4 h-4 rounded-full border border-dashed border-[#0F172A] animate-spin-slow"></div>
+      </div>
+    </nav>
+
+    <!-- FLOATING TOP BAR CONTAINER -->
+    <header class="fixed top-0 right-0 w-full lg:w-[calc(100%-80px)] h-16 border-b border-[#CBD5E1] bg-white/70 backdrop-blur-md z-40 px-6 flex items-center justify-between select-none">
+      <div class="flex items-center gap-4">
+        <div class="w-3 h-3 rounded-full bg-[#2563EB]"></div>
+        <div class="w-3 h-3 bg-[#E11D48]"></div>
+        <svg viewBox="0 0 100 100" class="w-3 h-3 text-[#FDE047] fill-current">
+          <polygon points="50,0 100,100 0,100" />
+        </svg>
+        <div class="hidden sm:block h-6 w-[1px] bg-slate-300 mx-2"></div>
+        <div class="hidden sm:flex flex-col">
+          <span class="font-sans text-xs tracking-widest font-black uppercase">STAATLICHES BAUHAUS</span>
+          <span class="font-mono text-[9px] text-slate-400 font-semibold uppercase">Kunst und Technik • Eine neue Einheit</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="#workshop" class="bg-[#0F172A] text-white px-4 py-1.5 font-mono text-xs font-bold uppercase hover:bg-[#E11D48] transition-all tracking-wider shadow-bauhaus-sm">
+          POSTER LAB
+        </a>
+      </div>
+    </header>
+
+    <div class="lg:pl-20">
+      
+      <!-- ================= SECTION 01: HERO ================= -->
+      <section id="intro" class="relative min-h-screen w-full bg-[#F4F4F2] bauhaus-grid flex flex-col justify-between overflow-hidden pt-24 pb-12 px-6 md:px-12 lg:px-24 border-b border-[#CBD5E1]" onmousemove="parallaxHero(event)">
+        <!-- Framing lines -->
+        <div class="absolute top-1/3 left-0 w-full h-[1px] bg-[#E11D48]/20 pointer-events-none"></div>
+        <div class="absolute top-2/3 left-0 w-full h-[1px] bg-[#2563EB]/20 pointer-events-none"></div>
+        <div class="absolute left-1/3 top-0 w-[1px] h-full bg-[#FDE047]/30 pointer-events-none"></div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center flex-1 my-auto">
+          <div class="lg:col-span-7 flex flex-col items-start text-[#0F172A]">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="font-mono text-xs font-black text-white bg-[#0F172A] px-1.5 py-0.5 tracking-widest">01 // INTRO</span>
+              <div class="h-[1px] w-12 bg-[#0F172A]"></div>
+              <span class="font-mono text-xs tracking-widest font-bold text-[#2563EB] uppercase">WEIMAR ACADEMY</span>
+            </div>
+
+            <h1 class="text-7xl md:text-8xl lg:text-9xl font-black leading-[0.85] tracking-tighter mb-4 flex flex-col uppercase">
+              <span>KUNST</span>
+              <span class="text-[#E11D48]">&nbsp;&nbsp;&nbsp;UND</span>
+              <span class="ml-8 md:ml-16">TECHNIK</span>
+            </h1>
+
+            <div class="max-w-md mt-4">
+              <h2 class="font-mono text-sm leading-tight font-black tracking-widest uppercase mb-4 border-b border-[#0F172A] pb-3">
+                • A NEW SYNTHESIS OF CREATIVITY & INDUSTRY
+              </h2>
+              <p class="font-mono text-xs text-slate-600 leading-relaxed font-bold">
+                The Staatliches Bauhaus was founded in Weimar in 1919. It sought to integrate individual artistic vision with mass production, turning design into a vital, functional element of everyday life.
+              </p>
+            </div>
+          </div>
+
+          <!-- Massive Parallax Canvas (Hero Shapes) -->
+          <div class="lg:col-span-5 h-[400px] lg:h-[500px] relative flex items-center justify-center">
+            
+            <!-- Blueprint assistance square -->
+            <div class="absolute inset-0 border border-dashed border-[#CBD5E1] flex items-center justify-center">
+              <div class="w-full h-[1px] border-t border-dashed border-slate-300"></div>
+              <div class="h-full w-[1px] border-l border-dashed border-slate-300 absolute"></div>
+            </div>
+
+            <!-- Shape 1: Resonant Blue Circle -->
+            <div id="p-circle" class="absolute w-44 h-44 md:w-52 md:h-52 rounded-full bg-[#2563EB] z-10 shadow-bauhaus-blue flex flex-col items-center justify-center transition-transform hover:scale-105 duration-300 cursor-pointer">
+              <div class="absolute inset-0 rounded-full border border-white/20 flex items-center justify-center">
+                <div class="w-5/6 h-5/6 rounded-full border border-white/10"></div>
+                <div class="w-2/3 h-2/3 rounded-full border border-dashed border-white/20"></div>
+              </div>
+              <p class="font-mono text-[10px] text-white tracking-widest font-black uppercase">Circle</p>
+              <p class="font-mono text-[9px] text-[#FDE047] font-bold">FOCUS</p>
+            </div>
+
+            <!-- Shape 2: Crimson Red Square -->
+            <div id="p-square" class="absolute w-40 h-40 md:w-48 md:h-48 bg-[#E11D48] z-20 shadow-bauhaus-lg flex items-center justify-center transition-transform hover:scale-105 duration-300 cursor-pointer">
+              <div class="absolute inset-0 border border-white/20 grid grid-cols-2 grid-rows-2 p-1 opacity-40">
+                <div class="border border-white/10"></div>
+                <div class="border border-white/10"></div>
+                <div class="border border-white/10"></div>
+                <div class="border border-white/10"></div>
+              </div>
+              <p class="font-mono text-[10px] text-white tracking-widest font-black uppercase">Square</p>
+            </div>
+
+            <!-- Shape 3: Yellow Vector Triangle -->
+            <div id="p-triangle" class="absolute w-52 h-52 md:w-60 md:h-60 z-0 text-[#FDE047] drop-shadow-[8px_8px_0px_#0F172A] transition-transform hover:scale-105 duration-300 cursor-pointer">
+              <svg viewBox="0 0 100 100" class="w-full h-full fill-current">
+                <polygon points="50,15 88,80 12,80" />
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="relative z-10 w-full mt-12 pt-6 border-t border-[#CBD5E1] flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div class="flex gap-8 font-mono text-[11px] text-slate-500 font-extrabold uppercase">
+            <div><span class="opacity-50">EPOCH:</span> 1919 — 1933</div>
+            <div><span class="opacity-50">COORD:</span> 51.84° N, 12.23° E</div>
+          </div>
+          <a href="#manifesto" class="flex items-center gap-2 font-mono text-[11px] font-bold border border-slate-900 px-4 py-2 hover:bg-slate-900 hover:text-white transition-all shadow-bauhaus-sm">
+            PROCEED TO MANIFESTO ↓
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 02: MANIFESTO ================= -->
+      <section id="manifesto" class="relative min-h-screen w-full bg-[#0F172A] text-white flex flex-col justify-between overflow-hidden py-24 px-6 md:px-12 lg:px-24 border-b border-[#CBD5E1]">
+        <div class="absolute inset-0 bauhaus-grid opacity-[0.03] pointer-events-none"></div>
+
+        <div class="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-white/10 pb-8">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-black text-black bg-[#FDE047] px-1.5 py-0.5 tracking-widest">02 // MANIFESTO</span>
+            <div class="h-[1px] w-12 bg-white/30"></div>
+            <span class="font-mono text-xs tracking-widest text-slate-400 uppercase">WALTER GROPIUS 1919</span>
+          </div>
+          <span class="font-mono text-[11px] text-slate-500 font-bold uppercase tracking-widest">DECLARATION</span>
+        </div>
+
+        <!-- Kinetic Scrolling marquee -->
+        <div class="relative z-10 w-full flex flex-col gap-4 my-12">
+          <div class="overflow-hidden whitespace-nowrap py-1">
+            <div class="font-sans text-[10vw] font-black tracking-tighter text-stroke-bauhaus leading-none uppercase select-none animate-pulse">
+              FORM • FOLLOWS • FUNCTION • FORM • FOLLOWS • FUNCTION
+            </div>
+          </div>
+          <div class="grid grid-cols-12 h-[2px] bg-white/10 my-2">
+            <div class="col-span-4 bg-[#E11D48]"></div>
+            <div class="col-span-8"></div>
+          </div>
+          <div class="overflow-hidden whitespace-nowrap py-1">
+            <div class="font-sans text-[10vw] font-black tracking-tighter text-[#FDE047] leading-none uppercase select-none">
+              LESS IS MORE • LESS IS MORE • LESS IS MORE
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Tenets Grid -->
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 my-10">
+          <!-- Tenet 1 -->
+          <div class="border border-white/10 p-6 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
+            <span class="text-4xl font-black text-[#E11D48] font-sans">I</span>
+            <h3 class="font-sans text-lg font-black uppercase tracking-wider text-white mt-4 mb-2">Form Follows Utility</h3>
+            <p class="font-mono text-[11px] text-slate-400 leading-relaxed">Remove the superfluous. Shape must relate directly to utility. Beauty is inherent in construction.</p>
+          </div>
+          <!-- Tenet 2 -->
+          <div class="border border-white/10 p-6 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
+            <span class="text-4xl font-black text-[#2563EB] font-sans">II</span>
+            <h3 class="font-sans text-lg font-black uppercase tracking-wider text-white mt-4 mb-2">The Great Synthesis</h3>
+            <p class="font-mono text-[11px] text-slate-400 leading-relaxed">Erase barriers between fine arts and crafts. Industrial design, type, and painting unite as one.</p>
+          </div>
+          <!-- Tenet 3 -->
+          <div class="border border-white/10 p-6 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
+            <span class="text-4xl font-black text-[#FDE047] font-sans">III</span>
+            <h3 class="font-sans text-lg font-black uppercase tracking-wider text-[#FDE047] mt-4 mb-2">Primary Primacy</h3>
+            <p class="font-mono text-[11px] text-slate-400 leading-relaxed">Fundamental reduction of form to physical emotional pillars: Red Square, Blue Circle, Yellow Triangle.</p>
+          </div>
+        </div>
+
+        <div class="relative z-10 w-full pt-6 border-t border-white/10 flex justify-between text-slate-500 font-mono text-[11px]">
+          <span>• RADICAL MODERNISM DESIGN SCALE</span>
+          <span class="text-[#E11D48] font-bold">[ GERMAN DEUTSCHE SEKTION ]</span>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 03: INTERACTION PLAYFIELD ================= -->
+      <section id="shapes" class="relative min-h-screen w-full bg-white flex flex-col justify-between overflow-hidden py-24 px-6 md:px-12 lg:px-24 border-b border-[#CBD5E1]">
+        <div class="absolute inset-0 bauhaus-grid opacity-[0.08] pointer-events-none"></div>
+
+        <div class="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-slate-300 pb-8 mb-12">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-black text-white bg-[#2563EB] px-1.5 py-0.5 tracking-widest">03 // PLAYGROUND</span>
+            <div class="h-[1px] w-12 bg-slate-400"></div>
+            <span class="font-mono text-xs tracking-widest text-[#0F172A] uppercase">TACTILE GEOMETRIC CONSTANTS</span>
+          </div>
+          <span class="font-mono text-[11px] text-slate-500 uppercase tracking-widest font-black">* Tap tabs below to load specific boards</span>
+        </div>
+
+        <div class="relative z-10 max-w-2xl mb-8">
+          <h2 class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tighter uppercase leading-none">GEOMETRIC GEODESY</h2>
+          <p class="font-mono text-xs text-slate-600 mt-3 font-semibold">
+            Interact with the core building blocks. Subdivide grid planes, trigger the sine synthesizer, or deform vector skew weights.
+          </p>
+        </div>
+
+        <!-- Labs Navigation Tabs -->
+        <div class="relative z-10 flex gap-4 border-b border-slate-300 pb-6 mb-12 flex-wrap">
+          <button id="btn-tab-square" onclick="togglePlaygroundTab('square')" class="flex items-center gap-2 px-5 py-3 border font-mono text-xs font-black uppercase shadow-bauhaus-sm bg-[#E11D48] text-white cursor-pointer transition-transform duration-200">
+            <span>■ RED SQUARE SUBDIV</span>
+          </button>
+          <button id="btn-tab-circle" onclick="togglePlaygroundTab('circle')" class="flex items-center gap-2 px-5 py-3 border font-mono text-xs font-black uppercase shadow-bauhaus-sm bg-[#F4F4F2] text-[#0F172A] cursor-pointer transition-transform duration-200">
+            <span>● BLUE AUDIO SYNTH</span>
+          </button>
+          <button id="btn-tab-triangle" onclick="togglePlaygroundTab('triangle')" class="flex items-center gap-2 px-5 py-3 border font-mono text-xs font-black uppercase shadow-bauhaus-sm bg-[#F4F4F2] text-[#0F172A] cursor-pointer transition-transform duration-200">
+            <span>▲ YELLOW VECTOR RIG</span>
+          </button>
+        </div>
+
+        <!-- Playfield Area -->
+        <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch min-h-[450px]">
+          
+          <!-- Board Canvas -->
+          <div class="lg:col-span-7 border-2 border-[#0F172A] bg-[#F4F4F2] shadow-bauhaus-lg overflow-hidden flex items-center justify-center p-8 relative">
+            <div class="absolute inset-0 bauhaus-grid-fine pointer-events-none opacity-50"></div>
+            
+            <div class="absolute top-4 left-4 font-mono text-[9px] text-slate-400 font-bold">BOARD_CONTAINER_V3</div>
+
+            <!-- TAB 1: SQUARE BOARD -->
+            <div id="board-square" class="w-72 h-72 md:w-80 md:h-80 border-4 border-[#0F172A] bg-white grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);">
+              <!-- Rendered cells via Javascript -->
+            </div>
+
+            <!-- TAB 2: CIRCLE BOARD (Synth Arena) -->
+            <div id="board-circle" class="hidden w-full h-full flex flex-col items-center justify-center min-h-[300px]">
+              <div id="synth-pad" class="w-64 h-64 md:w-72 md:h-72 rounded-full bg-[#2563EB] shadow-bauhaus-blue flex items-center justify-center relative cursor-crosshair overflow-hidden" onmousedown="triggerSynth(event)" onmousemove="glideSynth(event)" onmouseleave="clearSynth()">
+                <!-- Ripples SVG Area -->
+                <svg id="synth-ripples" class="absolute inset-0 w-full h-full pointer-events-none"></svg>
+                <div class="absolute border-l border-dashed border-white/20 h-full top-0 left-1/2"></div>
+                <div class="absolute border-t border-dashed border-white/20 w-full top-1/2 left-0"></div>
+                <span id="synth-feedback-txt" class="font-mono text-sm font-extrabold text-white relative z-10">TAP TO SYNTH</span>
+              </div>
+            </div>
+
+            <!-- TAB 3: TRIANGLE BOARD (Vector Rig) -->
+            <div id="board-triangle" class="hidden w-full h-full flex flex-col items-center justify-center min-h-[300px]">
+              <div id="vector-triangle-graphic" class="w-60 h-60 text-[#FDE047] drop-shadow-[6px_6px_0px_#0F172A] duration-200 ease-out origin-center">
+                <svg viewBox="0 0 100 100" class="w-full h-full fill-current">
+                  <polygon points="50,15 88,80 12,80" />
+                  <circle cx="50" cy="55" r="3" fill="#0F172A" />
+                  <!-- vectors projection guidelines -->
+                  <line x1="50" y1="15" x2="50" y2="80" stroke="#0F172A" stroke-width="0.5" stroke-dasharray="2,2"></line>
+                  <line x1="12" y1="80" x2="50" y2="55" stroke="#0F172A" stroke-width="0.5" stroke-dasharray="2,2"></line>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Board Sidebar Controls -->
+          <div class="lg:col-span-5 border-2 border-[#0F172A] p-6 bg-white shadow-bauhaus-sm flex flex-col justify-between">
+            <div class="flex flex-col gap-6">
+              <div class="border-b border-slate-300 pb-3 font-mono text-xs font-black uppercase text-[#0F172A]">CONTROL MONITOR</div>
+
+              <!-- CONTROLS: RED SQUARE -->
+              <div id="control-square" class="flex flex-col gap-4">
+                <div>
+                  <div class="flex justify-between text-xs font-bold font-mono mb-2">
+                    <span>GRID RADIX:</span>
+                    <span id="grid-radix-txt" class="text-[#E11D48]">- 3x3 -</span>
+                  </div>
+                  <input type="range" id="slider-grid-subdiv" min="2" max="6" value="3" oninput="changeSquareGrid(this.value)" class="w-full accent-[#E11D48] h-1 bg-slate-200 cursor-pointer">
+                </div>
+                <div class="bg-slate-50 p-4 border border-dashed border-slate-300">
+                  <h4 class="font-sans text-xs font-black uppercase text-slate-800 mb-2">Subdivision Rules</h4>
+                  <p class="font-mono text-[10px] text-slate-500 leading-relaxed font-bold">Click inside any grid tile to increment its local rotational angle offset by 90 degrees and cycle core primary colors.</p>
+                </div>
+                <button onclick="resetSquareSandbox()" class="w-full border border-slate-900 bg-white py-2 text-xs font-mono font-bold hover:bg-slate-900 hover:text-white transition-all shadow-bauhaus-sm">CLEAR RECTANGLE DEVIATIONS</button>
+              </div>
+
+              <!-- CONTROLS: BLUE CIRCLE -->
+              <div id="control-circle" class="hidden flex flex-col gap-4">
+                <div class="flex items-center justify-between p-4 border border-[#CBD5E1] bg-slate-50 shadow-bauhaus-sm">
+                  <span class="font-mono text-xs font-bold">SYNTH SOUND EMITTER</span>
+                  <button id="btn-synth-toggle" onclick="toggleSynthEngine()" class="bg-[#F4F4F2] border border-[#0F172A] px-4 py-1.5 font-mono text-[10px] font-black shadow-bauhaus-sm">ENABLE AUDIO</button>
+                </div>
+                <p class="font-mono text-[10px] text-slate-500 leading-relaxed font-bold">
+                  Wassily Kandinsky theorized color corresponds directly to specific acoustic resonant values. Circles correspond directly to pure internal sine waves. Hover and click inside to experience acoustic weights.
+                </p>
+                <div class="font-mono text-[9px] bg-slate-900 text-[#FDE047] p-3 leading-loose font-bold uppercase">
+                  <span>PITCH WAVE: SINE</span><br>
+                  <span id="txt-synth-status">STATUS: MUTED</span>
+                </div>
+              </div>
+
+              <!-- CONTROLS: YELLOW TRIANGLE -->
+              <div id="control-triangle" class="hidden flex flex-col gap-4">
+                <div>
+                  <div class="flex justify-between text-xs font-bold font-mono mb-2">
+                    <span>ROTATIONAL AXIS:</span>
+                    <span id="txt-tri-rot">0°</span>
+                  </div>
+                  <input type="range" min="0" max="360" value="0" oninput="skewTriangle('rot', this.value)" class="w-full accent-[#FDE047] h-1 bg-slate-200 cursor-pointer">
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs font-bold font-mono mb-2">
+                    <span>VECTOR SKEW:</span>
+                    <span id="txt-tri-skew">0px</span>
+                  </div>
+                  <input type="range" min="-45" max="45" value="0" oninput="skewTriangle('skew', this.value)" class="w-full accent-[#FDE047] h-1 bg-slate-200 cursor-pointer">
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs font-bold font-mono mb-2">
+                    <span>SCALE COEF:</span>
+                    <span id="txt-tri-scale">1.0x</span>
+                  </div>
+                  <input type="range" min="5" max="15" value="10" oninput="skewTriangle('scale', this.value)" class="w-full accent-[#FDE047] h-1 bg-slate-200 cursor-pointer">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="border-t border-slate-200 pt-4 font-mono text-[9px] text-slate-400 flex justify-between font-black mt-6">
+              <span>SANDBOX: RADIAL_1925</span>
+              <span class="text-[#2563EB]">ACTIVE_CHANNEL</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="relative z-10 w-full pt-6 border-t border-slate-300 flex justify-between text-slate-400 font-mono text-[11px] mt-12">
+          <span>• STABILIZATION GRID: INDEX_03</span>
+          <span>• STAATLICHES BAUHAUS DATA</span>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 04: EXHIBITION ================= -->
+      <section id="exhibition" class="relative min-h-screen w-full bg-[#F4F4F2] flex flex-col justify-between overflow-hidden py-24 px-6 md:px-12 lg:px-24 border-b border-[#CBD5E1]">
+        <div class="absolute inset-0 bauhaus-grid opacity-[0.08] pointer-events-none"></div>
+
+        <div class="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-slate-300 pb-8 mb-12">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-black text-white bg-black px-1.5 py-0.5 tracking-widest">04 // ARCHIVE</span>
+            <div class="h-[1px] w-12 bg-[#0F172A]"></div>
+            <span class="font-mono text-xs tracking-widest text-[#0F172A] uppercase">HISTORICAL MASTERS</span>
+          </div>
+          <span class="font-mono text-[11px] text-slate-500 uppercase tracking-widest">Aesthetic Artifacts</span>
+        </div>
+
+        <div class="relative z-10 max-w-2xl mb-12">
+          <h2 class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tighter uppercase leading-none">THE ARCHIVE PLATES</h2>
+          <p class="font-mono text-xs text-slate-600 mt-3 font-semibold">
+            Explore iconic visual compositions designed by original masters of the Weimar and Dessau academies. Hover over cards to see composition patterns decouple in space.
+          </p>
+        </div>
+
+        <!-- Masters Cards Grid -->
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="border-2 border-[#0F172A] bg-white p-5 flex flex-col justify-between shadow-bauhaus-sm hover:-translate-y-2 hover:shadow-bauhaus duration-300 group">
+            <div>
+              <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-4">
+                <span class="font-mono text-[9px] text-[#0F172A] font-extrabold">1923 • GERMANY</span>
+                <span class="font-mono text-[9px] text-white bg-slate-900 px-1.5 font-bold uppercase tracking-widest">PLATE_01</span>
+              </div>
+              <!-- Graphics plate -->
+              <div class="h-48 bg-[#F4F4F2] border border-slate-300 relative overflow-hidden mb-4 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bauhaus-grid-fine opacity-60"></div>
+                <div class="w-16 h-16 rounded-full bg-[#2563EB] group-hover:scale-110 group-hover:-translate-x-3 transition-transform duration-300"></div>
+                <div class="w-0 h-0 border-l-[25px] border-l-transparent border-r-[25px] border-r-transparent border-b-[45px] border-b-[#FDE047] absolute translate-x-12 translate-y-6 group-hover:translate-x-14 transition-transform duration-300"></div>
+              </div>
+              <span class="font-mono text-[10px] text-slate-400 font-bold block uppercase mb-1">WASSILY KANDINSKY</span>
+              <h3 class="font-sans text-xl font-black uppercase text-[#0F172A] leading-tight mb-2 group-hover:text-[#E11D48] transition-colors">Kandinsky Scheme</h3>
+              <p class="font-mono text-[10px] text-slate-500 font-bold leading-relaxed mb-4">A study on the psychological weight of active circles contrasted against yellow angles.</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 font-mono text-[9px] text-slate-400">COMPO: CIRCLE • TRIANGLE</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="border-2 border-[#0F172A] bg-white p-5 flex flex-col justify-between shadow-bauhaus-sm hover:-translate-y-2 hover:shadow-bauhaus duration-300 group">
+            <div>
+              <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-4">
+                <span class="font-mono text-[9px] text-[#0F172A] font-extrabold">1926 • DESSAU</span>
+                <span class="font-mono text-[9px] text-white bg-slate-900 px-1.5 font-bold uppercase tracking-widest">PLATE_02</span>
+              </div>
+              <!-- Graphics plate -->
+              <div class="h-48 bg-[#F4F4F2] border border-slate-300 relative overflow-hidden mb-4 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bauhaus-grid-fine opacity-60"></div>
+                <div class="w-16 h-28 bg-[#E11D48] -translate-x-4 shadow-bauhaus-sm group-hover:scale-105 duration-300"></div>
+                <div class="w-20 h-10 bg-slate-900 absolute translate-x-6 translate-y-6 border border-white/25 group-hover:translate-x-8 duration-300"></div>
+              </div>
+              <span class="font-mono text-[10px] text-slate-400 font-bold block uppercase mb-1">WALTER GROPIUS</span>
+              <h3 class="font-sans text-xl font-black uppercase text-[#0F172A] leading-tight mb-2 group-hover:text-[#E11D48] transition-colors"> Dessau Layout</h3>
+              <p class="font-mono text-[10px] text-slate-500 font-bold leading-relaxed mb-4">An exploration of visual asymmetric weights, concrete grids, and red primary planes.</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 font-mono text-[9px] text-slate-400">COMPO: SQUARE • RECTANGLE</div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="border-2 border-[#0F172A] bg-white p-5 flex flex-col justify-between shadow-bauhaus-sm hover:-translate-y-2 hover:shadow-bauhaus duration-300 group">
+            <div>
+              <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-4">
+                <span class="font-mono text-[9px] text-[#0F172A] font-extrabold">1925 • ALPHABET</span>
+                <span class="font-mono text-[9px] text-white bg-slate-900 px-1.5 font-bold uppercase tracking-widest">PLATE_03</span>
+              </div>
+              <!-- Graphics plate -->
+              <div class="h-48 bg-[#F4F4F2] border border-slate-300 relative overflow-hidden mb-4 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bauhaus-grid-fine opacity-60"></div>
+                <div class="w-24 h-24 rounded-full border border-dashed border-slate-900 absolute flex items-center justify-center group-hover:rotate-45 duration-700 animate-spin-slow"></div>
+                <span class="text-6xl font-black tracking-tighter text-[#0F172A] relative group-hover:scale-110 duration-200">a</span>
+              </div>
+              <span class="font-mono text-[10px] text-slate-400 font-bold block uppercase mb-1">HERBERT BAYER</span>
+              <h3 class="font-sans text-xl font-black uppercase text-[#0F172A] leading-tight mb-2 group-hover:text-[#E11D48] transition-colors">Universal Font</h3>
+              <p class="font-mono text-[10px] text-slate-500 font-bold leading-relaxed mb-4">Simplification of glyph blocks. Eliminating capital letters for speed during printing.</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 font-mono text-[9px] text-slate-400">COMPO: CIRCLE • LETTERBLOCK</div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="border-2 border-[#0F172A] bg-white p-5 flex flex-col justify-between shadow-bauhaus-sm hover:-translate-y-2 hover:shadow-bauhaus duration-300 group">
+            <div>
+              <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-4">
+                <span class="font-mono text-[9px] text-[#0F172A] font-extrabold">1924 • WEIMAR</span>
+                <span class="font-mono text-[9px] text-white bg-slate-900 px-1.5 font-bold uppercase tracking-widest">PLATE_04</span>
+              </div>
+              <!-- Graphics plate -->
+              <div class="h-48 bg-[#F4F4F2] border border-slate-300 relative overflow-hidden mb-4 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bauhaus-grid-fine opacity-60"></div>
+                <svg class="absolute inset-0 w-full h-full stroke-current text-[#0F172A] stroke-2 fill-none pointer-events-none opacity-40">
+                  <path d="M 10 90 Q 50 10 90 90" />
+                </svg>
+                <div class="w-10 h-10 bg-[#E11D48] absolute translate-x-8 -translate-y-4 group-hover:translate-y-[-24px] duration-300"></div>
+              </div>
+              <span class="font-mono text-[10px] text-slate-400 font-bold block uppercase mb-1">PAUL KLEE</span>
+              <h3 class="font-sans text-xl font-black uppercase text-[#0F172A] leading-tight mb-2 group-hover:text-[#E11D48] transition-colors">Pedagogical Path</h3>
+              <p class="font-mono text-[10px] text-slate-500 font-bold leading-relaxed mb-4">Conceptual drawings where a line wanders freely over mathematical gravity coordinates.</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 font-mono text-[9px] text-slate-400">COMPO: LINEPLANE • ROTATOR</div>
+          </div>
+
+        </div>
+
+        <div class="relative z-10 w-full pt-6 border-t border-slate-300 flex justify-between text-slate-400 font-mono text-[11px] mt-12">
+          <span>• GERMAN RETROSPECTIVE: EXHIB_B</span>
+          <span>• COORD_80×80_NOMINAL</span>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 05: WORKSHOP ================= -->
+      <section id="workshop" class="relative min-h-screen w-full bg-white flex flex-col justify-between overflow-hidden py-24 px-6 md:px-12 lg:px-24 border-b border-[#CBD5E1]">
+        <div class="absolute inset-0 bauhaus-grid opacity-[0.08] pointer-events-none"></div>
+
+        <div class="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-slate-300 pb-8 mb-12">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-black text-white bg-[#E11D48] px-1.5 py-0.5 tracking-widest">05 // WORKSHOP</span>
+            <div class="h-[1px] w-12 bg-slate-400"></div>
+            <span class="font-mono text-xs tracking-widest text-[#0F172A] uppercase">CREATIVE DESIGN LAB</span>
+          </div>
+          <span class="font-mono text-[11px] text-slate-500 uppercase tracking-widest">Composition Engine V5</span>
+        </div>
+
+        <div class="relative z-10 max-w-2xl mb-12">
+          <h2 class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tighter uppercase leading-none">POSTER WORKSHOP</h2>
+          <p class="font-mono text-xs text-slate-600 mt-3 font-semibold leading-relaxed">
+            Erase the boundary between user and designer. Drag elements inside the blueprint grid canvas. Scale, rotate, stack depth layers, and sign the official state archive registry.
+          </p>
+        </div>
+
+        <!-- Interactive Workshop Grid Structure -->
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+          
+          <!-- Vector Sketchboard Plate (7 Grid columns) -->
+          <div class="lg:col-span-7 flex flex-col gap-4">
+            <div class="flex justify-between font-mono text-[9px] text-slate-400 font-bold px-2 relative leading-none">
+              <span>0CM [MAIN_AXIS]</span>
+              <span>10CM</span>
+              <span>20CM</span>
+              <span>30CM</span>
+              <span>40CM [BOUNDS]</span>
+              <div class="h-2 w-[1px] bg-slate-300 absolute left-2 bottom-[-8px]"></div>
+              <div class="h-2 w-[1px] bg-slate-300 absolute right-2 bottom-[-8px]"></div>
+            </div>
+
+            <!-- Sketch Board Grid Container -->
+            <div id="workshop-canvas" class="w-full aspect-[4/5] border-3 border-[#0F172A] bg-[#F4F4F2] shadow-bauhaus-lg p-4 relative overflow-hidden select-none" onclick="deselectShape()">
+              <div class="absolute inset-4 border border-dashed border-slate-300 pointer-events-none"></div>
+              <div class="absolute inset-0 bauhaus-grid-fine pointer-events-none"></div>
+
+              <!-- Draggable shapes rendered via JS inside -->
+            </div>
+
+            <div class="flex justify-between font-mono text-[10px] text-slate-500 font-black">
+              <span>* DRAG SHAPES TO ENGAGE PARALLAX GRID</span>
+              <span id="active-shapes-counter">ACTIVE METRIC: 4 SHAPES</span>
+            </div>
+          </div>
+
+          <!-- Controls side track (5 Grid columns) -->
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            
+            <!-- TOOLBOX -->
+            <div class="border-2 border-[#0F172A] p-6 bg-[#F4F4F2] shadow-bauhaus-sm">
+              <h3 class="font-sans text-xs font-black uppercase text-[#0F172A] border-b border-slate-300 pb-3 mb-4">Spawn Geometries</h3>
+              <div class="grid grid-cols-3 gap-3 mb-6">
+                <button onclick="addWorkshopShape('square')" class="border border-slate-900 bg-white hover:bg-[#E11D48] hover:text-white p-3 font-mono text-[11px] font-black uppercase flex flex-col items-center gap-2 shadow-bauhaus-sm cursor-pointer transition-colors">
+                  <div class="w-6 h-6 bg-[#E11D48]"></div>
+                  <span>+ SQUARE</span>
+                </button>
+                <button onclick="addWorkshopShape('circle')" class="border border-slate-900 bg-white hover:bg-[#2563EB] hover:text-white p-3 font-mono text-[11px] font-black uppercase flex flex-col items-center gap-2 shadow-bauhaus-sm cursor-pointer transition-colors">
+                  <div class="w-6 h-6 bg-[#2563EB] rounded-full"></div>
+                  <span>+ CIRCLE</span>
+                </button>
+                <button onclick="addWorkshopShape('triangle')" class="border border-slate-900 bg-white hover:bg-[#FDE047] hover:text-slate-900 p-3 font-mono text-[11px] font-black uppercase flex flex-col items-center gap-2 shadow-bauhaus-sm cursor-pointer transition-colors">
+                  <svg viewBox="0 0 100 100" class="w-6 h-6 text-[#FDE047] fill-current">
+                    <polygon points="50,15 88,80 12,80" />
+                  </svg>
+                  <span>+ TRIANGLE</span>
+                </button>
+              </div>
+
+              <!-- MODIFIERS (Drives properties on Selected Element) -->
+              <div id="shape-modifiers-panel" class="hidden border-t border-dashed border-slate-300 pt-4 flex flex-col gap-4">
+                <div class="flex justify-between items-center mb-1">
+                  <span id="selected-shape-title" class="font-mono text-xs font-black text-[#0F172A]">ATTRIBUTES ON ELEM</span>
+                  <button onclick="deleteSelectedShape()" class="text-[#E11D48] text-xs font-bold hover:underline">REMOVE</button>
+                </div>
+
+                <div>
+                  <span class="font-mono text-[10px] font-black text-slate-500 block mb-1">1. COLOR SELECTION:</span>
+                  <div class="flex gap-2">
+                    <button onclick="updateSelectedShapeColor('#E11D48')" class="w-6 h-6 bg-[#E11D48] border border-slate-400 cursor-pointer"></button>
+                    <button onclick="updateSelectedShapeColor('#2563EB')" class="w-6 h-6 bg-[#2563EB] border border-slate-400 cursor-pointer"></button>
+                    <button onclick="updateSelectedShapeColor('#FDE047')" class="w-6 h-6 bg-[#FDE047] border border-slate-400 cursor-pointer"></button>
+                    <button onclick="updateSelectedShapeColor('#0F172A')" class="w-6 h-6 bg-[#0F172A] border border-slate-400 cursor-pointer"></button>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-mono text-[10px] font-bold text-slate-500 mb-1">
+                    <span>2. SCALE EXPANSION:</span>
+                    <span id="label-scale">1.0x</span>
+                  </div>
+                  <input type="range" id="input-scale" min="5" max="25" value="10" oninput="updateSelectedShapeScale(this.value)" class="w-full accent-slate-900 h-1 bg-slate-300 cursor-pointer">
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-mono text-[10px] font-bold text-slate-500 mb-1">
+                    <span>3. RADIAL ROTATION:</span>
+                    <span id="label-rotation">0°</span>
+                  </div>
+                  <input type="range" id="input-rotation" min="0" max="360" value="0" oninput="updateSelectedShapeRotation(this.value)" class="w-full accent-slate-900 h-1 bg-slate-300 cursor-pointer">
+                </div>
+
+                <!-- Depth Arrange buttons -->
+                <div class="flex gap-2 text-center mt-2">
+                  <button onclick="layerSelectedShape('front')" class="flex-1 border border-slate-900 bg-white hover:bg-slate-900 hover:text-white p-2 font-mono text-[10px] font-black shadow-bauhaus-sm">BRING TO FRONT</button>
+                  <button onclick="layerSelectedShape('back')" class="flex-1 border border-slate-900 bg-white hover:bg-slate-900 hover:text-white p-2 font-mono text-[10px] font-black shadow-bauhaus-sm">SEND TO BACK</button>
+                </div>
+              </div>
+
+              <!-- Fallback Empty message state -->
+              <div id="shape-modifiers-placeholder" class="text-center font-mono text-[11px] text-slate-400 py-6 border-t border-dashed border-slate-300 mt-4 leading-relaxed font-semibold">
+                * Click on any geometric element inside the grid drawing canvas to unlock scaling, skew direction, and depth arranging controls.
+              </div>
+            </div>
+
+            <!-- REGISTRY ARCHIVE FOR SIGN OFF -->
+            <div id="archive-sheet" class="border-2 border-[#0F172A] p-6 bg-white shadow-bauhaus">
+              <h3 class="font-sans text-xs font-black uppercase text-[#0F172A] border-b border-slate-300 pb-3 mb-4">ARCHIVE REGISTRY</h3>
+              
+              <!-- Form -->
+              <form id="form-register" onsubmit="submitArchiveRegistry(event)" class="flex flex-col gap-4">
+                <div>
+                  <label class="font-mono text-[10px] font-black text-slate-500 block mb-1">1. ARTIST NOM DE PLUME:</label>
+                  <input type="text" id="log-name" required placeholder="e.g. Bauhaus Gropius Student" class="w-full border border-slate-900 bg-[#F4F4F2] p-2 font-mono text-xs focus:ring-1 focus:outline-none focus:ring-[#2563EB] font-bold placeholder-slate-400">
+                </div>
+
+                <div>
+                  <label class="font-mono text-[10px] font-black text-slate-500 block mb-1">2. SECURITY DISCIPLINE TRAIN:</label>
+                  <select id="log-track" class="w-full border border-slate-900 bg-[#F4F4F2] p-2 font-mono text-xs focus:ring-1 focus:outline-none font-bold">
+                    <option value="Typography">TYPOGRAPHY (HERBERT BAYER)</option>
+                    <option value="Architecture">ARCHITECTURE (WALTER GROPIUS)</option>
+                    <option value="Painting">PAINTING (KANDINSKY / KLEE)</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="w-full mt-2 bg-[#0F172A] text-white hover:bg-[#2563EB] py-2.5 font-mono text-xs font-black shadow-bauhaus-sm uppercase transition-colors duration-200">
+                  LOCK WORK INTO ARCHIVE DATABASE
+                </button>
+              </form>
+
+              <!-- Success screen feedback -->
+              <div id="form-success-banner" class="hidden p-5 bg-[#2563EB] border border-[#0F172A] text-white text-center leading-relaxed">
+                <h4 class="font-sans text-lg font-black tracking-widest uppercase mb-1">REGISTERED ACCORDINGLY!</h4>
+                <p class="font-mono text-[10px]">Your poster metrics and student catalog token references are locked securely inside the digital archives memory for the year 2026.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="relative z-10 w-full pt-6 border-t border-[#CBD5E1] flex justify-between text-slate-400 font-mono text-[11px] mt-12">
+          <span>• INTEGRATED DESIGN FIELD: WORK_05</span>
+          <span class="text-[#E11D48]">ONLINE</span>
+        </div>
+      </section>
+
+      <!-- ================= PORTFOLIO BLUEPRINT FOOTER ================= -->
+      <footer class="w-full bg-[#0F172A] text-white border-t border-[#CBD5E1] py-12 px-6 md:px-12 lg:px-24">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+          
+          <div class="md:col-span-4 flex flex-col items-start gap-3">
+            <div class="w-12 h-12 border-2 border-white flex items-center justify-center font-mono font-bold text-xl bg-[#E11D48] shadow-bauhaus-sm">B</div>
+            <span class="font-sans text-lg font-black tracking-widest">STAATLICHES BAUHAUS</span>
+            <span class="font-mono text-xs text-slate-400">© Weimar 1919 • Dessau 1925</span>
+          </div>
+
+          <div class="md:col-span-5 font-mono text-[11px] text-slate-400 leading-relaxed font-semibold">
+            The Bauhaus model was forced down by political constraints in 1933, but its conceptual paradigm—that form must follow utility and fine arts must adapt to industrialized processes—remains the blueprint for modern UI/UX layout models today.
+          </div>
+
+          <div class="md:col-span-3 flex flex-col gap-1 text-[11px] font-mono md:text-right items-end text-slate-400 font-bold uppercase">
+            <span class="text-white">• LAYOUT: COMPLIANT_VITE</span>
+            <span>SYSTEM_NODE: DESSAU_RUN_Y</span>
+            <span class="text-[#FDE047]">COORD_SCALE_FACTOR: 1.00</span>
+          </div>
+
+        </div>
+
+        <div class="border-t border-white/10 mt-8 pt-4 flex justify-between items-center font-mono text-[10px] text-slate-500 font-black">
+          <span>PORT: 3000 // GH_PAGES_Nominal</span>
+          <span>CRAFT BY APPRENTICE CODING AGENT</span>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- ================= MODERN CONTROL SCRIPTS ================= -->
+    <script>
+      // 1. SCROLL METRICS TRACKER
+      window.addEventListener('scroll', () => {
+        const currentPos = window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = totalHeight > 0 ? (currentPos / totalHeight) * 100 : 0;
+        
+        document.getElementById('scroll-progress-indicator').style.width = `${progress}%`;
+        document.getElementById('tracker-y').innerText = `Y: ${Math.round(currentPos)}px`;
+      });
+
+      // 2. HERO PARALLAX TRACKER (Cursor Offset Move)
+      function parallaxHero(e) {
+        const circle = document.getElementById('p-circle');
+        const square = document.getElementById('p-square');
+        const triangle = document.getElementById('p-triangle');
+
+        const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+
+        circle.style.transform = `translate(${x * -40}px, ${y * -40}px)`;
+        square.style.transform = `translate(${x * 50}px, ${y * 50}px) rotate(${x * 45}deg)`;
+        triangle.style.transform = `translate(${x * -60}px, ${y * -60}px)`;
+      }
+
+      // 3. TAB SANDBOX CONTROLLER
+      function togglePlaygroundTab(type) {
+        const tabs = ['square', 'circle', 'triangle'];
+        tabs.forEach(t => {
+          document.getElementById(`board-${t}`).classList.add('hidden');
+          document.getElementById(`control-${t}`).classList.add('hidden');
+          document.getElementById(`btn-tab-${t}`).className = "flex items-center gap-2 px-5 py-3 border font-mono text-xs font-black uppercase shadow-bauhaus-sm bg-[#F4F4F2] text-[#0F172A] cursor-pointer transition-transform duration-200";
+        });
+
+        // Activating Target tab
+        document.getElementById(`board-${type}`).classList.remove('hidden');
+        document.getElementById(`control-${type}`).classList.remove('hidden');
+
+        // Color coordination
+        let btnColor = "bg-[#CBD5E1]";
+        if (type === 'square') btnColor = "bg-[#E11D48] text-white";
+        if (type === 'circle') btnColor = "bg-[#2563EB] text-white";
+        if (type === 'triangle') btnColor = "bg-[#FDE047] text-slate-900";
+
+        document.getElementById(`btn-tab-${type}`).className = `flex items-center gap-2 px-5 py-3 border font-mono text-xs font-black uppercase shadow-bauhaus-sm ${btnColor} cursor-pointer transition-transform duration-200`;
+        
+        // Pause active sound if going away from circle oscillator tab
+        if (type !== 'circle') clearSynth();
+      }
+
+      // --- LAB 01: RED SQUARE SUBDIVISION CELLS ---
+      let squareGridSize = 3;
+      let rotatedGridCells = {};
+      let coloredGridCells = {};
+
+      function renderSquareGrid() {
+        const board = document.getElementById('board-square');
+        board.innerHTML = '';
+        board.style.gridTemplateColumns = `repeat(${squareGridSize}, 1fr)`;
+        board.style.gridTemplateRows = `repeat(${squareGridSize}, 1fr)`;
+
+        for (let i = 0; i < squareGridSize * squareGridSize; i++) {
+          const cell = document.createElement('div');
+          const cellId = `cell-${i}`;
+          const currentRotation = rotatedGridCells[cellId] || 0;
+          const currentColor = coloredGridCells[cellId] || '#E11D48';
+
+          cell.id = cellId;
+          cell.className = "border border-[#0F172A] flex items-center justify-center font-mono text-[9px] text-white font-extrabold cursor-pointer select-none transition-all duration-300";
+          cell.style.backgroundColor = currentColor;
+          cell.style.transform = `rotate(${currentRotation}deg)`;
+          cell.innerText = `+${currentRotation}°`;
+
+          cell.onclick = (e) => {
+            e.stopPropagation();
+            // rotate cell
+            let nextRot = (currentRotation + 90) % 360;
+            rotatedGridCells[cellId] = nextRot;
+
+            // cycle colors
+            const palette = ['#E11D48', '#2563EB', '#FDE047', '#0F172A'];
+            const curIdx = palette.indexOf(currentColor);
+            const nextColor = palette[(curIdx + 1) % palette.length];
+            coloredGridCells[cellId] = nextColor;
+
+            renderSquareGrid();
+          };
+
+          board.appendChild(cell);
+        }
+      }
+
+      function changeSquareGrid(val) {
+        squareGridSize = parseInt(val);
+        document.getElementById('grid-radix-txt').innerText = `- ${val}x${val} -`;
+        resetSquareSandbox();
+      }
+
+      function resetSquareSandbox() {
+        rotatedGridCells = {};
+        coloredGridCells = {};
+        renderSquareGrid();
+      }
+
+      // --- LAB 02: BLUE CIRCLE ACOUSTIC SINE WAVE SYNTH ---
+      let isOscillatorRunning = false;
+      let audioCtx = null;
+      let oscNode = null;
+      let gainNode = null;
+
+      function toggleSynthEngine() {
+        const btn = document.getElementById('btn-synth-toggle');
+        if (!isOscillatorRunning) {
+          isOscillatorRunning = true;
+          btn.innerText = "DISABLE AUDIO";
+          btn.className = "bg-[#2563EB] text-white border border-[#0F172A] px-4 py-1.5 font-mono text-[10px] font-black shadow-bauhaus-sm cursor-pointer";
+          document.getElementById('txt-synth-status').innerText = "STATUS: SYNTH_ENG_NOMINAL";
+          document.getElementById('txt-synth-status').className = "text-[#2563EB] font-bold";
+        } else {
+          isOscillatorRunning = false;
+          btn.innerText = "ENABLE AUDIO";
+          btn.className = "bg-[#F4F4F2] text-[#0F172A] border border-[#0F172A] px-4 py-1.5 font-mono text-[10px] font-black shadow-bauhaus-sm cursor-pointer";
+          document.getElementById('txt-synth-status').innerText = "STATUS: MUTED";
+          document.getElementById('txt-synth-status').className = "text-slate-500 font-bold";
+          clearSynth();
+        }
+      }
+
+      function triggerSynth(e) {
+        if (!isOscillatorRunning) return;
+        const pad = document.getElementById('synth-pad');
+        const rect = pad.getBoundingClientRect();
+        const touchX = e.clientX - rect.left;
+        const touchY = e.clientY - rect.top;
+
+        const pitchRatio = touchX / rect.width;
+        const volumeRatio = 1 - (touchY / rect.height);
+        const frequency = Math.round(110 + pitchRatio * 550);
+
+        // Sound Engine
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          if (!oscNode) {
+            oscNode = audioCtx.createOscillator();
+            gainNode = audioCtx.createGain();
+            oscNode.type = 'sine';
+            oscNode.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscNode.start();
+          }
+
+          oscNode.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+          gainNode.gain.setValueAtTime(volumeRatio * 0.12, audioCtx.currentTime);
+
+          document.getElementById('synth-feedback-txt').innerText = `${frequency} HZ`;
+
+          // Ripple effect SVG
+          createVisualRipple(touchX, touchY);
+        } catch (err) {
+          console.warn('Acoustic synthesis pipeline failed:', err);
+        }
+      }
+
+      function glideSynth(e) {
+        if (e.buttons === 1) triggerSynth(e);
+      }
+
+      function clearSynth() {
+        if (oscNode) {
+          try {
+            oscNode.stop();
+            oscNode.disconnect();
+          } catch(e) {}
+          oscNode = null;
+        }
+        document.getElementById('synth-feedback-txt').innerText = `TAP TO SYNTH`;
+      }
+
+      function createVisualRipple(x, y) {
+        const svg = document.getElementById('synth-ripples');
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', '8');
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', '#FFFFFF');
+        circle.setAttribute('stroke-width', '2');
+        circle.style.transition = "all 0.5s ease-out";
+        svg.appendChild(circle);
+
+        setTimeout(() => {
+          circle.setAttribute('r', '120');
+          circle.style.opacity = '0';
+        }, 10);
+
+        setTimeout(() => {
+          circle.remove();
+        }, 550);
+      }
+
+      // --- LAB 03: YELLOW TRIANGLE GRAPHIC SLANT ---
+      let triRot = 0;
+      let triSkew = 0;
+      let triScale = 1.0;
+
+      function skewTriangle(prop, val) {
+        const tri = document.getElementById('vector-triangle-graphic');
+        if (prop === 'rot') {
+          triRot = parseInt(val);
+          document.getElementById('txt-tri-rot').innerText = `${val}°`;
+        } else if (prop === 'skew') {
+          triSkew = parseInt(val);
+          document.getElementById('txt-tri-skew').innerText = `${val}px`;
+        } else if (prop === 'scale') {
+          triScale = parseFloat(val / 10);
+          document.getElementById('txt-tri-scale').innerText = `${triScale}x`;
+        }
+
+        tri.style.transform = `rotate(${triRot}deg) skewX(${triSkew}deg) scale(${triScale})`;
+      }
+
+
+      // ================= SECTION 05: DESSAU WORKSHOP LAYOUT =================
+      let shapes = [
+        { id: 'shape-1', type: 'square', x: 150, y: 150, scale: 1, rotation: 0, color: '#E11D48' },
+        { id: 'shape-2', type: 'circle', x: 280, y: 180, scale: 1.2, rotation: 0, color: '#2563EB' },
+        { id: 'shape-3', type: 'triangle', x: 120, y: 320, scale: 0.9, rotation: 15, color: '#FDE047' }
+      ];
+      let selectedShapeId = null;
+      let isDragging = false;
+      let activeDragOffset = { x: 0, y: 0 };
+
+      function renderWorkshopBoard() {
+        const canvas = document.getElementById('workshop-canvas');
+        
+        // Keep elements
+        document.querySelectorAll('.workshop-elem').forEach(el => el.remove());
+
+        document.getElementById('active-shapes-counter').innerText = `ACTIVE INDEX: ${shapes.length} SECTIONS`;
+
+        shapes.forEach(shape => {
+          const div = document.createElement('div');
+          div.id = shape.id;
+          div.className = `workshop-elem absolute cursor-move origin-center ${selectedShapeId === shape.id ? 'ring-2 ring-slate-900 border-2 border-white' : ''}`;
+          
+          let bounds = shape.scale * 80;
+
+          div.style.left = `${shape.x}px`;
+          div.style.top = `${shape.y}px`;
+          div.style.width = shape.type === 'triangle' ? '0' : `${bounds}px`;
+          div.style.height = shape.type === 'triangle' ? '0' : `${bounds}px`;
+          div.style.transform = `translate(-50%, -50%) rotate(${shape.rotation}deg)`;
+
+          // Custom shape mapping elements
+          if (shape.type === 'square') {
+            div.style.backgroundColor = shape.color;
+          } else if (shape.type === 'circle') {
+            div.style.backgroundColor = shape.color;
+            div.style.borderRadius = "9999px";
+          } else if (shape.type === 'triangle') {
+            div.style.width = '0';
+            div.style.height = '0';
+            div.style.borderLeft = `${bounds/2}px style solid transparent`;
+            div.style.borderLeft = `${bounds/2}px solid transparent`;
+            div.style.borderRight = `${bounds/2}px solid transparent`;
+            div.style.borderBottom = `${bounds}px solid ${shape.color}`;
+          }
+
+          // Drag Events inside Javascript
+          div.onmousedown = (e) => {
+            e.stopPropagation();
+            selectedShapeId = shape.id;
+            isDragging = true;
+            activeDragOffset = {
+              x: e.clientX - shape.x,
+              y: e.clientY - shape.y
+            };
+            loadModifiersPanel();
+            renderWorkshopBoard();
+          };
+
+          canvas.appendChild(div);
+        });
+      }
+
+      function deselectShape() {
+        if (isDragging) return;
+        selectedShapeId = null;
+        loadModifiersPanel();
+        renderWorkshopBoard();
+      }
+
+      function loadModifiersPanel() {
+        const active = shapes.find(s => s.id === selectedShapeId);
+        const panel = document.getElementById('shape-modifiers-panel');
+        const placeholder = document.getElementById('shape-modifiers-placeholder');
+
+        if (active) {
+          panel.classList.remove('hidden');
+          placeholder.classList.add('hidden');
+          document.getElementById('selected-shape-title').innerText = `EDITING ELEMENT: ${active.type.toUpperCase()}`;
+          
+          document.getElementById('input-scale').value = active.scale * 10;
+          document.getElementById('label-scale').innerText = `${active.scale.toFixed(1)}x`;
+
+          document.getElementById('input-rotation').value = active.rotation;
+          document.getElementById('label-rotation').innerText = `${active.rotation}°`;
+        } else {
+          panel.classList.add('hidden');
+          placeholder.classList.remove('hidden');
+        }
+      }
+
+      // Move drag helper
+      document.getElementById('workshop-canvas').onmousemove = (e) => {
+        if (!isDragging || !selectedShapeId) return;
+        const rect = document.getElementById('workshop-canvas').getBoundingClientRect();
+        const active = shapes.find(s => s.id === selectedShapeId);
+        
+        let targetX = e.clientX - rect.left;
+        let targetY = e.clientY - rect.top;
+
+        // Constraint boundaries
+        targetX = Math.max(20, Math.min(rect.width - 20, targetX));
+        targetY = Math.max(20, Math.min(rect.height - 20, targetY));
+
+        active.x = targetX;
+        active.y = targetY;
+
+        renderWorkshopBoard();
+      };
+
+      document.body.onmouseup = () => {
+        isDragging = false;
+      };
+
+      // Modifiers setters
+      function updateSelectedShapeColor(color) {
+        const active = shapes.find(s => s.id === selectedShapeId);
+        if (active) {
+          active.color = color;
+          renderWorkshopBoard();
+        }
+      }
+
+      function updateSelectedShapeScale(val) {
+        const active = shapes.find(s => s.id === selectedShapeId);
+        if (active) {
+          active.scale = parseFloat(val / 10);
+          document.getElementById('label-scale').innerText = `${active.scale.toFixed(1)}x`;
+          renderWorkshopBoard();
+        }
+      }
+
+      function updateSelectedShapeRotation(val) {
+        const active = shapes.find(s => s.id === selectedShapeId);
+        if (active) {
+          active.rotation = parseInt(val);
+          document.getElementById('label-rotation').innerText = `${val}°`;
+          renderWorkshopBoard();
+        }
+      }
+
+      function deleteSelectedShape() {
+        shapes = shapes.filter(s => s.id !== selectedShapeId);
+        selectedShapeId = null;
+        loadModifiersPanel();
+        renderWorkshopBoard();
+      }
+
+      function layerSelectedShape(layer) {
+        const activeIdx = shapes.findIndex(s => s.id === selectedShapeId);
+        if (activeIdx < 0) return;
+        const target = shapes[activeIdx];
+        shapes.splice(activeIdx, 1);
+        if (layer === 'front') {
+          shapes.push(target); // Append (Highest stacking index)
+        } else {
+          shapes.unshift(target); // Prepend (Lowest index)
+        }
+        renderWorkshopBoard();
+      }
+
+      function addWorkshopShape(type) {
+        const id = `shape-${Date.now()}`;
+        const palette = {
+          square: '#E11D48',
+          circle: '#2563EB',
+          triangle: '#FDE047'
+        };
+        shapes.push({
+          id,
+          type,
+          x: 150 + Math.random() * 50,
+          y: 200 + Math.random() * 50,
+          scale: 1,
+          rotation: 0,
+          color: palette[type]
+        });
+        selectedShapeId = id;
+        loadModifiersPanel();
+        renderWorkshopBoard();
+      }
+
+      // Workshop signoff register logger submit
+      function submitArchiveRegistry(e) {
+        e.preventDefault();
+        document.getElementById('form-register').classList.add('hidden');
+        document.getElementById('form-success-banner').classList.remove('hidden');
+      }
+
+      // Start initial states
+      renderSquareGrid();
+      renderWorkshopBoard();
+    </script>
+  </body>
+</html>
