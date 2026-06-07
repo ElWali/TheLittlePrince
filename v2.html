@@ -1,0 +1,668 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staatliches Bauhaus — 1919–1933</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bauhaus: {
+                            red: '#E3000F',
+                            blue: '#0054A6',
+                            yellow: '#FFD100',
+                            black: '#111111',
+                            white: '#F4F4F0',
+                            gray: '#E5E5E5'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'marquee-reverse': 'marquee-reverse 25s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        'marquee-reverse': {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F4F4F0;
+            color: #111111;
+            overflow-x: hidden;
+        }
+        .grid-bg {
+            background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .shape-shadow {
+            box-shadow: 8px 8px 0px #111111;
+        }
+        .shape-shadow-hover:hover {
+            box-shadow: 12px 12px 0px #111111;
+            transform: translate(-4px, -4px);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // --- Icons (Custom SVG) ---
+        const IconMenu = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>;
+        const IconX = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>;
+        const IconArrowRight = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>;
+        const IconGrid = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>;
+        const IconCircle = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle></svg>;
+        const IconTriangle = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 22h20L12 2z"></path></svg>;
+        const IconLayers = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>;
+
+        // --- Data ---
+        const PRINCIPLES = [
+            { title: "Form Follows Function", desc: "The shape of a building or object should be primarily based upon its intended function or purpose." },
+            { title: "Truth to Materials", desc: "Materials should be used in their most appropriate and 'honest' form, celebrating their natural properties." },
+            { title: "Unity of Art and Technology", desc: "Bridging the gap between fine arts and applied arts, mass production, and craftsmanship." },
+            { title: "Gesamtkunstwerk", desc: "The 'total work of art' that integrates architecture, sculpture, painting, and design into a single cohesive whole." }
+        ];
+
+        const TIMELINE = [
+            { year: "1919", city: "Weimar", event: "Founded by Walter Gropius. The 'Staatliches Bauhaus' is established, merging the Grand Ducal School of Arts and Crafts with the Weimar Academy of Fine Art." },
+            { year: "1923", city: "Weimar", event: "First major exhibition. Shift in philosophy from expressionist craft to 'Art and Technology: A New Unity'." },
+            { year: "1925", city: "Dessau", event: "Relocation to Dessau. Gropius designs the iconic Bauhaus building. The school reaches its creative peak." },
+            { year: "1928", city: "Dessau", event: "Hannes Meyer becomes director, emphasizing social responsibility and scientific approach to design." },
+            { year: "1930", city: "Dessau", event: "Ludwig Mies van der Rohe takes over as director, shifting focus primarily to architecture." },
+            { year: "1932", city: "Berlin", event: "Forced to move to Berlin by the Nazi-controlled local government, operating as a private institute." },
+            { year: "1933", city: "Berlin", event: "The school is permanently closed under pressure from the Nazi regime." }
+        ];
+
+        const MASTERS = [
+            { name: "Walter Gropius", role: "Founder & Director", color: "bg-bauhaus-black text-bauhaus-white", desc: "Visionary architect who established the school's foundational philosophy of unifying art, craft, and technology." },
+            { name: "Wassily Kandinsky", role: "Master of Form", color: "bg-bauhaus-blue text-bauhaus-white", desc: "Pioneer of abstract art. Taught the preliminary course and mural painting, exploring the spiritual in art and geometric theory." },
+            { name: "Paul Klee", role: "Master of Form", color: "bg-bauhaus-yellow text-bauhaus-black", desc: "Master weaver and color theorist. His pedagogical sketches remain foundational to modern design education." },
+            { name: "Herbert Bayer", role: "Student & Master", color: "bg-bauhaus-red text-bauhaus-white", desc: "Graphic designer who developed the 'universal typeface', advocating for the removal of capital letters for efficiency." }
+        ];
+
+        // --- Components ---
+
+        const Navigation = ({ activeSection, setActiveSection, mobileMenuOpen, setMobileMenuOpen }) => {
+            const links = [
+                { id: 'hero', label: 'Core Grid' },
+                { id: 'manifesto', label: 'Manifesto' },
+                { id: 'sandbox', label: 'Geometries' },
+                { id: 'exhibition', label: 'Masters Guild' },
+                { id: 'workshop', label: 'Laboratory' }
+            ];
+
+            return (
+                <>
+                    {/* Desktop Sidebar */}
+                    <nav className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-bauhaus-black text-bauhaus-white flex-col border-r-2 border-bauhaus-black z-50">
+                        <div className="p-8 border-b-2 border-bauhaus-white/20">
+                            <h1 className="font-display font-bold text-2xl tracking-tighter leading-none">STAATLICHES<br/>BAUHAUS</h1>
+                            <p className="text-xs mt-2 text-bauhaus-gray font-body tracking-widest">1919 — 1933</p>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center p-8 space-y-6">
+                            {links.map(link => (
+                                <button 
+                                    key={link.id}
+                                    onClick={() => setActiveSection(link.id)}
+                                    className={`text-left font-display text-lg tracking-wide transition-all duration-300 flex items-center gap-3 ${activeSection === link.id ? 'text-bauhaus-yellow translate-x-2' : 'text-bauhaus-white/60 hover:text-bauhaus-white hover:translate-x-1'}`}
+                                >
+                                    <span className="w-2 h-2 bg-current rounded-full"></span>
+                                    {link.label}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="p-8 border-t-2 border-bauhaus-white/20 text-xs text-bauhaus-gray font-body">
+                            Form Follows Function
+                        </div>
+                    </nav>
+
+                    {/* Mobile Header */}
+                    <header className="md:hidden fixed top-0 left-0 right-0 h-16 bg-bauhaus-black text-bauhaus-white flex items-center justify-between px-4 z-50 border-b-2 border-bauhaus-white">
+                        <h1 className="font-display font-bold text-lg tracking-tighter">BAUHAUS</h1>
+                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+                            {mobileMenuOpen ? <IconX /> : <IconMenu />}
+                        </button>
+                    </header>
+
+                    {/* Mobile Menu */}
+                    {mobileMenuOpen && (
+                        <div className="md:hidden fixed inset-0 bg-bauhaus-black text-bauhaus-white z-40 pt-20 px-8 flex flex-col space-y-6">
+                            {links.map(link => (
+                                <button 
+                                    key={link.id}
+                                    onClick={() => { setActiveSection(link.id); setMobileMenuOpen(false); }}
+                                    className="text-left font-display text-2xl tracking-wide border-b border-bauhaus-white/20 pb-4"
+                                >
+                                    {link.label}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </>
+            );
+        };
+
+        const Hero = () => {
+            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+            const containerRef = useRef(null);
+
+            const handleMouseMove = (e) => {
+                if (!containerRef.current) return;
+                const rect = containerRef.current.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width / 2) / 20;
+                const y = (e.clientY - rect.top - rect.height / 2) / 20;
+                setMousePos({ x, y });
+            };
+
+            return (
+                <section id="hero" className="min-h-screen flex items-center justify-center pt-16 md:pt-0 relative overflow-hidden bg-bauhaus-white grid-bg">
+                    <div 
+                        ref={containerRef}
+                        onMouseMove={handleMouseMove}
+                        className="relative w-full max-w-4xl aspect-square md:aspect-video flex items-center justify-center perspective-1000"
+                        style={{ perspective: '1000px' }}
+                    >
+                        <div 
+                            className="relative w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out"
+                            style={{ transform: `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg)` }}
+                        >
+                            {/* Red Square */}
+                            <div className="absolute top-0 left-0 w-32 h-32 md:w-48 md:h-48 bg-bauhaus-red shape-shadow z-10 mix-blend-multiply"></div>
+                            
+                            {/* Blue Circle */}
+                            <div className="absolute bottom-0 right-0 w-40 h-40 md:w-64 md:h-64 bg-bauhaus-blue rounded-full shape-shadow z-20 mix-blend-multiply" 
+                                 style={{ transform: `translate(${mousePos.x * -1}px, ${mousePos.y * -1}px)` }}></div>
+                            
+                            {/* Yellow Triangle */}
+                            <div className="absolute top-1/2 left-1/2 w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-b-[100px] border-b-bauhaus-yellow md:border-l-[80px] md:border-r-[80px] md:border-b-[140px] shape-shadow z-30 mix-blend-multiply"
+                                 style={{ transform: `translate(-50%, -50%) rotate(${mousePos.x * 2}deg)` }}></div>
+                        </div>
+                        
+                        <div className="absolute bottom-8 left-8 md:left-20 max-w-md">
+                            <h2 className="font-display text-5xl md:text-7xl font-bold leading-none tracking-tighter mb-4">
+                                FORM<br/>FOLLOWS<br/><span className="text-bauhaus-red">FUNCTION</span>
+                            </h2>
+                            <p className="font-body text-sm md:text-base max-w-xs leading-relaxed border-l-2 border-bauhaus-black pl-4">
+                                The Staatliches Bauhaus was a German art school operational from 1919 to 1933 that combined crafts and the fine arts.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Manifesto = () => {
+            const [activeEra, setActiveEra] = useState(0);
+
+            return (
+                <section id="manifesto" className="min-h-screen bg-bauhaus-black text-bauhaus-white py-20 px-4 md:px-20">
+                    {/* Marquee */}
+                    <div className="overflow-hidden border-y-2 border-bauhaus-white py-6 mb-20">
+                        <div className="flex whitespace-nowrap animate-marquee">
+                            {[...Array(4)].map((_, i) => (
+                                <span key={i} className="font-display text-6xl md:text-8xl font-bold mx-8 tracking-tighter opacity-80">
+                                    ART AND TECHNOLOGY: A NEW UNITY • 
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-16 mb-24">
+                        <div>
+                            <h3 className="font-display text-4xl md:text-5xl font-bold mb-8 text-bauhaus-yellow">CORE PRINCIPLES</h3>
+                            <div className="grid gap-6">
+                                {PRINCIPLES.map((p, i) => (
+                                    <div key={i} className="border border-bauhaus-white/20 p-6 hover:bg-bauhaus-white/5 transition-colors group">
+                                        <h4 className="font-display text-xl font-bold mb-2 group-hover:text-bauhaus-red transition-colors">{p.title}</h4>
+                                        <p className="font-body text-sm text-bauhaus-gray leading-relaxed">{p.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 className="font-display text-4xl md:text-5xl font-bold mb-8 text-bauhaus-blue">HISTORICAL TIMELINE</h3>
+                            <div className="space-y-4">
+                                {TIMELINE.map((item, i) => (
+                                    <div 
+                                        key={i} 
+                                        onClick={() => setActiveEra(i)}
+                                        className={`cursor-pointer p-6 border-l-4 transition-all duration-300 ${activeEra === i ? 'border-bauhaus-red bg-bauhaus-white/10' : 'border-bauhaus-white/20 hover:border-bauhaus-yellow'}`}
+                                    >
+                                        <div className="flex justify-between items-baseline mb-2">
+                                            <span className="font-display text-2xl font-bold">{item.year}</span>
+                                            <span className="font-body text-xs uppercase tracking-widest text-bauhaus-gray">{item.city}</span>
+                                        </div>
+                                        <p className="font-body text-sm text-bauhaus-gray leading-relaxed">{item.event}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Sandbox = () => {
+            // Red Square State
+            const [gridState, setGridState] = useState(Array(9).fill(false));
+            const toggleGrid = (i) => {
+                const newState = [...gridState];
+                newState[i] = !newState[i];
+                setGridState(newState);
+            };
+
+            // Blue Circle State (Audio)
+            const [audioActive, setAudioActive] = useState(false);
+            const audioCtxRef = useRef(null);
+            const oscillatorRef = useRef(null);
+            const gainNodeRef = useRef(null);
+
+            const initAudio = () => {
+                if (!audioCtxRef.current) {
+                    audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                setAudioActive(true);
+            };
+
+            const playTone = (freq) => {
+                if (!audioActive || !audioCtxRef.current) return;
+                if (oscillatorRef.current) {
+                    oscillatorRef.current.stop();
+                }
+                const osc = audioCtxRef.current.createOscillator();
+                const gain = audioCtxRef.current.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.3, audioCtxRef.current.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtxRef.current.currentTime + 1.5);
+                osc.connect(gain);
+                gain.connect(audioCtxRef.current.destination);
+                osc.start();
+                oscillatorRef.current = osc;
+            };
+
+            // Yellow Triangle State
+            const [transform, setTransform] = useState({ scale: 1, rotate: 0, skew: 0 });
+
+            return (
+                <section id="sandbox" className="min-h-screen bg-bauhaus-white py-20 px-4 md:px-20">
+                    <h2 className="font-display text-5xl md:text-7xl font-bold mb-16 tracking-tighter border-b-4 border-bauhaus-black pb-4 inline-block">GEOMETRIES SANDBOX</h2>
+                    
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {/* Red Square */}
+                        <div className="border-2 border-bauhaus-black p-6 bg-bauhaus-gray/20">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-6 h-6 bg-bauhaus-red"></div>
+                                <h3 className="font-display text-2xl font-bold">SUBDIVISION</h3>
+                            </div>
+                            <div className="grid grid-cols-3 gap-2 aspect-square max-w-xs mx-auto">
+                                {gridState.map((active, i) => (
+                                    <button 
+                                        key={i}
+                                        onClick={() => toggleGrid(i)}
+                                        className={`transition-all duration-500 border border-bauhaus-black ${active ? 'bg-bauhaus-red rotate-45 scale-75' : 'bg-bauhaus-white hover:bg-bauhaus-yellow'}`}
+                                    ></button>
+                                ))}
+                            </div>
+                            <p className="mt-4 text-xs font-body text-center uppercase tracking-widest">Click to rotate modules</p>
+                        </div>
+
+                        {/* Blue Circle */}
+                        <div className="border-2 border-bauhaus-black p-6 bg-bauhaus-gray/20 flex flex-col items-center justify-center relative overflow-hidden">
+                            <div className="flex items-center gap-3 mb-6 w-full">
+                                <div className="w-6 h-6 bg-bauhaus-blue rounded-full"></div>
+                                <h3 className="font-display text-2xl font-bold">KANDINSKY SYNTH</h3>
+                            </div>
+                            
+                            {!audioActive ? (
+                                <button onClick={initAudio} className="px-6 py-3 bg-bauhaus-black text-bauhaus-white font-display font-bold hover:bg-bauhaus-blue transition-colors">
+                                    INITIALIZE AUDIO ENGINE
+                                </button>
+                            ) : (
+                                <div className="relative w-48 h-48 flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-bauhaus-blue rounded-full opacity-20 animate-pulse-slow"></div>
+                                    <button 
+                                        onMouseDown={() => playTone(220)}
+                                        onMouseUp={() => playTone(0)}
+                                        onTouchStart={() => playTone(220)}
+                                        onTouchEnd={() => playTone(0)}
+                                        className="w-32 h-32 bg-bauhaus-blue rounded-full shape-shadow-hover transition-all active:scale-95 flex items-center justify-center text-bauhaus-white font-display font-bold text-xs"
+                                    >
+                                        HOLD FOR A3
+                                    </button>
+                                    <button 
+                                        onMouseDown={() => playTone(329.63)}
+                                        onMouseUp={() => playTone(0)}
+                                        onTouchStart={() => playTone(329.63)}
+                                        onTouchEnd={() => playTone(0)}
+                                        className="absolute -bottom-4 -right-4 w-16 h-16 bg-bauhaus-yellow rounded-full shape-shadow-hover transition-all active:scale-95 flex items-center justify-center text-bauhaus-black font-display font-bold text-[10px]"
+                                    >
+                                        E4
+                                    </button>
+                                </div>
+                            )}
+                            <p className="mt-8 text-xs font-body text-center uppercase tracking-widest">Web Audio API Sine Wave</p>
+                        </div>
+
+                        {/* Yellow Triangle */}
+                        <div className="border-2 border-bauhaus-black p-6 bg-bauhaus-gray/20">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[20px] border-b-bauhaus-yellow"></div>
+                                <h3 className="font-display text-2xl font-bold">TRANSFORM</h3>
+                            </div>
+                            
+                            <div className="aspect-square flex items-center justify-center mb-6 overflow-hidden bg-bauhaus-white border border-bauhaus-black">
+                                <div 
+                                    className="w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-b-[100px] border-b-bauhaus-yellow transition-all duration-300"
+                                    style={{ 
+                                        transform: `scale(${transform.scale}) rotate(${transform.rotate}deg) skewX(${transform.skew}deg)` 
+                                    }}
+                                ></div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="text-xs font-bold uppercase block mb-1">Scale: {transform.scale}</label>
+                                    <input type="range" min="0.5" max="2" step="0.1" value={transform.scale} onChange={(e) => setTransform({...transform, scale: parseFloat(e.target.value)})} className="w-full accent-bauhaus-yellow" />
+                                </div>
+                                <div>
+                                    <label className="text-xs font-bold uppercase block mb-1">Rotate: {transform.rotate}°</label>
+                                    <input type="range" min="0" max="360" value={transform.rotate} onChange={(e) => setTransform({...transform, rotate: parseInt(e.target.value)})} className="w-full accent-bauhaus-yellow" />
+                                </div>
+                                <div>
+                                    <label className="text-xs font-bold uppercase block mb-1">Skew: {transform.skew}°</label>
+                                    <input type="range" min="-45" max="45" value={transform.skew} onChange={(e) => setTransform({...transform, skew: parseInt(e.target.value)})} className="w-full accent-bauhaus-yellow" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Exhibition = () => {
+            return (
+                <section id="exhibition" className="min-h-screen bg-bauhaus-red text-bauhaus-white py-20 px-4 md:px-20">
+                    <h2 className="font-display text-5xl md:text-7xl font-bold mb-16 tracking-tighter border-b-4 border-bauhaus-white pb-4 inline-block">MASTERS GUILD</h2>
+                    
+                    <div className="grid md:grid-cols-2 gap-12">
+                        {MASTERS.map((master, i) => (
+                            <div key={i} className="group relative bg-bauhaus-black p-8 border-2 border-bauhaus-white shape-shadow-hover transition-all duration-300">
+                                <div className={`inline-block px-3 py-1 font-display font-bold text-xs uppercase tracking-widest mb-4 ${master.color}`}>
+                                    {master.role}
+                                </div>
+                                <h3 className="font-display text-4xl font-bold mb-4 group-hover:text-bauhaus-yellow transition-colors">{master.name}</h3>
+                                <p className="font-body text-bauhaus-gray leading-relaxed mb-6">{master.desc}</p>
+                                
+                                {/* Abstract visual representation */}
+                                <div className="absolute bottom-4 right-4 opacity-20 group-hover:opacity-40 transition-opacity">
+                                    {i === 0 && <div className="w-24 h-24 border-4 border-bauhaus-white"></div>}
+                                    {i === 1 && <div className="w-24 h-24 rounded-full border-4 border-bauhaus-blue"></div>}
+                                    {i === 2 && <div className="w-0 h-0 border-l-[40px] border-l-transparent border-r-[40px] border-r-transparent border-b-[70px] border-b-bauhaus-yellow"></div>}
+                                    {i === 3 && <div className="w-24 h-8 bg-bauhaus-red"></div>}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-20 border-t-2 border-bauhaus-white/30 pt-12">
+                        <h3 className="font-display text-3xl font-bold mb-8">ARTIFACT GALLERY</h3>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {['Composition VIII', 'Bauhaus Building', 'Universal Typeface', 'Ad Parnassum'].map((art, i) => (
+                                <div key={i} className="aspect-[3/4] bg-bauhaus-white text-bauhaus-black p-4 flex flex-col justify-between hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-bauhaus-yellow">
+                                    <div className="w-full h-32 bg-bauhaus-gray/30 mb-4 flex items-center justify-center">
+                                        <span className="font-display font-bold text-4xl opacity-20">{i + 1}</span>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-display font-bold text-sm uppercase">{art}</h4>
+                                        <p className="text-xs text-bauhaus-black/60 mt-1">1923</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Workshop = () => {
+            const [shapes, setShapes] = useState([]);
+            const [draggingId, setDraggingId] = useState(null);
+            const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+            const [formData, setFormData] = useState({ name: '', email: '' });
+            const [submitted, setSubmitted] = useState(false);
+
+            const addShape = (type) => {
+                const id = Date.now();
+                const newShape = {
+                    id,
+                    type,
+                    x: 50 + Math.random() * 200,
+                    y: 50 + Math.random() * 200,
+                    color: type === 'square' ? 'bg-bauhaus-red' : type === 'circle' ? 'bg-bauhaus-blue' : 'bg-bauhaus-yellow',
+                    rotation: 0
+                };
+                setShapes([...shapes, newShape]);
+            };
+
+            const handleMouseDown = (e, id) => {
+                e.preventDefault();
+                const shape = shapes.find(s => s.id === id);
+                setDraggingId(id);
+                setDragOffset({
+                    x: e.clientX - shape.x,
+                    y: e.clientY - shape.y
+                });
+            };
+
+            const handleMouseMove = useCallback((e) => {
+                if (draggingId !== null) {
+                    setShapes(prev => prev.map(s => 
+                        s.id === draggingId 
+                            ? { ...s, x: e.clientX - dragOffset.x, y: e.clientY - dragOffset.y }
+                            : s
+                    ));
+                }
+            }, [draggingId, dragOffset]);
+
+            const handleMouseUp = useCallback(() => {
+                setDraggingId(null);
+            }, []);
+
+            useEffect(() => {
+                if (draggingId !== null) {
+                    window.addEventListener('mousemove', handleMouseMove);
+                    window.addEventListener('mouseup', handleMouseUp);
+                    return () => {
+                        window.removeEventListener('mousemove', handleMouseMove);
+                        window.removeEventListener('mouseup', handleMouseUp);
+                    };
+                }
+            }, [draggingId, handleMouseMove, handleMouseUp]);
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setSubmitted(true);
+                setTimeout(() => {
+                    setShapes([]);
+                    setFormData({ name: '', email: '' });
+                    setSubmitted(false);
+                }, 3000);
+            };
+
+            return (
+                <section id="workshop" className="min-h-screen bg-bauhaus-white py-20 px-4 md:px-20 relative">
+                    <h2 className="font-display text-5xl md:text-7xl font-bold mb-4 tracking-tighter">DESIGN LABORATORY</h2>
+                    <p className="font-body text-bauhaus-black/60 mb-12 max-w-xl">Spawn, layer, and compose geometric elements. Drag shapes to arrange your poster. Register your work to the academy archive.</p>
+
+                    <div className="grid lg:grid-cols-3 gap-8">
+                        {/* Controls */}
+                        <div className="lg:col-span-1 space-y-6">
+                            <div className="border-2 border-bauhaus-black p-6 bg-bauhaus-gray/10">
+                                <h3 className="font-display font-bold text-xl mb-4 flex items-center gap-2"><IconLayers /> TOOLBOX</h3>
+                                <div className="grid grid-cols-3 gap-3">
+                                    <button onClick={() => addShape('square')} className="aspect-square bg-bauhaus-red shape-shadow-hover hover:scale-105 transition-all border-2 border-bauhaus-black"></button>
+                                    <button onClick={() => addShape('circle')} className="aspect-square bg-bauhaus-blue rounded-full shape-shadow-hover hover:scale-105 transition-all border-2 border-bauhaus-black"></button>
+                                    <button onClick={() => addShape('triangle')} className="aspect-square flex items-center justify-center shape-shadow-hover hover:scale-105 transition-all border-2 border-bauhaus-black bg-bauhaus-white">
+                                        <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[26px] border-b-bauhaus-yellow"></div>
+                                    </button>
+                                </div>
+                                <button onClick={() => setShapes([])} className="mt-4 w-full py-2 border-2 border-bauhaus-black font-display font-bold text-sm hover:bg-bauhaus-black hover:text-bauhaus-white transition-colors">
+                                    CLEAR CANVAS
+                                </button>
+                            </div>
+
+                            <div className="border-2 border-bauhaus-black p-6 bg-bauhaus-black text-bauhaus-white">
+                                <h3 className="font-display font-bold text-xl mb-4">ARCHIVE REGISTRATION</h3>
+                                {submitted ? (
+                                    <div className="text-bauhaus-yellow font-display font-bold text-center py-4">
+                                        ✓ COMMITTED TO REGISTER
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleSubmit} className="space-y-4">
+                                        <div>
+                                            <label className="text-xs uppercase tracking-widest text-bauhaus-gray block mb-1">Student Name</label>
+                                            <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-bauhaus-white/10 border border-bauhaus-white/30 p-2 text-bauhaus-white focus:outline-none focus:border-bauhaus-yellow font-body" />
+                                        </div>
+                                        <div>
+                                            <label className="text-xs uppercase tracking-widest text-bauhaus-gray block mb-1">Workshop Email</label>
+                                            <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-bauhaus-white/10 border border-bauhaus-white/30 p-2 text-bauhaus-white focus:outline-none focus:border-bauhaus-yellow font-body" />
+                                        </div>
+                                        <button type="submit" className="w-full py-3 bg-bauhaus-yellow text-bauhaus-black font-display font-bold uppercase tracking-wider hover:bg-bauhaus-white transition-colors">
+                                            Submit Composition
+                                        </button>
+                                    </form>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Canvas */}
+                        <div className="lg:col-span-2">
+                            <div className="relative w-full aspect-[4/5] md:aspect-square bg-bauhaus-white border-4 border-bauhaus-black shadow-2xl overflow-hidden" style={{ backgroundImage: 'radial-gradient(#111 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+                                {shapes.length === 0 && (
+                                    <div className="absolute inset-0 flex items-center justify-center text-bauhaus-black/20 font-display text-2xl font-bold pointer-events-none">
+                                        EMPTY CANVAS
+                                    </div>
+                                )}
+                                {shapes.map(shape => (
+                                    <div
+                                        key={shape.id}
+                                        onMouseDown={(e) => handleMouseDown(e, shape.id)}
+                                        className={`absolute cursor-move shape-shadow transition-shadow hover:z-50 ${shape.color} ${shape.type === 'circle' ? 'rounded-full' : ''}`}
+                                        style={{
+                                            left: shape.x,
+                                            top: shape.y,
+                                            width: shape.type === 'triangle' ? '0' : '80px',
+                                            height: shape.type === 'triangle' ? '0' : '80px',
+                                            borderLeft: shape.type === 'triangle' ? '40px solid transparent' : 'none',
+                                            borderRight: shape.type === 'triangle' ? '40px solid transparent' : 'none',
+                                            borderBottom: shape.type === 'triangle' ? '70px solid #FFD100' : 'none',
+                                            zIndex: draggingId === shape.id ? 100 : 10
+                                        }}
+                                    ></div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const App = () => {
+            const [activeSection, setActiveSection] = useState('hero');
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            // Smooth scroll to section
+            useEffect(() => {
+                const element = document.getElementById(activeSection);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, [activeSection]);
+
+            return (
+                <div className="font-body antialiased selection:bg-bauhaus-yellow selection:text-bauhaus-black">
+                    <Navigation 
+                        activeSection={activeSection} 
+                        setActiveSection={setActiveSection}
+                        mobileMenuOpen={mobileMenuOpen}
+                        setMobileMenuOpen={setMobileMenuOpen}
+                    />
+                    
+                    <main className="md:ml-64">
+                        <Hero />
+                        <Manifesto />
+                        <Sandbox />
+                        <Exhibition />
+                        <Workshop />
+                        
+                        <footer className="bg-bauhaus-black text-bauhaus-white py-12 px-8 border-t-4 border-bauhaus-yellow">
+                            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                                <div>
+                                    <h4 className="font-display font-bold text-2xl tracking-tighter">STAATLICHES BAUHAUS</h4>
+                                    <p className="text-bauhaus-gray text-sm mt-2">Weimar • Dessau • Berlin</p>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-xs text-bauhaus-gray uppercase tracking-widest">Built with React, Tailwind & Web Audio API</p>
+                                    <p className="text-xs text-bauhaus-gray uppercase tracking-widest mt-1">Form Follows Function © 1919-1933</p>
+                                </div>
+                            </div>
+                        </footer>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
+```
