@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bauhaus — Interactive Design Showcase</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- React & Babel via CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Play Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bauhaus-red': '#E11D48',
+                        'bauhaus-blue': '#2563EB',
+                        'bauhaus-yellow': '#FDE047',
+                        'bauhaus-sand': '#F4F4F2',
+                        'bauhaus-cream': '#FFFFFF',
+                        'bauhaus-dark': '#0F172A',
+                        'bauhaus-grid': '#CBD5E1',
+                    },
+                    fontFamily: {
+                        sans: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS Base -->
+    <style type="text/css">
+        html {
+            scroll-behavior: smooth;
+            background-color: #F4F4F2;
+            color: #0F172A;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        ::selection {
+            background-color: #E11D48;
+            color: #FFFFFF;
+        }
+
+        /* Custom blueprint grids */
+        .bauhaus-grid {
+            background-image: 
+                linear-gradient(to right, #CBD5E1 1px, transparent 1px),
+                linear-gradient(to bottom, #CBD5E1 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+        
+        .bauhaus-grid-fine {
+            background-image: 
+                linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .shadow-bauhaus-sm {
+            box-shadow: 4px 4px 0px 0px #0F172A;
+        }
+        
+        .shadow-bauhaus {
+            box-shadow: 8px 8px 0px 0px #0F172A;
+        }
+        
+        .shadow-bauhaus-lg {
+            box-shadow: 16px 16px 0px 0px #0F172A;
+        }
+
+        .text-stroke-bauhaus {
+            -webkit-text-stroke: 1.5px #CBD5E1;
+            color: transparent;
+        }
+        
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spinSlow 20s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-bauhaus-sand antialiased select-none">
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Custom Icon Component (Replaces Lucide-React dependencies safely for offline runtimes)
+        const Icon = ({ name, className = "w-4 h-4", ...props }) => {
+            const finalClass = `${className} inline-block fill-none stroke-current stroke-2`.trim();
+            const icons = {
+                layers: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                        <polyline points="2 17 12 22 22 17" />
+                        <polyline points="2 12 12 17 22 12" />
+                    </svg>
+                ),
+                menu: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                        <line x1="4" x2="20" y1="6" y2="6" />
+                        <line x1="4" x2="20" y1="18" y2="18" />
+                    </svg>
+                ),
+                x: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <line x1="18" x2="6" y1="6" y2="18" />
+                        <line x1="6" x2="18" y1="6" y2="18" />
+                    </svg>
+                ),
+                clock: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                ),
+                sparkles: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                    </svg>
+                ),
+                'map-pin': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                ),
+                maximize2: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <polyline points="15 3 21 3 21 9" />
+                        <polyline points="9 21 3 21 3 15" />
+                        <line x1="21" y1="3" x2="14" y2="10" />
+                        <line x1="3" y1="21" x2="10" y2="14" />
+                    </svg>
+                ),
+                activity: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                ),
+                compass: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <circle cx="12" cy="12" r="10" />
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                    </svg>
+                ),
+                'help-circle': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                        <line x1="12" x2="12.01" y1="17" y2="17" />
+                    </svg>
+                ),
+                'chevron-right': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                ),
+                'chevron-left': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                ),
+                heart: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                    </svg>
+                ),
+                palette: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19H4.85857" />
+                        <circle cx="7.5" cy="10.5" r="1.5" />
+                        <circle cx="11.5" cy="7.5" r="1.5" />
+                        <circle cx="16.5" cy="9.5" r="1.5" />
+                        <circle cx="15.5" cy="14.5" r="1.5" />
+                    </svg>
+                ),
+                calendar: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                ),
+                award: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <circle cx="12" cy="8" r="7" />
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                    </svg>
+                ),
+                'book-open': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                ),
+                search: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                ),
+                briefcase: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                ),
+                sliders: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <line x1="4" x2="4" y1="21" y2="14" />
+                        <line x1="4" x2="4" y1="10" y2="3" />
+                        <line x1="12" x2="12" y1="21" y2="12" />
+                        <line x1="12" x2="12" y1="8" y2="3" />
+                        <line x1="20" x2="20" y1="21" y2="16" />
+                        <line x1="20" x2="20" y1="12" y2="3" />
+                        <line x1="2" x2="6" y1="14" y2="14" />
+                        <line x1="10" x2="14" y1="8" y2="8" />
+                        <line x1="18" x2="22" y1="16" y2="16" />
+                    </svg>
+                ),
+                'grid-3x3': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <rect x="3" y="3" width="4" height="4" />
+                        <rect x="10" y="3" width="4" height="4" />
+                        <rect x="17" y="3" width="4" height="4" />
+                        <rect x="3" y="10" width="4" height="4" />
+                        <rect x="10" y="10" width="4" height="4" />
+                        <rect x="17" y="10" width="4" height="4" />
+                        <rect x="3" y="17" width="4" height="4" />
+                        <rect x="10" y="17" width="4" height="4" />
+                        <rect x="17" y="17" width="4" height="4" />
+                    </svg>
+                ),
+                'external-link': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                ),
+                refresh: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <polyline points="23 4 23 10 17 10" />
+                        <polyline points="1 20 1 14 7 14" />
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                    </svg>
+                ),
+                play: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                ),
+                'pen-tool': (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                    </svg>
+                ),
+                eye: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                ),
+                plus: (
+                    <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                        <line x1="12" x2="12" y1="5" y2="19" />
+                        <line x1="5" x2="19" y1="12" y2="12" />
+                    </svg>
+                )
+            };
+
+            return icons[name] || (
+                <svg viewBox="0 0 24 24" className={finalClass} {...props}>
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" x2="12" y1="8" y2="16" />
+                </svg>
+            );
+        };
+
+        // Static Constants
+        const SECTIONS = [
+            { id: 'intro', index: '01', title: 'THE CORE GRID', subtitle: 'Synthesis of Art and Industry' },
+            { id: 'manifesto', index: '02', title: 'THE MANIFESTO', subtitle: 'Form Follows Function' },
+            { id: 'timeline', index: '03', title: 'CHRONOLOGY TIMELINE', subtitle: 'History of the Movement' },
+            { id: 'artistes', index: '04', title: 'MASTER ARTISTS', subtitle: 'Paul Klee lab & watercolor walks' },
+            { id: 'exhibition', index: '05', title: 'THE EXHIBITION', subtitle: 'Curated gallery catalogs' }
+        ];
+
+        const BAUHAUS_PRINCIPLES = [
+            { number: 'I', title: 'Form Follows Function', desc: 'Remove the superfluous. Shape must relate directly to utility. Beauty is not added; it is inherent in the purity of construction.' },
+            { number: 'II', title: 'The Great Synthesis', desc: 'Erase the barrier between fine art and artisanal craft. Architecture, typography, painting, and industries unite as a single complete whole.' },
+            { number: 'III', title: 'Primary Primacy', desc: 'Reduction of color and form to their pure, emotional roots: the red square, blue circle, and yellow triangle.' },
+            { number: 'IV', title: 'Truth to Materials', desc: 'Honoring honest structural components. Let concrete look like concrete, steel like steel, and type express its visual weight without disguise.' }
+        ];
+
+        const EXHIBITION_POSTERS = [
+            { id: 'kandinsky-1923', title: 'Kandinsky Structure', year: '1923', designer: 'Wassily Kandinsky', description: 'A study on the psychological weight of active circles contrasted against static rectilinearity.', bgColor: '#2563EB', shapeComposition: ['circle', 'triangle'], imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=600&q=80' },
+            { id: 'gropius-building', title: 'Dessau Architecture', year: '1926', designer: 'Walter Gropius', description: 'An exploration of structural glass-curtains, balanced asymmetry, and primary vertical planes.', bgColor: '#E11D48', shapeComposition: ['square', 'square'], imageUrl: 'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&w=600&q=80' },
+            { id: 'bayer-type', title: 'Universal Alphabet', year: '1925', designer: 'Herbert Bayer', description: 'A modern, single-case typeface eliminating capital letters for maximum typing efficiency.', bgColor: '#FDE047', shapeComposition: ['circle', 'square', 'triangle'], imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80' },
+            { id: 'klee-pedagogical', title: 'Klee Pedagogy', year: '1924', designer: 'Paul Klee', description: 'Lines taking walks across dynamic gravity fields, balancing biological rhythm with sterile precision.', bgColor: '#0F172A', shapeComposition: ['triangle', 'circle'], imageUrl: 'https://images.unsplash.com/photo-1579783921573-0402ca74df44?auto=format&fit=crop&w=600&q=80' }
+        ];
+
+        const BAUHAUS_ERAS = [
+            { id: 'weimar', name: 'Weimar Period', years: '1919–1925', location: 'Weimar, Germany', director: 'Walter Gropius', intro: 'Founded in 1919 through the merger of Grand-Ducal Saxon Academy and Arts & Crafts School, the Weimar phase focused on romantic expressionism and manual craftsmanship.', achievements: ['Defined the core Vorkurs (Preliminary Course) learning structure.', 'Constructed Haus am Horn (UNESCO World Heritage Site).', 'Recruited modern painting masters: Paul Klee and Wassily Kandinsky.'] },
+            { id: 'dessau', name: 'Dessau Golden Era', years: '1925–1932', location: 'Dessau, Germany', director: 'Walter Gropius & Hannes Meyer', intro: 'Generally hailed as the golden years, Dessau accommodated the school inside Gropius\'s bespoke structural glass-and-steel building campus.', achievements: ['Built the iconic Dessau Bauhaus Building with glass double-curtains.', 'Designed Marcel Breuer\'s tubular-steel Wassily & Cesca chairs.', 'Synthesized the modern advertising layout rules under Herbert Bayer.'] },
+            { id: 'berlin', name: 'Berlin Last Stand', years: '1932–1933', location: 'Berlin-Steglitz, Germany', director: 'Mies van der Rohe', intro: 'Re-established as a private academy inside an abandoned phone factory, the Berlin-Steglitz years were defined by heroic attempts to safeguard modern creative liberties.', achievements: ['Preserved the core curriculum under intense Gestapo inspection.', 'Crystallized the minimalist architectural "Less is more" paradigm.', 'Dispersed Bauhaus faculty globally, launching the Wave of modernism.'] }
+        ];
+
+        const BAUHAUS_ARTISTS_DB = [
+            { id: 'klee', name: 'Paul Klee', role: 'Form Master', years: '1921–1931', bio: 'The master of polyphonic watercolor grids, famously arguing that a line is simply a point that goes on a walk.', artworks: [{ title: 'Senecio', year: '1922', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Paul_Klee_-_Senecio_-_1922.jpg' }, { title: 'Castle and Sun', year: '1928', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Castle_and_Sun_by_Paul_Klee_1928.jpg' }] },
+            { id: 'kandinsky', name: 'Wassily Kandinsky', role: 'Analytical Master', years: '1922–1933', bio: 'The painter who aligned simple primary shapes with human feelings: stable red squares, spiritual yellow triangles, and deep circles.', artworks: [{ title: 'Composition VIII', year: '1923', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Vassily_Kandinsky_-_Composition_8_-_1923.jpg' }] },
+            { id: 'moholy', name: 'László Moholy-Nagy', role: 'Vorkurs Master', years: '1923–1928', bio: 'Introduced cameras, kinetic sculptures, and systematic typography grids instead of manual expressive paint.', artworks: [{ title: 'Photogram Study', year: '1924', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/L%C3%A1szl%C3%B3_Moholy-Nagy_-_Photogram_-_1922.jpg' }] }
+        ];
+
+        const BAUHAUS_MASTERS = [
+            { id: 'gropius', name: 'Walter Gropius', lifespan: '1883–1969', role: 'Founder & Director', workshop: 'Architecture', legacy: 'Drafted the primary Bauhaus Manifesto in Weimar, declaring: "The ultimate aim of all artistic activity is design for building!" Designed the legendary asymmetrical glass Dessau campus.', keyWork: 'Dessau Bauhaus Building', avatarText: 'WG', accentColor: '#E11D48' },
+            { id: 'kandinsky', name: 'Wassily Kandinsky', lifespan: '1866–1944', role: 'Form Master', workshop: 'Wall Painting', legacy: 'Conducted systematic psychological research aligning simple geometries with sensory triggers.', keyWork: 'Composition VIII & Form Theory Studies', avatarText: 'WK', accentColor: '#2563EB' },
+            { id: 'klee', name: 'Paul Klee', lifespan: '1879–1940', role: 'General Form Master', workshop: 'Stained Glass', legacy: 'Authored the pioneering "Pedagogical Sketchbook" stating: "A line is a dot that went for a walk."', keyWork: 'Pedagogical Sketchbook & Watercolors', avatarText: 'PK', accentColor: '#FDE047' },
+            { id: 'breuer', name: 'Marcel Breuer', lifespan: '1902–1981', role: 'Furniture Master', workshop: 'Cabinetmaking', legacy: 'Inspired by bent steel bicycle handlebars, he pioneered the use of seamless tubular steel to build modern cantilever chairs.', keyWork: 'Wassily Chair (Model B3)', avatarText: 'MB', accentColor: '#0F172A' }
+        ];
+
+        // Factual specifications from WIKIART_DATABASE to fulfill users Zoom clicks with real details instead of placeholders
+        const WIKIART_DATABASE = {
+            'Senecio': { location: 'Kunstmuseum Basel, Switzerland', medium: 'Oil on chalk on canvas', dimensions: '40.5 x 38 cm', movement: 'Expressionism / Cubism' },
+            'Castle and Sun': { location: 'Private Collection, Geneva', medium: 'Oil on canvas', dimensions: '50 x 59 cm', movement: 'Constructivism / Orphism' },
+            'Composition VIII': { location: 'Solomon R. Guggenheim Museum, New York', medium: 'Oil on canvas', dimensions: '140.3 x 201 cm', movement: 'Geometric Abstraction' },
+            'Photogram Study': { location: 'Art Institute of Chicago', medium: 'Gelatin silver print (Photogram)', dimensions: '23.8 x 17.8 cm', movement: 'New Vision (Constructivism)' }
+        };
+
+        const BAUHAUS_CHRONOLOGY = [
+            { year: "1919", title: "The Inception & Manifesto", location: "Weimar", director: "Walter Gropius", description: "Walter Gropius founds the Bauhaus in Weimar, merging Saxon schools and publishing the historic Manifesto.", details: ["Featuring Lyonel Feininger's Cathedral woodcut.", "Tears down the barrier between fine art and manual crafting.", "Unifies all industrial disciplines under building design."], keyFigures: ["Walter Gropius", "Lyonel Feininger"], significance: "Establishes a manual guild structure.", themeColor: "border-zinc-950 text-zinc-950", accentBg: "bg-zinc-100" },
+            { year: "1923", title: "Art & Technology: A New Unity", location: "Weimar", director: "Walter Gropius", description: "László Moholy-Nagy replaces Johannes Itten, shifting curriculum towards industrial mass synthesis and tech.", details: ["Forces constructivist discipline and camerawork.", "Theme: 'Art and Technology—A New Unity'.", "Constructs 'Haus am Horn'—the first prototype modular prefab."], keyFigures: ["László Moholy-Nagy", "Georg Muche"], significance: "Launches mass-industrial design.", themeColor: "border-indigo-600 text-indigo-600", accentBg: "bg-indigo-50" },
+            { year: "1925", title: "Move to Dessau", location: "Dessau", director: "Walter Gropius", description: "Political friction in Weimar forces closure. Relocates to the rich industrial hub Dessau.", details: ["Funded by progressive mayor Fritz Hesse.", "Breuer designs the bent tubular steel Wassily chair.", "Bayer designs the single-case Universal lowercase typeface."], keyFigures: ["Walter Gropius", "Marcel Breuer", "Herbert Bayer"], significance: "Pivot to mechanical serial fabrication.", themeColor: "border-blue-750 text-blue-750", accentBg: "bg-blue-50/60" },
+            { year: "1926", title: "Inauguration of Gropius Campus", location: "Dessau", director: "Walter Gropius", description: "The iconic steel-curtain Gropius building is opened. Installs the school as an accredited university.", details: ["Double-glazed glass curts and Masters' houses.", "Recognized as State Design University.", "Becomes magnetic epicentre of global architecture."], keyFigures: ["Walter Gropius", "Gunta Stölzl"], significance: "Creates the immortal face of the movement.", themeColor: "border-red-700 text-red-700", accentBg: "bg-red-50/70" },
+            { year: "1930", title: "Mies van der Rohe's Less is More", location: "Dessau", director: "Ludwig Mies van der Rohe", description: "Appointed to settle political volatility and reinforce apolitical building design.", details: ["Bans political student activism.", "Focuses on rigorous architectural aesthetics.", "Ensures pure craftsmanship and elite geometry."], keyFigures: ["Mies van der Rohe", "Fritz Hesse"], significance: "Transitions to minimalism and steel glass geometry.", themeColor: "border-purple-700 text-purple-700", accentBg: "bg-purple-50" },
+            { year: "1933", title: "Gestapo Raids & Closure", location: "Berlin", director: "Ludwig Mies van der Rohe", description: "Sealed by security forces, the faculty votes to close rather than comply with political censorship.", details: ["Private Steglitz factory raided on April 11.", "Masters refuse to replace Kandinsky or Gropius.", "Self-dissolved on July 20, dispersing concepts globally."], keyFigures: ["Mies van der Rohe", "Wassily Kandinsky"], significance: "Ends the physical school but launches global modernist diaspora.", themeColor: "border-zinc-950 text-zinc-950", accentBg: "bg-zinc-200" }
+        ];
+
+        // MAIN APPLICATION ROOT
+        function App() {
+            const [activeSection, setActiveSection] = useState('intro');
+            const [scrollY, setScrollY] = useState(0);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrollY(window.scrollY);
+                    
+                    // Highlight active sidebar sections
+                    for (const section of SECTIONS) {
+                        const el = document.getElementById(section.id);
+                        if (el) {
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top <= 160 && rect.bottom >= 160) {
+                                setActiveSection(section.id);
+                            }
+                        }
+                    }
+                };
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <div className="relative min-h-screen text-bauhaus-dark bg-bauhaus-sand antialiased selection:bg-bauhaus-red selection:text-white">
+                    {/* Header bar / Left sidebar */}
+                    <Navbar activeSection={activeSection} />
+                    
+                    {/* Zones of App */}
+                    <main className="lg:pl-64">
+                        <HeroSection scrollY={scrollY} />
+                        <PhilosophySection />
+                        <TimelineSection />
+                        <ArtistesSection />
+                        <ExhibitionSection />
+                    </main>
+
+                    {/* Minimal decorative footer */}
+                    <footer className="lg:pl-64 border-t border-bauhaus-grid bg-white py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-bauhaus-dark/60 font-bold uppercase">
+                        <div>&copy; 1919-2026 BAUHAUS STUDY GROUP. NO RIGHTS RESERVED.</div>
+                        <div className="flex gap-4">
+                            <span>WEIMAR</span>
+                            <span className="text-bauhaus-red">&#9632;</span>
+                            <span>DESSAU</span>
+                            <span className="text-bauhaus-blue">&#9679;</span>
+                            <span>BERLIN</span>
+                            <span className="text-bauhaus-yellow">&#9650;</span>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        // NAVBAR / NAVIGATION CONTROL
+        function Navbar({ activeSection }) {
+            const [mobileOpen, setMobileOpen] = useState(false);
+
+            const scrollInto = (id) => {
+                setMobileOpen(false);
+                const val = document.getElementById(id);
+                if (val) {
+                    val.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            return (
+                <>
+                    {/* Mobile header (hidden on large displays) */}
+                    <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-bauhaus-grid flex items-center justify-between px-6 z-50">
+                        <span onClick={() => scrollInto('intro')} className="font-sans text-xl font-black tracking-widest text-bauhaus-dark uppercase cursor-pointer">
+                            BAUHAUS
+                        </span>
+                        <button onClick={() => setMobileOpen(!mobileOpen)} className="p-1 focus:outline-none text-bauhaus-dark">
+                            <Icon name={mobileOpen ? 'x' : 'menu'} className="w-6 h-6" />
+                        </button>
+                    </header>
+
+                    {/* Mobile Drawer menu */}
+                    <div className={`fixed inset-0 bg-[#0d1017]/80 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                        <div className={`w-80 h-full bg-white border-r border-bauhaus-grid p-6 flex flex-col justify-between transition-transform duration-300 transform ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                            <div>
+                                <div className="border-b border-bauhaus-grid pb-6 mb-8 flex justify-between items-center">
+                                    <span className="font-sans text-xl font-black tracking-widest uppercase">BAUHAUS</span>
+                                    <button onClick={() => setMobileOpen(false)}><Icon name="x" className="w-5 h-5" /></button>
+                                </div>
+                                <nav className="flex flex-col gap-4 font-mono text-sm leading-none font-bold uppercase">
+                                    {SECTIONS.map((sec) => (
+                                        <button 
+                                            key={sec.id} 
+                                            onClick={() => scrollInto(sec.id)}
+                                            className={`text-left p-2.5 transition border-l-2 focus:outline-none ${activeSection === sec.id ? 'border-bauhaus-red text-bauhaus-red bg-zinc-50' : 'border-transparent text-zinc-500 hover:text-bauhaus-dark'}`}
+                                        >
+                                            {sec.index} // {sec.title}
+                                        </button>
+                                    ))}
+                                </nav>
+                            </div>
+                            <div className="font-mono text-[9px] text-zinc-400">DESIGN SYSTEM STANDARD V5.1</div>
+                        </div>
+                    </div>
+
+                    {/* Desktop Sidebar (Permanent left edge layout) */}
+                    <aside className="hidden lg:flex fixed top-0 bottom-0 left-0 w-64 bg-white border-r border-bauhaus-grid flex-col justify-between p-8 z-30 select-none">
+                        <div>
+                            {/* Logo */}
+                            <div className="border-b-4 border-bauhaus-dark pb-6 mb-10">
+                                <h1 onClick={() => scrollInto('intro')} className="font-sans text-4xl font-black tracking-tighter text-bauhaus-dark uppercase leading-none cursor-pointer">
+                                    BAUHAUS
+                                </h1>
+                                <p className="font-mono text-[9px] uppercase font-bold text-zinc-400 tracking-widest mt-1">
+                                    ESTABLISHED 1919
+                                </p>
+                            </div>
+
+                            {/* Section mapping */}
+                            <nav className="flex flex-col gap-3 font-mono text-xs font-bold uppercase">
+                                {SECTIONS.map((sec) => (
+                                    <button
+                                        key={sec.id}
+                                        onClick={() => scrollInto(sec.id)}
+                                        className={`group text-left p-3 flex flex-col relative overflow-hidden transition-all duration-300 border-l ${activeSection === sec.id ? 'border-bauhaus-red text-bauhaus-red pl-5 bg-zinc-50' : 'border-zinc-200 text-zinc-400 pl-3 hover:text-bauhaus-dark hover:border-bauhaus-dark'}`}
+                                    >
+                                        <span className="text-[9px] opacity-75">{sec.index} //</span>
+                                        <span className="tracking-tighter mt-0.5">{sec.title}</span>
+                                    </button>
+                                ))}
+                            </nav>
+                        </div>
+
+                        {/* Coordinate or scale telemetry */}
+                        <div className="border-t border-zinc-200 pt-6">
+                            <div className="flex gap-1.5 items-center justify-between font-mono text-[9px] font-black uppercase text-zinc-400">
+                                <div className="flex gap-1 items-center">
+                                    <Icon name="clock" className="w-3 h-3 text-bauhaus-blue" />
+                                    <span>UTC TIMER</span>
+                                </div>
+                                <span className="text-zinc-600">ONLINE</span>
+                            </div>
+                        </div>
+                    </aside>
+                </>
+            );
+        }
+
+        // HERO / GENERAL INTRO
+        function HeroSection({ scrollY }) {
+            const containerRef = useRef(null);
+            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+            const handleMouseMove = (e) => {
+                if (!containerRef.current) return;
+                const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+                const x = (e.clientX - left - width / 2) / (width / 2);
+                const y = (e.clientY - top - height / 2) / (height / 2);
+                setMousePos({ x, y });
+            };
+
+            const textOpacity = Math.max(1 - scrollY / 700, 0);
+            const textTranslateY = scrollY * 0.35;
+
+            return (
+                <section
+                    id="intro"
+                    ref={containerRef}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={() => setMousePos({ x: 0, y: 0 })}
+                    className="relative min-h-screen w-full bg-bauhaus-sand bauhaus-grid flex flex-col justify-between overflow-hidden pt-24 pb-12 px-6 md:px-12 lg:px-16 border-b border-bauhaus-grid select-none"
+                >
+                    {/* Blueprint grid lines overlay */}
+                    <div className="absolute top-1/3 left-0 w-full h-[1px] bg-bauhaus-red/15 pointer-events-none" />
+                    <div className="absolute top-2/3 left-0 w-full h-[1px] bg-bauhaus-blue/15 pointer-events-none" />
+                    <div className="absolute left-1/3 top-0 w-[1px] h-full bg-bauhaus-yellow/20 pointer-events-none" />
+                    <div className="absolute left-2/3 top-0 w-[1px] h-full bg-bauhaus-dark/5 pointer-events-none" />
+
+                    {/* Geometries parralax background planes */}
+                    <div 
+                        className="absolute w-48 h-48 rounded-full bg-bauhaus-blue opacity-25"
+                        style={{
+                            left: '60%', top: '30%',
+                            transform: `translate(${mousePos.x * -70}px, ${mousePos.y * -70 - scrollY * 0.3}px)`
+                        }}
+                    />
+                    <div 
+                        className="absolute w-36 h-36 bg-bauhaus-red opacity-20"
+                        style={{
+                            left: '75%', top: '15%',
+                            transform: `translate(${mousePos.x * 60}px, ${mousePos.y * 60 + scrollY * 0.1}px)`
+                        }}
+                    />
+                    <div 
+                        className="absolute w-0 h-0 opacity-25 border-l-[70px] border-l-transparent border-r-[70px] border-r-transparent border-b-[120px] border-b-bauhaus-yellow"
+                        style={{
+                            left: '50%', top: '60%',
+                            transform: `translate(${mousePos.x * -90}px, ${mousePos.y * -90}px) rotate(15deg)`
+                        }}
+                    />
+
+                    <div 
+                        className="relative z-10 flex-1 my-auto flex flex-col items-start transition-all"
+                        style={{ opacity: textOpacity, transform: `translateY(${textTranslateY}px)` }}
+                    >
+                        <div className="flex items-center gap-3 mb-6">
+                            <span className="font-mono text-xs font-black text-bauhaus-cream bg-bauhaus-red px-2 py-0.5 tracking-widest shadow-bauhaus-sm">
+                                01 // INDUCTION
+                            </span>
+                            <div className="h-[2px] w-12 bg-bauhaus-dark" />
+                            <span className="font-mono text-xs tracking-widest text-bauhaus-dark/60 font-bold uppercase">WEIMAR 1919</span>
+                        </div>
+
+                        <h1 className="font-sans text-[11vw] sm:text-[9vw] lg:text-[7vw] xl:text-[6.5vw] font-black tracking-tighter text-bauhaus-dark leading-[0.9] uppercase align-middle">
+                            KUNST UND <br />
+                            <span className="text-stroke-bauhaus relative">TECHNIK</span>
+                        </h1>
+
+                        <div className="w-full h-1 bg-bauhaus-dark my-6 shadow-bauhaus-sm" />
+
+                        <p className="font-sans text-xl md:text-2xl font-semibold tracking-tight uppercase max-w-xl text-bauhaus-dark/95">
+                            Unified fine art, mechanical manufacture, and physical architecture into a single great synthesis.
+                        </p>
+                    </div>
+
+                    <div className="relative z-10 flex justify-between items-end border-t border-bauhaus-grid pt-6 font-mono text-[10px] text-zinc-500 font-bold">
+                        <span>EST. WEIMAR, GERMANY</span>
+                        <button 
+                            onClick={() => document.getElementById('manifesto').scrollIntoView({ behavior: 'smooth' })}
+                            className="bg-bauhaus-dark text-white p-2 flex items-center justify-center hover:bg-bauhaus-red transition"
+                        >
+                            <Icon name="chevron-right" className="w-3.5 h-3.5 rotate-90" />
+                        </button>
+                        <span>FORM FOLLOWS FUNCTION</span>
+                    </div>
+                </section>
+            );
+        }
+
+        // PHILOSOPHY / MANIFESTO CARDS
+        function PhilosophySection() {
+            return (
+                <section id="manifesto" className="py-24 px-6 md:px-12 lg:px-16 border-b border-bauhaus-grid bg-white">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex justify-between items-center border-b border-bauhaus-dark pb-6 mb-12">
+                            <div className="flex items-center gap-3">
+                                <span className="font-mono text-xs font-black text-bauhaus-cream bg-bauhaus-blue px-2 py-0.5 tracking-widest shadow-bauhaus-sm">02 // THEOREM</span>
+                                <div className="h-[2px] w-12 bg-bauhaus-dark" />
+                                <span className="font-mono text-xs tracking-widest text-bauhaus-dark/60 font-bold uppercase">PHILOSOPHICAL CODE</span>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+                            <div className="lg:col-span-4 flex flex-col justify-between">
+                                <h2 className="font-sans text-3xl md:text-5xl font-black text-bauhaus-dark leading-none uppercase">
+                                    THE CORE <br />MANIFESTO
+                                </h2>
+                                <p className="font-mono text-xs text-zinc-500 font-semibold leading-relaxed mt-4">
+                                    The original publication argued to demolish academic segregation and replace it with authentic mechanical craft training.
+                                </p>
+                            </div>
+
+                            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {BAUHAUS_PRINCIPLES.map((pr) => (
+                                    <div key={pr.number} className="border-3 border-bauhaus-dark p-6 bg-bauhaus-sand hover:bg-[#11141a] hover:text-white transition-all duration-300 shadow-bauhaus flex flex-col justify-between group">
+                                        <div className="font-mono text-4xl font-extrabold text-bauhaus-red group-hover:text-bauhaus-yellow transition-colors">{pr.number}</div>
+                                        <div className="mt-8">
+                                            <h3 className="font-sans text-lg font-black uppercase text-current mb-2">{pr.title}</h3>
+                                            <p className="font-mono text-[11px] text-neutral-600 group-hover:text-neutral-300 leading-normal">{pr.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // TIMELINE / CHRONOLOGICAL TIMELINE CHIEF ERAS
+        function TimelineSection() {
+            const [selectedEra, setSelectedEra] = useState('all');
+            const [expandedEventIndex, setExpandedEventIndex] = useState(null);
+
+            const filteredEvents = selectedEra === 'all' 
+                ? BAUHAUS_CHRONOLOGY 
+                : BAUHAUS_CHRONOLOGY.filter(e => e.location.toLowerCase() === selectedEra);
+
+            return (
+                <section id="timeline" className="py-24 px-6 md:px-12 lg:px-16 border-b border-bauhaus-grid bg-bauhaus-sand relative">
+                    <div className="absolute inset-0 bauhaus-grid opacity-10 pointer-events-none" />
+                    
+                    <div className="max-w-7xl mx-auto relative z-10">
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-bauhaus-grid pb-6 mb-12">
+                            <div className="flex items-center gap-3">
+                                <span className="font-mono text-xs font-black text-bauhaus-cream bg-bauhaus-yellow text-bauhaus-dark px-2 py-0.5 tracking-widest shadow-bauhaus-sm">03 // RECORD</span>
+                                <div className="h-[2px] w-12 bg-bauhaus-dark/30" />
+                                <span className="font-mono text-xs tracking-widest text-bauhaus-dark/60 font-bold uppercase">14-YEAR CHRONOLOGY</span>
+                            </div>
+                            
+                            {/* Filter tabs */}
+                            <div className="flex bg-white border border-bauhaus-dark p-1 divide-x divide-bauhaus-dark font-mono text-[9px] font-black uppercase z-10 shadow-bauhaus-sm">
+                                {['all', 'weimar', 'dessau', 'berlin'].map((tab) => (
+                                    <button
+                                        key={tab}
+                                        onClick={() => { setSelectedEra(tab); setExpandedEventIndex(null); }}
+                                        className={`px-3 py-1 cursor-pointer hover:bg-neutral-100 transition focus:outline-none ${selectedEra === tab ? 'bg-bauhaus-red text-white hover:bg-bauhaus-red' : ''}`}
+                                    >
+                                        {tab}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* General Eras Intro Slider cards */}
+                        {selectedEra !== 'all' && (
+                            <div className="bg-white border-3 border-bauhaus-dark p-6 shadow-bauhaus mb-12 flex flex-col md:flex-row gap-6 items-stretch transition-all duration-300">
+                                {BAUHAUS_ERAS.filter(era => era.id === selectedEra).map(info => (
+                                    <div key={info.id} className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
+                                        <div className="md:col-span-8 flex flex-col justify-between">
+                                            <div>
+                                                <span className="font-mono text-[10px] font-black text-bauhaus-red uppercase tracking-widest">{info.years}</span>
+                                                <h3 className="font-sans text-2xl font-black text-neutral-900 uppercase tracking-tight mt-1">{info.name}</h3>
+                                                <div className="font-mono text-[9px] text-zinc-400 mt-0.5 font-bold uppercase">DIRECTED BY {info.director} // REST SITE: {info.location}</div>
+                                                <p className="font-sans text-sm text-neutral-700 leading-relaxed mt-4 font-semibold">{info.intro}</p>
+                                            </div>
+                                            <div className="mt-6">
+                                                <div className="font-mono text-[9px] font-black text-zinc-400 uppercase tracking-wider mb-2">PRIMARY ACHIEVEMENTS:</div>
+                                                <ul className="flex flex-col gap-1 list-none font-mono text-[10px] text-neutral-800">
+                                                    {info.achievements.map((ach, i) => (
+                                                        <li key={i} className="flex gap-2 items-start font-bold">
+                                                            <span className="text-bauhaus-blue">&#9632;</span>
+                                                            <span>{ach}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="md:col-span-4 min-h-[160px] bg-neutral-100 border border-bauhaus-dark overflow-hidden flex items-center justify-center relative">
+                                            <div className="absolute inset-0 bg-[#0d1017]/10" />
+                                            <img 
+                                                src={info.id === 'weimar' ? 'https://upload.wikimedia.org/wikipedia/commons/2/29/Haus_am_Horn.jpg' : info.id === 'dessau' ? 'https://upload.wikimedia.org/wikipedia/commons/d/de/Dessau-Bauhaus.jpg' : 'https://upload.wikimedia.org/wikipedia/commons/5/52/Walter_Gropius.jpg'}
+                                                alt={info.name} 
+                                                className="w-full h-full object-cover grayscale active:grayscale-0 transition duration-500"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Chronology expandable list stack */}
+                        <div className="flex flex-col gap-4 mt-8">
+                            {filteredEvents.map((ev, index) => {
+                                const isExpanded = index === expandedEventIndex;
+                                return (
+                                    <div 
+                                        key={ev.year}
+                                        className={`border-3 border-bauhaus-dark transition duration-300 bg-white shadow-bauhaus-sm block hover:shadow-bauhaus cursor-pointer overflow-hidden`}
+                                        onClick={() => setExpandedEventIndex(isExpanded ? null : index)}
+                                    >
+                                        {/* Header Row */}
+                                        <div className="p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                                            <div className="flex items-center gap-4">
+                                                <span className={`font-mono text-3xl font-black text-white px-2 py-1 select-none ${ev.year === '1933' ? 'bg-bauhaus-red' : ev.year === '1925' ? 'bg-bauhaus-blue' : 'bg-bauhaus-dark'}`}>{ev.year}</span>
+                                                <div>
+                                                    <h4 className="font-sans text-sm font-black text-bauhaus-dark uppercase tracking-tight">{ev.title}</h4>
+                                                    <span className="font-mono text-[9px] text-zinc-400 font-bold uppercase tracking-wider">{ev.location} // DIRECTED BY {ev.director}</span>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-3">
+                                                <span className="font-mono text-[7.5px] uppercase tracking-widest px-1.5 py-0.5 border border-zinc-200 text-zinc-400 font-bold bg-zinc-50">{ev.significance}</span>
+                                                <button className="p-1 border border-zinc-200 bg-neutral-50 rounded-none w-6 h-6 flex items-center justify-center">
+                                                    <Icon name="plus" className={`w-3.5 h-3.5 text-zinc-500 transition-transform duration-300 ${isExpanded ? 'rotate-45' : ''}`} />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Expanded Details pane */}
+                                        <div className={`transition-all duration-300 border-t border-bauhaus-dark/10 bg-neutral-50/50 ${isExpanded ? 'max-h-[600px] opacity-100 p-6' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+                                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 font-mono text-[11px]">
+                                                <div className="lg:col-span-8">
+                                                    <p className="font-sans text-xs font-semibold text-neutral-800 leading-relaxed mb-6">{ev.description}</p>
+                                                    <div className="font-semibold text-zinc-500 uppercase tracking-widest text-[9px] mb-3">CONCISE CHRONIC HISTORICAL RECORDS:</div>
+                                                    <ul className="flex flex-col gap-2.5 list-none">
+                                                        {ev.details.map((dt, i) => (
+                                                            <li key={i} className="flex gap-2 items-start font-medium text-neutral-700">
+                                                                <span className="text-zinc-500 font-black">&#8212;</span>
+                                                                <span>{dt}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                                <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-zinc-200 pt-6 lg:pt-0 lg:pl-6 flex flex-col justify-between">
+                                                    <div>
+                                                        <div className="font-black text-zinc-400 uppercase tracking-widest text-[8px] mb-1">KEY FIGURES:</div>
+                                                        <div className="flex flex-wrap gap-1.5">
+                                                            {ev.keyFigures.map((k, i) => (
+                                                                <span key={i} className="bg-zinc-100 text-zinc-800 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 border border-zinc-200">{k}</span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-6 p-3 bg-neutral-100 border border-zinc-200 flex gap-2 items-center text-[9px]">
+                                                        <span className="text-zinc-400 select-none">#</span>
+                                                        <span className="text-zinc-500 uppercase tracking-wider font-bold">Historical data locked on active timeline. No sound/synth triggers.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ARTISTES / PAUL KLEE DYNAMIC watercolor WALKS LANDING LAB
+        function ArtistesSection() {
+            const [selectedArtist, setSelectedArtist] = useState(BAUHAUS_ARTISTS_DB[0]);
+            
+            // Paul Klee Canvas variables
+            const [activePresetColor, setActivePresetColor] = useState('#E11D48');
+            const [sandboxPoints, setSandboxPoints] = useState([]);
+            const [isAutoWalkActive, setIsAutoWalkActive] = useState(false);
+            const walkIntervalRef = useRef(null);
+            
+            // Masterpiece Zoom Lightbox logic
+            const [lightboxArtwork, setLightboxArtwork] = useState(null);
+            const [isGridOverlay, setIsGridOverlay] = useState(false);
+            const [zoomLevel, setZoomLevel] = useState(1);
+            const [imageRotation, setImageRotation] = useState(0);
+            const [isColorInverted, setIsColorInverted] = useState(false);
+
+            // Dynamic Drawing walker generator for "A line is a point on a walk" Klee Engine
+            const addPointToWalk = (xVal, yVal) => {
+                setSandboxPoints(prev => {
+                    const clean = [...prev];
+                    if (clean.length > 30) clean.shift(); // keep length optimized
+                    return [...clean, { x: xVal, y: yVal, color: activePresetColor }];
+                });
+            };
+
+            const triggerManualGridClick = (e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const xPct = ((e.clientX - rect.left) / rect.width) * 100;
+                const yPct = ((e.clientY - rect.top) / rect.height) * 100;
+                addPointToWalk(xPct.toFixed(1), yPct.toFixed(1));
+            };
+
+            // START AUTO WALK SYSTEM (Zero sounds, purely dynamic vector graphic plotting)
+            const toggleAutoWalk = () => {
+                if (isAutoWalkActive) {
+                    clearInterval(walkIntervalRef.current);
+                    setIsAutoWalkActive(false);
+                } else {
+                    setIsAutoWalkActive(true);
+                    let lastX = 50;
+                    let lastY = 50;
+                    walkIntervalRef.current = setInterval(() => {
+                        const stepX = (Math.random() - 0.5) * 16;
+                        const stepY = (Math.random() - 0.5) * 16;
+                        lastX = Math.min(Math.max(lastX + stepX, 5), 95);
+                        lastY = Math.min(Math.max(lastY + stepY, 5), 95);
+                        addPointToWalk(lastX.toFixed(1), lastY.toFixed(1));
+                    }, 140);
+                }
+            };
+
+            useEffect(() => {
+                return () => clearInterval(walkIntervalRef.current);
+            }, []);
+
+            return (
+                <section id="artistes" className="py-24 px-6 md:px-12 lg:px-16 border-b border-bauhaus-grid bg-white relative">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex justify-between items-center border-b border-bauhaus-dark pb-6 mb-12">
+                            <div className="flex items-center gap-3">
+                                <span className="font-mono text-xs font-black text-bauhaus-cream bg-bauhaus-dark px-2 py-0.5 tracking-widest shadow-bauhaus-sm">04 // POLYPHONIC</span>
+                                <div className="h-[2px] w-12 bg-bauhaus-dark" />
+                                <span className="font-mono text-xs tracking-widest text-bauhaus-dark/60 font-bold uppercase">PAUL KLEE VISUAL LABORATORY</span>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+                            {/* Artist Selector Profiles pane */}
+                            <div className="lg:col-span-4 flex flex-col justify-between">
+                                <div>
+                                    <h2 className="font-sans text-3xl md:text-5xl font-black text-bauhaus-dark uppercase leading-none mb-6">
+                                        MASTER <br />ARTISTES
+                                    </h2>
+                                    <div className="flex flex-col gap-2.5">
+                                        {BAUHAUS_ARTISTS_DB.map(art => (
+                                            <button
+                                                key={art.id}
+                                                onClick={() => setSelectedArtist(art)}
+                                                className={`text-left p-4 border-3 border-bauhaus-dark uppercase leading-none font-sans font-black flex justify-between items-center transition focus:outline-none cursor-pointer ${selectedArtist.id === art.id ? 'bg-bauhaus-dark text-white' : 'bg-bauhaus-sand hover:bg-neutral-100 text-bauhaus-dark'}`}
+                                            >
+                                                <span>{art.name}</span>
+                                                <span className="font-mono text-[9px] font-bold opacity-60">{art.years}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    
+                                    {/* Selected profile display */}
+                                    <div className="mt-6 border-t-2 border-dashed border-zinc-200 pt-6">
+                                        <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold leading-none">{selectedArtist.role}</span>
+                                        <p className="font-sans text-sm text-neutral-700 leading-relaxed font-semibold mt-2">{selectedArtist.bio}</p>
+                                    </div>
+                                </div>
+
+                                {/* Active masterpieces to zoom */}
+                                <div className="mt-8 border-t border-zinc-200 pt-6">
+                                    <div className="font-mono text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-3">TAP MASTERPIECE TO ZOOM DETAILS:</div>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        {selectedArtist.artworks.map((work, i) => (
+                                            <div 
+                                                key={i} 
+                                                onClick={() => { setLightboxArtwork(work); setZoomLevel(1); setImageRotation(0); setIsColorInverted(false); }}
+                                                className="border border-bauhaus-dark p-1.5 bg-bauhaus-sand hover:bg-white hover:scale-[1.02] active:scale-95 cursor-pointer flex flex-col justify-between gap-2 shadow-inner transition"
+                                            >
+                                                <div className="w-full aspect-square bg-white border border-dashed border-zinc-200 overflow-hidden flex items-center justify-center relative">
+                                                    <img src={work.imageUrl} alt={work.title} referrerPolicy="no-referrer" className="w-full h-full object-cover grayscale active:grayscale-0" />
+                                                </div>
+                                                <div className="font-mono text-[7px] leading-tight font-black uppercase flex flex-col">
+                                                    <span className="truncate max-w-[100px] text-zinc-800">{work.title}</span>
+                                                    <span className="text-bauhaus-red mt-0.5">{work.year}</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Active interactive Drawing walkthrough canvas */}
+                            <div className="lg:col-span-8 flex flex-col gap-4">
+                                <div className="border-3 border-bauhaus-dark bg-white p-5 shadow-bauhaus flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-bauhaus-dark gap-4 md:gap-0">
+                                    {/* Left side plot controller */}
+                                    <div className="md:w-1/3 flex flex-col justify-between pr-4 gap-6">
+                                        <div>
+                                            <span className="font-mono text-[9px] font-black text-bauhaus-cream bg-bauhaus-blue px-2 py-0.5 tracking-widest shadow-bauhaus-sm">ENGINE v3.1</span>
+                                            <h3 className="font-sans text-lg font-black uppercase text-bauhaus-dark mt-3 leading-tight">THE CHRONIC DRAWING MACHINE</h3>
+                                            <p className="font-mono text-[9px] text-neutral-500 leading-normal mt-2">"A line is a point that goes on a walk." Spawn vectors on the canvas or trigger autowalk.</p>
+                                        </div>
+
+                                        {/* Colors */}
+                                        <div>
+                                            <div className="font-mono text-[8px] font-black text-zinc-400 uppercase tracking-widest mb-1.5">CHROMATIC COLOR PIGMENT:</div>
+                                            <div className="flex gap-2">
+                                                {['#E11D48', '#2563EB', '#FDE047', '#0F172A'].map(col => (
+                                                    <button 
+                                                        key={col} 
+                                                        onClick={() => setActivePresetColor(col)}
+                                                        className={`w-6 h-6 border cursor-pointer focus:outline-none transition-transform duration-150 ${activePresetColor === col ? 'scale-110 border-2 border-bauhaus-dark shadow-sm' : 'border-zinc-300'}`}
+                                                        style={{ backgroundColor: col }}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* autowalk clicker */}
+                                        <div className="flex gap-2 mb-2">
+                                            <button 
+                                                onClick={toggleAutoWalk}
+                                                className={`flex-1 p-2.5 font-mono text-[9.5px] font-bold uppercase transition focus:outline-none border-2 border-bauhaus-dark cursor-pointer flex justify-center items-center gap-1.5 ${isAutoWalkActive ? 'bg-bauhaus-red text-white' : 'bg-white hover:bg-neutral-50 text-bauhaus-dark shadow-bauhaus-sm'}`}
+                                            >
+                                                <Icon name="play" className="w-3 h-3" />
+                                                <span>{isAutoWalkActive ? 'STOP WALK' : 'AUTOWALK'}</span>
+                                            </button>
+                                            <button 
+                                                onClick={() => setSandboxPoints([])}
+                                                className="p-2.5 font-mono text-[9.5px] font-bold uppercase border-2 border-bauhaus-dark bg-white hover:bg-neutral-50 cursor-pointer text-zinc-500 shadow-bauhaus-sm"
+                                            >
+                                                CLR
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* Right side drawing coordinate grid */}
+                                    <div className="flex-1 md:pl-4">
+                                        <div 
+                                            onClick={triggerManualGridClick}
+                                            className="w-full aspect-[4/3] border border-bauhaus-dark bg-bauhaus-sand py-2 px-2 relative cursor-crosshair overflow-hidden select-none"
+                                        >
+                                            <div className="absolute inset-0 bauhaus-grid-fine opacity-70 pointer-events-none" />
+                                            {/* Instructions text */}
+                                            {sandboxPoints.length === 0 && (
+                                                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center font-mono text-[9px] text-zinc-400 pointer-events-none select-none uppercase">
+                                                    <span>Tap anywhere inside to spawn points</span>
+                                                    <span className="mt-1">or trigger AUTOWALK on left controls</span>
+                                                </div>
+                                            )}
+
+                                            {/* Renders point nodes and joint lines */}
+                                            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                                                {sandboxPoints.map((pt, i) => {
+                                                    if (i === 0) return null;
+                                                    const prevPt = sandboxPoints[i - 1];
+                                                    return (
+                                                        <line 
+                                                            key={i} 
+                                                            x1={`${prevPt.x}%`} y1={`${prevPt.y}%`}
+                                                            x2={`${pt.x}%`} y2={`${pt.y}%`}
+                                                            stroke={pt.color} strokeWidth="1.6" strokeLinecap="round"
+                                                        />
+                                                    );
+                                                })}
+                                            </svg>
+                                            
+                                            {/* Visual point targets */}
+                                            {sandboxPoints.map((pt, i) => (
+                                                <div 
+                                                    key={i}
+                                                    className="absolute w-2.5 h-2.5 rounded-full -translate-x-1/2 -translate-y-1/2 border border-white z-10 transition-transform scale-102"
+                                                    style={{ left: `${pt.x}%`, top: `${pt.y}%`, backgroundColor: pt.color }}
+                                                />
+                                            ))}
+
+                                            {/* coordinates HUD overlay */}
+                                            {sandboxPoints.length > 0 && (
+                                                <div className="absolute bottom-2.5 right-2 py-0.5 px-2 bg-white/95 border border-bauhaus-dark font-mono text-[7px] text-zinc-500 font-bold uppercase pointer-events-none select-none">
+                                                    X: {sandboxPoints[sandboxPoints.length - 1].x}% // Y: {sandboxPoints[sandboxPoints.length - 1].y}%
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* DYNAMIC MASTERPIECE LIGHTBOX ZOOM OVERLAY Modal (Real specs table, grid layers, color options) */}
+                    {lightboxArtwork && (() => {
+                        const details = WIKIART_DATABASE[lightboxArtwork.title] || { location: 'Museum Archive Collection', medium: 'Artistic Watercolor / Print', dimensions: 'Standard Exhibition Size', movement: 'Expressionism' };
+                        return (
+                            <div className="fixed inset-0 bg-[#07090d]/85 flex items-center justify-center p-3 md:p-6 z-50 animate-fade-in select-none">
+                                <div className="bg-white border-4 border-bauhaus-dark max-w-5xl w-full h-full max-h-[85vh] md:max-h-[75vh] grid grid-cols-1 md:grid-cols-12 overflow-hidden shadow-bauhaus-lg">
+                                    
+                                    {/* Left pane: interactive image zoom coordinates panel */}
+                                    <div className="md:col-span-7 bg-[#0b0e14] h-[340px] md:h-full relative overflow-hidden flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-bauhaus-dark select-none">
+                                        <div className="absolute inset-0 bg-[radial-gradient(#1f2634_1.2px,transparent_1.2px)] [background-size:14px_14px] opacity-45 pointer-events-none" />
+                                        
+                                        {/* The artwork canvas */}
+                                        <div 
+                                            className="relative flex items-center justify-center max-w-full max-h-full transition-transform duration-300"
+                                            style={{
+                                                transform: `scale(${zoomLevel}) rotate(${imageRotation}deg)`,
+                                                filter: isColorInverted ? 'invert(1) hue-rotate(180deg)' : 'none'
+                                            }}
+                                        >
+                                            <img 
+                                                src={lightboxArtwork.imageUrl} 
+                                                alt={lightboxArtwork.title} 
+                                                referrerPolicy="no-referrer"
+                                                className="max-w-full max-h-[260px] md:max-h-[380px] object-contain border border-zinc-800 shadow-2xl z-10"
+                                            />
+                                        </div>
+
+                                        {/* Golden section geometric schema overlay */}
+                                        {isGridOverlay && (
+                                            <svg className="absolute inset-0 w-full h-full pointer-events-none z-20 opacity-80">
+                                                <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#DC2626" strokeWidth="0.8" strokeDasharray="3 3" />
+                                                <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#DC2626" strokeWidth="0.8" strokeDasharray="3 3" />
+                                                <line x1="61.8%" y1="0" x2="61.8%" y2="100%" stroke="#2563EB" strokeWidth="0.7" />
+                                                <line x1="0" y1="61.8%" x2="100%" y2="61.8%" stroke="#2563EB" strokeWidth="0.7" />
+                                                <circle cx="50%" cy="50%" r="20%" fill="none" stroke="#EAB308" strokeWidth="0.8" />
+                                                <text x="52%" y="15%" className="fill-red-400 font-mono text-[7px] font-bold tracking-wider uppercase">CENTRAL AXIS</text>
+                                                <text x="52%" y="47%" className="fill-yellow-400 font-mono text-[7px] font-bold tracking-wider uppercase">SYNESTHETIC FOCUS</text>
+                                            </svg>
+                                        )}
+
+                                        {/* Viewport helper overlay indices bottom right */}
+                                        <div className="absolute bottom-3 left-3 bg-[#0d1017]/95 px-2 py-1 border border-zinc-800 pointer-events-none font-mono text-[7px] text-zinc-400 uppercase select-none">
+                                            * GRID_OVERLAY: Golden structural ratio (61.8%)
+                                        </div>
+                                    </div>
+
+                                    {/* Right pane: Real detailed specs table dossier */}
+                                    <div className="md:col-span-5 flex flex-col justify-between overflow-y-auto bg-white p-5 h-full">
+                                        <div>
+                                            <div className="flex justify-between items-center text-zinc-500 font-mono text-[7px] font-bold uppercase tracking-widest mb-1.5">
+                                                <span>WIKIART DATA ENTRY REGISTER</span>
+                                                <span>ID: #{Math.abs(lightboxArtwork.title.length * 13).toFixed(0)}</span>
+                                            </div>
+
+                                            <div className="border-b border-bauhaus-dark pb-3 mb-4">
+                                                <span className="font-mono text-[9px] font-black text-bauhaus-red tracking-wider uppercase">{selectedArtist.name} // {lightboxArtwork.year}</span>
+                                                <h3 className="font-sans text-xl font-black text-neutral-900 mt-0.5 uppercase tracking-tighter leading-tight">{lightboxArtwork.title}</h3>
+                                            </div>
+
+                                            {/* REAL DOSSIER SPECIFICATIONS TABLE (Fulfilling zoom detailed specifications mandate) */}
+                                            <div className="mb-6 bg-bauhaus-sand border-2 border-bauhaus-dark p-3.5 flex flex-col gap-2 select-text shadow-inner">
+                                                <div className="flex justify-between items-center border-b border-zinc-300 pb-1 font-mono text-[8.5px] font-bold">
+                                                    <span className="text-zinc-500 uppercase">RESTING MUSEUM:</span>
+                                                    <span className="text-zinc-800 text-right uppercase truncate max-w-[150px]">{details.location}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center border-b border-zinc-300 pb-1 font-mono text-[8.5px] font-bold">
+                                                    <span className="text-zinc-500 uppercase">TECHNICAL MEDIUM:</span>
+                                                    <span className="text-zinc-800 uppercase truncate max-w-[150px]">{details.medium}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center border-b border-zinc-300 pb-1 font-mono text-[8.5px] font-bold">
+                                                    <span className="text-zinc-500 uppercase">METRIC SIZE:</span>
+                                                    <span className="text-zinc-800 uppercase">{details.dimensions}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center pt-0.5 font-mono text-[8.5px] font-bold">
+                                                    <span className="text-zinc-500 uppercase">ART CLASSIFICATION:</span>
+                                                    <span className="text-bauhaus-blue uppercase truncate max-w-[150px]">{details.movement}</span>
+                                                </div>
+                                            </div>
+
+                                            {/* Interactive slider decks */}
+                                            <div className="grid grid-cols-1 gap-2.5">
+                                                <button 
+                                                    onClick={() => setIsGridOverlay(!isGridOverlay)}
+                                                    className={`w-full py-2 border-2 border-bauhaus-dark font-mono text-[9px] font-black uppercase transition focus:outline-none flex items-center justify-center gap-1.5 cursor-pointer ${isGridOverlay ? 'bg-bauhaus-yellow text-bauhaus-dark' : 'bg-white hover:bg-neutral-50'}`}
+                                                >
+                                                    <Icon name="grid-3x3" className="w-3.5 h-3.5 text-bauhaus-blue" />
+                                                    <span>{isGridOverlay ? 'AXE LABELS_ON' : 'GEOMETRIC GRID'}</span>
+                                                </button>
+                                                <div className="grid grid-cols-3 gap-2">
+                                                    <button 
+                                                        onClick={() => setZoomLevel(prev => prev > 1 ? 1 : 1.7)}
+                                                        className={`py-2 border border-bauhaus-dark font-mono text-[9px] font-bold uppercase text-center transition focus:outline-none cursor-pointer ${zoomLevel > 1 ? 'bg-bauhaus-blue text-white' : 'bg-white hover:bg-neutral-50'}`}
+                                                    >
+                                                        {zoomLevel > 1 ? '1.0X' : '1.7X_ZOOM'}
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => setImageRotation(prev => (prev + 90) % 360)}
+                                                        className="py-2 border border-bauhaus-dark font-mono text-[9px] font-bold uppercase text-zinc-600 bg-white hover:bg-neutral-50 transition cursor-pointer"
+                                                    >
+                                                        ROT_90&deg;
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => setIsColorInverted(!isColorInverted)}
+                                                        className={`py-2 border border-bauhaus-dark font-mono text-[9px] font-bold uppercase text-center transition focus:outline-none cursor-pointer ${isColorInverted ? 'bg-bauhaus-red text-white' : 'bg-white hover:bg-neutral-50'}`}
+                                                    >
+                                                        CHROMA
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button 
+                                            onClick={() => setLightboxArtwork(null)}
+                                            className="w-full mt-6 bg-bauhaus-dark hover:bg-bauhaus-red text-white py-2.5 font-sans font-black tracking-widest text-xs uppercase cursor-pointer transition select-none flex items-center justify-center gap-2 shadow-bauhaus-sm focus:outline-none"
+                                        >
+                                            <Icon name="x" className="w-3.5 h-3.5" />
+                                            <span>CLOSE DOSSIER</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })()}
+                </section>
+            );
+        }
+
+        // EXHIBITION / CATALOGS POSTERS AND CHIEF DIRECTORS BLUEPRINTS MODULE
+        function ExhibitionSection() {
+            const [selectedMaster, setSelectedMaster] = useState(BAUHAUS_MASTERS[0]);
+
+            return (
+                <section id="exhibition" className="py-24 px-6 md:px-12 lg:px-16 border-b border-bauhaus-grid bg-white">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex justify-between items-center border-b border-bauhaus-dark pb-6 mb-12">
+                            <div className="flex items-center gap-3">
+                                <span className="font-mono text-xs font-black text-bauhaus-cream bg-bauhaus-red px-2 py-0.5 tracking-widest shadow-bauhaus-sm">05 // ARCHIVE</span>
+                                <div className="h-[2px] w-12 bg-bauhaus-dark" />
+                                <span className="font-mono text-xs tracking-widest text-bauhaus-dark/60 font-bold uppercase">HISTORICAL CURATIONS</span>
+                            </div>
+                        </div>
+
+                        {/* Top layout: Poster Showcase */}
+                        <div className="mb-20">
+                            <h2 className="font-sans text-3xl md:text-5xl font-black text-bauhaus-dark uppercase leading-none mb-4">
+                                CURATED <br />POSTER EXHIBITS
+                            </h2>
+                            <p className="font-mono text-xs text-zinc-500 font-semibold leading-relaxed max-w-xl mb-10">
+                                Rare promotional compositions dating back to Weimar exhibitions, showcasing flat typography and early mechanical grid forms.
+                            </p>
+                            
+                            {/* Exhibition Grid catalog */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {EXHIBITION_POSTERS.map((post) => (
+                                    <div key={post.id} className="border-3 border-bauhaus-dark bg-bauhaus-sand p-3.5 shadow-bauhaus flex flex-col justify-between group transition">
+                                        <div>
+                                            <div className="w-full aspect-[3/4] bg-neutral-200 border border-bauhaus-dark mb-4 overflow-hidden flex items-center justify-center relative">
+                                                <div className="absolute inset-0 bg-[#0d1017]/10" />
+                                                <img 
+                                                    src={post.imageUrl} 
+                                                    alt={post.title} 
+                                                    className="w-full h-full object-cover grayscale opacity-95 group-hover:grayscale-0 group-hover:scale-105 transition duration-500"
+                                                />
+                                            </div>
+                                            <div className="font-mono text-[10px] text-zinc-500 font-bold uppercase">{post.designer} // {post.year}</div>
+                                            <h3 className="font-sans text-base font-black text-neutral-900 uppercase mt-1 leading-tight">{post.title}</h3>
+                                            <p className="font-mono text-[9px] text-zinc-600 mt-2 leading-relaxed">{post.description}</p>
+                                        </div>
+                                        <div className="border-t border-dashed border-zinc-200 pt-3 mt-4 flex justify-between items-center">
+                                            <span className="font-mono text-[7px] text-zinc-400 font-bold">TYPE ID: #{post.id.slice(0, 5)}</span>
+                                            <div className="flex gap-1.5">
+                                                {post.shapeComposition.map((sh, j) => (
+                                                    <span key={j} className="w-1.5 h-1.5 bg-bauhaus-dark rounded-full" />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Bottom layout: Chefs & Guild Masters area */}
+                        <div className="border-t-3 border-bauhaus-dark pt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+                            {/* Left selectors list */}
+                            <div className="lg:col-span-5 flex flex-col justify-between">
+                                <div>
+                                    <h3 className="font-sans text-3xl font-black text-neutral-900 uppercase leading-none mb-3">FACULTY MASTERS GUILD</h3>
+                                    <p className="font-mono text-xs text-neutral-500 font-semibold leading-relaxed mb-6">Explore the chief architects, cabinetmakers, and color theorists who engineered the curriculum.</p>
+                                    <div className="flex flex-col gap-2">
+                                        {BAUHAUS_MASTERS.map(master => (
+                                            <button
+                                                key={master.id}
+                                                onClick={() => setSelectedMaster(master)}
+                                                className={`text-left p-3.5 border-2 border-bauhaus-dark uppercase font-sans font-black flex justify-between items-center transition focus:outline-none cursor-pointer ${selectedMaster.id === master.id ? 'bg-bauhaus-dark text-white' : 'bg-bauhaus-sand hover:bg-neutral-100 text-bauhaus-dark'}`}
+                                            >
+                                                <span>{master.name}</span>
+                                                <span className="font-mono text-[8px] opacity-60 font-medium">{master.lifespan}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right blueprint toggle */}
+                            <div className="lg:col-span-7">
+                                <div className="border-3 border-bauhaus-dark bg-[#0a0d14] text-white p-6 shadow-bauhaus flex flex-col justify-between h-full relative overflow-hidden select-none">
+                                    <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-50 pointer-events-none" />
+                                    
+                                    {/* Blueprint overlay index lines */}
+                                    <div className="absolute top-12 left-0 right-0 h-[1px] bg-sky-500/10 pointer-events-none" />
+                                    <div className="absolute bottom-12 left-0 right-0 h-[1px] bg-sky-500/10 pointer-events-none" />
+                                    
+                                    <div className="relative z-10">
+                                        <div className="flex justify-between items-start">
+                                            <div>
+                                                <span className="font-mono text-[8px] font-black text-sky-400 bg-sky-950 px-2 py-0.5 border border-sky-800 tracking-widest uppercase">
+                                                    MASTER BLUEPRINT // ROLE_{selectedMaster.id.toUpperCase()}
+                                                </span>
+                                                <h4 className="font-sans text-3xl font-black text-white uppercase tracking-tight leading-none mt-3">
+                                                    {selectedMaster.name}
+                                                </h4>
+                                                <div className="font-mono text-[9px] text-zinc-500 mt-1 uppercase font-bold">WORKSHOP DEPT: {selectedMaster.workshop} // {selectedMaster.lifespan}</div>
+                                            </div>
+                                            <div className="w-12 h-12 border-2 border-dashed border-sky-500/30 flex items-center justify-center font-sans font-black text-sky-400/90 text-sm select-none">
+                                                {selectedMaster.avatarText}
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-8">
+                                            <div className="font-mono text-[8px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">HISTORIC LEGACY ACCREDITATION:</div>
+                                            <p className="font-sans text-sm text-zinc-300 leading-relaxed font-semibold italic">"{selectedMaster.legacy}"</p>
+                                        </div>
+
+                                        <div className="mt-6 border-t border-sky-500/20 pt-6">
+                                            <div className="font-mono text-[8.5px] font-black text-sky-400 uppercase tracking-widest">KEY MONUMENTAL WORK:</div>
+                                            <span className="font-sans text-lg font-black text-white uppercase mt-1 leading-none block">{selectedMaster.keyWork}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Blueprint coordinate scales indicators */}
+                                    <div className="relative z-10 flex justify-between items-center pt-8 font-mono text-[7px] text-zinc-600 font-bold select-none border-t border-dashed border-sky-500/15">
+                                        <span>SCALE FAC // 1:24.00</span>
+                                        <span className="text-sky-500/50">SEC_Z_INDICATORS // COMP 05</span>
+                                        <span>BAUHAUS FACULTY SYST</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Mount the React Application Container
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+    </script>
+</body>
+</html>
