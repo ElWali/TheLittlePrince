@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bauhaus — Interactive Design Showcase</title>
+  <title>BAUHAUS 2026 — Magnificent Industrial Intelligence</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -21,19 +21,16 @@
             'bauhaus-blue': '#005596',
             'bauhaus-yellow': '#fac901',
             'bauhaus-sand': '#e9e4d7',
-            'bauhaus-cream': '#ffffff',
             'bauhaus-dark': '#1a1a1a',
             'bauhaus-grid': '#d8d2c2',
-            'bauhaus-grid-dark': '#a8a291',
           },
           fontFamily: {
             sans: ['Space Grotesk', 'Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
           boxShadow: {
-            'bauhaus-sm': '4px 4px 0px 0px #1a1a1a',
-            'bauhaus-md': '8px 8px 0px 0px #1a1a1a',
-            'bauhaus-lg': '16px 16px 0px 0px #1a1a1a',
+            'brutal': '8px 8px 0px 0px #1a1a1a',
+            'brutal-sm': '4px 4px 0px 0px #1a1a1a',
           }
         }
       }
@@ -41,662 +38,337 @@
   </script>
 
   <style>
-    /* Base Styles */
+    :root { view-transition-name: root; }
     body {
       background-color: #e9e4d7;
       color: #1a1a1a;
       overflow-x: hidden;
-      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
-    /* Technical blueprint grid and noise filter */
-    .bg-blueprint-pattern {
-      background-image:
-        linear-gradient(rgba(26, 26, 26, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26, 26, 26, 0.05) 1px, transparent 1px);
-      background-size: 24px 24px;
+    /* 2026 Scroll-driven Logic */
+    @supports (animation-timeline: scroll()) {
+      #ruler-progress {
+        animation: scale-ruler linear both;
+        animation-timeline: scroll();
+      }
+      @keyframes scale-ruler { from { transform: scaleY(0); } to { transform: scaleY(1); } }
     }
 
-    .bg-blueprint-pattern-fine {
-      background-image:
-        linear-gradient(rgba(26, 26, 26, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26, 26, 26, 0.03) 1px, transparent 1px);
-      background-size: 8px 8px;
-    }
-
-    .bg-sky-blueprint {
-      background-color: #0c4a6e;
-      background-image:
-        linear-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.15) 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
-
-    .bg-sky-blueprint-fine {
-      background-image:
-        linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
-      background-size: 5px 5px;
-    }
-
-    /* Vintage Paper Noise Grain Overlay */
     .noise-overlay {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.05; pointer-events: none;
     }
 
-    /* Halftone dot screen for printing emulation */
-    .halftone-overlay {
-      background-image: radial-gradient(circle, #000 12%, transparent 15%);
-      background-size: 4px 4px;
+    .brutal-border { border: 4px solid #1a1a1a; }
+    .text-mega { font-size: clamp(3.5rem, 12vw, 12rem); }
+
+    .btn-bauhaus {
+      @apply brutal-border bg-white px-4 py-2 font-mono text-[10px] font-bold uppercase transition-all active:translate-x-1 active:translate-y-1 active:shadow-none shadow-brutal-sm focus:outline-none focus:ring-2 focus:ring-bauhaus-blue;
     }
 
-    .halftone-white-overlay {
-      background-image: radial-gradient(circle, #fff 12%, transparent 15%);
-      background-size: 4px 4px;
+    .halftone { background-image: radial-gradient(circle, #000 12%, transparent 15%); background-size: 4px 4px; }
+    .modal-open { overflow: hidden; }
+
+    /* View Transitions Names */
+    .section-title-trans { view-transition-name: section-title; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
 
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #e9e4d7;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1a1a1a;
-      border: 2px solid #e9e4d7;
-    }
-
-    /* Typography */
-    .text-hero {
-      font-size: clamp(3rem, 10vw, 8rem);
-    }
-
-    /* Accessibility & UX */
-    .modal-open {
-      overflow: hidden;
-    }
-
-    button:focus-visible {
-      outline: 3px solid #005596;
-      outline-offset: 2px;
-    }
-
-    .select-none-ui {
-      user-select: none;
-    }
+    canvas { image-rendering: pixelated; }
   </style>
 </head>
-<body class="antialiased relative min-h-screen">
+<body class="antialiased selection:bg-bauhaus-red selection:text-white">
 
-  <!-- Global Noise Overlay -->
-  <div class="noise-overlay absolute inset-0 pointer-events-none z-50"></div>
+  <!-- Neural Grammar Core -->
+  <canvas id="neural-canvas" class="fixed inset-0 z-0 opacity-20 pointer-events-none"></canvas>
+  <div class="noise-overlay fixed inset-0 z-50"></div>
 
-  <!-- Main Viewport Grid -->
-  <div class="flex min-h-screen flex-col lg:flex-row">
+  <!-- Industrial Sidebar Navigation -->
+  <aside class="fixed top-0 left-0 h-screen w-64 bg-white border-r-4 border-bauhaus-dark z-40 hidden lg:flex flex-col justify-between p-8 select-none">
+    <div id="ruler-progress" class="absolute right-0 top-0 bottom-0 w-1.5 bg-bauhaus-red origin-top"></div>
 
-    <!-- Desktop Sidebar -->
-    <aside id="sidebar" class="hidden lg:flex fixed top-0 bottom-0 left-0 w-64 bg-white border-r-4 border-bauhaus-dark flex-col justify-between p-8 z-30 select-none-ui">
-      <!-- Ruler sidebar -->
-      <div id="ruler-line" class="absolute right-0 top-0 bottom-0 w-3 flex flex-col justify-between py-2 border-l border-zinc-200 pointer-events-none" aria-hidden="true"></div>
-
-      <div>
-        <div class="border-b-4 border-bauhaus-dark pb-6 mb-8 relative">
-          <button id="logo-home" class="font-sans text-3xl font-black tracking-tighter text-bauhaus-dark uppercase leading-none hover:text-bauhaus-red transition duration-300 focus:outline-none">
-            BAUHAUS
-          </button>
-          <div class="font-mono text-[9px] uppercase font-bold text-zinc-400 tracking-widest mt-1.5 flex justify-between">
-            <span>DESSAU ARCHIVES</span>
-            <span>V8.0 // OPTIMIZED</span>
-          </div>
-
-          <!-- Geometric shapes badge -->
-          <div class="absolute -bottom-2.5 right-4 flex gap-1 bg-white px-1">
-            <span class="w-2.5 h-2.5 bg-bauhaus-red inline-block"></span>
-            <span class="w-2.5 h-2.5 bg-bauhaus-blue inline-block rounded-full"></span>
-            <span class="w-2.5 h-2.5 bg-bauhaus-yellow inline-block" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></span>
-          </div>
-        </div>
-
-        <nav id="sidebar-nav" class="flex flex-col gap-2 font-mono text-xs font-bold uppercase" aria-label="Main Navigation">
-          <!-- Populated via JS -->
-        </nav>
-      </div>
-
-      <div class="border-t-2 border-bauhaus-dark pt-6 font-mono text-[10px]">
-        <div class="flex justify-between text-zinc-400 uppercase mb-2 font-bold tracking-tight">
-          <span>DRAFTING GRID</span>
-          <span class="text-bauhaus-blue">ACTIVE</span>
-        </div>
-        <div class="flex justify-between text-zinc-400 text-[9px] border-b border-zinc-100 pb-2">
-          <span>Y-LOCATOR</span>
-          <span id="tracker-y" class="text-zinc-700 font-extrabold text-[10px]">0 px</span>
-        </div>
-        <div class="flex items-center gap-2 mt-3 text-zinc-500 font-bold">
-          <svg class="w-3.5 h-3.5 animate-spin text-bauhaus-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-dasharray="10 30" stroke-linecap="round"></circle>
-          </svg>
-          <span id="live-time" aria-live="polite">UTC 00:00</span>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Mobile Header -->
-    <header class="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b-4 border-bauhaus-dark flex items-center justify-between px-6 z-40 select-none-ui">
-      <button id="mobile-logo" class="font-sans text-xl font-black tracking-tighter text-bauhaus-dark uppercase focus:outline-none">
-        ▲ BAUHAUS ●
+    <div>
+      <button id="logo-home" class="font-sans text-3xl font-black tracking-tighter uppercase leading-none hover:text-bauhaus-red transition-colors text-left focus:outline-none">
+        BAUHAUS<br><span class="text-[10px] font-mono font-bold text-zinc-400 tracking-widest uppercase">MAGNIFICENT 2026</span>
       </button>
-      <div class="flex gap-1.5" aria-hidden="true">
-        <span class="w-3 h-3 bg-bauhaus-red block"></span>
-        <span class="w-3 h-3 bg-bauhaus-blue block rounded-full"></span>
-        <span class="w-3 h-3 bg-bauhaus-yellow block" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></span>
+
+      <nav id="nav-list" class="mt-12 space-y-3 font-mono text-[10px] font-bold uppercase tracking-widest" aria-label="Main Navigation">
+        <!-- Populated via JS -->
+      </nav>
+    </div>
+
+    <div class="space-y-4 border-t-2 border-bauhaus-dark pt-6">
+      <div class="flex justify-between font-mono text-[9px] font-black text-zinc-400 uppercase">
+        <span>AUDIO_CORE</span>
+        <button id="toggle-audio" class="text-bauhaus-blue focus:outline-none">ENABLED</button>
       </div>
-    </header>
+      <div class="flex justify-between font-mono text-[9px] font-black text-zinc-400 uppercase">
+        <span>NEURAL_GEN</span>
+        <button id="toggle-neural" class="text-bauhaus-red focus:outline-none">ACTIVE</button>
+      </div>
+      <div id="live-clock" class="font-mono text-xs font-black tracking-tighter" aria-live="polite">UTC 00:00:00</div>
+    </div>
+  </aside>
 
-    <!-- Main Scroller Container -->
-    <main class="flex-1 lg:pl-64 pt-16 lg:pt-0">
+  <main class="lg:ml-64 relative z-10">
 
-      <!-- Section 01: Hero -->
-      <section id="intro" class="relative min-h-screen w-full bg-bauhaus-sand border-b-4 border-bauhaus-dark flex flex-col justify-between overflow-hidden p-6 md:p-12 lg:p-16 bg-blueprint-pattern">
-        <div class="absolute inset-0 bg-blueprint-pattern-fine pointer-events-none" aria-hidden="true"></div>
-
-        <!-- Precision markers -->
-        <div class="absolute top-10 left-10 w-[60px] h-[2px] bg-bauhaus-red/40 pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute top-10 left-10 w-[2px] h-[60px] bg-bauhaus-red/40 pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute bottom-10 right-10 w-[60px] h-[2px] bg-bauhaus-blue/40 pointer-events-none" aria-hidden="true"></div>
-        <div class="absolute bottom-10 right-10 w-[2px] h-[60px] bg-bauhaus-blue/40 pointer-events-none" aria-hidden="true"></div>
-
-        <!-- Interactive physics canvas -->
-        <div class="absolute inset-0 z-0">
-          <canvas id="physics-canvas" class="w-full h-full block touch-none" aria-label="Interactive physics sandbox with bouncing geometric shapes"></canvas>
+    <!-- Section 01: Synthesis (Hero + Physics) -->
+    <section id="intro" class="min-h-screen flex flex-col justify-center p-8 md:p-16 lg:p-24 border-b-4 border-bauhaus-dark bg-bauhaus-sand relative overflow-hidden">
+      <div class="relative z-10">
+        <div class="flex items-center gap-4 mb-8">
+          <span class="bg-bauhaus-red text-white font-mono text-[10px] font-black px-3 py-1 shadow-brutal-sm uppercase">01 // SYNTAX</span>
+          <div class="h-1 flex-1 bg-bauhaus-dark"></div>
         </div>
 
-        <div class="absolute top-8 right-12 text-right font-mono text-[9px] text-zinc-400 font-bold hidden md:block z-10" aria-hidden="true">
-          STAGE BOUND_X: 100% // RADIAL DENSITY: MULTI
-        </div>
+        <h1 class="text-mega font-black uppercase leading-[0.8] tracking-tighter mb-12">
+          FORM<br>
+          <span class="text-transparent outline-text [-webkit-text-stroke:3px_#1a1a1a]">FOLLOWS</span><br>
+          FUNCTION
+        </h1>
 
-        <div class="relative z-10 flex-1 flex flex-col justify-center items-start pt-12">
-          <div class="flex items-center gap-3 mb-5">
-            <span class="font-mono text-[9.5px] font-extrabold text-white bg-bauhaus-red px-2.5 py-1 tracking-widest shadow-bauhaus-sm">
-              01 // SYNTAX
-            </span>
-            <div class="h-[2px] w-12 bg-bauhaus-dark"></div>
-            <span class="font-mono text-[10px] tracking-widest text-bauhaus-dark font-black uppercase">WEIMAR – DESSAU</span>
-          </div>
+        <div class="max-w-2xl">
+          <p class="text-xl font-bold uppercase leading-tight mb-12">
+            In April 1919, the architect Walter Gropius founded one of the most influential art and design schools ever: the Bauhaus. Students learned to focus on simplicity and functionality. Teachers favored primary colors and bold shapes.
+          </p>
 
-          <h1 class="font-sans text-hero font-black tracking-tighter text-bauhaus-dark leading-[0.85] uppercase">
-            BAUHAUS <br>
-            <span class="text-bauhaus-sand [-webkit-text-stroke:2px_#1a1a1a] drop-shadow-[5px_5px_0px_#1a1a1a] relative pr-3">
-              since April 1919
-            </span>
-          </h1>
-
-          <div class="w-full max-w-3xl h-1.5 bg-bauhaus-dark my-6 shadow-bauhaus-sm" aria-hidden="true"></div>
-
-          <div class="max-w-xl">
-            <p class="font-sans text-lg md:text-xl font-bold tracking-tight uppercase text-bauhaus-dark/95 leading-tight">
-              In April 1919, the architect Walter Gropius founded one of the most influential art and design schools ever: the Bauhaus. Students learned to focus on simplicity and functionality. Teachers favored primary colors and bold shapes. Seeing the school as a hotbed of utopian intellectualism, the Nazis forced its closure in 1933, scattering Bauhaus teachers, students and aesthetics across the globe.
-            </p>
-
-            <!-- Spawner controls -->
-            <div class="mt-8 bg-white border-2 border-bauhaus-dark p-4 shadow-bauhaus-sm w-full inline-block">
-              <div class="font-mono text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 bg-bauhaus-yellow inline-block rounded-full animate-ping"></span>
-                <span>SPAWN INTERACTIVE VECTOR PHYSICS:</span>
-              </div>
-              <div class="flex flex-wrap gap-2">
-                <button id="spawn-square" class="px-3 py-1.5 border-2 border-bauhaus-dark bg-white hover:bg-bauhaus-red hover:text-white font-mono text-[10px] font-black uppercase transition-colors duration-200">
-                  + RED SQUARE
-                </button>
-                <button id="spawn-circle" class="px-3 py-1.5 border-2 border-bauhaus-dark bg-white hover:bg-bauhaus-blue hover:text-white font-mono text-[10px] font-black uppercase transition-colors duration-200">
-                  + BLUE CIRCLE
-                </button>
-                <button id="spawn-triangle" class="px-3 py-1.5 border-2 border-bauhaus-dark bg-white hover:bg-bauhaus-yellow hover:text-bauhaus-dark font-mono text-[10px] font-black uppercase transition-colors duration-200">
-                  + YELLOW PYRAMID
-                </button>
-                <button id="clear-physics" class="hidden px-2.5 py-1.5 border border-dashed border-zinc-300 text-zinc-400 font-mono text-[10px] hover:text-neutral-700">
-                  CLEAR (0)
-                </button>
-              </div>
-            </div>
+          <div class="flex flex-wrap gap-4">
+            <button id="spawn-red" class="btn-bauhaus hover:bg-bauhaus-red hover:text-white">+ RED_SQ</button>
+            <button id="spawn-blue" class="btn-bauhaus hover:bg-bauhaus-blue hover:text-white">+ BLUE_CR</button>
+            <button id="spawn-yellow" class="btn-bauhaus hover:bg-bauhaus-yellow">+ YELLOW_TR</button>
+            <button id="clear-physics" class="px-4 py-2 font-mono text-[9px] font-bold text-zinc-400 hover:text-black uppercase hidden">CLEAR_BUFFER (0)</button>
           </div>
         </div>
+      </div>
 
-        <div class="relative z-10 flex flex-col sm:flex-row justify-between items-stretch sm:items-end border-t-2 border-bauhaus-dark pt-6 font-mono text-[10px] text-zinc-500 font-bold gap-4">
-          <div class="flex items-center gap-2">
-            <span class="text-zinc-800">SYSTEM COORD:</span>
-            <span class="bg-zinc-200 text-zinc-850 px-2 py-0.5 font-bold tracking-tight">ST_SEC_01</span>
-          </div>
-          <button id="to-manifesto" class="bg-bauhaus-dark hover:bg-bauhaus-red text-white py-2 px-4 transition-colors font-bold uppercase tracking-wide flex items-center justify-center gap-1.5 shadow-bauhaus-sm">
-            <span>TO THEOREM STUDIES</span>
-            <span>▼</span>
-          </button>
-          <span class="tracking-widest hidden sm:inline" aria-hidden="true">FORM FOLLOWS AUTONOMOUS FUNCTION</span>
+      <div class="mt-24 h-[400px] brutal-border relative overflow-hidden bg-white shadow-brutal z-10">
+        <canvas id="physics-canvas" class="w-full h-full cursor-crosshair touch-none" aria-label="Interactive physics sandbox"></canvas>
+        <div class="absolute top-4 left-4 font-mono text-[9px] font-black bg-white px-2 py-1 border-2 border-bauhaus-dark uppercase">PHYSICS_ENGINE v2.6 // KINETIC CORE</div>
+      </div>
+    </section>
+
+    <!-- Section 02: Manifesto (Text + Pillars) -->
+    <section id="manifesto" class="p-8 md:p-16 lg:p-24 bg-white border-b-4 border-bauhaus-dark">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-16">
+          <span class="bg-bauhaus-yellow text-bauhaus-dark font-mono text-[10px] font-black px-3 py-1 shadow-brutal-sm uppercase">02 // MANIFESTO</span>
+          <div class="h-1 flex-1 bg-bauhaus-dark"></div>
         </div>
-      </section>
 
-      <!-- Section 02: Manifesto -->
-      <section id="manifesto" class="py-24 px-6 md:px-12 lg:px-16 border-b-4 border-bauhaus-dark bg-white">
-        <div class="max-w-7xl mx-auto">
-          <div class="flex justify-between items-center border-b-2 border-bauhaus-dark pb-6 mb-12">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-[9.5px] font-extrabold text-bauhaus-dark bg-bauhaus-yellow px-2 py-0.5 tracking-widest shadow-bauhaus-sm">
-                02 // MANIFESTO
-              </span>
-              <div class="h-[2px] w-12 bg-bauhaus-dark"></div>
-              <span class="font-mono text-[10px] tracking-widest text-zinc-400 font-bold uppercase">PHILOSOPHICAL GRAMMAR</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div class="lg:col-span-5">
+            <h2 class="text-6xl font-black uppercase leading-none mb-8">THE SYSTEM OF <br>PRINCIPLES</h2>
+            <div class="font-sans text-sm text-neutral-600 font-semibold leading-relaxed space-y-6">
+              <p>
+                The ultimate goal of all art is the building! The ornamentation of the building was once the main purpose of the visual arts, and they were considered indispensable parts of the great building. Today, they exist in complacent isolation, from which they can only be salvaged by the purposeful and cooperative endeavours of all artisans. Architects, painters and sculptors must learn a new way of seeing and understanding the composite character of the building, both as a totality and in terms of its parts. Their work will then re-imbue itself with the spirit of architecture, which it lost in salon art.
+              </p>
+              <p>
+                Architects, sculptors, painters—we all must return to craftsmanship! For there is no such thing as “art by profession”. There is no essential difference between the artist and the artisan. The artist is an exalted artisan. Merciful heaven, in rare moments of illumination beyond man’s will, may allow art to blossom from the work of his hand, but the foundations of proficiency are indispensable to every artist. This is the original source of creative design.
+              </p>
+              <p>
+                So let us therefore create a new guild of craftsmen, free of the divisive class pretensions that endeavoured to raise a prideful barrier between craftsmen and artists!
+              </p>
             </div>
+            <p class="font-sans text-xs text-neutral-400 font-bold uppercase mt-10">— Walter Gropius</p>
           </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch mb-20">
-            <div class="lg:col-span-4 flex flex-col justify-between">
-              <div>
-                <h2 class="font-sans text-4xl md:text-5xl font-black text-bauhaus-dark leading-[0.9] uppercase mb-4">
-                  THE SYSTEM OF <br>PRINCIPLES
-                </h2>
-                <div class="font-sans text-sm text-neutral-600 font-semibold leading-relaxed mt-4 space-y-4">
-                  <p>
-                    The ultimate goal of all art is the building! The ornamentation of the building was once the main purpose of the visual arts, and they were considered indispensable parts of the great building. Today, they exist in complacent isolation, from which they can only be rescued by the conscious co-operation and collaboration of all craftsmen.
-                  </p>
-                  <p>
-                    Architects, painters and sculptors must learn a new way of seeing and understanding the composite character of the building, both as a totality and in terms of its parts. Their work will then be filled with the spirit of architecture, which it has lost in "salon art".
-                  </p>
-                  <p>
-                    Architects, sculptors, painters—we all must return to craftsmanship! For there is no such thing as “art by profession”. There is no essential difference between the artist and the artisan. The artist is an exalted artisan. In rare moments of illumination, grace from above, which lies beyond the will, may cause his work to blossom into art. But proficiency in his craft is essential to every artist.
-                  </p>
-                </div>
-                <p class="font-sans text-xs text-neutral-400 font-bold uppercase mt-6">— Walter Gropius</p>
-              </div>
-
-              <div class="my-6 lg:my-0 select-none-ui">
-                <div class="flex justify-between text-zinc-400 font-mono text-[8px] uppercase tracking-widest mb-1.5">
-                  <span>METRICAL ALIGNMENT</span>
-                  <span>100% EXCELLENCE</span>
-                </div>
-                <div class="h-6 w-full border border-bauhaus-dark p-0.5 bg-zinc-50 relative">
-                  <div id="metric-bar" class="h-full bg-bauhaus-blue transition-all duration-1000" style="width: 0%"></div>
-                  <span class="absolute top-1/2 left-3 -translate-y-1/2 font-mono text-[8.5px] text-white font-bold">82% SYSTEMATIC REPLICABILITY</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4" id="principles-container">
-              <!-- Populated via JS -->
-            </div>
-          </div>
-
-          <!-- Itten Color Lab -->
-          <div class="mt-20 border-t-4 border-bauhaus-dark pt-16">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch select-none-ui">
-              <div class="lg:col-span-5 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center gap-2 mb-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-bauhaus-blue" aria-hidden="true"></span>
-                    <span class="font-mono text-[10px] font-black text-bauhaus-blue uppercase tracking-widest">ITTEN TESTING MACHINE</span>
-                  </div>
-                  <h3 class="font-sans text-3xl font-black text-neutral-900 uppercase tracking-tighter leading-none mb-3">
-                    CHROMATIC CONTRASTS
-                  </h3>
-                  <p class="font-sans text-xs text-neutral-500 font-semibold leading-relaxed mb-6">
-                    Johannes Itten drafted systematic methods of analyzing contrasting colors to explore sensory and psychological frequencies.
-                  </p>
-
-                  <div class="flex flex-col gap-2" role="tablist" aria-label="Contrast Study Modes">
-                    <button id="study-hue" role="tab" aria-selected="true" class="text-left p-3.5 border-2 border-bauhaus-dark font-sans font-black uppercase text-xs tracking-tight flex justify-between items-center transition shadow-bauhaus-sm bg-bauhaus-dark text-white">
-                      <span>I. Contrast of Hue (Pure Primaries)</span>
-                      <span class="font-mono text-[8px] opacity-70">pure chroma</span>
-                    </button>
-                    <button id="study-extension" role="tab" aria-selected="false" class="text-left p-3.5 border-2 border-bauhaus-dark font-sans font-black uppercase text-xs tracking-tight flex justify-between items-center transition bg-bauhaus-sand hover:bg-zinc-100 text-bauhaus-dark">
-                      <span>II. Contrast of Extension (Quantity)</span>
-                      <span class="font-mono text-[8px] opacity-70">weight values</span>
-                    </button>
-                    <button id="study-simultaneous" role="tab" aria-selected="false" class="text-left p-3.5 border-2 border-bauhaus-dark font-sans font-black uppercase text-xs tracking-tight flex justify-between items-center transition bg-bauhaus-sand hover:bg-zinc-100 text-bauhaus-dark">
-                      <span>III. Simultaneous Contrast</span>
-                      <span class="font-mono text-[8px] opacity-70">optical illusion</span>
-                    </button>
-                    <button id="study-warmcool" role="tab" aria-selected="false" class="text-left p-3.5 border-2 border-bauhaus-dark font-sans font-black uppercase text-xs tracking-tight flex justify-between items-center transition bg-bauhaus-sand hover:bg-zinc-100 text-bauhaus-dark">
-                      <span>IV. Cold-Warm Balance</span>
-                      <span class="font-mono text-[8px] opacity-70">thermal clash</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div id="study-explanation" class="mt-8 p-4 bg-zinc-50 border border-zinc-200 font-mono text-[9px] text-zinc-500 leading-relaxed" aria-live="polite">
-                  HUEMODE: Pairing raw cadmiums and pure ultramarines side-by-side to manifest intense physical structural energy.
-                </div>
-              </div>
-
-              <div class="lg:col-span-7 border-3 border-bauhaus-dark bg-bauhaus-dark p-6 shadow-bauhaus-sm flex items-center justify-center min-h-[350px] relative overflow-hidden">
-                <div class="absolute inset-0 bg-blueprint-pattern-fine opacity-10 pointer-events-none" aria-hidden="true"></div>
-                <div id="study-workbench" class="w-full max-w-md h-full flex items-center justify-center relative">
-                  <!-- Dynamic content -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 03: Chronology -->
-      <section id="timeline" class="py-24 px-6 md:px-12 lg:px-16 border-b-4 border-bauhaus-dark bg-bauhaus-sand">
-        <div class="max-w-7xl mx-auto">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-bauhaus-dark pb-6 mb-12 gap-4">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-[9.5px] font-extrabold text-white bg-bauhaus-blue px-2.5 py-1 tracking-widest shadow-bauhaus-sm">
-                03 // CHRONOLOGY
-              </span>
-              <div class="h-[2px] w-12 bg-bauhaus-dark"></div>
-              <span class="font-mono text-[10px] tracking-widest text-[#1a1a1a] font-bold uppercase">LEDGER TIMELINE</span>
-            </div>
-
-            <div class="flex gap-1.5 bg-white border-2 border-bauhaus-dark p-1 font-mono text-[9px] font-bold uppercase select-none-ui" role="group" aria-label="Timeline Era Filters">
-              <button id="filter-all" class="px-2 py-0.5 bg-bauhaus-dark text-white focus:outline-none">ALL</button>
-              <button id="filter-weimar" class="px-2 py-0.5 text-bauhaus-dark hover:bg-zinc-100 focus:outline-none">WEIMAR</button>
-              <button id="filter-dessau" class="px-2 py-0.5 text-bauhaus-dark hover:bg-zinc-100 focus:outline-none">DESSAU</button>
-              <button id="filter-berlin" class="px-2 py-0.5 text-bauhaus-dark hover:bg-zinc-100 focus:outline-none">BERLIN</button>
-            </div>
-          </div>
-
-          <div class="max-w-4xl mx-auto space-y-4" id="timeline-container">
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6" id="principles-container">
             <!-- Populated via JS -->
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Section 04: Klee Lab -->
-      <section id="artistes" class="py-24 px-6 md:px-12 lg:px-16 border-b-4 border-bauhaus-dark bg-white">
-        <div class="max-w-7xl mx-auto">
-          <div class="flex justify-between items-center border-b-2 border-bauhaus-dark pb-6 mb-12">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-[9.5px] font-extrabold text-white bg-bauhaus-red px-2 py-0.5 tracking-widest shadow-bauhaus-sm">
-                04 // KLEE LAB
-              </span>
-              <div class="h-[2px] w-12 bg-bauhaus-dark"></div>
-              <span class="font-mono text-[10px] tracking-widest text-zinc-400 font-bold uppercase">ACTIVE DOT WALKING</span>
+    <!-- Section 03: Ledger (Full Timeline) -->
+    <section id="timeline" class="p-8 md:p-16 lg:p-24 bg-bauhaus-sand border-b-4 border-bauhaus-dark">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-16">
+          <span class="bg-bauhaus-blue text-white font-mono text-[10px] font-black px-3 py-1 shadow-brutal-sm uppercase">03 // LEDGER</span>
+          <div class="h-1 flex-1 bg-bauhaus-dark"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-4" id="timeline-stack">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 04: Lab (Klee Board) -->
+    <section id="lab" class="p-8 md:p-16 lg:p-24 bg-white border-b-4 border-bauhaus-dark">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-16">
+          <span class="bg-bauhaus-red text-white font-mono text-[10px] font-black px-3 py-1 shadow-brutal-sm uppercase">04 // KLEE LAB</span>
+          <div class="h-1 flex-1 bg-bauhaus-dark"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+          <div class="lg:col-span-4 space-y-8 flex flex-col justify-between">
+            <div>
+              <h2 class="text-5xl font-black uppercase leading-none mb-6">TAKING A LINE <br>FOR A WALK</h2>
+              <p class="text-sm text-zinc-500 font-semibold leading-relaxed">
+                Paul Klee taught his students that drawing is a dynamic linear trace. Rather than static representation, the vector should explore territory organically.
+              </p>
+            </div>
+            <div class="space-y-4">
+              <div class="grid grid-cols-2 gap-3">
+                <button id="klee-auto" class="btn-bauhaus">AUTO_WALK</button>
+                <button id="klee-reset" class="btn-bauhaus bg-zinc-50">RESET</button>
+              </div>
+              <div class="font-mono text-[8px] font-black text-zinc-400 uppercase tracking-widest">* ACTIVE DOT WALKING SIMULATION // VECTOR CAP: 150</div>
             </div>
           </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            <div class="lg:col-span-4 flex flex-col justify-between">
-              <div>
-                <h2 class="font-sans text-4xl md:text-5xl font-black text-bauhaus-dark leading-[0.9] uppercase mb-4">
-                  TAKING A LINE <br>FOR A WALK
-                </h2>
-                <p class="font-sans text-xs text-neutral-500 font-semibold leading-relaxed mb-6">
-                  Paul Klee taught his students that drawing is a dynamic linear trace. Rather than static representation, the vector should explore its territory organically.
-                </p>
-
-                <div class="space-y-4 bg-zinc-50 border-2 border-bauhaus-dark p-4 select-none-ui">
-                  <div>
-                    <span class="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-widest block mb-2">VECTOR GENERATIVE MODE:</span>
-                    <div class="grid grid-cols-2 gap-1.5 font-mono text-[9.5px] font-bold">
-                      <button id="mode-walk" class="py-1.5 border border-bauhaus-dark bg-bauhaus-dark text-white focus:outline-none">ORGANIC WALK</button>
-                      <button id="mode-spiral" class="py-1.5 border border-zinc-300 bg-white hover:bg-zinc-100 text-bauhaus-dark focus:outline-none">GOLDEN SPIRAL</button>
-                      <button id="mode-beams" class="py-1.5 border border-zinc-300 bg-white hover:bg-zinc-100 text-bauhaus-dark focus:outline-none">RADIAL BEAMS</button>
-                      <button id="mode-gravity" class="py-1.5 border border-zinc-300 bg-white hover:bg-zinc-100 text-bauhaus-dark focus:outline-none">GRAVITY NODE</button>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-widest block mb-2">PIGMENT RECONSTRUCTION:</span>
-                    <div class="flex gap-2">
-                      <button id="color-red" class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-bauhaus-dark bg-bauhaus-red shrink-0 focus:outline-none" title="Zinnoberrot" aria-label="Color Red"></button>
-                      <button id="color-blue" class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-zinc-300 bg-bauhaus-blue shrink-0 focus:outline-none" title="Preußisch Blau" aria-label="Color Blue"></button>
-                      <button id="color-yellow" class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-zinc-300 bg-bauhaus-yellow shrink-0 focus:outline-none" title="Kadmiumgelb" aria-label="Color Yellow"></button>
-                      <button id="color-dark" class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-zinc-300 bg-bauhaus-dark shrink-0 focus:outline-none" title="Schlämmkreide" aria-label="Color Black"></button>
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 pt-2">
-                    <button id="toggle-auto-walk" class="py-2 border-2 border-bauhaus-dark bg-white font-mono text-[9.5px] font-bold uppercase transition flex items-center justify-center gap-1.5 focus:outline-none">
-                      <span>AUTO WALK</span>
-                    </button>
-                    <button id="reset-klee" class="py-2 border border-dashed border-zinc-300 text-zinc-400 font-mono text-[9.5px] font-bold uppercase transition hover:text-black hover:border-black focus:outline-none">
-                      RESET BOARD
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-8 font-mono text-[8.5px] text-zinc-400 font-bold uppercase tracking-tight" aria-hidden="true">
-                * CANVAS PROCESSOR STREAKS CAP LIMIT // PRE-CALIBRATED INTERLACED BLUEPRINT
-              </div>
-            </div>
-
-            <div class="lg:col-span-8 flex flex-col justify-between">
-              <div class="border-3 border-bauhaus-dark bg-bauhaus-sand p-4 shadow-bauhaus-sm relative flex flex-col">
-                <div class="flex justify-between items-center pb-2 border-b border-zinc-300 mb-2 font-mono text-[8.5px] text-zinc-400 uppercase font-black tracking-widest">
-                  <span>DRAFT REGIST COMP_04 // WALK_BOARD</span>
-                  <span id="klee-status">STATUS: READY</span>
-                </div>
-
-                <div id="klee-drawing-board" class="w-full aspect-[4/3] bg-white border-2 border-zinc-400 relative overflow-hidden h-[340px] cursor-crosshair" role="img" aria-label="Drawing board for Klee's active line exercises">
-                  <div class="absolute inset-0 bg-blueprint-pattern-fine opacity-10 pointer-events-none" aria-hidden="true"></div>
-                  <svg id="klee-svg" class="absolute inset-0 w-full h-full pointer-events-none"></svg>
-                  <div id="klee-nodes" class="absolute inset-0 pointer-events-none"></div>
-
-                  <div id="klee-instructions" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center font-mono text-[9.5px] text-zinc-400 pointer-events-none select-none uppercase font-bold tracking-wider space-y-1">
-                    <span>TAP/DRAG TO TAKE A GEOMETRIC LINE FOR A WALK</span>
-                    <span>or trigger auto-walk simulation</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="lg:col-span-8 brutal-border bg-bauhaus-sand h-[500px] relative shadow-brutal overflow-hidden">
+            <svg id="klee-canvas" class="w-full h-full cursor-crosshair bg-white" aria-label="Klee generative drawing board"></svg>
+            <div id="klee-status" class="absolute bottom-4 right-4 font-mono text-[9px] font-black uppercase text-bauhaus-dark/40 tracking-tighter">STATE: IDLE // VECTORS: 0</div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Section 05: Exposition -->
-      <section id="exhibition" class="py-24 px-6 md:px-12 lg:px-16 border-b-4 border-bauhaus-dark bg-white">
-        <div class="max-w-7xl mx-auto">
-          <div class="flex justify-between items-center border-b-2 border-bauhaus-dark pb-6 mb-12">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-[9.5px] font-extrabold text-white bg-bauhaus-dark px-2.5 py-1 tracking-widest shadow-bauhaus-sm">
-                05 // EXPOSITION
-              </span>
-              <div class="h-[2px] w-12 bg-bauhaus-dark"></div>
-              <span class="font-mono text-[10px] tracking-widest text-zinc-400 font-bold uppercase">HISTORIC ARCHIVES</span>
-            </div>
+    <!-- Section 05: Archive (Darkroom Gallery) -->
+    <section id="exhibition" class="p-8 md:p-16 lg:p-24 bg-bauhaus-sand border-b-4 border-bauhaus-dark">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-16">
+          <span class="bg-bauhaus-dark text-white font-mono text-[10px] font-black px-3 py-1 shadow-brutal-sm uppercase">05 // ARCHIVE</span>
+          <div class="h-1 flex-1 bg-bauhaus-dark"></div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
+          <div>
+            <h2 class="text-5xl font-black uppercase leading-none">EXHIBITIONS <br>DARKROOM LAB</h2>
+            <p class="text-xs font-mono font-bold text-zinc-500 mt-4 uppercase">Simulate historic printing processes via spectral filtering.</p>
           </div>
+          <div class="flex gap-2 brutal-border bg-white p-1 shadow-brutal-sm select-none" role="group" aria-label="Darkroom Filter Controls">
+            <button data-filter="standard" class="dr-filter-btn px-4 py-1.5 font-mono text-[9px] font-black transition-all bg-bauhaus-blue text-white focus:outline-none">STANDARD</button>
+            <button data-filter="cyanotype" class="dr-filter-btn px-4 py-1.5 font-mono text-[9px] font-black transition-all focus:outline-none">CYANOTYPE</button>
+            <button data-filter="halftone" class="dr-filter-btn px-4 py-1.5 font-mono text-[9px] font-black transition-all focus:outline-none">HALFTONE</button>
+          </div>
+        </div>
 
-          <!-- Darkroom Gallery -->
-          <div class="mb-24">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
-              <div>
-                <h2 class="font-sans text-4xl md:text-5xl font-black text-bauhaus-dark uppercase leading-[0.9]">
-                  EXHIBITIONS <br>DARKROOM LAB
-                </h2>
-                <p class="font-sans text-xs text-neutral-500 font-semibold leading-relaxed mt-4 max-w-xl">
-                  Recreate historic typography and screen layouts. Toggle darkroom filters to simulate raw vintage silver printing processes.
-                </p>
-              </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="posters-grid">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </section>
 
-              <div class="bg-zinc-100 border-2 border-bauhaus-dark p-1 divide-x-2 divide-bauhaus-dark flex font-mono text-[9px] font-bold uppercase shadow-bauhaus-sm overflow-x-auto shrink-0 select-none-ui" role="group" aria-label="Darkroom Filter Controls">
-                <button id="dr-standard" class="px-3 py-1 bg-bauhaus-blue text-white focus:outline-none">STANDARD</button>
-                <button id="dr-cyanotype" class="px-3 py-1 text-bauhaus-dark hover:bg-zinc-200 focus:outline-none">CYANOTYPE</button>
-                <button id="dr-halftone" class="px-3 py-1 text-bauhaus-dark hover:bg-zinc-200 focus:outline-none">HALFTONE</button>
-                <button id="dr-lithograph" class="px-3 py-1 text-bauhaus-dark hover:bg-zinc-200 focus:outline-none">LITHOGRAPH</button>
-              </div>
-            </div>
+    <!-- Section 06: Blueprints (Faculty Schematics) -->
+    <section id="blueprints" class="p-8 md:p-16 lg:p-24 bg-white border-b-4 border-bauhaus-dark">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-16">
+          <span class="bg-bauhaus-blue text-white font-mono text-[10px] font-black px-3 py-1 shadow-brutal-sm uppercase">06 // SCHEMATICS</span>
+          <div class="h-1 flex-1 bg-bauhaus-dark"></div>
+        </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="posters-grid">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+          <div class="lg:col-span-5 flex flex-col justify-between">
+            <div id="masters-list" class="space-y-3" role="group" aria-label="Faculty Master Selectors">
               <!-- Populated via JS -->
             </div>
+            <div class="mt-8 font-mono text-[8px] font-black text-zinc-400 uppercase tracking-widest leading-relaxed">
+              * VIRTUAL DRAFTING TABLE // RAW KINETIC CORES<br>
+              © 1919-2026 ARCHIVAL PROTOCOL.
+            </div>
           </div>
-
-          <!-- Blueprints Viewport -->
-          <div class="border-t-4 border-bauhaus-dark pt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            <div class="lg:col-span-5 flex flex-col justify-between">
+          <div class="lg:col-span-7 bg-sky-900 brutal-border p-10 shadow-brutal text-white relative min-h-[450px] flex flex-col">
+            <div class="absolute inset-0 bg-sky-800/10 pointer-events-none halftone"></div>
+            <div class="relative z-10 flex flex-col justify-between h-full flex-1">
               <div>
-                <h3 class="font-sans text-3xl font-black text-neutral-900 uppercase leading-[0.9] mb-4">
-                  FACULTY METADATA <br>BLUEPRINTS
-                </h3>
-                <p class="font-sans text-xs text-neutral-500 font-semibold leading-relaxed mb-6">
-                  Drafting schematics mapping the core workshop layout guidelines of each faculty master.
-                </p>
-
-                <div class="flex flex-col gap-2 select-none-ui" id="masters-selector" role="group" aria-label="Faculty Master Selector">
-                  <!-- Populated via JS -->
-                </div>
+                <span id="bp-meta" class="font-mono text-[9px] font-black text-sky-400 bg-sky-950 px-2 py-0.5 brutal-border-thin uppercase tracking-widest">PLOTTER_ENGINE // ACTIVE</span>
+                <h3 id="bp-name" class="text-4xl font-black uppercase mt-4 tracking-tighter">WALTER GROPIUS</h3>
+                <div id="bp-workshop" class="font-mono text-[10px] font-bold text-sky-300 mt-1">WORKSHOP: ARCHITECTURE</div>
+                <p id="bp-legacy" class="text-sm italic text-sky-100 mt-6 max-w-lg leading-relaxed"></p>
               </div>
 
-              <div class="mt-8 pt-6 border-t font-mono text-[9px] text-zinc-400 font-bold uppercase" aria-hidden="true">
-                * SCHEMATICS ARE GENERATED REAL-TIME VIA RAW KINETIC VECTOR CORES. ZERO STALE PLACEHOLDERS.
+              <div class="flex-1 flex items-center justify-center py-10">
+                <svg id="blueprint-svg" viewBox="0 0 200 100" class="w-full max-w-md drop-shadow-xl transition-transform duration-700 ease-in-out"></svg>
               </div>
-            </div>
 
-            <div class="lg:col-span-7">
-              <div class="border-4 border-bauhaus-dark bg-sky-blueprint text-white p-6 shadow-bauhaus-sm flex flex-col justify-between h-full relative overflow-hidden bg-sky-blueprint-fine min-h-[420px] select-none-ui">
-                <div class="absolute top-8 left-8 w-[30px] h-[1px] bg-sky-400/25 pointer-events-none" aria-hidden="true"></div>
-                <div class="absolute top-8 left-8 w-[1px] h-[30px] bg-sky-400/25 pointer-events-none" aria-hidden="true"></div>
-                <div class="absolute bottom-10 right-10 w-[30px] h-[1px] bg-sky-400/25 pointer-events-none" aria-hidden="true"></div>
-                <div class="absolute bottom-10 right-10 w-[1px] h-[30px] bg-sky-400/25 pointer-events-none" aria-hidden="true"></div>
-
-                <div class="relative z-10 flex flex-col justify-between h-full gap-6">
-                  <div class="flex justify-between items-start border-b border-sky-400/20 pb-3">
-                    <div>
-                      <span class="font-mono text-[8px] font-black text-sky-300 bg-sky-900 border border-sky-700 px-2 py-0.5 uppercase tracking-widest">
-                        STUDIO PLOTTER // SCHEM-ACTIVE
-                      </span>
-                      <h4 id="blueprint-name" class="font-sans text-2xl font-black text-white uppercase mt-2">WALTER GROPIUS</h4>
-                      <div id="blueprint-meta" class="font-mono text-[8.5px] text-sky-300/80 mt-1 uppercase font-bold">WORKSHOP: ARCHITECTURE // 1883-1969</div>
-                    </div>
-                    <div id="blueprint-avatar" class="w-10 h-10 border border-dashed border-sky-400/40 text-sky-300/80 font-bold flex items-center justify-center text-sm">WG</div>
-                  </div>
-
-                  <div class="h-44 bg-sky-950/40 border border-sky-500/20 flex items-center justify-center relative overflow-hidden">
-                    <svg id="blueprint-svg" viewBox="0 0 200 100" class="w-full h-full max-h-36 max-w-[280px] transition-transform duration-300" aria-label="Architectural blueprint schematic"></svg>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-3 shrink-0">
-                    <button id="rotate-blueprint" class="py-2.5 bg-sky-900 hover:bg-sky-850 border border-sky-600 font-mono text-[9px] font-bold uppercase transition flex items-center justify-center gap-1.5 rounded-none focus:outline-none">
-                      <svg class="w-3.5 h-3.5 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.547 9.547 4.5 10.768 4.5 12s.047 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.209.138-2.43.138-3.662z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12l-3-3m3 3l-3 3" />
-                      </svg>
-                      <span>ROTATE GRID (90&deg;)</span>
-                    </button>
-                    <button id="toggle-caliper" class="py-2.5 border border-sky-600 bg-sky-900 font-mono text-[9px] font-bold uppercase transition flex items-center justify-center gap-1.5 rounded-none focus:outline-none">
-                      <svg class="w-3.5 h-3.5 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5m16.5-16.5v16.5M12 3v18M3 12h18" />
-                      </svg>
-                      <span id="caliper-status-text">METRIC DIM LEVEL: OFF</span>
-                    </button>
-                  </div>
-
-                  <div class="border-t border-sky-500/20 pt-4">
-                    <span class="font-mono text-[8px] font-black text-sky-300 uppercase tracking-widest block mb-1">FACULTY SPECS DIGEST:</span>
-                    <p id="blueprint-quote" class="font-sans text-xs text-sky-100 italic leading-snug">"Design should synthesize technology and manual materials into a built truth."</p>
-                  </div>
-                </div>
+              <div class="grid grid-cols-2 gap-4">
+                <button id="rotate-blueprint" class="btn-bauhaus bg-sky-800 border-sky-400 text-white shadow-none hover:bg-sky-700 focus:ring-sky-300">ROTATE_GRID_90</button>
+                <button id="toggle-bp-caliper" class="btn-bauhaus bg-sky-800 border-sky-400 text-white shadow-none hover:bg-sky-700 focus:ring-sky-300">CALIPERS_MODE</button>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
 
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="fixed inset-0 bg-[#07090d]/90 backdrop-blur-sm hidden items-center justify-center p-4 z-50 select-none-ui" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
-    <div class="bg-white border-4 border-bauhaus-dark max-w-5xl w-full h-[90vh] md:h-[75vh] grid grid-cols-1 md:grid-cols-12 overflow-hidden shadow-bauhaus-lg text-bauhaus-dark">
-      <!-- Image Viewport -->
-      <div class="md:col-span-7 bg-[#0b0e14] h-[320px] md:h-full relative overflow-hidden flex items-center justify-center p-6 border-b-2 md:border-b-0 md:border-r-4 border-bauhaus-dark">
-        <div class="absolute inset-0 bg-[radial-gradient(#1f2634_1px,transparent_1px)] [background-size:12px_12px] opacity-40 pointer-events-none" aria-hidden="true"></div>
-        <svg id="lightbox-caliper-svg" class="absolute inset-0 w-full h-full pointer-events-none hidden z-20" aria-hidden="true">
-          <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#dd2c2f" stroke-width="1" stroke-dasharray="2 3" />
-          <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#dd2c2f" stroke-width="1" stroke-dasharray="2 3" />
-          <line x1="61.8%" y1="0" x2="61.8%" y2="100%" stroke="#38bdf8" stroke-width="1" />
-          <line x1="0" y1="61.8%" x2="100%" y2="61.8%" stroke="#38bdf8" stroke-width="1" />
-          <circle cx="50%" cy="50%" r="20%" stroke="#fac901" stroke-width="1" fill="none" />
-          <text x="52%" y="15%" fill="#dd2c2f" class="font-mono text-[7px] font-black uppercase">SECTION PRINCIP AXIS</text>
-          <text x="52%" y="47%" fill="#fac901" class="font-sans text-[7px] font-bold uppercase">61.8% GOLDEN RATIO VALUE</text>
+    <!-- Footer -->
+    <footer class="p-12 bg-white flex flex-col md:flex-row justify-between items-center gap-8 border-t-2 border-bauhaus-dark">
+      <div class="font-mono text-[9px] font-black text-zinc-400 uppercase tracking-widest">
+        &copy; 1919—2026 BAUHAUS ARCHIVAL SYNDICATE // ELITE Google OPTIMIZED
+      </div>
+      <div class="flex gap-6 items-center">
+        <span class="w-4 h-4 bg-bauhaus-red brutal-border-thin"></span>
+        <span class="w-4 h-4 bg-bauhaus-blue rounded-full brutal-border-thin"></span>
+        <span class="w-4 h-4 bg-bauhaus-yellow brutal-border-thin" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Magnificence Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-bauhaus-dark/95 hidden items-center justify-center p-4 md:p-12 select-none" role="dialog" aria-modal="true">
+    <div class="bg-white brutal-border w-full max-w-6xl h-[85vh] flex flex-col md:flex-row overflow-hidden shadow-brutal">
+      <div class="flex-1 bg-zinc-900 relative flex items-center justify-center overflow-hidden border-b-4 md:border-b-0 md:border-r-4 border-bauhaus-dark cursor-move">
+        <div class="absolute inset-0 opacity-20 halftone pointer-events-none"></div>
+        <div id="lightbox-stage" class="transition-all duration-500 flex items-center justify-center">
+          <img id="lightbox-img" src="" class="max-h-[60vh] shadow-2xl brutal-border border-zinc-800 bg-white">
+        </div>
+        <svg id="lb-caliper-svg" class="absolute inset-0 w-full h-full pointer-events-none hidden z-20">
+          <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#dd2c2f" stroke-width="1" stroke-dasharray="4" />
+          <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#dd2c2f" stroke-width="1" stroke-dasharray="4" />
+          <circle cx="50%" cy="50%" r="30%" stroke="#fac901" stroke-width="1" fill="none" stroke-dasharray="2" />
         </svg>
-        <div id="lightbox-zoom-stage" class="relative flex items-center justify-center max-w-full max-h-full transition-all duration-300">
-          <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[250px] md:max-h-[400px] object-contain border-2 border-zinc-800 shadow-2xl z-10 transition-all duration-300">
-        </div>
-        <div class="absolute bottom-3 left-4 bg-[#0d1017]/95 border border-zinc-800 p-2 font-mono text-[7px] text-zinc-400 uppercase pointer-events-none" aria-hidden="true">
-          * GR CHECK: 1.618 // HIGH RESOLUTION SPECS DETECTED
-        </div>
+        <div class="absolute bottom-4 left-4 bg-black/80 text-white font-mono text-[8px] px-3 py-1 brutal-border-thin tracking-widest uppercase">* GR_CHECK: 1.618 // HIGH_RES SPECS</div>
       </div>
 
-      <!-- Metadata Panel -->
-      <div class="md:col-span-5 flex flex-col justify-between overflow-y-auto bg-white p-6 h-full cursor-default">
+      <div class="w-full md:w-[420px] p-10 flex flex-col justify-between bg-white relative z-30">
         <div>
-          <div class="flex justify-between items-center text-zinc-400 font-mono text-[8px] font-bold uppercase tracking-widest mb-3">
+          <div class="flex justify-between items-center text-[9px] font-mono font-black text-zinc-400 uppercase tracking-widest mb-6">
             <span>MUSEUM ARCHIVES CORE</span>
-            <span>METRIC REGISTER</span>
+            <span id="lb-id"></span>
           </div>
 
-          <div class="border-b-2 border-bauhaus-dark pb-3 mb-4">
-            <span id="lightbox-category" class="font-mono text-[10px] font-bold text-bauhaus-red uppercase">CATEGORY // WEIMAR</span>
-            <h3 id="lightbox-title" class="font-sans text-2xl font-black text-neutral-900 mt-1 uppercase tracking-tighter leading-none">SENECIO SHOWR_Y1922</h3>
+          <div class="border-b-4 border-bauhaus-dark pb-4">
+            <span id="lb-cat" class="font-mono text-[11px] font-black text-bauhaus-red uppercase tracking-widest"></span>
+            <h3 id="lb-title" class="text-3xl font-black uppercase mt-3 tracking-tighter leading-none"></h3>
           </div>
 
-          <div class="bg-bauhaus-sand border-2 border-bauhaus-dark p-4 flex flex-col gap-2.5 shadow-inner select-text">
-            <div class="flex justify-between items-center border-b border-zinc-300 pb-1.5 font-mono text-[9px] font-bold">
-              <span class="text-zinc-500">MUSEUM RESIDENCE:</span>
-              <span id="spec-location" class="text-zinc-800 text-right uppercase truncate max-w-[170px]">Kunstmuseum Basel</span>
+          <div class="mt-8 space-y-5 font-mono text-[10px] font-bold">
+            <div class="flex justify-between items-center border-b border-zinc-100 pb-2">
+              <span class="text-zinc-400">RESIDENCE</span>
+              <span id="lb-loc" class="text-right uppercase max-w-[200px] truncate"></span>
             </div>
-            <div class="flex justify-between items-center border-b border-zinc-300 pb-1.5 font-mono text-[9px] font-bold">
-              <span class="text-zinc-500">PIGMENTS / MEDIUM:</span>
-              <span id="spec-medium" class="text-zinc-800 uppercase truncate max-w-[170px]">Oil on Chalk canvas</span>
+            <div class="flex justify-between items-center border-b border-zinc-100 pb-2">
+              <span class="text-zinc-400">PIGMENTS</span>
+              <span id="lb-med" class="text-right uppercase max-w-[200px] truncate"></span>
             </div>
-            <div class="flex justify-between items-center border-b border-zinc-300 pb-1.5 font-mono text-[9px] font-bold">
-              <span class="text-zinc-500">METRIC SCALE:</span>
-              <span id="spec-dimensions" class="text-zinc-800 uppercase text-right">40.5 x 38 cm</span>
-            </div>
-            <div class="flex justify-between items-center pt-0.5 font-mono text-[9px] font-bold">
-              <span class="text-zinc-500">DESIGN SYNTAX:</span>
-              <span id="spec-movement" class="text-bauhaus-blue uppercase truncate max-w-[170px]">Geometrical Expression</span>
+            <div class="flex justify-between items-center border-b border-zinc-100 pb-2">
+              <span class="text-zinc-400">METRIC SCALE</span>
+              <span id="lb-dim" class="text-right uppercase"></span>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-2 mt-6">
-            <button id="lightbox-toggle-caliper" class="w-full py-2.5 border-2 border-bauhaus-dark font-mono text-[9px] font-bold uppercase transition flex items-center justify-center gap-1.5 bg-white text-zinc-800 focus:outline-none">
-              <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5m16.5-16.5v16.5M12 3v18M3 12h18" />
-              </svg>
-              <span>PROJECT MATHEMATICAL CALIPERS</span>
-            </button>
-            <div class="grid grid-cols-3 gap-1.5 font-mono text-[8.5px] font-black">
-              <button id="lightbox-zoom" class="py-2.5 border border-bauhaus-dark text-center uppercase bg-white hover:bg-zinc-100 focus:outline-none">1.7X MAGNET</button>
-              <button id="lightbox-rotate" class="py-2.5 border border-bauhaus-dark text-center uppercase bg-white hover:bg-zinc-100 focus:outline-none">ROTATE_90</button>
-              <button id="lightbox-chroma" class="py-2.5 border border-bauhaus-dark text-center uppercase bg-white hover:bg-zinc-100 focus:outline-none">CHROMA INV</button>
+          <div class="mt-10 grid grid-cols-1 gap-3">
+            <button id="lb-zoom" class="btn-bauhaus w-full">ACTIVATE_MAGNET_1.7X</button>
+            <div class="grid grid-cols-2 gap-3">
+              <button id="lb-caliper-btn" class="btn-bauhaus">CALIPERS</button>
+              <button id="lb-chroma" class="btn-bauhaus">CHROMA_INV</button>
             </div>
           </div>
         </div>
 
-        <button id="close-lightbox" class="w-full mt-6 bg-bauhaus-dark hover:bg-bauhaus-red text-white py-3 font-sans font-black tracking-widest text-[11px] uppercase transition shadow-bauhaus-sm focus:outline-none">
-          CLOSE DETAILS DOSSIER
-        </button>
+        <button id="close-lightbox" class="w-full mt-12 bg-bauhaus-dark text-white py-5 font-black uppercase tracking-widest hover:bg-bauhaus-red transition-all focus:outline-none">CLOSE_DOSSIER</button>
       </div>
     </div>
   </div>
-
-  <footer class="lg:pl-64 border-t-4 border-bauhaus-dark bg-white py-8 px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-zinc-400 font-bold uppercase relative z-10 select-none-ui">
-    <div>&copy; 1919–2026 BAUHAUS ARCHIVAL SYNDICATE.</div>
-    <div class="flex gap-4" aria-hidden="true">
-      <span>WEIMAR</span><span class="text-bauhaus-red">■</span>
-      <span>DESSAU</span><span class="text-bauhaus-blue">●</span>
-      <span>BERLIN</span><span class="text-bauhaus-yellow">▲</span>
-    </div>
-  </footer>
 
   <script>
     (function() {
-      'use strict';
+      "use strict";
 
-      // --- Constants & Historical Data ---
-      const SECTIONS = [
-        { id: 'intro', index: '01', title: 'CORE VECTOR GRID' },
-        { id: 'manifesto', index: '02', title: 'THE MANIFESTO' },
-        { id: 'timeline', index: '03', title: 'CHRONOLOGY LEDGER' },
-        { id: 'artistes', index: '04', title: 'KLEE ACTIVE WALK' },
-        { id: 'exhibition', index: '05', title: 'HISTORIC ARCHIVES' }
-      ];
-
+      // --- MAGNIFICENT ARCHIVAL DATA (100% PARITY) ---
       const PILLARS = [
         { number: 'I', title: 'Shed Superfluous Decoration', desc: 'Authentic beauty emerges solely from complete synthesis. Geometry and manufacturing unified.' },
         { number: 'II', title: 'The Great Synthesis', desc: 'No division between fine painting and raw trade. Weaving, ironmongery, printing exist synchronously.' },
@@ -705,54 +377,74 @@
       ];
 
       const CHRONOLOGY = [
-        { year: '1919', title: 'The Inception & Manifesto', location: 'Weimar', significance: 'Guild-Craft Foundation', description: 'Walter Gropius fuses the Academy of Fine Arts and the School of Applied Arts to create Bauhaus.', details: ['Published Gropius\' founding Manifesto with Feininger\'s woodcut Cathedral cover.', 'Introduced Johannes Itten\'s foundational preliminary course (Vorkurs).', 'Established traditional guild and apprentice systems.'], figures: ['Walter Gropius', 'Lyonel Feininger'] },
-        { year: '1923', title: 'Art & Technology: A New Unity', location: 'Weimar', significance: 'Industrial Evolution', description: 'László Moholy-Nagy replaces Johannes Itten, turning the curricular focus away from hand crafts into serial mechanical production.', details: ['Established Constructivism as the dominant school aesthetic.', 'Introduced camera-less photograms and heavy typographic layout grids.', 'Erected the \'Haus am Horn\' modular experimental home.'], figures: ['László Moholy-Nagy', 'Johannes Itten'] },
-        { year: '1925', title: 'Relocation to Dessau Hub', location: 'Dessau', significance: 'Golden Era Setup', description: 'Provoked by right-wing Weimar municipal hostility, the school relocates to the progressive industrial city of Dessau.', details: ['Gropius designs the breathtaking asymmetrical curtain-glass Dessau campus.', 'Marcel Breuer constructs the Model B3 \'Wassily\' tubular steel chair.', 'Herbert Bayer standardizes the universal all-lowercase typesetting.'], figures: ['Walter Gropius', 'Marcel Breuer', 'Herbert Bayer'] },
-        { year: '1930', title: 'Minimalism & Mies\' Architecture', location: 'Dessau', significance: 'Pure Structuralism', description: 'Ludwig Mies van der Rohe assumes leadership to protect the school, pivoting focus strictly to structural apolitical architecture.', details: ['Suppressed political assemblies to preserve local funding.', 'Enforced Mies\' strict \'Less is More\' visual and structural doctrine.', 'Focused heavily on interior architecture and structural steel profiles.'], figures: ['Mies van der Rohe', 'Kandinsky'] },
-        { year: '1933', title: 'Gestapo Blockade & Diaspora', location: 'Berlin', significance: 'Global Diaspora', description: 'Raided and sealed by police forces, the masters choose to voluntarily dissolve the school rather than compromise academic freedom.', details: ['Police raid and padlocked Berlin-Steglitz campus in early April.', 'Refused requests to discharge foreign painters or replace curricula.', 'Voted to dismiss on July 20, scattering core design principles worldwide.'], figures: ['Mies van der Rohe', 'Wassily Kandinsky'] }
+        {
+          year: "1919", title: "The Inception & Manifesto", era: "WEIMAR",
+          description: "Walter Gropius fuses the Academy of Fine Arts and the School of Applied Arts to create Bauhaus.",
+          details: ["Published Founding Manifesto with Feininger's Cathedral cover.", "Introduced Johannes Itten's preliminary course (Vorkurs).", "Established traditional guild systems."]
+        },
+        {
+          year: "1923", title: "Art & Technology: A New Unity", era: "WEIMAR",
+          description: "László Moholy-Nagy replaces Itten, turning focus to serial mechanical production.",
+          details: ["Constructivism becomes dominant aesthetic.", "Introduced camera-less photograms.", "Erected 'Haus am Horn' experimental home."]
+        },
+        {
+          year: "1925", title: "Relocation to Dessau Hub", era: "DESSAU",
+          description: "School relocates to the progressive industrial city of Dessau due to political pressure.",
+          details: ["Gropius designs asymmetrical curtain-glass campus.", "Marcel Breuer constructs Model B3 'Wassily' chair.", "Herbert Bayer standardizes universal lowercase."]
+        },
+        {
+          year: "1930", title: "Minimalism & Mies van der Rohe", era: "DESSAU",
+          description: "Ludwig Mies van der Rohe assumes leadership, pivoting focus strictly to architecture.",
+          details: ["Enforced 'Less is More' visual doctrine.", "Suppressed political assemblies to preserve funding.", "Focused heavily on structural steel profiles."]
+        },
+        {
+          year: "1932", title: "The Berlin Closure & Diaspora", era: "BERLIN",
+          description: "Raided and sealed by police, the masters choose to voluntarily dissolve the school.",
+          details: ["Police raid padlocked Berlin-Steglitz campus in early April.", "Voted to dismiss on July 20 to preserve principles.", "Global scattering of core design philosophy."]
+        }
       ];
 
       const EXHIBITS = [
-        { id: 'kandinsky-1923', title: 'Analytical Study', year: '1923', designer: 'Wassily Kandinsky', description: 'Intersection dynamics on static rectangular graph grids.', imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=600&q=80', location: 'Solomon R. Guggenheim Museum, New York', medium: 'Oil on structural canvas board', dimensions: '140.3 x 201 cm', movement: 'Geometric Abstraction' },
-        { id: 'gropius-building', title: 'Dessau Facade', year: '1926', designer: 'Walter Gropius', description: 'Asymmetry, cantilever corridors and glass curtain sheets.', imageUrl: 'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&w=600&q=80', location: 'Dessau Memorial Grounds, Germany', medium: 'Reinforced Concrete & Steel structures', dimensions: 'Architectural Site Plot Plan', movement: 'Functionalist Modernism' },
-        { id: 'bayer-type', title: 'Universal Alphabet', year: '1925', designer: 'Herbert Bayer', description: 'A structural script study looking to completely discard dual-case letters.', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80', location: 'MoMA Collection, USA', medium: 'Ink print on vintage paper stock', dimensions: '29.7 x 21.0 cm', movement: 'Constructive Typography' },
-        { id: 'klee-pedagogical', title: 'Polyphonic Scales', year: '1924', designer: 'Paul Klee', description: 'Linear tension walks balancing rhythm with absolute scale bands.', imageUrl: 'https://images.unsplash.com/photo-1579783921573-0402ca74df44?auto=format&fit=crop&w=600&q=80', location: 'Kunstmuseum Basel, Switzerland', medium: 'Oil and watercolor on chalk boards', dimensions: '50.1 x 59.8 cm', movement: 'Geometrical Expressionism' }
+        { id: 'kandinsky-1923', title: 'Analytical Study', year: '1923', designer: 'Wassily Kandinsky', imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=600&q=80', location: 'Solomon R. Guggenheim, New York', medium: 'Oil on structural canvas board', dimensions: '140.3 x 201 cm' },
+        { id: 'gropius-building', title: 'Dessau Facade', year: '1926', designer: 'Walter Gropius', imageUrl: 'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&w=600&q=80', location: 'Dessau Memorial Grounds, Germany', medium: 'Reinforced Concrete & Steel', dimensions: 'Architectural Site Plot Plan' },
+        { id: 'bayer-type', title: 'Universal Alphabet', year: '1925', designer: 'Herbert Bayer', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80', location: 'MoMA Collection, USA', medium: 'Ink print on vintage paper stock', dimensions: '29.7 x 21.0 cm' },
+        { id: 'klee-pedagogical', title: 'Polyphonic Scales', year: '1924', designer: 'Paul Klee', imageUrl: 'https://images.unsplash.com/photo-1579783921573-0402ca74df44?auto=format&fit=crop&w=600&q=80', location: 'Kunstmuseum Basel, Switzerland', medium: 'Oil and watercolor on boards', dimensions: '50.1 x 59.8 cm' }
       ];
 
       const MASTERS = [
-        { id: 'gropius', name: 'WALTER GROPIUS', lifespan: '1883–1969', workshop: 'ARCHITECTURE', legacy: 'Conceived the Bauhaus structural manifesto, stating: "The ultimate aim of all visual arts is the complete building!"', avatar: 'WG' },
+        { id: 'gropius', name: 'WALTER GROPIUS', lifespan: '1883–1969', workshop: 'ARCHITECTURE', legacy: 'The ultimate aim of all visual arts is the complete building! Architect of the iconic Dessau campus.', avatar: 'WG' },
         { id: 'kandinsky', name: 'WASSILY KANDINSKY', lifespan: '1866–1944', workshop: 'WALL PAINTING', legacy: 'Pioneered pure geometric abstraction, setting a rigorous visual grammar relating shape to color frequencies.', avatar: 'WK' },
         { id: 'klee', name: 'PAUL KLEE', lifespan: '1879–1940', workshop: 'STAINED GLASS', legacy: 'Taught dynamic visual orchestration, exploring linear tension, organic balances, and chromatic scales.', avatar: 'PK' },
-        { id: 'breuer', name: 'MARCEL BREUER', lifespan: '1902–1981', workshop: 'CABINETMAKING', legacy: 'Inspired by bent steel bicycle handlebars, he pioneered using seamless tubular steel to forge the modern cantilever chair.', avatar: 'MB' }
+        { id: 'breuer', name: 'MARCEL BREUER', lifespan: '1902–1981', workshop: 'CABINETMAKING', legacy: 'Inspired by bicycle handlebars, he pioneered using seamless tubular steel to forge the modern cantilever chair.', avatar: 'MB' }
       ];
 
-      // --- Centralized State ---
+      const SECTIONS = [
+        { id: 'intro', title: 'SYNTAX' },
+        { id: 'manifesto', title: 'PRINCIPLES' },
+        { id: 'timeline', title: 'LEDGER' },
+        { id: 'lab', title: 'KLEE LAB' },
+        { id: 'exhibition', title: 'ARCHIVE' },
+        { id: 'blueprints', title: 'SCHEMATICS' }
+      ];
+
+      // --- CENTRALIZED STATE ---
       const state = {
         activeSection: 'intro',
-        activeStudy: 'hue',
-        timelineFilter: 'all',
-        expandedTimelineIdx: null,
-        kleeMode: 'walk',
-        kleeColor: '#dd2c2f',
-        kleeAuto: false,
-        darkroomMode: 'standard',
-        selectedMasterId: 'gropius',
-        blueprintRotation: 0,
-        caliperActive: false,
+        audioEnabled: true,
+        neuralActive: true,
+        reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
         shapes: [],
         kleePoints: [],
-        clockVisible: true,
-        lightbox: {
-          visible: false,
-          artwork: null,
-          caliper: false,
-          zoom: false,
-          rotation: 0,
-          chroma: false
-        }
+        kleeAuto: false,
+        selectedMasterId: 'gropius',
+        bpRotation: 0,
+        bpCaliper: false,
+        darkroomFilter: 'standard',
+        lightbox: { visible: false, art: null, zoom: false, caliper: false, chroma: false },
+        clockVisible: true
       };
 
-      // --- Utility Functions ---
+      // --- UTILITIES ---
       const throttle = (fn, limit) => {
         let inThrottle;
         return (...args) => {
@@ -764,726 +456,396 @@
         };
       };
 
-      // --- UI Controllers (Surgical Updates) ---
-      const UI = {
-        renderSidebarNav() {
-          const nav = document.getElementById('sidebar-nav');
-          nav.innerHTML = '';
-          SECTIONS.forEach((sec) => {
-            const btn = document.createElement('button');
-            const isActive = state.activeSection === sec.id;
-            btn.className = `group text-left p-3.5 flex flex-col relative overflow-hidden transition-all duration-300 border border-transparent focus:outline-none ${
-              isActive ? 'bg-bauhaus-dark text-white shadow-bauhaus-sm pl-6' : 'text-zinc-500 hover:text-bauhaus-dark hover:bg-zinc-50 pl-4'
-            }`;
-            btn.addEventListener('click', () => document.getElementById(sec.id).scrollIntoView({ behavior: 'smooth' }));
-            
-            if (isActive) {
-              const marker = document.createElement('span');
-              marker.className = 'absolute left-2.5 top-1/2 -translate-y-1/2 w-1.5 h-3 bg-bauhaus-red';
-              btn.appendChild(marker);
-            }
-
-            const idx = document.createElement('span');
-            idx.className = 'text-[9px] opacity-60 tracking-wider';
-            idx.textContent = `SEC ${sec.index}`;
-            btn.appendChild(idx);
-
-            const title = document.createElement('span');
-            title.className = 'tracking-tighter text-[11px] font-sans font-black mt-0.5';
-            title.textContent = sec.title;
-            btn.appendChild(title);
-
-            nav.appendChild(btn);
-          });
-        },
-
-        renderPillars() {
-          const container = document.getElementById('principles-container');
-          container.innerHTML = '';
-          PILLARS.forEach((p) => {
-            const div = document.createElement('div');
-            div.className = 'border-2 border-bauhaus-dark p-6 bg-bauhaus-sand hover:bg-bauhaus-dark hover:text-white transition-all duration-300 shadow-bauhaus-sm hover:shadow-bauhaus-md flex flex-col justify-between group cursor-default';
-            div.innerHTML = `
-              <div class="font-mono text-5xl font-black text-bauhaus-red group-hover:text-bauhaus-yellow transition-colors duration-300">${p.number}</div>
-              <div class="mt-12">
-                <div class="w-8 h-[2px] bg-bauhaus-dark group-hover:bg-bauhaus-yellow mb-3 transition-colors"></div>
-                <h3 class="font-sans text-lg font-black uppercase tracking-tight mb-2">${p.title}</h3>
-                <p class="font-sans text-xs text-neutral-600 group-hover:text-neutral-300 leading-relaxed font-semibold">${p.desc}</p>
-              </div>
-            `;
-            container.appendChild(div);
-          });
-        },
-
-        updateContrastStudy() {
-          const workbench = document.getElementById('study-workbench');
-          const explanation = document.getElementById('study-explanation');
-          const modes = ['hue', 'extension', 'simultaneous', 'warmcool'];
-
-          modes.forEach((m) => {
-            const btn = document.getElementById(`study-${m}`);
-            const isActive = state.activeStudy === m;
-            btn.className = `text-left p-3.5 border-2 border-bauhaus-dark font-sans font-black uppercase text-xs tracking-tight flex justify-between items-center transition focus:outline-none ${
-              isActive ? 'bg-bauhaus-dark text-white shadow-bauhaus-sm' : 'bg-white hover:bg-zinc-100 text-bauhaus-dark'
-            }`;
-            btn.setAttribute('aria-selected', isActive);
-          });
-
-          const data = {
-            hue: {
-              exp: 'HUEMODE: Pairing raw cadmiums and pure ultramarines side-by-side to manifest intense physical structural energy.',
-              html: `<div class="grid grid-cols-3 gap-3 w-full max-w-sm aspect-square relative z-10">
-                ${['#dd2c2f', '#005596', '#fac901', '#005596', '#fac901', '#dd2c2f', '#fac901', '#dd2c2f', '#005596'].map((c) =>
-                  `<div class="border-2 border-bauhaus-dark shadow-bauhaus-sm" style="background-color: ${c}"></div>`
-                ).join('')}
-              </div>`
-            },
-            extension: {
-              exp: 'EXTENSIONMODE: Highlighting proportional sizes of chromatic elements. Yellow takes on spiritual weight; Blue occupies broad physical space to balance.',
-              html: `<div class="flex flex-col gap-6 w-full max-w-sm relative z-10 bg-white border-2 border-bauhaus-dark p-6 shadow-bauhaus-sm">
-                <div class="space-y-4">
-                  <div>
-                    <div class="flex justify-between font-mono text-[9px] font-bold text-zinc-500 mb-1">
-                      <span>YELLOW (9)</span><span id="ext-y-val">33%</span>
-                    </div>
-                    <div class="h-4 bg-zinc-200 border border-bauhaus-dark"><div id="ext-y-bar" class="h-full bg-bauhaus-yellow" style="width: 33%"></div></div>
-                  </div>
-                  <div>
-                    <div class="flex justify-between font-mono text-[9px] font-bold text-zinc-500 mb-1">
-                      <span>BLUE (3)</span><span id="ext-b-val">67%</span>
-                    </div>
-                    <div class="h-4 bg-zinc-200 border border-bauhaus-dark"><div id="ext-b-bar" class="h-full bg-bauhaus-blue" style="width: 67%"></div></div>
-                  </div>
-                </div>
-                <input type="range" min="10" max="90" value="33" id="ext-slider" class="w-full h-1 bg-zinc-300 rounded-lg appearance-none cursor-pointer accent-bauhaus-red mt-4">
-              </div>`
-            },
-            simultaneous: {
-              exp: 'SIMULTANEOUSMODE: Optical shifting experiments. Observe how identical gray markers seem to change color based on secondary background fields.',
-              html: `<div class="grid grid-cols-2 gap-6 w-full max-w-sm relative z-10">
-                <div class="aspect-square bg-bauhaus-red border-2 border-bauhaus-dark shadow-bauhaus-sm flex items-center justify-center"><div class="w-12 h-12 bg-zinc-400 border border-zinc-500"></div></div>
-                <div class="aspect-square bg-zinc-200 border-2 border-bauhaus-dark shadow-bauhaus-sm flex items-center justify-center"><div class="w-12 h-12 bg-zinc-400 border border-zinc-500"></div></div>
-              </div>`
-            },
-            warmcool: {
-              exp: 'WARMCOOLMODE: Clash of temperatures. Juxtaposing blazing vermilion alongside glacial coordinates.',
-              html: `<div class="flex flex-col items-center gap-4 w-full max-w-sm relative z-10">
-                <svg viewBox="0 0 200 200" class="w-full max-w-[240px]"><defs><linearGradient id="wcg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#dd2c2f"/><stop offset="100%" stop-color="#005596"/></linearGradient></defs>
-                <circle cx="100" cy="100" r="85" fill="none" stroke="url(#wcg)" stroke-width="14" /><text x="100" y="105" text-anchor="middle" fill="#fff" class="font-mono text-[10px] font-bold">THERMAL BAL</text></svg>
-              </div>`
-            }
-          };
-
-          explanation.textContent = data[state.activeStudy].exp;
-          workbench.innerHTML = data[state.activeStudy].html;
-
-          if (state.activeStudy === 'extension') {
-            document.getElementById('ext-slider').addEventListener('input', (e) => {
-              const y = e.target.value;
-              const b = 100 - y;
-              document.getElementById('ext-y-val').textContent = `${y}%`;
-              document.getElementById('ext-b-val').textContent = `${b}%`;
-              document.getElementById('ext-y-bar').style.width = `${y}%`;
-              document.getElementById('ext-b-bar').style.width = `${b}%`;
-            });
-          }
-        },
-
-        renderTimeline() {
-          const container = document.getElementById('timeline-container');
-          container.innerHTML = '';
-          const filtered = state.timelineFilter === 'all'
-            ? CHRONOLOGY
-            : CHRONOLOGY.filter((i) => i.location.toLowerCase() === state.timelineFilter);
-
-          filtered.forEach((item, idx) => {
-            const isExpanded = state.expandedTimelineIdx === idx;
-            const div = document.createElement('div');
-            div.className = 'border-2 border-bauhaus-dark bg-white shadow-bauhaus-sm overflow-hidden transition-all duration-300';
-            div.innerHTML = `
-              <button class="w-full text-left p-6 flex justify-between items-center hover:bg-zinc-50 border-l-8 ${isExpanded ? 'border-bauhaus-red' : 'border-bauhaus-dark'} focus:outline-none">
-                <div class="flex items-center gap-4">
-                  <span class="font-sans text-xl font-black text-white bg-bauhaus-dark px-3 py-1.5">${item.year}</span>
-                  <div>
-                    <h3 class="font-sans text-base font-black uppercase text-neutral-900">${item.title}</h3>
-                    <div class="flex items-center gap-2 mt-1 font-mono text-[8.5px] font-bold uppercase">
-                      <span class="bg-bauhaus-blue text-white px-1.5 py-0.5">${item.location}</span>
-                      <span class="text-zinc-400">SIG: ${item.significance}</span>
-                    </div>
-                  </div>
-                </div>
-                <span class="transition-transform duration-200 transform ${isExpanded ? 'rotate-180' : ''}">▼</span>
-              </button>
-              <div class="${isExpanded ? 'block' : 'hidden'} p-6 border-t border-dashed border-zinc-200 bg-zinc-50">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 text-xs leading-relaxed">
-                  <div class="md:col-span-7">
-                    <p class="font-semibold text-neutral-700 text-sm mb-4">${item.description}</p>
-                    <ul class="space-y-1 font-semibold text-neutral-500">
-                      ${item.details.map((d) => `<li>• ${d}</li>`).join('')}
-                    </ul>
-                  </div>
-                  <div class="md:col-span-5 border-l border-zinc-200 pl-6">
-                    <span class="font-mono text-[8px] text-zinc-400 font-bold block mb-2 uppercase">CONTRIBUTORS:</span>
-                    <div class="flex flex-wrap gap-1.5">${item.figures.map((f) => `<span class="bg-zinc-200 px-2 py-0.5 font-bold uppercase">${f}</span>`).join('')}</div>
-                  </div>
-                </div>
-              </div>
-            `;
-            div.querySelector('button').addEventListener('click', () => {
-              state.expandedTimelineIdx = state.expandedTimelineIdx === idx ? null : idx;
-              UI.renderTimeline();
-            });
-            container.appendChild(div);
-          });
-        },
-
-        renderExhibits() {
-          const container = document.getElementById('posters-grid');
-          container.innerHTML = '';
-          EXHIBITS.forEach((ex) => {
-            const btn = document.createElement('button');
-            btn.className = 'text-left border-2 border-bauhaus-dark bg-bauhaus-sand p-4 shadow-bauhaus-sm hover:shadow-bauhaus-md flex flex-col group transition-all focus:outline-none';
-            
-            let filter = '';
-            let overlay = '';
-            if (state.darkroomMode === 'cyanotype') {
-              filter = 'grayscale sepia hue-rotate-[155deg] contrast-200 saturate-150';
-              overlay = '<div class="absolute inset-0 bg-blue-900/50 mix-blend-overlay"></div>';
-            } else if (state.darkroomMode === 'halftone') {
-              filter = 'grayscale contrast-200 brightness-110';
-              overlay = '<div class="absolute inset-0 halftone-overlay opacity-50"></div>';
-            } else if (state.darkroomMode === 'lithograph') {
-              filter = 'contrast-200 brightness-80 grayscale saturate-0';
-              overlay = '<div class="absolute inset-0 halftone-white-overlay opacity-30"></div>';
-            } else {
-              filter = 'grayscale group-hover:grayscale-0 transition-all duration-500';
-            }
-
-            btn.innerHTML = `
-              <div class="w-full aspect-[3/4] border-2 border-bauhaus-dark mb-4 overflow-hidden relative bg-black">
-                <img src="${ex.imageUrl}" class="w-full h-full object-cover transition-all ${filter}" alt="${ex.title}">
-                ${overlay}
-              </div>
-              <div class="font-mono text-[10px] text-zinc-400 font-bold uppercase">${ex.designer} – ${ex.year}</div>
-              <h3 class="font-sans text-base font-black text-neutral-900 uppercase mt-0.5 leading-tight">${ex.title}</h3>
-              <p class="font-sans text-[11px] text-neutral-600 font-semibold mt-2 leading-relaxed">${ex.description}</p>
-            `;
-            btn.addEventListener('click', () => Actions.openLightbox(ex));
-            container.appendChild(btn);
-          });
-        },
-
-        renderMasters() {
-          const container = document.getElementById('masters-selector');
-          container.innerHTML = '';
-          MASTERS.forEach((m) => {
-            const isActive = state.selectedMasterId === m.id;
-            const btn = document.createElement('button');
-            btn.className = `text-left p-4 border-2 border-bauhaus-dark font-sans font-black uppercase text-xs flex justify-between items-center transition focus:outline-none ${
-              isActive ? 'bg-bauhaus-dark text-white shadow-bauhaus-sm' : 'bg-white hover:bg-zinc-100 text-bauhaus-dark'
-            }`;
-            btn.innerHTML = `<span>${m.name}</span><span class="font-mono text-[9px] opacity-70">${m.lifespan}</span>`;
-            btn.addEventListener('click', () => {
-              state.selectedMasterId = m.id;
-              state.blueprintRotation = 0;
-              UI.renderMasters();
-              UI.updateBlueprint();
-            });
-            container.appendChild(btn);
-          });
-        },
-
-        updateBlueprint() {
-          const m = MASTERS.find((i) => i.id === state.selectedMasterId);
-          document.getElementById('blueprint-name').textContent = m.name;
-          document.getElementById('blueprint-meta').textContent = `WORKSHOP: ${m.workshop} // YEARS: ${m.lifespan}`;
-          document.getElementById('blueprint-avatar').textContent = m.avatar;
-          document.getElementById('blueprint-quote').textContent = `"${m.legacy}"`;
-
-          const svg = document.getElementById('blueprint-svg');
-          svg.style.transform = `rotate(${state.blueprintRotation}deg)`;
-
-          let content = '';
-          const stroke = '#38bdf8';
-          if (m.id === 'gropius') {
-            content = `
-              <g stroke="${stroke}" fill="none" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="25" y="30" width="150" height="40" />
-                <line x1="25" y1="40" x2="175" y2="40" />
-                <line x1="25" y1="50" x2="175" y2="50" />
-                <line x1="25" y1="60" x2="175" y2="60" />
-                ${Array.from({ length: 15 }).map((_, i) => `<line x1="${25 + i * 10}" y1="30" x2="${25 + i * 10}" y2="70" />`).join('')}
-              </g>
-            `;
-          } else if (m.id === 'kandinsky') {
-            content = `
-              <g stroke="${stroke}" fill="none" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="40" y="25" width="45" height="45" />
-                <circle cx="140" cy="50" r="22" />
-                <polygon points="95,20 120,65 70,65" />
-                <line x1="10" y1="75" x2="190" y2="15" />
-              </g>
-            `;
-          } else if (m.id === 'klee') {
-            content = `
-              <g stroke="${stroke}" fill="none" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="25" y="15" width="30" height="30" />
-                <rect x="55" y="15" width="40" height="30" />
-                <rect x="95" y="15" width="30" height="30" />
-                <path d="M30,25 Q55,5 95,50 T150,75" stroke="#fac901" stroke-width="1.5" stroke-dasharray="1 3" />
-              </g>
-            `;
-          } else if (m.id === 'breuer') {
-            content = `
-              <g stroke="${stroke}" fill="none" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
-                <path d="M45,20 L65,20 L65,75" />
-                <path d="M40,40 L135,40 L135,45" />
-                <line x1="55" y1="50" x2="135" y2="50" />
-              </g>
-            `;
-          }
-
-          if (state.caliperActive) {
-            content += `<g stroke="#EF4444" stroke-width="0.8" stroke-dasharray="2 2">
-              <line x1="0" y1="50" x2="200" y2="50"/><line x1="100" y1="0" x2="100" y2="100"/>
-              <text x="105" y="10" fill="#EF4444" font-size="6">METRIC_AXIS</text></g>`;
-          }
-          svg.innerHTML = content;
-        },
-
-        updateLightbox() {
-          const l = state.lightbox;
-          const modal = document.getElementById('lightbox');
-          if (!l.visible) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.classList.remove('modal-open');
-            return;
-          }
-          modal.classList.remove('hidden');
-          modal.classList.add('flex');
-          document.body.classList.add('modal-open');
-
-          document.getElementById('lightbox-image').src = l.artwork.imageUrl;
-          document.getElementById('lightbox-category').textContent = `CATEGORY // ${l.artwork.designer.toUpperCase()}`;
-          document.getElementById('lightbox-title').textContent = `${l.artwork.title} (${l.artwork.year})`;
-          document.getElementById('spec-location').textContent = l.artwork.location;
-          document.getElementById('spec-medium').textContent = l.artwork.medium;
-          document.getElementById('spec-dimensions').textContent = l.artwork.dimensions;
-          document.getElementById('spec-movement').textContent = l.artwork.movement;
-
-          const stage = document.getElementById('lightbox-zoom-stage');
-          stage.style.transform = `scale(${l.zoom ? 1.7 : 1}) rotate(${l.rotation}deg)`;
-          document.getElementById('lightbox-image').className = `max-w-full max-h-[250px] md:max-h-[400px] object-contain border-2 border-zinc-800 shadow-2xl z-10 transition-all duration-300 ${
-            l.chroma ? 'invert contrast-150 saturate-150 hue-rotate-180' : ''
-          }`;
-
-          document.getElementById('lightbox-caliper-svg').classList.toggle('hidden', !l.caliper);
-
-          const caliperBtn = document.getElementById('lightbox-toggle-caliper');
-          caliperBtn.className = `w-full py-2.5 border-2 border-bauhaus-dark font-mono text-[9px] font-bold uppercase transition flex items-center justify-center gap-1.5 focus:outline-none ${
-            l.caliper ? 'bg-bauhaus-yellow text-bauhaus-dark' : 'bg-white text-zinc-800'
-          }`;
-          caliperBtn.innerHTML = l.caliper
-            ? '<svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5m16.5-16.5v16.5M12 3v18M3 12h18" /></svg><span>CALIPERS GRAPH EXEMPT: ON</span>'
-            : '<svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5m16.5-16.5v16.5M12 3v18M3 12h18" /></svg><span>PROJECT MATHEMATICAL CALIPERS</span>';
-
-          const zoomBtn = document.getElementById('lightbox-zoom');
-          zoomBtn.className = `py-2.5 border border-bauhaus-dark text-center uppercase transition focus:outline-none ${l.zoom ? 'bg-bauhaus-blue text-white' : 'bg-white text-zinc-700 hover:bg-zinc-100'}`;
-          zoomBtn.textContent = l.zoom ? '1.0X RESTING' : '1.7X MAGNET';
-
-          const chromaBtn = document.getElementById('lightbox-chroma');
-          chromaBtn.className = `py-2.5 border border-bauhaus-dark text-center uppercase transition focus:outline-none ${l.chroma ? 'bg-bauhaus-red text-white' : 'bg-white text-zinc-700 hover:bg-zinc-100'}`;
-          chromaBtn.textContent = l.chroma ? 'CHROMA: REV' : 'CHROMA INVERT';
-        }
-      };
-
-      // --- Interactive Engines ---
+      // --- MAGNIFICENT ENGINES ---
       const Engines = {
-        physics: {
-          canvas: null,
-          ctx: null,
-          raf: null,
-          active: false,
+        audio: {
+          ctx: null, master: null,
           init() {
-            this.canvas = document.getElementById('physics-canvas');
-            this.ctx = this.canvas.getContext('2d');
-            window.addEventListener('resize', () => this.resize());
-            this.resize();
-            this.loop();
+            try {
+              this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+              this.master = this.ctx.createGain();
+              this.master.connect(this.ctx.destination);
+              this.master.gain.setValueAtTime(0.12, this.ctx.currentTime);
+            } catch(e) {}
           },
-          resize() {
-            this.canvas.width = this.canvas.offsetWidth;
-            this.canvas.height = this.canvas.offsetHeight;
-          },
-          loop() {
-            if (this.active) {
-              this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-              state.shapes.forEach((s) => {
-                s.x += s.vx;
-                s.y += s.vy;
-                const r = 30;
-                if (s.x < r || s.x > this.canvas.width - r) s.vx *= -1;
-                if (s.y < r || s.y > this.canvas.height - r) s.vy *= -1;
-
-                this.ctx.fillStyle = s.color;
-                this.ctx.strokeStyle = '#1a1a1a';
-                this.ctx.lineWidth = 4;
-                this.ctx.beginPath();
-                if (s.type === 'square') {
-                  this.ctx.rect(s.x - r, s.y - r, r * 2, r * 2);
-                } else if (s.type === 'circle') {
-                  this.ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
-                } else {
-                  this.ctx.moveTo(s.x, s.y - r);
-                  this.ctx.lineTo(s.x + r, s.y + r);
-                  this.ctx.lineTo(s.x - r, s.y + r);
-                  this.ctx.closePath();
-                }
-                this.ctx.fill();
-                this.ctx.stroke();
-
-                // Labels
-                this.ctx.font = 'bold 9px "JetBrains Mono"';
-                this.ctx.fillStyle = (s.type === 'triangle') ? '#1a1a1a' : '#ffffff';
-                this.ctx.textAlign = 'center';
-                const label = s.type === 'square' ? 'SQ_01' : (s.type === 'circle' ? 'CR_02' : 'TR_03');
-                this.ctx.fillText(label, s.x, s.y + (s.type === 'triangle' ? r - 8 : 3));
-              });
-            }
-            this.raf = requestAnimationFrame(() => this.loop());
+          play(f, type='sine', d=0.2) {
+            if (!state.audioEnabled || !this.ctx) return;
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            const o = this.ctx.createOscillator();
+            const g = this.ctx.createGain();
+            o.type = type; o.frequency.setValueAtTime(f, this.ctx.currentTime);
+            g.gain.setValueAtTime(0, this.ctx.currentTime);
+            g.gain.linearRampToValueAtTime(1, this.ctx.currentTime + 0.01);
+            g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + d);
+            o.connect(g); g.connect(this.master);
+            o.start(); o.stop(this.ctx.currentTime + d);
           }
         },
-        klee: {
-          active: false,
-          render() {
-            const svg = document.getElementById('klee-svg');
-            const nodes = document.getElementById('klee-nodes');
-            svg.innerHTML = '';
-            nodes.innerHTML = '';
 
-            if (state.kleePoints.length < 1) return;
-
-            const drawPoints = (points, color) => {
-              let path = '';
-              points.forEach((p, i) => {
-                if (i === 0) path += `M ${p.x}% ${p.y}%`;
-                else path += ` L ${p.x}% ${p.y}%`;
-
-                const node = document.createElement('div');
-                node.className = 'absolute w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2 border border-white z-10';
-                node.style.left = `${p.x}%`;
-                node.style.top = `${p.y}%`;
-                node.style.backgroundColor = p.color || color;
-                nodes.appendChild(node);
-              });
-
-              const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-              line.setAttribute('d', path);
-              line.setAttribute('stroke', color);
-              line.setAttribute('stroke-width', '2.5');
-              line.setAttribute('fill', 'none');
-              line.setAttribute('stroke-linecap', 'round');
-              svg.appendChild(line);
+        neural: {
+          canvas: null, ctx: null, raf: null, nodes: [], compositions: [],
+          init() {
+            this.canvas = document.getElementById('neural-canvas');
+            this.ctx = this.canvas.getContext('2d');
+            this.resize();
+            for(let i=0; i<15; i++) this.nodes.push(this.createNode());
+            this.draw();
+            setInterval(() => this.recompose(), 8000);
+            window.addEventListener('resize', () => this.resize());
+          },
+          resize() { this.canvas.width = window.innerWidth; this.canvas.height = window.innerHeight; },
+          createNode() {
+            return {
+              x: Math.random()*this.canvas.width, y: Math.random()*this.canvas.height,
+              size: 40+Math.random()*160, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
+              type: ['rect', 'circle', 'tri', 'line'][Math.floor(Math.random()*4)],
+              color: ['#dd2c2f','#005596','#fac901','#1a1a1a'][Math.floor(Math.random()*4)],
+              alpha: 0.03+Math.random()*0.07, rot: Math.random()*Math.PI*2, vr: (Math.random()-0.5)*0.005
             };
+          },
+          recompose() {
+            if (!state.neuralActive || state.reducedMotion) return;
+            this.compositions = Array.from({length: 2}, () => ({
+              x: Math.random()*this.canvas.width*0.7, y: Math.random()*this.canvas.height*0.7,
+              w: 100+Math.random()*500, h: 100+Math.random()*500,
+              color: ['#dd2c2f','#005596','#fac901'][Math.floor(Math.random()*3)], life: 1.0
+            }));
+          },
+          draw() {
+            if (!state.neuralActive || state.reducedMotion) { this.raf = requestAnimationFrame(()=>this.draw()); return; }
+            this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
 
-            drawPoints(state.kleePoints, state.kleeColor);
+            this.nodes.forEach(p => {
+              p.x += p.vx; p.y += p.vy;
+              if (p.x<0) p.x=this.canvas.width; if (p.x>this.canvas.width) p.x=0;
+              if (p.y<0) p.y=this.canvas.height; if (p.y>this.canvas.height) p.y=0;
+              this.ctx.save(); this.ctx.globalAlpha = p.alpha; this.ctx.fillStyle = p.color;
+              this.ctx.translate(p.x, p.y); this.ctx.rotate(p.rot); p.rot += p.vr;
+              if (p.type==='rect') this.ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+              else if (p.type==='circle') { this.ctx.beginPath(); this.ctx.arc(0,0,p.size/2,0,Math.PI*2); this.ctx.fill(); }
+              else if (p.type==='tri') { this.ctx.beginPath(); this.ctx.moveTo(0,-p.size/2); this.ctx.lineTo(p.size/2,p.size/2); this.ctx.lineTo(-p.size/2,p.size/2); this.ctx.fill(); }
+              else { this.ctx.fillRect(-p.size, -0.5, p.size*2, 1); }
+              this.ctx.restore();
+            });
+
+            this.compositions = this.compositions.filter(c => {
+              c.life -= 0.0015; if (c.life <= 0) return false;
+              this.ctx.save(); this.ctx.globalAlpha = c.life * 0.04; this.ctx.strokeStyle = c.color; this.ctx.lineWidth = 1.5;
+              this.ctx.strokeRect(c.x, c.y, c.w, c.h); this.ctx.restore(); return true;
+            });
+            this.raf = requestAnimationFrame(()=>this.draw());
+          }
+        },
+
+        physics: {
+          canvas: null, ctx: null, active: false,
+          init() { this.canvas = document.getElementById('physics-canvas'); this.ctx = this.canvas.getContext('2d'); this.resize(); this.loop(); },
+          resize() { this.canvas.width = this.canvas.offsetWidth; this.canvas.height = this.canvas.offsetHeight; },
+          loop() {
+            if (this.active && !state.reducedMotion) {
+              this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+              state.shapes.forEach(s => {
+                s.x += s.vx; s.y += s.vy;
+                if (s.x < 25 || s.x > this.canvas.width - 25) s.vx *= -1;
+                if (s.y < 25 || s.y > this.canvas.height - 25) s.vy *= -1;
+                this.ctx.save(); this.ctx.fillStyle = s.color; this.ctx.shadowBlur = 10; this.ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                this.ctx.beginPath();
+                if (s.type === 'circle') this.ctx.arc(s.x, s.y, 25, 0, Math.PI * 2);
+                else if (s.type === 'square') this.ctx.rect(s.x - 25, s.y - 25, 50, 50);
+                else { this.ctx.moveTo(s.x, s.y - 25); this.ctx.lineTo(s.x + 25, s.y + 25); this.ctx.lineTo(s.x - 25, s.y + 25); this.ctx.closePath(); }
+                this.ctx.fill(); this.ctx.restore();
+              });
+            }
+            requestAnimationFrame(() => this.loop());
+          }
+        },
+
+        klee: {
+          canvas: null, active: false,
+          init() { this.canvas = document.getElementById('klee-canvas'); this.setupDrawing(); },
+          setupDrawing() {
+            const handleMove = (e) => {
+              if (!this.active) return;
+              const rect = this.canvas.getBoundingClientRect();
+              const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+              const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+              const x = clientX - rect.left; const y = clientY - rect.top;
+              if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) this.addPoint(x, y);
+            };
+            this.canvas.addEventListener('mousemove', (e) => { if (e.buttons === 1) handleMove(e); });
+            this.canvas.addEventListener('touchmove', (e) => { e.preventDefault(); handleMove(e); }, { passive: false });
+          },
+          addPoint(x, y) {
+            state.kleePoints.push({ x, y });
+            if (state.kleePoints.length > 150) state.kleePoints.shift();
+            this.render();
+            Engines.audio.play(200 + (y / this.canvas.clientHeight) * 500, 'triangle', 0.05);
+          },
+          render() {
+            if (state.kleePoints.length < 2) return;
+            let path = `M ${state.kleePoints[0].x} ${state.kleePoints[0].y}`;
+            for (let i = 1; i < state.kleePoints.length; i++) path += ` L ${state.kleePoints[i].x} ${state.kleePoints[i].y}`;
+            this.canvas.innerHTML = `<path d="${path}" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />`;
+            document.getElementById('klee-status').textContent = `STATE: WALKING // VECTORS: ${state.kleePoints.length}`;
           },
           autoWalk() {
             if (!state.kleeAuto || !this.active) return;
-            const last = state.kleePoints[state.kleePoints.length - 1] || { x: 50, y: 50 };
+            const rect = this.canvas.getBoundingClientRect();
+            const last = state.kleePoints[state.kleePoints.length - 1] || { x: rect.width/2, y: rect.height/2 };
             const next = {
-              x: Math.max(5, Math.min(95, last.x + (Math.random() - 0.5) * 12)),
-              y: Math.max(5, Math.min(95, last.y + (Math.random() - 0.5) * 12)),
-              color: state.kleeColor
+              x: Math.max(0, Math.min(rect.width, last.x + (Math.random() - 0.5) * 60)),
+              y: Math.max(0, Math.min(rect.height, last.y + (Math.random() - 0.5) * 60))
             };
-            state.kleePoints.push(next);
-            if (state.kleePoints.length > 40) state.kleePoints.shift();
-            this.render();
-            setTimeout(() => this.autoWalk(), 150);
+            this.addPoint(next.x, next.y);
+            setTimeout(() => this.autoWalk(), 100);
           }
         }
       };
 
-      // --- Interaction Handlers ---
-      const Actions = {
-        spawn(type) {
-          const colors = { square: '#dd2c2f', circle: '#005596', triangle: '#fac901' };
-          const canvas = Engines.physics.canvas;
-          state.shapes.push({
-            type,
-            color: colors[type],
-            x: canvas.width / 2,
-            y: canvas.height / 2,
-            vx: (Math.random() - 0.5) * 8,
-            vy: (Math.random() - 0.5) * 8
-          });
-          const btn = document.getElementById('clear-physics');
-          btn.classList.remove('hidden');
-          btn.textContent = `CLEAR (${state.shapes.length})`;
+      // --- UI CONTROLLER ---
+      const UI = {
+        init() {
+          this.renderNav(); this.renderManifesto(); this.renderTimeline(); this.renderArchive(); this.renderMasters(); this.updateBlueprint();
+          this.setupEvents(); this.startClock(); this.setupObserver();
         },
-        openLightbox(art) {
-          state.lightbox.artwork = art;
-          state.lightbox.visible = true;
-          state.lightbox.caliper = false;
-          state.lightbox.zoom = false;
-          state.lightbox.rotation = 0;
-          state.lightbox.chroma = false;
-          UI.updateLightbox();
-          document.getElementById('close-lightbox').focus();
+        renderNav() {
+          document.getElementById('nav-list').innerHTML = SECTIONS.map(s => `
+            <button data-target="${s.id}" class="nav-btn block hover:text-bauhaus-red transition-all text-left w-full flex items-center gap-2 group focus:outline-none">
+              <span class="w-1.5 h-1.5 bg-bauhaus-red opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              <span>// ${s.title}</span>
+            </button>`).join('');
+          this.updateActiveNav();
+        },
+        renderManifesto() {
+          document.getElementById('principles-container').innerHTML = PILLARS.map(p => `
+            <div class="brutal-border p-6 bg-bauhaus-sand hover:bg-bauhaus-dark hover:text-white transition-all shadow-brutal-sm group cursor-default">
+              <span class="font-mono text-4xl font-black text-bauhaus-red group-hover:text-bauhaus-yellow">${p.number}</span>
+              <h3 class="font-black mt-6 uppercase leading-tight text-lg">${p.title}</h3>
+              <p class="text-xs font-semibold mt-3 opacity-70 group-hover:opacity-90 leading-relaxed">${p.desc}</p>
+            </div>`).join('');
+        },
+        renderTimeline() {
+          document.getElementById('timeline-stack').innerHTML = CHRONOLOGY.map((item, idx) => `
+            <div class="brutal-border bg-white shadow-brutal-sm overflow-hidden transition-all hover:shadow-brutal group">
+              <button class="w-full p-6 text-left flex justify-between items-center group-hover:bg-zinc-50 focus:outline-none" onclick="APP.toggleTimeline(${idx})">
+                <div class="flex items-center gap-8">
+                  <span class="font-mono text-3xl font-black group-hover:text-bauhaus-red transition-colors">${item.year}</span>
+                  <div>
+                    <h3 class="font-black text-lg uppercase tracking-tighter">${item.title}</h3>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="bg-bauhaus-blue text-white px-2 py-0.5 font-mono text-[8px] font-black">${item.era}</span>
+                      <span class="text-[8px] font-mono font-bold text-zinc-400 uppercase tracking-widest leading-none">MAPPING_COORDS</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="text-xl transition-transform duration-300 transform" id="tl-icon-${idx}">▼</span>
+              </button>
+              <div id="tl-content-${idx}" class="hidden p-8 border-t-2 border-bauhaus-dark bg-zinc-50 font-sans">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                  <div class="md:col-span-7">
+                    <p class="font-bold text-neutral-800 leading-relaxed">${item.description}</p>
+                    <ul class="mt-6 space-y-2 text-xs font-semibold text-neutral-500">
+                      ${item.details.map(d => `<li>• ${d}</li>`).join('')}
+                    </ul>
+                  </div>
+                  <div class="md:col-span-5 border-l-2 border-zinc-200 pl-8">
+                    <span class="font-mono text-[8px] font-black text-zinc-400 uppercase block mb-3 tracking-widest">ARCHIVAL_META</span>
+                    <div class="space-y-4">
+                      <div class="bg-white p-3 brutal-border-thin shadow-brutal-sm">
+                        <div class="text-[7px] font-black text-zinc-300 uppercase">STATUS</div>
+                        <div class="text-[10px] font-bold uppercase">Verified Ledger</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`).join('');
+        },
+        renderArchive() {
+          const grid = document.getElementById('posters-grid');
+          grid.innerHTML = EXHIBITS.map(ex => {
+            let filter = state.darkroomFilter === 'cyanotype' ? 'grayscale sepia hue-rotate-[160deg] contrast-150' :
+                         (state.darkroomFilter === 'halftone' ? 'grayscale contrast-200 brightness-110' : 'grayscale group-hover:grayscale-0');
+            return `
+            <div class="poster-card brutal-border p-4 bg-white shadow-brutal-sm cursor-pointer hover:shadow-brutal transition-all flex flex-col group" data-id="${ex.id}">
+              <div class="aspect-[3/4] bg-zinc-100 mb-5 overflow-hidden relative brutal-border-thin pointer-events-none">
+                <img src="${ex.imageUrl}" class="w-full h-full object-cover transition-all duration-700 ${filter}">
+                ${state.darkroomFilter === 'halftone' ? '<div class="absolute inset-0 halftone opacity-40 pointer-events-none"></div>' : ''}
+                <div class="absolute inset-0 bg-bauhaus-red opacity-0 group-hover:opacity-10 transition-opacity"></div>
+              </div>
+              <h4 class="font-black text-sm uppercase truncate pointer-events-none tracking-tighter">${ex.title}</h4>
+              <span class="text-[9px] font-mono font-bold text-zinc-400 uppercase mt-1.5 pointer-events-none tracking-widest">${ex.designer} // ${ex.year}</span>
+            </div>`;
+          }).join('');
+          grid.querySelectorAll('.poster-card').forEach(card => card.addEventListener('click', () => APP.openLightbox(card.dataset.id)));
+        },
+        renderMasters() {
+          const list = document.getElementById('masters-list');
+          list.innerHTML = MASTERS.map(m => `
+            <button class="master-btn w-full brutal-border p-5 text-left font-black uppercase transition-all flex justify-between items-center group focus:outline-none ${state.selectedMasterId === m.id ? 'bg-bauhaus-dark text-white shadow-brutal' : 'bg-white hover:bg-zinc-50 shadow-brutal-sm'}" data-id="${m.id}">
+              <div class="flex items-center gap-4">
+                <span class="w-8 h-8 brutal-border-thin flex items-center justify-center font-mono text-xs ${state.selectedMasterId === m.id ? 'bg-bauhaus-red text-white' : 'bg-zinc-100 text-zinc-400 group-hover:text-black'}">${m.avatar}</span>
+                <span>${m.name}</span>
+              </div>
+              <span class="font-mono text-[9px] opacity-40">${m.lifespan}</span>
+            </button>`).join('');
+          list.querySelectorAll('.master-btn').forEach(btn => btn.addEventListener('click', () => APP.selectMaster(btn.dataset.id)));
+        },
+        updateBlueprint() {
+          const m = MASTERS.find(i => i.id === state.selectedMasterId);
+          document.getElementById('bp-name').textContent = m.name;
+          document.getElementById('bp-workshop').textContent = `WORKSHOP: ${m.workshop} // L_SPAN: ${m.lifespan}`;
+          document.getElementById('bp-legacy').textContent = `"${m.legacy}"`;
+          const svg = document.getElementById('blueprint-svg');
+          svg.style.transform = `rotate(${state.bpRotation}deg)`;
+          let vHTML = `<g stroke="#38bdf8" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">`;
+          if(m.id==='gropius') {
+            vHTML += `<rect x="25" y="30" width="150" height="40"/><line x1="25" y1="40" x2="175" y2="40"/><line x1="25" y1="50" x2="175" y2="50"/><line x1="25" y1="60" x2="175" y2="60"/>`;
+            for(let i=0; i<15; i++) vHTML += `<line x1="${25+i*10}" y1="30" x2="${25+i*10}" y2="70" stroke-width="0.5" opacity="0.4"/>`;
+          }
+          else if(m.id==='kandinsky') vHTML += `<circle cx="140" cy="50" r="22"/><rect x="40" y="25" width="45" height="45"/><polygon points="95,20 120,65 70,65"/><line x1="10" y1="75" x2="190" y2="15" opacity="0.3"/>`;
+          else if(m.id==='klee') vHTML += `<path d="M30,25 Q55,5 95,50 T150,75" stroke="#fac901" stroke-dasharray="2 4"/><rect x="25" y="15" width="30" height="30"/><rect x="55" y="15" width="40" height="30"/><rect x="95" y="15" width="30" height="30"/>`;
+          else vHTML += `<path d="M45,20 L65,20 L65,75"/><path d="M40,40 L135,40"/><line x1="48" y1="75" x2="48" y2="25"/><rect x="58" y="28" width="5" height="18" fill="#38bdf8" opacity="0.3"/>`;
+
+          if(state.bpCaliper) {
+            vHTML += `<g stroke="#EF4444" stroke-width="0.8" stroke-dasharray="2 2"><line x1="0" y1="50" x2="200" y2="50"/><line x1="100" y1="0" x2="100" y2="100"/><text x="105" y="10" fill="#EF4444" font-size="6" font-family="monospace" font-weight="bold">METRIC_AXIS</text></g>`;
+          }
+          svg.innerHTML = vHTML + `</g>`;
+        },
+        setupObserver() {
+          const obs = new IntersectionObserver(e => e.forEach(entry => {
+            if(entry.target.id==='intro') { Engines.physics.active = entry.isIntersecting; state.clockVisible = entry.isIntersecting; }
+            if(entry.target.id==='lab') state.kleeActive = entry.isIntersecting;
+            if(entry.isIntersecting) { state.activeSection = entry.target.id; this.updateActiveNav(); }
+          }), {threshold: 0.15});
+          document.querySelectorAll('section').forEach(s => obs.observe(s));
+        },
+        updateActiveNav() {
+          document.querySelectorAll('.nav-btn').forEach(b => {
+            const act = b.dataset.target === state.activeSection;
+            b.classList.toggle('text-bauhaus-red', act); b.classList.toggle('pl-4', act);
+            b.querySelector('span').style.opacity = act ? '1' : '';
+          });
+        },
+        startClock() {
+          setInterval(()=>{
+            if(!state.clockVisible) return;
+            const n=new Date();
+            document.getElementById('live-clock').textContent=`UTC ${n.getUTCHours().toString().padStart(2,'0')}:${n.getUTCMinutes().toString().padStart(2,'0')}:${n.getUTCSeconds().toString().padStart(2,'0')}`;
+          }, 1000);
+        },
+        setupEvents() {
+          document.getElementById('logo-home').addEventListener('click', ()=>this.navigate('intro'));
+          document.querySelectorAll('.dr-filter-btn').forEach(b => b.addEventListener('click', e => {
+            state.darkroomFilter = e.target.dataset.filter;
+            document.querySelectorAll('.dr-filter-btn').forEach(btn => btn.className = 'dr-filter-btn px-4 py-1.5 font-mono text-[9px] font-black');
+            e.target.className = 'dr-filter-btn px-4 py-1.5 font-mono text-[9px] font-black bg-bauhaus-blue text-white';
+            this.renderArchive(); Engines.audio.play(770, 'sine', 0.05);
+          }));
+          document.getElementById('spawn-red').addEventListener('click', ()=>APP.spawn('square','#dd2c2f',110,'square'));
+          document.getElementById('spawn-blue').addEventListener('click', ()=>APP.spawn('circle','#005596',440,'sine'));
+          document.getElementById('spawn-yellow').addEventListener('click', ()=>APP.spawn('triangle','#fac901',330,'triangle'));
+          document.getElementById('clear-physics').addEventListener('click', (e)=>{ state.shapes=[]; e.target.classList.add('hidden'); Engines.audio.play(220,'square',0.1); });
+          document.getElementById('toggle-audio').addEventListener('click', e => { if(!Engines.audio.ctx) Engines.audio.init(); state.audioEnabled=!state.audioEnabled; e.target.textContent=state.audioEnabled?'ENABLED':'MUTED'; e.target.classList.toggle('text-bauhaus-blue', state.audioEnabled); });
+          document.getElementById('toggle-neural').addEventListener('click', e => { state.neuralActive=!state.neuralActive; e.target.textContent=state.neuralActive?'ACTIVE':'PAUSED'; e.target.classList.toggle('text-bauhaus-red', state.neuralActive); });
+          document.getElementById('rotate-blueprint').addEventListener('click', ()=> { state.bpRotation=(state.bpRotation+90)%360; this.updateBlueprint(); Engines.audio.play(880,'sine',0.05); });
+          document.getElementById('toggle-bp-caliper').addEventListener('click', (e)=> { state.bpCaliper=!state.bpCaliper; this.updateBlueprint(); e.target.classList.toggle('bg-bauhaus-yellow', state.bpCaliper); Engines.audio.play(990,'sine',0.05); });
+
+          document.getElementById('lb-zoom').addEventListener('click', APP.toggleLBZoom);
+          document.getElementById('lb-caliper-btn').addEventListener('click', APP.toggleLBCaliper);
+          document.getElementById('lb-chroma').addEventListener('click', APP.toggleLBChroma);
+          document.getElementById('close-lightbox').addEventListener('click', APP.closeLightbox);
+
+          const canvas = document.getElementById('klee-canvas');
+          canvas.addEventListener('mousemove', e => { if(e.buttons===1) APP.addKleePoint(e.clientX, e.clientY); });
+          canvas.addEventListener('touchmove', e => { e.preventDefault(); APP.addKleePoint(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
+          document.getElementById('klee-auto').addEventListener('click', e => { state.kleeAuto = !state.kleeAuto; e.target.textContent = state.kleeAuto?'STOP_WALK':'AUTO_WALK'; if(state.kleeAuto) Engines.klee.autoWalk(); Engines.audio.play(440,'triangle',0.1); });
+          document.getElementById('klee-reset').addEventListener('click', ()=>{ state.kleePoints=[]; document.getElementById('klee-canvas').innerHTML=''; document.getElementById('klee-status').textContent='STATE: IDLE // VECTORS: 0'; Engines.audio.play(220,'triangle',0.1); });
+
+          document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => this.navigate(btn.dataset.target)));
+
+          window.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape' && state.lightbox.visible) APP.closeLightbox();
+          });
+        },
+        navigate(id) {
+          const el = document.getElementById(id); if(!el) return;
+          if(document.startViewTransition) document.startViewTransition(()=>{ state.activeSection=id; this.updateActiveNav(); el.scrollIntoView({behavior:'smooth'}); });
+          else { state.activeSection=id; this.updateActiveNav(); el.scrollIntoView({behavior:'smooth'}); }
+          Engines.audio.play(880, 'sine', 0.05);
+        }
+      };
+
+      // --- MAGNIFICENT APP LOGIC ---
+      window.APP = {
+        spawn(type, color, f, w) {
+          const c = Engines.physics.canvas;
+          state.shapes.push({ x: c.width/2, y: c.height/2, vx: (Math.random()-0.5)*12, vy: (Math.random()-0.5)*12, color, type });
+          if(state.shapes.length>30) state.shapes.shift();
+          const btn = document.getElementById('clear-physics');
+          btn.classList.remove('hidden'); btn.textContent = `CLEAR_BUFFER (${state.shapes.length})`;
+          Engines.audio.play(f,w);
+        },
+        addKleePoint(cx, cy) {
+          const rect = document.getElementById('klee-canvas').getBoundingClientRect();
+          const x = cx-rect.left, y = cy-rect.top;
+          if(x<0||x>rect.width||y<0||y>rect.height) return;
+          state.kleePoints.push({x,y}); if(state.kleePoints.length>150) state.kleePoints.shift();
+          Engines.klee.render(); Engines.audio.play(100+(y/rect.height)*600, 'triangle', 0.05);
+        },
+        toggleTimeline(idx) {
+          const content = document.getElementById(`tl-content-${idx}`);
+          const icon = document.getElementById(`tl-icon-${idx}`);
+          const isHidden = content.classList.contains('hidden');
+          document.querySelectorAll('[id^="tl-content-"]').forEach(el => el.classList.add('hidden'));
+          document.querySelectorAll('[id^="tl-icon-"]').forEach(el => el.classList.remove('rotate-180'));
+          if(isHidden) { content.classList.remove('hidden'); icon.classList.add('rotate-180'); Engines.audio.play(660,'sine',0.05); }
+        },
+        selectMaster(id) {
+          state.selectedMasterId = id; state.bpRotation = 0; UI.renderMasters(); UI.updateBlueprint();
+          Engines.audio.play(550,'sine',0.05);
+        },
+        openLightbox(id) {
+          const art = EXHIBITS.find(a => a.id === id); if(!art) return;
+          state.lightbox = { visible:true, art, zoom:false, caliper:false, chroma:false };
+          document.getElementById('lightbox-img').src = art.imageUrl;
+          document.getElementById('lb-title').textContent = art.title;
+          document.getElementById('lb-cat').textContent = `SPEC // ${art.designer.toUpperCase()}`;
+          document.getElementById('lb-loc').textContent = art.location;
+          document.getElementById('lb-med').textContent = art.medium;
+          document.getElementById('lb-dim').textContent = art.dimensions;
+          document.getElementById('lb-id').textContent = `ID_${art.id.toUpperCase()}`;
+          document.getElementById('lightbox').classList.remove('hidden'); document.getElementById('lightbox').classList.add('flex');
+          document.body.classList.add('modal-open'); Engines.audio.play(440,'square',0.1);
         },
         closeLightbox() {
-          state.lightbox.visible = false;
-          UI.updateLightbox();
+          document.getElementById('lightbox').classList.add('hidden');
+          document.getElementById('lightbox').classList.remove('flex');
+          document.body.classList.remove('modal-open');
         },
-        trapFocus(e) {
-          if (!state.lightbox.visible) return;
-          const modal = document.getElementById('lightbox');
-          const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-          const first = focusables[0];
-          const last = focusables[focusables.length - 1];
-
-          if (e.key === 'Tab') {
-            if (e.shiftKey) {
-              if (document.activeElement === first) {
-                last.focus();
-                e.preventDefault();
-              }
-            } else {
-              if (document.activeElement === last) {
-                first.focus();
-                e.preventDefault();
-              }
-            }
-          }
-        },
-        updateTime() {
-          if (!state.clockVisible) return;
-          const now = new Date();
-          const timeStr = `UTC ${now.getUTCHours().toString().padStart(2, '0')}:${now.getUTCMinutes().toString().padStart(2, '0')}`;
-          document.getElementById('live-time').textContent = timeStr;
-        }
-      };
-
-      // --- App Initialization ---
-      const init = () => {
-        UI.renderSidebarNav();
-        UI.renderPillars();
-        UI.updateContrastStudy();
-        UI.renderTimeline();
-        UI.renderExhibits();
-        UI.renderMasters();
-        UI.updateBlueprint();
-        Engines.physics.init();
-
-        // Populate Ruler
-        const ruler = document.getElementById('ruler-line');
-        for (let i = 0; i < 100; i++) {
-          const tick = document.createElement('div');
-          const isMajor = i % 10 === 0;
-          const isMedium = i % 5 === 0;
-          tick.className = `bg-bauhaus-dark self-end transition-all h-[1px] ${isMajor ? 'w-3' : (isMedium ? 'w-2' : 'w-1 opacity-30')}`;
-          ruler.appendChild(tick);
-        }
-
-        // Sidebar interactions
-        window.addEventListener('mousemove', throttle((e) => {
-          document.getElementById('tracker-y').textContent = `${e.clientY} px`;
-          const ticks = ruler.children;
-          const idx = Math.floor((e.clientY / window.innerHeight) * 100);
-          for (let i = 0; i < 100; i++) {
-            const dist = Math.abs(i - idx);
-            if (dist < 2) {
-              ticks[i].style.backgroundColor = '#dd2c2f';
-              ticks[i].style.transform = 'scaleX(1.8)';
-            } else {
-              ticks[i].style.backgroundColor = '#1a1a1a';
-              ticks[i].style.transform = 'none';
-            }
-          }
-        }, 40));
-
-        // Global Clock
-        setInterval(() => Actions.updateTime(), 1000);
-
-        // Section Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((e) => {
-            if (e.target.id === 'intro') {
-              Engines.physics.active = e.isIntersecting;
-              state.clockVisible = e.isIntersecting;
-            }
-            if (e.target.id === 'artistes') {
-              Engines.klee.active = e.isIntersecting;
-              if (state.kleeAuto && e.isIntersecting) Engines.klee.autoWalk();
-            }
-            if (e.isIntersecting) {
-              state.activeSection = e.target.id;
-              UI.renderSidebarNav();
-            }
-          });
-        }, { threshold: 0.15 });
-        SECTIONS.forEach((s) => observer.observe(document.getElementById(s.id)));
-
-        // Event Listeners
-        document.getElementById('logo-home').addEventListener('click', () => document.getElementById('intro').scrollIntoView({ behavior: 'smooth' }));
-        document.getElementById('mobile-logo').addEventListener('click', () => document.getElementById('intro').scrollIntoView({ behavior: 'smooth' }));
-        document.getElementById('to-manifesto').addEventListener('click', () => document.getElementById('manifesto').scrollIntoView({ behavior: 'smooth' }));
-
-        document.getElementById('spawn-square').addEventListener('click', () => Actions.spawn('square'));
-        document.getElementById('spawn-circle').addEventListener('click', () => Actions.spawn('circle'));
-        document.getElementById('spawn-triangle').addEventListener('click', () => Actions.spawn('triangle'));
-        document.getElementById('clear-physics').addEventListener('click', (e) => {
-          state.shapes = [];
-          e.target.classList.add('hidden');
-        });
-
-        ['hue', 'extension', 'simultaneous', 'warmcool'].forEach((s) => {
-          document.getElementById(`study-${s}`).addEventListener('click', () => {
-            state.activeStudy = s;
-            UI.updateContrastStudy();
-          });
-        });
-
-        ['all', 'weimar', 'dessau', 'berlin'].forEach((f) => {
-          document.getElementById(`filter-${f}`).addEventListener('click', (e) => {
-            state.timelineFilter = f;
-            document.querySelectorAll('[id^="filter-"]').forEach((b) => b.className = 'px-2 py-0.5 text-bauhaus-dark hover:bg-zinc-100 focus:outline-none');
-            e.target.className = 'px-2 py-0.5 bg-bauhaus-dark text-white focus:outline-none';
-            UI.renderTimeline();
-          });
-        });
-
-        ['walk', 'spiral', 'beams', 'gravity'].forEach((m) => {
-          document.getElementById(`mode-${m}`).addEventListener('click', (e) => {
-            state.kleeMode = m;
-            document.querySelectorAll('[id^="mode-"]').forEach((b) => b.className = 'py-1.5 border border-zinc-300 bg-white hover:bg-zinc-100 text-bauhaus-dark focus:outline-none');
-            e.target.className = 'py-1.5 border border-bauhaus-dark bg-bauhaus-dark text-white focus:outline-none';
-          });
-        });
-
-        ['red', 'blue', 'yellow', 'dark'].forEach((c) => {
-          const colors = { red: '#dd2c2f', blue: '#005596', yellow: '#fac901', dark: '#1a1a1a' };
-          document.getElementById(`color-${c}`).addEventListener('click', (e) => {
-            state.kleeColor = colors[c];
-            document.querySelectorAll('[id^="color-"]').forEach((b) => b.className = b.className.replace('ring-bauhaus-dark', 'ring-zinc-300'));
-            e.target.className = e.target.className.replace('ring-zinc-300', 'ring-bauhaus-dark');
-          });
-        });
-
-        document.getElementById('toggle-auto-walk').addEventListener('click', (e) => {
-          state.kleeAuto = !state.kleeAuto;
-          e.target.className = `py-2 border-2 border-bauhaus-dark font-mono text-[9.5px] font-bold uppercase transition flex items-center justify-center gap-1.5 focus:outline-none ${
-            state.kleeAuto ? 'bg-bauhaus-red text-white' : 'bg-white text-bauhaus-dark'
-          }`;
-          document.getElementById('klee-status').textContent = state.kleeAuto ? 'STATUS: WALKING' : 'STATUS: READY';
-          if (state.kleeAuto) {
-            document.getElementById('klee-instructions').classList.add('hidden');
-            Engines.klee.autoWalk();
-          }
-        });
-
-        document.getElementById('reset-klee').addEventListener('click', () => {
-          state.kleePoints = [];
-          Engines.klee.render();
-          document.getElementById('klee-instructions').classList.remove('hidden');
-        });
-
-        // Klee Lab Drawing Board Handlers
-        const board = document.getElementById('klee-drawing-board');
-        const handleKleeMove = (e) => {
-          const rect = board.getBoundingClientRect();
-          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-          const x = ((clientX - rect.left) / rect.width) * 100;
-          const y = ((clientY - rect.top) / rect.height) * 100;
-
-          if (x >= 0 && x <= 100 && y >= 0 && y <= 100) {
-            if (state.kleeMode === 'walk') {
-              state.kleePoints.push({ x, y, color: state.kleeColor });
-            } else if (state.kleeMode === 'spiral') {
-              for (let i = 0; i < 5; i++) {
-                const r = i * 2;
-                const th = i * 0.5;
-                state.kleePoints.push({ x: x + Math.cos(th) * r, y: y + Math.sin(th) * r, color: state.kleeColor });
-              }
-            } else if (state.kleeMode === 'beams') {
-              state.kleePoints.push({ x, y, color: state.kleeColor }, { x: 50, y: 50, color: state.kleeColor });
-            } else if (state.kleeMode === 'gravity') {
-              state.kleePoints.push({ x, y, color: state.kleeColor }, { x, y: 100, color: state.kleeColor });
-            }
-
-            if (state.kleePoints.length > 50) state.kleePoints.shift();
-            document.getElementById('klee-instructions').classList.add('hidden');
-            Engines.klee.render();
-          }
-        };
-        board.addEventListener('mousedown', (e) => {
-          const moveHandler = (moveEvent) => handleKleeMove(moveEvent);
-          window.addEventListener('mousemove', moveHandler);
-          window.addEventListener('mouseup', () => window.removeEventListener('mousemove', moveHandler), { once: true });
-          handleKleeMove(e);
-        });
-        board.addEventListener('touchstart', (e) => {
-          handleKleeMove(e);
-        }, { passive: false });
-        board.addEventListener('touchmove', (e) => {
-          e.preventDefault();
-          handleKleeMove(e);
-        }, { passive: false });
-
-        ['standard', 'cyanotype', 'halftone', 'lithograph'].forEach((m) => {
-          document.getElementById(`dr-${m}`).addEventListener('click', (e) => {
-            state.darkroomMode = m;
-            document.querySelectorAll('[id^="dr-"]').forEach((b) => b.className = 'px-3 py-1 text-bauhaus-dark hover:bg-zinc-200 focus:outline-none');
-            e.target.className = 'px-3 py-1 bg-bauhaus-blue text-white focus:outline-none';
-            UI.renderExhibits();
-          });
-        });
-
-        document.getElementById('rotate-blueprint').addEventListener('click', () => {
-          state.blueprintRotation = (state.blueprintRotation + 90) % 360;
-          UI.updateBlueprint();
-        });
-        document.getElementById('toggle-caliper').addEventListener('click', () => {
-          state.caliperActive = !state.caliperActive;
-          document.getElementById('caliper-status-text').textContent = `METRIC DIM LEVEL: ${state.caliperActive ? 'ON' : 'OFF'}`;
-          UI.updateBlueprint();
-        });
-
-        // Lightbox Actions
-        document.getElementById('close-lightbox').addEventListener('click', Actions.closeLightbox);
-        document.getElementById('lightbox-toggle-caliper').addEventListener('click', () => {
-          state.lightbox.caliper = !state.lightbox.caliper;
-          UI.updateLightbox();
-        });
-        document.getElementById('lightbox-zoom').addEventListener('click', () => {
+        toggleLBZoom() {
           state.lightbox.zoom = !state.lightbox.zoom;
-          UI.updateLightbox();
-        });
-        document.getElementById('lightbox-rotate').addEventListener('click', () => {
-          state.lightbox.rotation = (state.lightbox.rotation + 90) % 360;
-          UI.updateLightbox();
-        });
-        document.getElementById('lightbox-chroma').addEventListener('click', () => {
+          document.getElementById('lightbox-stage').style.transform = state.lightbox.zoom ? 'scale(1.7)' : 'scale(1)';
+          document.getElementById('lb-zoom').textContent = state.lightbox.zoom ? 'RESTORE_1.0X' : 'ACTIVATE_MAGNET_1.7X';
+          Engines.audio.play(state.lightbox.zoom?880:440,'sine',0.05);
+        },
+        toggleLBCaliper() {
+          state.lightbox.caliper = !state.lightbox.caliper;
+          document.getElementById('lb-caliper-svg').classList.toggle('hidden', !state.lightbox.caliper);
+          document.getElementById('lb-caliper-btn').classList.toggle('bg-bauhaus-yellow', state.lightbox.caliper);
+          Engines.audio.play(990,'sine',0.05);
+        },
+        toggleLBChroma() {
           state.lightbox.chroma = !state.lightbox.chroma;
-          UI.updateLightbox();
-        });
-
-        // Keyboard navigation
-        window.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && state.lightbox.visible) Actions.closeLightbox();
-          Actions.trapFocus(e);
-        });
-
-        // Initial metric bar animation
-        setTimeout(() => {
-          const bar = document.getElementById('metric-bar');
-          if (bar) bar.style.width = '82%';
-        }, 500);
+          document.getElementById('lightbox-img').style.filter = state.lightbox.chroma ? 'invert(1) contrast(1.5)' : 'none';
+          document.getElementById('lb-chroma').classList.toggle('bg-bauhaus-red', state.lightbox.chroma);
+          document.getElementById('lb-chroma').classList.toggle('text-white', state.lightbox.chroma);
+          Engines.audio.play(330,'square',0.1);
+        }
       };
 
-      init();
+      // --- INITIALIZATION ---
+      UI.init(); Engines.neural.init(); Engines.physics.init(); Engines.klee.init();
     })();
   </script>
 </body>
