@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAUHAUS 2026 — Magnificent Industrial Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bauhaus: {
+                            red: '#E3000F',
+                            blue: '#0078D7',
+                            yellow: '#F8D800',
+                            black: '#111111',
+                            white: '#F4F4F4',
+                            gray: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"Space Mono"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ELITE 2026 CSS OPTIMIZATIONS */
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        
+        body {
+            background-color: #F4F4F4;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        /* Architectural Grid Overlay */
+        .grid-overlay {
+            background-image: linear-gradient(to right, #11111108 1px, transparent 1px),
+                              linear-gradient(to bottom, #11111108 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        /* Cyanotype & Halftone Filters */
+        .filter-cyanotype { filter: sepia(100%) hue-rotate(170deg) saturate(300%) contrast(1.2); }
+        .filter-halftone { 
+            background-image: radial-gradient(circle, #111 1px, transparent 1.5px); 
+            background-size: 4px 4px;
+            mix-blend-mode: multiply;
+        }
+
+        /* Kinetic Shape Blending */
+        .kinetic-shape {
+            mix-blend-mode: multiply;
+            transition: transform 0.1s linear;
+            will-change: transform;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F4F4F4; }
+        ::-webkit-scrollbar-thumb { background: #111; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-bauhaus-red selection:text-white">
+
+    <!-- GLOBAL GRID -->
+    <div class="fixed inset-0 grid-overlay z-0"></div>
+
+    <!-- HEADER / HUD -->
+    <header class="fixed top-0 left-0 w-full z-50 border-b border-bauhaus-black/10 bg-bauhaus-white/80 backdrop-blur-md font-mono text-xs tracking-widest">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="font-bold text-bauhaus-red">BAUHAUS</span>
+                <span class="text-bauhaus-gray">MAGNIFICENT 2026</span>
+                <span class="hidden md:inline-block px-2 py-0.5 bg-bauhaus-black text-bauhaus-white rounded-sm">AUDIO_CORE: ENABLED</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span id="utc-clock" class="tabular-nums">UTC 00:00:00</span>
+                <div class="w-2 h-2 rounded-full bg-bauhaus-red animate-pulse-fast"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+
+        <!-- 01 // SYNTAX -->
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-7 space-y-6">
+                    <h1 class="text-6xl md:text-9xl font-black leading-[0.85] tracking-tighter uppercase">
+                        Form<br>
+                        <span class="text-bauhaus-gray">Follows</span><br>
+                        Function
+                    </h1>
+                    <p class="font-mono text-sm md:text-base max-w-md leading-relaxed border-l-2 border-bauhaus-black pl-4">
+                        In April 1919, Walter Gropius founded the Bauhaus. Students learned to focus on simplicity and functionality. Teachers favored primary colors and bold shapes.
+                    </p>
+                    <div class="flex gap-4 pt-4">
+                        <button class="group relative px-6 py-3 bg-bauhaus-black text-bauhaus-white font-mono text-sm overflow-hidden">
+                            <span class="relative z-10 group-hover:text-bauhaus-black transition-colors duration-300">INITIALIZE CORE</span>
+                            <div class="absolute inset-0 bg-bauhaus-yellow transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- KINETIC CORE CANVAS -->
+                <div class="md:col-span-5 relative h-[400px] md:h-[600px] border border-bauhaus-black/10 bg-white/50" id="physics-container">
+                    <div class="absolute top-4 left-4 font-mono text-[10px] text-bauhaus-gray">PHYSICS_ENGINE v2.6</div>
+                    <!-- Shapes injected via JS -->
+                    <div id="shape-red" class="kinetic-shape absolute w-32 h-32 bg-bauhaus-red"></div>
+                    <div id="shape-blue" class="kinetic-shape absolute w-32 h-32 bg-bauhaus-blue rounded-full"></div>
+                    <div id="shape-yellow" class="kinetic-shape absolute w-0 h-0 border-l-[64px] border-l-transparent border-r-[64px] border-r-transparent border-b-[110px] border-b-bauhaus-yellow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 // MANIFESTO -->
+        <section class="py-24 px-6 md:px-12 bg-bauhaus-black text-bauhaus-white">
+            <div class="max-w-5xl mx-auto">
+                <div class="font-mono text-bauhaus-yellow mb-8 text-sm tracking-widest">02 // MANIFESTO — THE SYSTEM OF PRINCIPLES</div>
+                <blockquote class="text-2xl md:text-4xl font-light leading-tight space-y-8">
+                    <p>"The ultimate goal of all art is the building! ... Architects, painters and sculptors must learn a new way of seeing and understanding the composite character of the building."</p>
+                    <p class="text-bauhaus-gray">"Architects, sculptors, painters—we all must return to craftsmanship! For there is no such thing as 'art by profession'."</p>
+                    <p class="text-bauhaus-yellow font-medium">"So let us therefore create a new guild of craftsmen, free of the divisive class pretensions..."</p>
+                </blockquote>
+                <div class="mt-12 font-mono text-sm text-bauhaus-gray">— Walter Gropius, 1919</div>
+            </div>
+        </section>
+
+        <!-- 04 // KLEE LAB -->
+        <section class="py-24 px-6 md:px-12 border-t border-bauhaus-black/10">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
+                <div class="md:col-span-4 space-y-6">
+                    <h2 class="text-4xl font-black uppercase tracking-tight">Klee Lab</h2>
+                    <p class="font-mono text-sm text-bauhaus-gray leading-relaxed">
+                        Paul Klee taught that drawing is a dynamic linear trace. Rather than static representation, the vector should explore territory organically.
+                    </p>
+                    <div class="space-y-4 pt-4">
+                        <div class="flex justify-between font-mono text-xs border-b border-bauhaus-black/10 pb-2">
+                            <span>STATE</span>
+                            <span id="klee-state" class="text-bauhaus-blue">ACTIVE</span>
+                        </div>
+                        <div class="flex justify-between font-mono text-xs border-b border-bauhaus-black/10 pb-2">
+                            <span>VECTORS</span>
+                            <span id="klee-vectors" class="tabular-nums">0 / 150</span>
+                        </div>
+                        <button id="klee-reset" class="w-full py-3 border border-bauhaus-black font-mono text-xs hover:bg-bauhaus-black hover:text-white transition-colors duration-200">
+                            RESET_BUFFER
+                        </button>
+                    </div>
+                </div>
+                <div class="md:col-span-8 relative bg-white border border-bauhaus-black shadow-[8px_8px_0px_0px_rgba(17,17,17,1)]">
+                    <canvas id="klee-canvas" class="w-full h-[400px] md:h-[500px] cursor-crosshair"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 // ARCHIVE -->
+        <section class="py-24 px-6 md:px-12 bg-bauhaus-gray/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-bauhaus-black pb-4">
+                    <h2 class="text-4xl font-black uppercase">Archive Darkroom</h2>
+                    <div class="flex gap-2 mt-4 md:mt-0 font-mono text-xs">
+                        <button class="filter-btn px-4 py-2 bg-bauhaus-black text-white" data-filter="none">STANDARD</button>
+                        <button class="filter-btn px-4 py-2 border border-bauhaus-black hover:bg-bauhaus-black hover:text-white transition-colors" data-filter="filter-cyanotype">CYANOTYPE</button>
+                        <button class="filter-btn px-4 py-2 border border-bauhaus-black hover:bg-bauhaus-black hover:text-white transition-colors" data-filter="filter-halftone">HALFTONE</button>
+                    </div>
+                </div>
+                
+                <div class="relative w-full h-[400px] bg-bauhaus-black overflow-hidden group">
+                    <!-- Procedural Archive Pattern -->
+                    <div id="archive-visual" class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0iI2Y0ZjRmNCIvPjwvc3ZnPg==')] opacity-30 transition-all duration-700"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="font-mono text-bauhaus-white/50 text-6xl md:text-8xl font-black tracking-tighter select-none group-hover:scale-105 transition-transform duration-700">1919</span>
+                    </div>
+                    <!-- Scanline -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bauhaus-white/5 to-transparent h-4 w-full animate-[scan_3s_linear_infinite] pointer-events-none"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 // SCHEMATICS -->
+        <footer class="py-12 px-6 md:px-12 border-t border-bauhaus-black font-mono text-[10px] md:text-xs text-bauhaus-gray uppercase tracking-widest">
+            <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-bauhaus-black mb-2">Virtual Drafting Table</div>
+                    <div>RAW KINETIC CORES</div>
+                </div>
+                <div>
+                    <div class="text-bauhaus-black mb-2">Workshop</div>
+                    <div>Architecture // Walter Gropius</div>
+                </div>
+                <div>
+                    <div class="text-bauhaus-black mb-2">Metrics</div>
+                    <div>GR_CHECK: 1.618 // HIGH_RES</div>
+                </div>
+                <div class="text-right">
+                    <div>© 1919—2026</div>
+                    <div>Bauhaus Archival Syndicate</div>
+                    <div class="text-bauhaus-red mt-1">ELITE GOOGLE OPTIMIZED</div>
+                </div
+            </div>
+        </footer>
+    </main>
+
+    <style>
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(400px); }
+        }
+    </style>
+
+    <script>
+        /**
+         * ELITE 2026 ARCHITECTURE
+         * 1. Reactive State Proxy
+         * 2. Unified RequestAnimationFrame Loop
+         * 3. Modular Class-based Components
+         */
+
+        // --- 1. REACTIVE STATE ---
+        const state = new Proxy({
+            utc: '00:00:00',
+            kleeVectors: 0,
+            kleeMaxVectors: 150,
+            kleeActive: true,
+            archiveFilter: 'none'
+        }, {
+            set(target, property, value) {
+                target[property] = value;
+                if (property === 'utc') document.getElementById('utc-clock').textContent = `UTC ${value}`;
+                if (property === 'kleeVectors') {
+                    document.getElementById('klee-vectors').textContent = `${value} / ${target.kleeMaxVectors}`;
+                    if (value >= target.kleeMaxVectors) {
+                        target.kleeActive = false;
+                        document.getElementById('klee-state').textContent = 'CAP REACHED';
+                        document.getElementById('klee-state').classList.replace('text-bauhaus-blue', 'text-bauhaus-red');
+                    }
+                }
+                return true;
+            }
+        });
+
+        // --- 2. CLOCK ---
+        setInterval(() => {
+            state.utc = new Date().toISOString().split('T')[1].split('.')[0];
+        }, 1000);
+
+        // --- 3. KINETIC PHYSICS ENGINE (Minimalist) ---
+        class PhysicsEngine {
+            constructor() {
+                this.shapes = [
+                    { el: document.getElementById('shape-red'), x: 50, y: 50, vx: 1.5, vy: 1.2, size: 128 },
+                    { el: document.getElementById('shape-blue'), x: 200, y: 150, vx: -1.2, vy: 1.8, size: 128 },
+                    { el: document.getElementById('shape-yellow'), x: 100, y: 250, vx: 1.8, vy: -1.5, size: 128 } // Approximate for triangle
+                ];
+                this.container = document.getElementById('physics-container');
+                this.animate = this.animate.bind(this);
+                requestAnimationFrame(this.animate);
+            }
+
+            animate() {
+                const rect = this.container.getBoundingClientRect();
+                const width = rect.width;
+                const height = rect.height;
+
+                this.shapes.forEach(shape => {
+                    shape.x += shape.vx;
+                    shape.y += shape.vy;
+
+                    // Bounce
+                    if (shape.x <= 0 || shape.x + shape.size >= width) shape.vx *= -1;
+                    if (shape.y <= 0 || shape.y + shape.size >= height) shape.vy *= -1;
+
+                    // Clamp
+                    shape.x = Math.max(0, Math.min(shape.x, width - shape.size));
+                    shape.y = Math.max(0, Math.min(shape.y, height - shape.size));
+
+                    shape.el.style.transform = `translate(${shape.x}px, ${shape.y}px)`;
+                });
+
+                requestAnimationFrame(this.animate);
+            }
+        }
+
+        // --- 4. KLEE LAB: VECTOR WALK ---
+        class KleeLab {
+            constructor() {
+                this.canvas = document.getElementById('klee-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.points = [];
+                this.currentPoint = { x: 0, y: 0 };
+                this.angle = 0;
+                
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+                
+                this.currentPoint = { x: this.canvas.width / 2, y: this.canvas.height / 2 };
+                this.points.push({ ...this.currentPoint });
+
+                document.getElementById('klee-reset').addEventListener('click', () => this.reset());
+                
+                this.animate = this.animate.bind(this);
+                requestAnimationFrame(this.animate);
+            }
+
+            resize() {
+                const rect = this.canvas.parentElement.getBoundingClientRect();
+                this.canvas.width = rect.width;
+                this.canvas.height = rect.height;
+                this.redraw();
+            }
+
+            reset() {
+                this.points = [];
+                this.currentPoint = { x: this.canvas.width / 2, y: this.canvas.height / 2 };
+                this.points.push({ ...this.currentPoint });
+                this.angle = 0;
+                state.kleeVectors = 0;
+                state.kleeActive = true;
+                document.getElementById('klee-state').textContent = 'ACTIVE';
+                document.getElementById('klee-state').classList.replace('text-bauhaus-red', 'text-bauhaus-blue');
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+
+            redraw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.ctx.beginPath();
+                this.ctx.strokeStyle = '#111111';
+                this.ctx.lineWidth = 2;
+                this.ctx.lineCap = 'round';
+                this.ctx.lineJoin = 'round';
+
+                if (this.points.length > 0) {
+                    this.ctx.moveTo(this.points[0].x, this.points[0].y);
+                    for (let i = 1; i < this.points.length; i++) {
+                        // Smooth quadratic curve for organic "Klee" feel
+                        const xc = (this.points[i].x + this.points[i - 1].x) / 2;
+                        const yc = (this.points[i].y + this.points[i - 1].y) / 2;
+                        this.ctx.quadraticCurveTo(this.points[i - 1].x, this.points[i - 1].y, xc, yc);
+                    }
+                    this.ctx.lineTo(this.currentPoint.x, this.currentPoint.y);
+                }
+                this.ctx.stroke();
+            }
+
+            animate() {
+                if (state.kleeActive && this.points.length < state.kleeMaxVectors) {
+                    // Organic random walk with momentum
+                    this.angle += (Math.random() - 0.5) * 1.5;
+                    const speed = 8;
+                    this.currentPoint.x += Math.cos(this.angle) * speed;
+                    this.currentPoint.y += Math.sin(this.angle) * speed;
+
+                    // Wrap around screen
+                    if (this.currentPoint.x < 0) this.currentPoint.x = this.canvas.width;
+                    if (this.currentPoint.x > this.canvas.width) this.currentPoint.x = 0;
+                    if (this.currentPoint.y < 0) this.currentPoint.y = this.canvas.height;
+                    if (this.currentPoint.y > this.canvas.height) this.currentPoint.y = 0;
+
+                    this.points.push({ ...this.currentPoint });
+                    state.kleeVectors = this.points.length;
+                    this.redraw();
+                }
+                requestAnimationFrame(this.animate);
+            }
+        }
+
+        // --- 5. ARCHIVE FILTERS ---
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Reset styles
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-bauhaus-black', 'text-white');
+                    b.classList.add('border-bauhaus-black');
+                });
+                // Active style
+                e.target.classList.remove('border-bauhaus-black');
+                e.target.classList.add('bg-bauhaus-black', 'text-white');
+                
+                // Apply filter
+                const visual = document.getElementById('archive-visual');
+                visual.className = `absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0iI2Y0ZjRmNCIvPjwvc3ZnPg==')] opacity-30 transition-all duration-700 ${e.target.dataset.filter}`;
+            });
+        });
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            new PhysicsEngine();
+            new KleeLab();
+        });
+    </script>
+</body>
+</html>
