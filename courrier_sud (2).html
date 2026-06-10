@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courrier Sud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              body: ["'Cormorant Garamond'", "serif"],
+              display: ["'Cinzel'", "serif"],
+              playfair: ["'Playfair Display'", "serif"]
+            },
+            colors: {
+              orange: {
+                100: "oklch(95.4% .038 75.164)",
+                500: "oklch(70.5% .213 47.604)"
+              },
+              gray: {
+                50: "oklch(98.5% .002 247.839)",
+                100: "oklch(96.7% .003 264.542)",
+                200: "oklch(92.8% .006 264.531)",
+                400: "oklch(70.7% .022 261.325)",
+                500: "oklch(55.1% .027 264.364)",
+                600: "oklch(44.6% .03 256.802)",
+                700: "oklch(37.3% .034 259.733)",
+                800: "oklch(27.8% .033 256.848)",
+                900: "oklch(21% .034 264.665)"
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
+
+      body {
+        color: #1a1a1a;
+        font-family: 'Cormorant Garamond', serif;
+        background-color: #fdfcf8;
+        overflow-x: hidden;
+      }
+      .cs-hero {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        display: flex;
+        position: relative;
+      }
+      .cs-hero:before {
+        content: "";
+        z-index: -1;
+        background: radial-gradient(circle, transparent, #fdfcf8 80%), url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(\'%23noise\')" opacity="0.04"/></svg>');
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      .cs-hero-title {
+        font-family: 'Cinzel', serif;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        font-size: 5rem;
+      }
+      .cs-hero-subtitle {
+        font-family: 'Playfair Display', serif;
+        color: #555;
+        margin-bottom: 3rem;
+        font-size: 1.5rem;
+        font-style: italic;
+      }
+      .cs-tarfaya-tribute {
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: #888;
+        text-align: center;
+        font-size: .9rem;
+        position: absolute;
+        bottom: 2rem;
+      }
+      .cs-novel-container {
+        background-color: #fdfcf8;
+        flex-direction: column;
+        align-items: center;
+        padding: 4rem 1rem;
+        display: flex;
+      }
+      .t-chapter-node {
+        box-sizing: border-box;
+        background-color: #fdfcf8;
+        border: 1px solid #e8e6da;
+        width: 100%;
+        max-width: 800px;
+        min-height: 80vh;
+        margin-bottom: 4rem;
+        padding: 4rem 5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      }
+      .t-chapter-node p {
+        font-family: 'Cormorant Garamond', serif;
+        text-indent: 1.5em;
+        text-align: justify;
+        color: #1a1a1a;
+        margin-bottom: 0;
+        font-size: 1.35rem;
+        line-height: 1.8;
+      }
+      .t-chapter-node p:first-of-type {
+        text-indent: 0;
+      }
+      .t-chapter-node p:has(+h1), .t-chapter-node p:has(+h2), .t-chapter-node p:has(+h3) {
+        margin-bottom: 2rem;
+      }
+      .t-chapter-node h1 {
+        font-family: 'Cinzel', serif;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-align: center;
+        break-before: page;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+        font-size: 3rem;
+      }
+      .t-chapter-node h2 {
+        font-family: 'Playfair Display', serif;
+        color: #333;
+        text-align: center;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        font-style: italic;
+      }
+      .t-chapter-node h3 {
+        font-family: 'Playfair Display', serif;
+        color: #555;
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+      .scroll-track {
+        width: 100%;
+      }
+      @media(max-width: 1024px){
+        .cs-hero-title { font-size: 4rem; }
+      }
+      @media(max-width: 768px){
+        .cs-hero-title { text-align: center; padding: 0 1rem; font-size: 3rem; }
+        .cs-hero-subtitle { text-align: center; padding: 0 1rem; font-size: 1.25rem; }
+        .cs-novel-container { padding: 2rem 1rem; }
+        .t-chapter-node { margin-bottom: 2rem; padding: 3rem 2rem; }
+        .t-chapter-node p { font-size: 1.2rem; line-height: 1.7; }
+        .t-chapter-node h1 { margin-top: 2.5rem; font-size: 2.25rem; }
+        .t-chapter-node h2 { font-size: 1.5rem; }
+      }
+      @media(max-width: 480px){
+        .cs-hero-title { font-size: 2.2rem; }
+        .cs-hero-subtitle { font-size: 1.1rem; }
+        .t-chapter-node { margin-bottom: 1.5rem; padding: 2rem 1.25rem; }
+        .t-chapter-node p { text-align: left; font-size: 1.1rem; line-height: 1.6; }
+        .t-chapter-node h1 { margin-top: 2rem; font-size: 1.8rem; }
+        .t-chapter-node h2 { font-size: 1.3rem; }
+      }
+      .cs-footer {
+        background-color: #fdfcf8;
+        border-top: 1px solid #e8e6da;
+        margin-top: 4rem;
+      }
+      .cs-btn {
+        font-family: 'Cormorant Garamond', serif;
+        color: #1a1a1a;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #e8e6da;
+        border-radius: 9999px;
+        align-items: center;
+        gap: .5rem;
+        padding: .75rem 1.5rem;
+        font-size: 1.1rem;
+        transition: all .2s;
+        display: inline-flex;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+      }
+      .cs-btn:hover {
+        background: #f8f7f1;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+      .cs-btn-crypto {
+        color: #fff;
+        background: #1a1a1a;
+        border-color: #1a1a1a;
+      }
+      .cs-btn-crypto:hover {
+        background: #333;
+      }
+      .fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+      }
+      .fade-out {
+        animation: fadeOut 0.3s ease-in forwards;
+      }
+      .scale-up {
+        animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+      .scale-down {
+        animation: scaleDown 0.3s ease-in forwards;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+      @keyframes scaleUp {
+        from { transform: scale(0.95) translateY(10px); opacity: 0; }
+        to { transform: scale(1) translateY(0); opacity: 1; }
+      }
+      @keyframes scaleDown {
+        from { transform: scale(1) translateY(0); opacity: 1; }
+        to { transform: scale(0.95) translateY(10px); opacity: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- COMPONENTS TEMPLATES -->
+    <template id="app-template">
+      <div id="app-container">
+        <!-- Hero Section -->
+        <section class="cs-hero">
+          <h1 class="cs-hero-title text-gray-900 leading-none">Courrier Sud</h1>
+          <h2 class="cs-hero-subtitle text-gray-700 italic">Antoine de Saint-Exupéry</h2>
+          <div class="cs-tarfaya-tribute select-none text-gray-400">
+            Written in the sands of Tarfaya, 1928.<br>
+            Scroll to open the novel.
+          </div>
+        </section>
+
+        <!-- Novel Chapters Container -->
+        <div class="cs-novel-container" id="chapters-root"></div>
+
+        <!-- Footer -->
+        <footer class="cs-footer">
+          <div class="cs-footer-inner mx-auto max-w-4xl px-4 py-8 flex flex-wrap justify-center gap-4">
+            <button id="share-btn" class="cs-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share
+            </button>
+            <button id="fav-btn" class="cs-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-plus"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/><line x1="12" x2="12" y1="7" y2="13"/><line x1="15" x2="9" y1="10" y2="10"/></svg>
+              Favorite
+            </button>
+            <button id="support-btn" class="cs-btn cs-btn-crypto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bitcoin"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg>
+              Support Project
+            </button>
+          </div>
+        </footer>
+
+        <!-- Crypto Modal -->
+        <div id="crypto-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+          <div id="crypto-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+          <div id="crypto-modal-body" class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 relative overflow-hidden">
+            <button id="close-modal-btn" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors" aria-label="Close modal">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            <div class="flex flex-col items-center pt-4 pb-2">
+              <div class="w-16 h-16 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bitcoin"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg>
+              </div>
+              <h3 class="text-2xl font-medium tracking-tight text-gray-900 mb-2 font-display">Support our Project</h3>
+              <p class="text-center text-gray-500 mb-6 font-sans">If you enjoyed this reading experience, consider supporting the project with a cryptocurrency donation.</p>
+              <div class="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 mb-4">
+                <div class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2 ml-1">USDT / ETH (ERC-20)</div>
+                <div class="flex items-center gap-2">
+                  <code id="wallet-address" class="flex-1 bg-white border border-gray-200 rounded-lg py-2 px-3 text-sm text-gray-700 truncate font-mono">0x0000000000000000000000000000000000000000</code>
+                  <button id="copy-btn" class="p-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors flex flex-shrink-0 items-center justify-center" title="Copy Address">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                  </button>
+                </div>
+              </div>
+              <p class="text-xs text-gray-400 text-center font-sans">Only send supported assets to this address.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <script>
+      /* --- MODULE: Service Worker & PWA --- */
+      (function() {
+        const swContent = `
+          const CACHE_NAME = 'courrier-sud-cache-v1';
+          self.addEventListener('install', e => self.skipWaiting());
+          self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+          self.addEventListener('fetch', e => {
+            e.respondWith(
+              caches.match(e.request).then(res => {
+                if (res) return res;
+                return fetch(e.request).then(newRes => {
+                  if (newRes && newRes.status === 200 && newRes.type === 'basic') {
+                    const copy = newRes.clone();
+                    caches.open(CACHE_NAME).then(c => c.put(e.request, copy));
+                  }
+                  return newRes;
+                }).catch(() => {
+                  if (e.request.mode === 'navigate') return caches.match('/');
+                });
+              })
+            );
+          });
+        `;
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('./sw.js')
+            .then(r => console.log('SW Registered successfully via path', r.scope))
+            .catch(e => {
+              console.warn('Direct SW registration failed, trying blob fallback...', e);
+              try {
+                const blob = new Blob([swContent], { type: 'application/javascript' });
+                const sUrl = URL.createObjectURL(blob);
+                navigator.serviceWorker.register(sUrl, { scope: './' })
+                  .then(r => console.log('Blob SW Registered successfully', r.scope))
+                  .catch(err => console.warn('All ServiceWorker registrations failed', err));
+              } catch (blobErr) {
+                console.warn('Blob SW creation failed', blobErr);
+              }
+            });
+        }
+        try {
+          const manifest = {
+            name: "Courrier Sud",
+            short_name: "Courrier Sud",
+            description: "An elegant offline reading experience of Courrier Sud.",
+            start_url: window.location.href,
+            display: "standalone",
+            background_color: "#fdfcf8",
+            theme_color: "#1a1a1a",
+            icons: [
+              {
+                src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%231a1a1a'><circle cx='50' cy='50' r='40'/><text x='50' y='55' fill='white' font-size='24' font-family='serif' text-anchor='middle'>CS</text></svg>",
+                sizes: "192x192",
+                type: "image/svg+xml"
+              }
+            ]
+          };
+          const mBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+          const mUrl = URL.createObjectURL(mBlob);
+          const link = document.createElement('link');
+          link.rel = 'manifest';
+          link.href = mUrl;
+          document.head.appendChild(link);
+        } catch (e) {
+          console.warn(e);
+        }
+      })();
+    </script>
+    <script>
+      /* --- MODULE: Novel Data --- */
+      const bM = [
+        "<h1>PREMIÈRE PARTIE</h1>",
+        "<h2>I</h2>\\n<p>Par radio. 6 h. 10. De Toulouse pour escales. Courrier France-Amérique du Sud quitte Toulouse 5 h. 45 stop.</p>\\n<p align=\\\"center\\\">* * * * *</p>\\n<p>Un ciel pur comme de l’eau baignait les étoiles et les révélait. Puis c’était la nuit. Le Sahara se dépliait dune par dune sous la lune.</p>\\n<p>Sur nos fronts cette lumière de lampe qui ne livre pas les objets mais les compose, nourrit de matière tendre chaque chose. Sous nos pas assourdis, c’était le luxe d’un sable épais. Et nous marchions nu-tête, libérés du poids du soleil. La nuit : cette demeure…</p>\\n<p>Mais comment croire à notre paix ? Les vents alizés glissaient sans repos vers le Sud. Ils essuyaient la plage avec un bruit de soie. Ce n’étaient plus ces vents d’Europe qui tournent, cèdent ; ils étaient établis sur nous comme sur le rapide en marche. Parfois la nuit, ils nous touchaient, si durs, que l’on s’appuyait contre eux, face au Nord, avec le sentiment d’être emporté, de les remonter vers un but obscur. Quelle hâte, quelle inquiétude !</p>\\n<p>Le soleil tournait, ramenait le jour. Les Maures s’agitaient peu. Ceux qui s’aventuraient jusqu’au fort espagnol gesticulaient, portaient leur fusil comme un jouet. C’était le Sahara vu des coulisses : les tribus insoumises y perdaient leur mystère et livraient quelques figurants.</p>\\n<p>Nous vivions les uns sur les autres en face de notre propre image, la plus bornée. C’est pourquoi nous ne savions pas être isolés dans le désert : il nous eût fallu rentrer chez nous pour imaginer notre éloignement, et le découvrir dans sa perspective.</p>",
+        "<p>Nous n’allions guère qu’à cinq cents mètres où commençait la dissidence, captifs des Maures et de nous-mêmes. Nos plus proches voisins, ceux de Cisneros, de Port-Étienne, étaient, à sept cents, mille kilomètres, pris aussi dans le Sahara comme dans une gangue. Ils gravitaient autour du même fort. Nous les connaissions par leurs surnoms, par leurs manies, mais il y avait entre nous la même épaisseur de silence qu’entre les planètes habitées.</p>\\n<p>Ce matin-là, le monde commençait pour nous à s’émouvoir. L’opérateur de T.S.F. nous remit enfin un télégramme : deux pylônes, plantés dans le sable, nous reliaient une fois par semaine à ce monde :</p>\\n<p>« Courrier France-Amérique parti de Toulouse 5 h. 45 stop. Passé Alicante 11 h. 10. »</p>\\n<p>Toulouse parlait, Toulouse, tête de ligne. Dieu lointain.</p>\\n<p>En dix minutes, la nouvelle nous parvenait par Barcelone, par Casablanca, par Agadir, puis se propageait vers Dakar. Sur cinq mille kilomètres de ligne, les aéroports étaient alertés. À la reprise de six heures du soir, on nous communiquait encore :</p>\\n<p>« Courrier atterrira Agadir 21 heures repartira pour Cabo Juby 21 h. 30, s’y posera avec bombe Michelin stop. Cabo Juby préparera feux habituels stop. Ordre rester en contact avec Agadir. Signé : Toulouse. »</p>\\n<p>De l’observatoire de Cabo Juby, isolés en plein Sahara, nous suivions une comète lointaine.</p>\\n<p>Vers six heures du soir le Sud s’agitait :</p>\\n<p>« De Dakar pour Port-Étienne, Cisneros, Juby : communiquer urgence nouvelles courrier. »</p>",
+        "<p>« De Juby pour Cisneros, Port-Étienne, Dakar : pas de nouvelles depuis passage 11 h. 10 Alicante. »</p>\\n<p>Un moteur grondait quelque part. De Toulouse jusqu’au Sénégal on cherchait à l’entendre.</p>",
+        "<h2>II</h2>\\n<p>Toulouse 5 h. 30.</p>\\n<p>La voiture de l’aéroport stoppe net à l’entrée du hangar, ouvert sur la nuit mêlée de pluie. Des ampoules de cinq cents bougies livrent des objets durs, nus, précis comme ceux d’un stand. Sous cette voûte chaque mot prononcé résonne, demeure, charge le silence.</p>\\n<p>Tôles loisantes, moteur sans cambouis. L’avion semble neuf. Horlogerie délicate à quoi touchaient les mécaniciens avec des doigts d’inventeurs. Maintenant ils s’écartent de l’œuvre au point.</p>\\n<p>« Pressons, messieurs, pressons… »</p>\\n<p>Sac par sac, le courrier s’enfonce dans le ventre de l’appareil. Pointage rapide :</p>\\n<p>– Buenos-Ayres… Natal… Dakar… Casa… Dakar… Trente-neuf sacs. Exact ?</p>\\n<p>– Exact.</p>\\n<p>Le pilote s’habille. Chandails, foulard, combinaison de cuir, bottes fourrées. Son corps endormi pèse. On l’interpelle : « Allons ! Pressons… » Les mains encombrées de sa montre, de son altimètre, de son porte-cartes, de ses gants, il se hisse lourd et maladroit jusqu’au poste de pilotage.</p>",
+        "<h2>II <span class='font-sans'>(suite)</span></h2>\\n<p>Le chef de piste jette un dernier coup d’œil : ordre absolu des choses ; gestes réglés comme pour un ballet. Cet avion a sa place exacte dans ce hangar, comme dans d’cinq minutes dans ce ciel. Ce vol aussi bien calculé que le lancement d’un navire. Cette goupille qui manque : erreur éclatante. Ces ampoules de cinq cents bougies, ces regards précis, cette dureté pour que ce vol relancé d’escale en escale jusqu’à Buenos-Ayres ou Santiago du Chili soit un effet de balistique et non une œuvre de hasard. Pour que, malgré les tempêtes, les brumes, les tornades, malgré les mille pièges du ressort de soupape, du culbuteur, de la matière, soient rejoints, distancés, effacés : express, rapides, cargos, vapeurs ! Et touchés dans un temps record Buenos-Ayres ou Santiago du Chili.</p>\\n<p>– Mettez en route.</p>\\n<p>On passe un papier au pilote Bernis : le plan de bataille.</p>\\n<p>Bernis lit :</p>\\n<p>« Perpignan signale ciel clair, vent nul. Barcelone : tempête. Alicante… »</p>\\n<p>Toulouse. 5 h. 45.</p>\\n<p>Les roues puissantes écrasent les cales. Battue par le vent de l’hélice, l’herbe jusqu’à vingt mètres en arrière semble couler. Bernis, d’un mouvement de son poignet, déchaîne ou retient l’orage.</p>",
+        "<p>Le bruit s’enfle maintenant, dans les reprises répétées, jusqu’à devenir un milieu dense, presque solide où le corps se trouve enfermé. Quand le pilote le sent combler en lui quelque chose de jusqu’alors inassouvi, il pense : c’est bien. Puis regarde le capot noir appuyé sur le ciel, à contre-jour, en obusier. Derrière l’hélice, un paysage d’aube tremble.</p>\\n<p>Ayant roulé, lentement, vent debout, il tire à lui la manette des gaz. L’avion, happé par l’hélice, fonce. Les premiers bonds sur l’air élastique s’amortissent et le sol enfin paraît se tendre, luire sous les roues comme une courroie. Ayant jugé l’air, d’abord impalpable puis fluide, devenu maintenant solide, le pilote s’y appuie et monte.</p>\\n<p>Les arbres qui bordent la piste livrent l’horizon et se dérobent. À deux cents mètres on se penche encore sur une bergerie d’enfant, aux arbres posés droit, aux maisons peintes, et les forêts gardent leur épaisseur de fourrure : terre habitée…</p>\\n<p>Bernis cherche l’inclinaison du dos, la position exacte du coude qui sont nécessaires à sa paix. Derrière lui, les nuages bas de Toulouse figurent le hall sombre des gares. Maintenant, il résiste moins à l’avion qui cherche à monter, laisse s’épanouir un peu la force que sa main comprime. Il libère d’un mouvement de son poignet chaque vague qui le soulève et qui se propage en lui comme une onde.</p>",
+        "<p>Dans cinq heures Alicante, ce soir l’Afrique. Bernis rêve. Il est en paix : « J’ai mis de l’ordre. » Hier, il quittait Paris par l’express du soir ; quelles étranges vacances. Il en garde le souvenir confus d’un tumulte obscur. Il souffrira plus tard, mais, pour l’instant, il abandonne tout en arrière comme si tout se continuait en dehors de lui. Pour l’instant, il lui semble naître avec le petit jour qui monte, aider, ô matinal, à construire ce jour. Il pense : « Je ne suis plus qu’un ouvrier, j’établis le courrier d’Afrique. » Et chaque jour, pour l’ouvrier, qui commence à bâtir le monde, le monde commence.</p>\\n<p>« J’ai mis de l’ordre… » Dernier soir dans l’appartement. Journaux pliés autour des blocs de livres. Lettres brûlées, lettres classées, housses des meubles. Chaque chose cernée, tirée de sa vie, posée dans l’espace. Et ce tumulte du cœur qui n’avait plus de sens.</p>\\n<p>Il s’est préparé pour le lendemain comme pour un voyage. Il s’est embarqué pour le jour suivant comme pour une Amérique. Tant de choses inachevées l’attachaient encore à lui-même. Et tout à coup, il était libre. Bernis a presque peur de se découvrir si disponible, si mortel.</p>\\n<p>Carcassonne, escale de secours, sous lui dérive.</p>\\n<p>Quel monde bien rangé aussi – 3.000 mètres. – Rangé comme dans sa boîte la bergerie. Maisons, canaux, routes, jouets des hommes.</p>",
+        "<p>Monde loti, monde carrelé, où chaque champ touche sa haie, le parc son mur. Carcassonne où chaque mercière refait la vie de son aïeule. Humbles bonheurs parqués. Jouets des hommes bien rangés dans leur vitrine.</p>\\n<p>Monde en vitrine, trop exposé, trop étalé, villes en ordre sur la carte roulée et qu’une terre lente porte à lui avec la sûreté d’une marée.</p>\\n<p>Il songe qu’il est seul. Sur le cadran de l’altimètre le soleil miroite. Un soleil lumineux et glacé. Un coup de palonnier : le paysage entier dérive. Cette lumière est minérale, ce sol apparaît minéral : ce qui fait la douceur, le parfum, la faiblesse des choses vivantes est aboli.</p>\\n<p>Et pourtant, sous la veste de cuir, une chair tiède – et fragile, Bernis. – Sous les gants épais des mains merveilleuses qui savaient, Geneviève, caresser du revers des doigts ton visage…</p>\\n<p>Voici l’Espagne.</p>",
+        "<h2>III</h2>\\n<p>Aujourd’hui, Jacques Bernis, tu franchiras l’Espagne avec une tranquillité de propriétaire. Des visions connues, une à une, s’établiront. Tu joueras des coudes, avec aisance, entre les orages. Barcelone, Valence, Gibraltar, apportées à toi, emportées. C’est bien. Tu dévideras ta carte roulée, le travail fini s’entasse en arrière. Mais je me souviens de toues tes premiers pas, de mes derniers conseils, la veille de ton premier courrier. Tu devais, à l’aube, prendre dans tes bras les méditations d’un peuple. Dans tes faibles bras. Les porter à travers mille embûches comme un trésor sous le manteau. Courrier précieux, t’avait-on dit, courrier plus précieux que la vie. Et si fragile. Et qu’une faute disperse en flammes, et mêle au vent. Je me souviens de cette veillée d’armes :</p>\\n<p>– Et alors ?</p>\\n<p>– Alors tu tâcherais d’atteindre la plage de Peniscola. Méfie-toi des barques de pêche.</p>\\n<p>– Ensuite ?</p>\\n<p>– Ensuite jusqu’à Valence tu trouveras toujours des terrains de secours : je les souligne au crayon rouge. Faute de mieux, pose-toi dans les rios secs.</p>\\n<p>Bernis retrouvait le collège sous l’abat-jour vert de cette lampe, devant ces cartes dépliées. Mais de chaque point du sol, son maître d’aujourd’hui lui dégageait un secret vivant. Les pays inconnus ne livraient plus de chiffres morts, mais de vrais champs avec leurs fleurs – où justement il faut se méfier de cet arbre – mais de vraies plages avec leur sable – où, vers le soir, il faut éviter les pêcheurs.</p>",
+        "<p>Déjà tu savais, Jacques Bernis, que nous ne connaîtrons jamais de Grenade ou d’Almeria ni l’Alhambra, ni les mosquées, mais un ruisseau, un oranger, mais leurs plus humbles confidences.</p>\\n<p>– Écoute-moi donc : s’il fait beau ici, tu passes tout droit. Mais, s’il fait mauvais, si tu voles bas, tu appuies à gauche, tu t’engages dans cette vallée.</p>\\n<p>– Je m’engage dans cette vallée.</p>\\n<p>– Tu rejoins la mer, plus tard, par ce col.</p>\\n<p>– Je rejoins la mer par ce col.</p>\\n<p>– Et tu te méfies de ton moteur : la falaise à pic et des rochers.</p>\\n<p>– Et s’il me plaque ?</p>\\n<p>– Tu te débrouilles.</p>\\n<p>Et Bernis souriait : les pilotes jeunes sont romanesques. Un rocher passe, en jet de fronde, et l’assassine. Un enfant court, mais une main l’arrête au frotn et le renverse…</p>\\n<p>– Mais non, mon vieux, mais non ! on se débrouille.</p>\\n<p>Et Bernis était fier de cet enseignement : son enfance n’avait pas tiré de l’Énéide un seul secret qui le protégeât de la mort. Le doigt du professeur sur la carte d’Espagne n’était pas un doigt de sourcier et ne démasquait ni trésor ni piège, ne touchait pas cette bergère dans ce pré.</p>\\n<p>Quelle douceur aujourd’hui répandit cette lampe dont coulait une lumière d’huile. Ce filet d’huile qui fait le calme dans la mer. Dehors il ventait. Cette chambre était bien un îlot dans le monde comme une auberge de marins.</p>\\n<p>– Un petit Porto ?</p>\\n<p>– Bien sûr…</p>",
+        "<p>Chambre de pilote, auberge incertaine, il fallait souvent te rebâtir. La compagnie nous avisait la veille au soir : « Le pilote X est affecté au Sénégal… à l’Amérique… » Il fallait, la nuit même, dénouer ses liens, clouer ses caisses, déshabiller sa chambre de soi-même, de ses photos, de ses bouquins et la laisser derrière soi, moins marquée que par un fantôme. Il fallait quelquefois, la nuit même, dénouer deux bras, épuiser les forces d’une petite fille, non la raisonner, toutes se butent, mais l’user, et, vers trois heures du matin, la déposer doucement dans le sommeil, soumise, non à ce départ, mais à son chagrin, et se dire : voilà qu’elle accepte, elle pleure.</p>\\n<p>Qu’as-tu appris plus tard à courir le monde, Jacques Bernis ? L’avion ? On avance lentement en creusant son trou dans un cristal dur. Les villes peu à peu se remplacent l’une l’autre, il faut atterrir pour y prendre corps. Maintenant tu sais que ces richesses ne sont qu’offertes puis effacées, lavées par les heures comme par la mer. Mais au retour de tes premiers voyages, quel homme pensais-tu être devenu et pourquoi ce désir de le confronter avec le fantôme d’un gamin tendre ? Dès ta première permission tu m’avois entraîné vers le collège : du Sahara, Bernis, où j’attends ton passage, je me souviens avec mélancolie de cette visite à notre enfance.</p>\\n<p>Une villa blanche entre les pins, une fenêtre s’allumait, puis une autre. Tu me disais :</p>\\n<p>« Voici l’étude où nous écrivions nos premiers poèmes… »</p>",
+        "<p>Nous venions de très loin. Nos manteaux lourds capitonnaient le monde et nos âmes de voyageurs veillaient au centre de nous-mêmes. Nous abordions les villes inconnues, les mâchoires closes, les mains gantées, bien protégés. Les foules coulaient sur nous sans nous heurter. Nous réservions pour les villes apprivoisées le pantalon de flanelle blanche et la chemise de tennis. Pour Casablanca, pour Dakar. À Tanger nous marchions nu-tête : il n’était pas besoin d’armure dans cette petite ville endormie.</p>\\n<p>Nous revenions solides, appuyés sur des muscles d’homme. Nous avions lutté, nous avions souffert, nous avions traversé des terres sans limites, nous avions aimé quelques femmes, joué parfois à pile ou face avec la mort, pour simplement dépouiller cette crainte, qui avait dominé notre enfance, des pensums et des retenues, pour assister invulnérables aux lectures des notes du samedi soir.</p>\\n<p>Ce fut dans le vestibule un chuchotement, puis des appels, puis toute une hâte de vieillards. Ils venaient, habillés de la lumière dorée des lampes, les joues de parchemin, mais les yeux si clairs : égayés, charmants. Et, tout de suite, nous comprîmes qu’ils nous savaient déjà d’une autre chair : les anciens ont coutume de revenir avec un pas dur qui prend sa revanche.</p>",
+        "<p>Car ils ne s’étonnaient pas de ma poignée de main robuste, ni du regard droit de Jacques Bernis, car ils nous traitèrent sans transition comme des hommes, car ils coururent chercher une bouteille de vieux Samos dont ils ne nous avaient jamais rien dit.</p>\\n<p>On s’installa pour le repas du soir. Ils se resserraient sous l’abat-jour comme les paysans autour du feu et nous apprîmes qu’ils étaient faibles.</p>",
+        "<p>Ils étaient faibles car ils devenaient indulgents, car notre paresse d’autrefois, qui devait nous conduire au vice, à la misère, n’était plus qu’un défaut d’enfant, ils en souriaient ; car notre orgueil, qu’ils nous menaient vaincre avec tant de fougue, ils le flattaient, ce soir, le disaient noble. Nous tenions même des aveux du maître de philosophie.</p>",
+        "<p>Descartes avait, peut-être, appuyé son système sur une pétition de principe. Pascal… Pascal était cruel. Lui-même terminait sa vie, sans résoudre, malgré tant d’efforts, le vieux problème de la liberté humaine. Et lui, qui nous défendait de toutes ses forces contre le déterminisme, contre Taine, lui, qui ne voyait pas d’ennemi plus cruel dans la vie, pour des enfants qui sortent du collège, que Nietzsche, il nous avouait des tendresses coupables. Nietzsche… Nietzsche lui-même le troublait. Et la réalité de la matière… Il ne savait plus, il s’inquiétait… Alors ils nous interrogèrent. Nous étions sortis de cette maison tiède dans la grande tempête de la vie, il nous fallait leur raconter le vrai temps qu’il fait sur la terre. Si vraiment l’homme qui aime une femme devient son esclave comme Pyrrhus ou son bourreau comme Néron. Si vraiment l’Afrique et ses solitudes et son ciel bleu répondent à l’enseignement du maître de géographie. (And les autruches qui ferment les yeux pour se protéger ?) Jacques Bernis s’inclinait un peu car il possédait de grands secrets, mais les professeurs les lui dérobèrent.</p>",
+        "<p>Ils voulurent savoir de lui l’ivresse de l’action, le grondement de son moteur et qu’il ne nous suffisait plus, pour être heureux, de tailler comme eux des rosiers, le soir. C’était son tour d’expliquer Lucrèce ou l’Ecclésiaste et de conseiller. Bernis leur enseignait, à temps encore, ce qu’il faut emporter de vivres et d’eau pour ne pas mourir, perdu en panne dans le désert. Bernis en hâte leur jetait les derniers conseils : les secrets qui sauvent le pilote des Maures, les réflexes qui sauvent le pilote du feu. Et voici qu’ils hochaient la tête, encore inquiets, déjà rassurés et fiers aussi d’avoir lâché par le monde ces forces neuves. Ces héros qu’ils célébraient depuis toujours, ils les touchaient enfin du doigt et, les ayant enfin connus, pouvaient mourir. Ils parlèrent de Jules César, enfant.</p>\\n<p>Mais, de peur de les attrister, nous leur dîmes les déceptions et le goût amer du repos après l’action inutile. Et, comme le plus vieux rêvait, ce qui nous fit mal, combien la seule vérité est peut-être la paix des livres. Mais les professeurs le savaient déjà. Leur expérience était cruelle puisqu’ils enseignaient l’histoire aux hommes.</p>\\n<p>« Pourquoi êtes-vous revenus au pays ? » Bernis ne leur répondait pas, mais les vieux professeurs connaissaient les âmes et, clignant de l’œil, pensaient à l’amour…</p>",
+        "<h2>IV</h2>\\n<p>La terre, de là-haut, paraissait nue et morte ; l’avion descend : elle s’habille. Les bois de nouveau la capitonnent, les vallées, les coteaux impriment en elle une houle : elle respire. Une montagne qu’il survole, poitrine de géant couché, se gonfle presque jusqu’à lui.</p>\\n<p>Maintenant proche, comme le torrent sous un pont, le cours des choses s’accélère. C’est la débâcle de ce monde uni. Arbres, maisons, villages se séparent d’un horizon lisse, sont emportés derrière lui à la dérive.</p>\\n<p>Le terrain d’Alicante monte, bascule, se place, les roues le frôlent, s’en rapprochent comme d’un laminoir, s’y aiguisent…</p>\\n<p>Bernis descend de la carlingue, les jambes lourdes. Une seconde, il ferme les yeux ; la tête pleine encore du bruit de son moteur et d’images vives, les membres encore comme chargés par les vibrations de l’appareil. Puis il entre dans le bureau où il s’assied avec lenteur, repousse du coude l’encrier, quelques livres, et tire à lui le carnet de route du 612.</p>\\n<p>Toulouse-Alicante : 5 h. 15 de vol.</p>",
+        "<p>Il s’interrompt, se laisse dominer par la fatigue et par le rêve. Il lui parvient un bruit confus. Une commère crie quelque part. Le chauffeur de la Ford ouvre la porte, s’excuse, sourit. Bernis considère gravement ces murs, cette porte et ce chauffeur grandeur nature. Il est mêlé pour dix minutes à une discussion qu’il ne comprend pas, à des gestes que l’on achève, que l’on commence. Cette vision est irréelle. Un arbre planté devant la porte dure pourtant depuis trente ans. Depuis trente ans repère l’image.</p>\\n<p>Moteur : Rien à signaler.</p>\\n<p>Avion : Penche à droite.</p>\\n<p>Il dépose le porte-plume, pense simplement : « J’ai sommeil », et le rêve qui serre ses tempes s’impose encore.</p>\\n<p>Une lumière couleur d’ambre sur un paysage si clair. Des champs bien ratissés et des prairies. Un village posé à droite, à gauche un troupeau minuscule et, l’enfermant, la voûte d’un ciel bleu. « Une maison », pense Bernis. Il se souvient d’avoir ressenti avec une évidence soudaine que ce paysage, ce ciel, cette terre étaient bâtis à la manière d’une demeure. Demeure familière, bien en ordre. Chaque chose si verticale. Nulle menace, nulle fissure dans cette vision unie : il était comme à l’intérieur du paysage.</p>",
+        "<p>Ainsi les vieilles dames se sentent éternelles à la fenêtre de leur salon. La pelouse est fraîche, le jardinier lent arrose les fleurs. Elles suivent des yeux son dos rassurant. Une odeur d’encaustique monte du parquet luisant et les ravit. L’ordre dans la maison est doux : le jour a passé traînant son vent et son soleil et ses averses pour user à peine quelques roses.</p>\\n<p>« C’est l’heure. Adieu. » Bernis repart.</p>\\n<p>Bernis entre dans la tempête. Elle s’acharne sur l’avion comme les coups de pioche du démolisseur : on en a vu d’autres, on passera. Bernis n’a plus que des pensées rudimentaires, les pensées qui dirigent l’action : sortir de ce cirque de montagnes où la tornade descendante le plonge, où la pluie en rafales est si drue qu’il fait nuit, sauter ce mur, gagner la mer.</p>\\n<p>Un choc ! Une rupture ? L’avion tout à coup pèse vers la gauche. Bernis le retient d’une main, puis des deux mains, puis de tout son corps. « Nom de Dieu ! » L’avion a repris son poids vers la terre. Voici Bernis ruiné. Une seconde encore, et de cette maison bousculée, et qu’il vient à peine de comprendre, il sera rejeté pour toujours. Plaines, forêts, villages, jailliront vers lui en spirale. Fumée des apparences, spirales de fumée, fumée ! Bergerie culbutée aux quatre coins du ciel…</p>\\n<p>« Ah ! J’ai eu peur… » Un coup de talon libère un câble. Commande coincée. Quoi ? Sabotage ? Non. Trois fois rien : un coup de talon rétablit le monde. Quelle aventure !</p>",
+        "<p>Une aventure ? Il ne reste de cette seconde qu’un goût dans la bouche, une aigreur de la chair. Eh ! mais cette faille entrevue ! Tout n’était là qu’en trompe-l’œil : routes, canaux, maisons, jouets des hommes !…</p>\\n<p>Passé. Fini. Ici le ciel est clair. La météo l’avait prédit. « Ciel un quart couvert de cirrus. » La météo ? Les isobares ? Les « Systèmes nuageux » du professeur Borjsen ? Un ciel de fête populaire : oui. Un ciel de 14 Juillet. Il fallait dire : « À Malaga c’est jour de fête ! » Chaque habitant possède dix mille mètres de ciel pur sur lui. Un ciel qui va jusqu’aux cirrus. Jamais l’aquarium ne fut si lumineux, si vaste. Ainsi dans le golfe, un soir de régates : ciel bleu, mer bleu, col bleu et les yeux bleu du capitaine. Congé lumineux.</p>\\n<p>Fini. Trente mille lettres ont passé.</p>\\n<p>La Compagnie prêchait : courrier précieux, courrier plus précieux que la vie. Oui. De quoi faire vivre trente mille amants… Patience, amants ! Dans les feux du soir on vous arrive. Derrière Bernis les nuages épais, brassés dans une cuve par la tornade. Devant lui une terre vêtue de soleil, l’étoffe claire des prés, la laine des bois, le voile froncé de la mer.</p>\\n<p>À la hauteur de Gibraltar il fera nuit. Alors un virage à gauche vers Tanger détachera de Bernis l’Europe, banquise énorme, à la dérive…</p>\\n<p>Encore quelques villes nourries de terre brune puis l’Afrique. Encore quelques villes nourries de pâte noire puis le Sahara. Bernis assistera ce soir au déshabiller de la terre.</p>",
+        "<p>Bernis est las. Deux mois plus tôt, il montait vers Paris à la conquête de Geneviève. Il rentrait hier à la Compagnie, ayant mis de l’ordre dans sa défaite. Ces plaines, ces villes, ces lumières qui s’en vont, c’est bien lui qui les abandonne. Qui s’en dévêt. Dans une heure le phare de Tanger luira : Jacques Bernis, jusqu’au phare de Tanger, va se souvenir.</p>",
+        "<h1>DEUXIÈME PARTIE</h1>",
+        "<h2>I</h2>\\n<p>Je dois revenir en arrière, raconter ces deux mois passés, autrement qu’en resterait-il ? Quand les événements que je vais dire auront peu à peu terminé leur faible remous, leurs cercles concentriques, sur ceux des personnages qu’ils ont simplement effacés, comme l’eau refermée d’un lac, quand seront amorties les émotions poignantes, puis moins poignantes, puis douces que je leur dois, le monde de nouveau me paraîtra sûr. Ne puis-je pas me promener déjà, là où devrait m’être cruel le souvenir de Geneviève et de Bernis, sans qu’à peine le regret me touche ?</p>\\n<p align=\\\"center\\\">* * * * *</p>\\n<p>Deux mois plus tôt il montait vers Paris, mais, après tant d’absence, on ne retrouve plus sa place : on encombre une ville. Il n’était plus que Jacques Bernis habillé d’un veston qui sentait le camphre. Il se mouvait dans un corps engourdi, maladroit, et demandait à ses cantines, too bien rangées dans un coin de la chambre, tout ce qu’elles révélaient d’instable, de provisoire : cette chambre n’était pas conquise encore par du linge blanc, par des livres.</p>\\n<p>« Allo… C’est toi ? » Il recense les amitiés. On s’exclame, on le félicite :</p>\\n<p>– Un revenant ! Bravo !</p>\\n<p>– Eh oui ! Quand te verrai-je ?</p>\\n<p>On n’est justement pas libre aujourd’hui. Demain ? Demain on joue au golf, mais qu’il vienne aussi. Il ne veut pas ? Alors après-demain. Dîner. Huit heures précises.</p>",
+        "<p>Il entre, pesant, dans un dancing, garde, parmi les gigolos, son manteau comme un vêtement d’explorateur. Ils vivent leur nuit dans cette enceinte comme des goujons dans un aquarium, tournent un madrigal, dansent, reviennent boire. Bernis dans ce milieu flou, où seul il garde sa raison, se sent lourd comme un portefaix, pèse droit sur ses jambes. Ses pensées n’ont point de halo. Il avance, parmi les tables, vers une place libre. Les yeux des femmes qu’il touche des siens se dérobent, semblent s’éteindre. Les jeunes gens s’écartent flexibles pour qu’il passe. Ainsi, la nuit, les cigarettes des sentinelles, à mesure que l’officier de ronde avance, tombent des doigts.</p>\\n<p>Ce monde, nous le retrouvions chaque fois, comme les matelots bretons retrouvent leur village de carte postale et leur fiancée trop fidèle, à leur retour à peine vieillie. Toujours pareille, la gravure d’un livre d’enfance. À reconnaître tout si bien en place, si bien réglé par le destin, nous avions peur de quelque chose d’obscur. Bernis s’informait d’un ami : « Mais oui. Le même. Ses affaires ne vont pas bien fort. Enfin tu sais… la vie. » Tous étaient prisonniers d’eux-mêmes, limités par ce frein obscur et non comme lui, ce fugitif, cet enfant pauvre, ce magicien.</p>",
+        "<p>Les visages de ses amis à peine usés, à peine amincis par deux hivers, par deux étés. Cette femme dans un coin du bar : il la reconnaissait. Le visage à peine fatigué d’avoir servi tant de sourires. Ce barman : le même. Il eut peur d’en être reconnu, comme si cette voix en l’interpellant devait ressusciter en lui un Bernis mort, un Bernis sans ailes, un Bernis qui ne s’était pas évadé.</p>\\n<p>Peu à peu, pendant le retour, un paysage se bâtissait déjà autour de lui, comme une prison. Les sables du Sahara, les rochers d’Espagne, étaient peu à peu retirés, comme des vêtements de théâtre, du paysage vrai qui allait transparaître. Enfin, dès la frontière franchie, Perpignan servie par sa plaine. Cette plaine où traînait encore le soleil, en coulées obliques, allongées, à chaque minute plus élimées, ces vêtements d’or, çà et là sur l’herbe, à chaque minute plus fragiles, plus transparents et qui ne s’éteignent pas mais s’évaporent. Alors ce limon vert, sombre et doux sous l’air bleu. Ce fond tranquille. Moteur au ralenti, cette plongée vers ce fond de mers où tout repose, où tout prend l’évidence et la durée d’un mur.</p>",
+        "<p>Ce trajet en voiture de l’aéroport vers la gare. Ces visages en face du sien fermés, durcis. Ces mains qui portaient leur destin gravé et reposaient à plat sur les genoux, si lourdes. Ces paysans frôlés qui revenaient des champs. Cette jeune fille devant sa porte qui guettait un homme entre cent mille, qui avait renoncé à cent mille espérances. Cette mère qui berçait un enfant, qui en était déjà prisonnière, qui ne pouvait fuir.</p>\\n<p>Bernis directement posé au secret des choses revenait au pays par le sentier le plus intime, les mains dans les poches, sans valise, pilote de ligne. Dans le monde le plus immuable où, pour toucher un mur, pour allonger un champ, il fallait vingt ans de procès.</p>\\n<p>Après deux ans d’Afrique et de paysages mouvants et toujours changeants comme la face de la mer, mais qui, un à un dérobés, laissaient nu ce vieux paysage, le seul, l’éternel, celui dont il était sorti, il prenait pied sur un vrai sol, archange triste.</p>\\n<p>« Et voilà tout pareil… »</p>",
+        "<p>Il avait craint de trouver les choses différentes et voici qu’il souffrait de les découvrir si semblables. Il n’attendait plus des rencontres, des amitiés qu’un ennui vague. De loin on imagine. Les tendresses, au départ, on les abandonne derrière soi avec une morsure au cœur, mais aussi avec un étrange sentiment de trésor enfoui sous terre. Ces fuites quelquefois témoignent de tant d’amour avare. Une nuit dans le Sahara peuplé d’étoiles, comme il rêvait à ces tendresses lointaines, chaudes et couvertes par la nuit, par le temps, comme des semences, il eut ce brusque sentiment : s’être écarté un peu pour regarder dormir. Appuyé à l’avion en panne, devant cette courbe du sable, ce fléchissement de l’horizon, il veillait ses amours comme un berger…</p>\\n<p>« Et voici ce que je retrouve ! »</p>\\n<p>Et Bernis m’écrivit un jour :</p>",
+        "<p>… Je ne te parle pas de mon retour : je me crois le maître des choses quand les émotions me répondent. Mais aucune ne s’est réveillée. J’étais pareil à ce pèlerin qui arrive une minute trop tard à Jérusalem. Son désir, sa foi venaient de mourir : il trouve des pierres. Cette ville ici : un mur. Je veux repartir. Te souviens-tu de ce premier départ ? Nous l’avons fait ensemble. Murcie, Grenade couchées comme des bibelots dans leur vitrine et, car nous n’atterrissions pas, ensevelies dans le passé. Déposées là par les siècles qui se retirent. Le moteur faisait ce bruit dense qui existe seul et derrière lequel le paysage passe en silence comme un film. Et ce froid, car nous volions haut : ces villes prises dans la glace. Tu te souviens ?</p>\\n<p>J’ai gardé les papiers que tu me passais :</p>\\n<p>« Surveille ce cliquetis bizarre… ne t’engage pas sur le détroit si ça augmente. »</p>\\n<p>Deux heures après, à Gibraltar : « Attends Tarifa pour traverser : meilleur. »</p>\\n<p>À Tanger : « Ne te pose pas trop long : terrain mou. »</p>",
+        "<p>Simplement. Avec ces phrases-là, on gagne le monde. J’avais la révélation d’une stratégie que ces ordres brefs rendaient si forte. Tanger, cette petite ville de rien du tout, c’était ma première conquête. C’était, vois-tu, c’était mon premier cambriolage. Oui. À la verticale, d’abord, mais si loin. Puis, pendant la descente, cette éclosion des prés, des fleurs, des maisons. Je ramenais au jour une ville engloutie et qui devenait vivante. Et tout à coup cette découverte merveilleuse : à d’cinq cents mètres du terrain cet Arabe qui labourait, que je tirais à moi, dont je faisais un homme à mon échelle, qui était vraiment mon butin de guerre ou ma création ou mon jeu. J’avais pris un otage et l’Afrique m’appartenait.</p>\\n<p>Deux minutes plus tard, debout sur l’herbe, j’étais jeune, comme posé dans quelque étoile où la via recommence. Dans ce climat neuf. Je me sentais dans ce sol, dans ce ciel, comme un jeune arbre. Et je m’étirais du voyage avec cette adorable faim. Je faisais des pas allongés, flexibles, pour me délasser du pilotage et je riais d’avoir rejoint mon ombre : l’atterrissage.</p>",
+        "<p>Et ce printemps ! Te souviens-tu de ce printemps après la pluie grise de Toulouse ? Cet air si neuf qui circulait entre les choses. Chaque femme contenait un secret : un accent, un geste, un silence. Et toutes étaient désirables. Et puis, tu me connais, cette hâte de repartir, de chercher plus loin ce que je pressentais et ne comprenais pas, car j’étais ce sourcier dont le coudrier tremble et qu’il promène sur le monde jusqu’au trésor.</p>\\n<p>Mais dis-moi donc ce que je cherche et pourquoi contre ma fenêtre, appuyé à la ville de mes amis, de mes désirs, de mes souvenirs, je désespère ? Pourquoi, pour la première fois, je ne découvre pas de source et me sens si loin du trésor ? Quelle est cette promesse obscure que l’on m’a faite et qu’un dieu obscur ne tient pas ?</p>\\n<p align=\\\"center\\\">* * * * *</p>\\n<p>J’ai retrouvé la source. T’en souviens-tu ? C’est Geneviève…</p>\\n<p align=\\\"center\\\">* * * * *</p>\\n<p>En lisant ce mot de Bernis, Geneviève, j’ai fermé les yeux et vous ai revue petite fille. Quinze ans quand nous en avions treize. Comment auriez-vous vieilli dans nos souvenirs ? Vous étiez restée cette enfant fragile, et c’est elle, quand nous entendions parler de vous, que nous hasardions, surpris, dans la vie.</p>",
+        "<p>Tandis que d’autres poussaient devant l’Autel une femme déjà faite, c’est une petite fille que Bernis et moi, du fond de l’Afrique, avons fiancée. Vous avez été, enfant de quinze ans, le plus jeune des mères. À l’âge où l’on écorche aux branches des mollets nus, vous exigiez un vrai berceau, jouet royal. Et tandis que parmi les vôtres, qui ne devinaient pas le prodige, vous faisiez dans la vie d’humbles gestes de femme, vous viviez pour nous un conte enchanté et vous entriez dans le monde par la porte magique – comme dans un bal costumé, un bal d’enfants – déguisée en épouse, en mère, en fée…</p>\\n<p>Car vous étiez fée. Je me souviens. Vous habitiez sous l’épaisseur des murs une vieille maison. Je vous revois vous accoudant à la fenêtre, percée en meurtrière, et guettant la lune. Elle montait. Et la plaine commençait à bruire et secouait aux ailes des cigales ses crécelles, au ventre des grenouilles ses grelots, au cou des bœufs qui rentraient ses cloches. La lune montait. Parfois du village un glas s’élevait, portant aux grillons, aux blés, aux cigales, l’inexplicable mort. Et vous vous penchiez en avant, inquiète pour les fiancés seulement, car rien n’est aussi menacée que l’espérance. Les chiens errants l’assiégeaient en cercle et criaient vers elle. Et chaque arbre, chaque herbe, chaque roseau était vivant. Et la lune montait.</p>",
+        "<p>Alors vous nous preniez les mains et vous nous disiez d’écouter parce que c’étaient les bruits de la terre et qu’ils rassuraient et qu’ils étaient bons.</p>\\n<p>Vous étiez si bien abritée par cette maison et, autour d’elle, par cette robe vivante de la terre. Vous aviez conclu tant de pactes avec les tilleuls, avec les chênes, avec les troupeaux que nous vous nommions leur princesse. Votre visage s’apaisait par degrés quand, le soir, on rangeait le monde pour la nuit. « Le fermier a rentré ses bêtes. » Vous le lisiez aux lumières lointaines des étables. Un bruit sourd : « On ferme l’écluse. » Tout était en ordre. Enfin le rapide de sept heures du soir faisait son orage, doublait la province et s’évadait, nettoyant enfin votre monde de ce qui est inquiet, mobile, incertain comme un visage aux vitres des sleepings. Et c’était le dîner dans une salle à manger trop grande, mal éclairée, où tu devenais la reine de la nuit car nous te surveillons sans relâche comme des espions. Tu t’asseyais silencieuse parmi de vieilles gens, au centre de ces boiseries et penchée en avant, n’offrant que ta seule chevelure à l’enclos doré des abat-jour, couronnée de lumière, tu régnais. Tu nous paraissais éternelle d’être si bien liée aux choses, si sûre des choses, de tes pensées, de ton avenir. Tu régnais…</p>",
+        "<p>Mais nous voulions savoir s’il était possible de te faire souffrir, de te serrer dans les bras jusqu’à t’étouffer, car nous sentions en toi une présence humaine que nous désirions amener au jour. Une tendresse, une détresse que nous désirions amener aux yeux. Et Bernis te prenait dans les bras et tu rougissais. Et Bernis te serrait plus fort et tes yeux devenaient brillants de larmes sans que tes lèvres se soient enlaidies, comme aux vieilles qui pleurent, et Bernis me disait que ces larmes venaient du cœur soudain rempli, plus précieuses que des diamants, et que celui qui les boirait serait immortel. Il me disait aussi que tu habitais ton corps, comme cette fée sous les eaux, et qu’il connaissait mille sortilèges pour te ramener à la surface, dont le plus sûr était de te faire pleurer. C’est ainsi que nous te volions de l’amour. Mais, quand nous te lâchions, tu riais et ce rire nous remplissait de confusion. Ainsi un oiseau, moins serré, s’envole.</p>\\n<p>« Geneviève, lis-nous des vers. »</p>\\n<p>Tu lisais peu et nous pensions que déjà tu connaissais tout. Nous ne t’avons jamais vue étonnée.</p>\\n<p>« Lis-nous des vers… »</p>\\n<p>Tu lisais, et, pour nous, c’étaient des enseignements sur le monde, sur la vie, qui nous venaient non du poète, mais de ta sagesse. Et les détresses des amants et les pleurs des reines devenaient de grandes choses tranquilles. On mourait d’amour avec tant de calme dans ta voix…</p>\\n<p>« Geneviève, est-ce vrai que l’on meurt d’amour ? »</p>",
+        "<p>Tu suspendais les vers, tu réfléchissais gravement. Tu cherchais sans doute la réponse chez les fougères, les grillons, les abeilles et tu répondais « oui » puisque les abeilles en meurent. C’était nécessaire et paisible.</p>\\n<p>« Geneviève, qu’est-ce qu’un amant ? »</p>\\n<p>Nous désirions te faire rougir. Tu ne rougissais pas. À peine moins légère tu regardais de face l’étang tremblant de lune. Nous pensions qu’un amant, c’était pour toi cette lumière.</p>\\n<p>« Geneviève, as-tu un amant ? »</p>\\n<p>Cette fois-ci tu rougirais ! Mais non. Tu souriais sans gêne. Tu secouais la tête. Dans ton royaume, une saison apporte les fleurs, l’automne les fruits, une saison apporte l’amour : la vie est simple.</p>\\n<p>« Geneviève, sais-tu ce que nous ferons plus tard ? » Nous voulions t’éblouir et nous t’appelions : faible femme. « Nous serons, faible femme, des conquérants. » Nous t’expliquions la vie. Les conquérants qui reviennent chargés de gloire et prennent pour maîtresse celle qu’ils aimaient.</p>\\n<p>« Alors nous serons tes amants. Esclave, lis-nous des vers… »</p>",
+        "<p>Mais tu ne lisais plus. Tu repoussais le livre. Tu sentais soudain ta vie si certaine, comme un jeune arbre se sentirait croître et développer la graine au jour. Il n’était plus rien que de nécessaire. Nous étions des conquérants de fable, mais toi tu t’appuyais sur tes fougères, tes abeilles, tes chèvres, tes étoiles, tu écoutais les voix de tes grenouilles, tu tirais ta confiance de toute cette vie qui montait et autour de toi dans la paix nocturne et en toi-même de tes chevilles vers ta nuque pour ce destin inexprimable et pourtant sûr.</p>\\n<p>Et comme la lune était haute et qu’il était temps de dormir, tu fermais la fenêtre et la lune brillait derrière la vitre. Et nous te disions que tu avais fermé le ciel comme une vitrine et que la lune y était prise et une poignée d’étoiles, car nous cherchions par tous les symboles, par tous les pièges, à t’entraîner, sous les apparences, dans ce fond des mers où nous appelait notre inquiétude.</p>\\n<p align=\\\"center\\\">* * * * *</p>\\n<p>… J’ai retrouvé la source. C’est elle qu’il me fallait pour me reposer du voyage. Elle est présente. Les autres… Il est des femmes dont nous disions qu’elles sont, après l’amour, rejetées au loin dans les étoiles, qui ne sont rien qu’une construction du cœur. Geneviève… tu te souviens, nous la disions, elle, habitée. Je l’ai retrouvée comme on retrouve le sens des choses et je marche à son côté dans un monde dont je découvre enfin l’intérieur…</p>",
+        "<p>Elle lui venait de la part des choses. Elle servait d’intermédiaire, après mille divorces, pour mille mariages. Elle lui rendait ces marronniers, ce boulevard, cette fontaine. Chaque chose portait de nouveau ce secret au centre qui est son âme. Ce parc n’était plus peigné, rasé et dépouillé comme pour un Américain, mais justement on y rencontrait ce désordre dans les allées, ces feuilles sèches, ce mouchoir perdu qu’y laisse le pas des amants. Et ce parc devenait un piège.</p>",
+        "<h2>II</h2>\\n<p>Geneviève avait épousé un homme de bon sens. De beaucoup de bon sens. Un de ces hommes qui sont la structure même d’une société, de ces hommes dont toutes les pensées ont un poids, de ces hommes dont le pas robuste fait trembler les parquets de leur logis et qui rassurent, car un pas si lourd éloigne la mort. Un époux. Il l’enferma dans une demeure solide. Tout y était à sa place : les commodes, les armoires, les buffets de chêne. Et, chaque soir, cet homme venait s’asseoir en face d’elle, avec son gros bonheur et sa grosse certitude et son gros appétit d’homme robuste. Elle avait, en trois ans, appris à se plier à ce destin matériel. Elle portait, comme une parure trop lourde, ce mari, cette maison, ce nom de femme sage. Elle s’efforçait de croire que cette vie solide était la sère et qu’on s’y sentait heureuse, et qu’il était doux de vieillir à l’abri de ces murs de pierre grise, dans le sillage de cet homme robuste.</p>",
+        "<p>Et pourtant. Elle était venue à Jacques Bernis. Un message d’elle l’avait appelé à l’heure même où il désespérait. Elle l’avait appelé, un après-midi de pluie, dans ce petit salon d’hôtel où elle l’attendait, frileuse et pâle sous sa fourrure. Elle était venue à lui avec un geste d’enfant perdue, sans fierté, sans défense. Elle lui avait pris les mains, elle les avait serrées contre ses joues froides :</p>\\n<p>– Ce n’est rien, Jacques Bernis. Un instant. Laisse-moi seulement reprendre haleine. On m’a fait tant de mal…</p>\\n<p>– Qui donc, Geneviève ?</p>\\n<p>– Je ne sais pas. Eux tous. Cette maison. Cette vie où je m’étouffe. Jacques, emmène-moi. Emmène-moi n’importe où, dans ton Afrique, dans ton désert. Je ne veux plus de leur sécurité.</p>",
+        "<p>– S’il te plaît, Jacques…</p>\\n<p>Il l’avait prise dans ses bras, et, tandis qu’elle pleurait doucement sur son épaule, il avait senti qu’elle lui livrait enfin cette détresse qu’il avait si longtemps cherchée sous ses sourires d’enfant fée. Elle n’était plus la reine immuable de son royaume de fougères et d’étoiles ; elle n’était plus qu’une pauvre femme blessée, qui s’appuyait sur lui pour ne pas tomber. Et Jacques, le pilote errant, le magicien pauvre, se découvrait soudain un rôle de protecteur : il l’emportait vers sa destinée.</p>",
+        "<p>Jacques m’expliquait son bonheur. « C’est elle, vois-tu, qui me rend le monde. Quand elle est là, chaque objet reprend son sens. Cette pluie sur la vitre n’est plus une gêne pour mon courrier, elle devient la pluie douce qui mouille sa chevelure. Ce vent qui souffle du Nord n’est plus l’exil, il est le vent qui pousse les vagues vers sa plage. Je ne suis plus seul à guetter le matin ; nous bâtissons ensemble chaque jour. »</p>",
+        "<p>On vivait dans une enceinte où un enfant courait. Geneviève avait un fils. Un petit garçon de deux ans, léger comme un oiseau, aux yeux très clairs. Elle l’aimait avec une fureur jalouse. Quand il courait vers elle, elle l’attrapait au passage, le serrait contre sa poitrine avec tant de force qu’il riait, un peu effrayé par cette tendresse sauvage. Jacques l’observait avec une mélancolie douce ; cet enfant était la seule attache vraie qui la retînt encore au monde de l’époux robuste. Mais l’enfant tomba malade.</p>",
+        "<h2>III</h2>\\n<p>L’enfant mourut.</p>\\n<p>Jacques me raconta cette agonie. Ce fut rapide et cruel comme un accident. L’enfant brûlait de fièvre dans sa petite chambre blanche. Geneviève veillait à son chevet, immobile, les yeux secs, repoussant toutes les mains qui tentaient de l’approcher. Elle ne pleurait pas. Elle semblait d’une pierre glacée.</p>",
+        "<p>Elle s’obstinait à nier le danger. Quand le médecin entrait, elle le regardait avec un défi sauvage, comme si sa seule volonté pouvait faire reculer la mort. Elle lui disait d’une voix sourde : « Il va mieux. N’est-ce pas qu’il va mieux ? Regardez, il dort. » Mais l’enfant ne dormait pas ; il sombrait dans un délire obscur, s’agitant contre ses draps trempés de sueur, appelant des choses invisibles de sa petite voix cassée.</p>",
+        "<p>Puis ce fut la fin. Un dernier soupir, si léger que la mère ne l’entendit pas. Elle resta longtemps inclinée sur ce petit corps immobile, lui parlant tout bas, lui arrangeant ses cheveux bouclés d’un geste si doux, si fou, que les assistants se détournèrent pour cacher leurs larmes. Elle refusait de croire que ce petit jouet royal ne répondrait plus à ses caresses.</p>",
+        "<p>Puis l’homme de bon sens entra. Le mari robuste. Son pas ébranla le parquet de la chambre blanche. Il s’approcha du lit, considéra l’enfant mort, puis sa femme agenouillée. Son visage se contracta dans une grimace de douleur digne et bourgeoise. Il posa sa grosse main sur l’épaule de Geneviève :</p>\\n<p>« Geneviève. Écoute-moi. Cet enfant a cessé de souffrir. C’est la volonté de Dieu. Il faut te montrer courageuse. La vie continue. Nous avons des devoirs… »</p>",
+        "<p>Le mari avait, sans doute, préparé ces phrases rassurantes pendant son trajet en voiture. Elles tombaient de sa bouche avec le poids et la régularité de pierres de taille. À ces mots, Geneviève se redressa d’un bond. Elle regarda cet homme, ce mari de bon sens, ce monument de certitude matérielle. Elle le regarda avec une haine si pure, si absolue, qu’il recula d’un pas, intimidé.</p>\\n<p>– Va-t’en, dit-elle tout bas. Va-t’en d’ici.</p>\\n<p>Puis, se tournant vers Jacques Bernis qui se tenait dans l’ombre de la porte :</p>\\n<p>– Jacques… emmène-moi.</p>",
+        "<p>Un secrétaire d’ébène, où gisaient des lettres d’amour, fut refermé. On cloua quelques caisses en hâte. Ils partirent le soir même pour Paris, fuyant cette maison de deuil, ce mari robuste, ce passé solide dont les liens venaient d’être rompus par la mort d’un enfant. Ils s’évadaient ensemble, mais, dans leur fuite obscure, ils emportaient un cadavre.</p>",
+        "<h2>IV</h2>\\n<p>Ils habitèrent à Paris une petite chambre meublée sous les toits. Ce fut une halte bien clandestine. Geneviève passait ses journées couchée, les yeux perdus sur le papier peint de la muraille où des oiseaux bleus s’envolaient sans fin. Elle habitait son chagrin. Jacques venait s’asseoir à ses côtés, lui parlait à voix basse, mais elle ne l’entendait pas. Elle n’entendait que cette petite voix cassée qui s’était tue pour toujours. Elle pleurait souvent, sans bruit, et Jacques buvait ses larmes ; elles n’étaient point de celles qui sanctifient, elles étaient amères comme du poison. Il luttait contre ce spectre d’enfant qui s’interposait entre eux.</p>",
+        "<p>Un jour il se mit en colère :</p>\\n<p>– Geneviève ! Écoute-moi donc. Il faut vivre. Nous nous aimons. Tu as fui pour commencer une vie nouvelle. Mais tu restes prisonnière de ta douleur. Tu ne m’offres qu’un corps vide. Il n’y a point de place pour moi dans ton royaume de deuil.</p>\\n<p>Elle le regarda avec surprise, comme s’il eût parlé une langue étrangère. Puis elle baissa la tête :</p>\\n<p>– Pardonne-moi, Jacques. Je t’aime. Je fais de mon mieux. Mais je suis si fatiguée…</p>\\n<p>Et Jacques comprit qu’elle disait vrai. Son amour pour elle, qui l’avait soulevé au-dessus du désert, se brisait contre ce deuil opaque. Il l’avait crue libre d’attaches puisque son enfant était mort et qu’elle avait fui son mari, mais sa douleur même était son domaine infini, sa patrie fermée, d’où il était exclu comme un étranger.</p>",
+        "<p>C’est que le monde de Geneviève s’était écroulé avec la mort du petit garçon. Les marronniers, la fontaine, les étoiles même ne parlaient plus. Il n’y avait plus de pactes avec les brebis, car le petit agneau royal n’était plus là pour les guider. Elle n’était plus la princesse de la plaine ; elle n’était plus qu’une ombre égarée dans un Paris bruyant, hostile, où le pas des passants n’avait plus de rythme, où les maisons n’avaient plus de secrets, où chaque chose n’était que matière morte, livrée au hasard des heures.</p>\\n<p>Elle tenta de s’intéresser à sa vie de pilote :</p>\\n<p>– Jacques… raconte-moi tes voyages. Parle-moi du Sahara, des Maures, du vent de sable.</p>\\n<p>Il essaya. Il lui dit la poésie des nuits sous la lune, la pureté du désert, l’orgueil de la ligne d’Afrique. Mais ses mots tombaient dans le vide. Le Sahara pour elle n’était qu’une étendue sterile, les Maures des figurants barbares. Elle ne découvrait point de source dans cette contrée sans limites.</p>",
+        "<p>Il vit s’évanouir de jour en jour l’illusion qui l’avait réchauffé pendant deux ans d’exil. Cette Geneviève qu’il avait crue éternelle, parce qu’elle était si bien liée à sa terre, s’effilochait dans sa chambre meublée. Elle n’avait plus de racines, plus de suc, plus de force. Et lui, Jacques Bernis, n’était point assez riche de certitudes pour lui en prêter. Il n’était lui-même qu’un errant, un sourcier sans eau, un soldat sans patrie.</p>\\n<p>De nouveau, le soir, ils marchaient l’un à côté de l’autre dans les rues humides de Paris, tristes amants. Ils évitaient les dancings où la joie des gigolos les offensait, ils fuyaient les lumières trop vives. Ils cherchaient les quartiers étroits, les quais obscurs de la Seine où l’eau noire coulait en silence, emportant les reflets des réverbères comme des messages d’adieu.</p>",
+        "<p>Ils allèrent dîner une fois chez des amis de Jacques. Ce fut un supplice. Ces intellectuels, ces artistes parlaient d’œuvres d’art, de livres, de théories littéraires avec une aisance brillante et vaine. Leurs paroles tournaient en l’air, légères et multicolores comme des ballons de baudruche. Ils discutaient de la douleur, de la mort, de l’amour, comme d’objets de musée qu’on manipule avec des mains gantées. Geneviève, silencieuse au bout de la table, les considérait avec un mépris si las qu’ils en parurent gênés. Elle savait, elle qui avait veillé son enfant mort, ce que pèse la vraie souffrance. Elle n’offrait à leurs madrigaux que sa chevelure couronnée de deuil et son silence de reine déchue.</p>",
+        "<h2>V</h2>\\n<p>Trois jours plus tard, Geneviève fut malade de nouveau. Une fièvre lente, tenace, la reprit. Le médecin murmura des mots inquiets, parla d’épuisement, de dépression nerveuse, conseilla le grand air, le retour au pays natal. « Mais elle ne veut pas y retourner ! » criait Jacques. « Elle préfère en mourir. » Et Jacques comprit qu’il n’avait d’autre choix que de la ramener, secrètement, vers cette demeure solide d’où elle s’était enfuie.</p>",
+        "<p>On roula dans la nuit vers la province d’enfance. Elle reposait la tête sur l’épaule de Jacques, le visage pâle sous la buée de la vitre, les yeux brillants de fièvre. Aux abords du domaine, elle frémit :</p>\\n<p>– Jacques… n’entre pas. Laisse-moi là, au bout de l’allée des tilleuls. Il ne faut pas qu’il te voie. Il est si fort, si juste dans sa demeure.</p>\\n<p>Jacques stoppa la voiture sous l’ombre des grands arbres. La nuit était fraîche, parfumée d’herbe mouillée. Des grillons chantaient au loin. La plaine d’enfance, fidèle à son habitude, bruissait doucement sous la lune.</p>",
+        "<p>– Geneviève, regarde. Ton royaume t’attend. Les tilleuls sont en fleurs, les bêtes sont rentrées. Tout est en ordre.</p>\\n<p>She souriait faiblement :</p>\\n<p>– Oui, Jacques. Tout est en ordre. La maison a conservé mes secrets. Je vais y dormir. Adieu, mon chéri.</p>\\n<p>Il l’embrassa sur le frotn, longuement, comme on embrasse une reine qu’on abandonne aux mains des vainqueurs. Il la regarda s’éloigner, petite silhouette blanche sous la voûte sombre des grands arbres, avançant d’un pas chancelant vers les lumières jaunes de la vieille maison solide.</p>",
+        "<p>– Ce n’est rien pour un homme d’avoir peur, pensait Jacques en rebroussant chemin. Mais d’avoir été impuissant à sauver la vie d’une reine, de n’avoir point trouvé de source pour étancher sa soif !…</p>\\n<p>Il reprenait la route de Paris avec un vide immense au cœur. L’illusion s’était éteinte. Ce voyage à la conquête de Geneviève s’achevait sur cette retraite obscure dans la nuit. Il n’était plus rien que Jacques Bernis, pilote de ligne, passager inutile d’un train rapide d’où tout s’enfuit.</p>",
+        "<p>La forêt se referma derrière elle. La nuit d’Afrique, les dunes du Sahara, les escales d’Espagne, l’attendaient à l’autre bout de sa course pour le reprendre dans leur engrenage puissant, mais il savait qu’il courait désormais vers un horizon sans promesse.</p>\\n<p>Le lendemain soir, Jacques m’envoyait son dernier télégramme :</p>\\n<p>« Geneviève réintégrée domicile conjugal stop. Reprends service demain courrier Afrique stop. Adieu. Signé : Jacques. »</p>",
+        "<p>Mais l’avion s’en allait et emportait ses débris. Geneviève, Geneviève ! vous étiez, dans votre domaine, la gardienne de nos rêves, le phare calme qui repère notre course. Maintenant que le phare s’est éteint sous l’ordre robuste de la maison, nous voguons à l’aveugle dans la nuit.</p>",
+        "<p>Il retrouva l’homme de bon sens devant son ministre. Son mari robuste fut poli. Poli comme un homme de loi qui a triomphé. Il lui dit :</p>\\n<p>« Monsieur Bernis. Je sais tout. Je ne vous ferai point de reproches. Geneviève est faible. Elle a commis une faute, mais elle est malade, elle a souffert. Elle est revenue à sa place, sous mon toit. Notre honneur est sauf. Je vous prie seulement de ne plus chercher à la revoir. Votre présence ne pourrait que troubler sa convalescence. »</p>",
+        "<p>Il fit quelques pas dans le vestibule, prit son chapeau de feutre gris, et sortit. Dehors il pleuvait toujours. Un ciel lourd de suie pesait sur la ville d’hommes. C’était fini. Jacques Bernis avait mis de l’ordre dans ses souvenirs.</p>",
+        "<h1>TROISIÈME PARTIE</h1>",
+        "<h2>I</h2>\\n<p>Par radio. 14 h. De Juby pour escales. Courrier passé Agadir 13 h. 30 stop. Temps lourd brumes de sable sur la côte stop.</p>\\n<p align=\\\"center\\\">* * * * *</p>\\n<p>La hâte s’en allait. Le Sahara se dépliait sous un ciel blanc, opaque, sans haleine. De notre observatoire de Cabo Juby, les pylônes de la radio vibraient doucement, comme des cordes tendues sous la chaleur. L’opérateur de T.S.F. avait chaussé ses écouteurs de métal, le buste penché en avant, guettant les pulsations lointaines de la comète d’acier.</p>\\n<p>Un mécanicien espagnol, en bleu de travail maculé d’huile, nettoyait une hélice de d’acier devant le hangar. Le bruit métallique de sa lime rythmait le silence pesant du désert. Il s’arrêta un instant pour essuyer la sueur qui coulait sur son visage bronzé et regarda le Nord :</p>\\n<p>– Il fera chaud aujourd’hui. Le vent de sable monte. Le courrier va danser.</p>",
+        "<p>La mort pour un Espagnol est une chose simple, familière, presque amicale. Il en parlait sans haine, avec une sorte de résignation tranquille. Bernis dans son avion, là-haut, luttait maintenant contre le vent d’Est, ce vent brûlant qui descend des hauts plateaux et balaie le sable d’Afrique jusqu’à la mer.</p>\\n<p>– ... Eh bien ?</p>\\n<p>– Le courrier a passé Agadir. Rien d’autre.</p>\\n<p>– Les vents ?</p>\\n<p>– Vent de sable à terre. Mer mauvaise. On lui conseille de s’éloigner de la côte, de voler sur l’eau.</p>\\n<p>Nous attendons. Les heures passent d’une lenteur de plomb. Vers quatre heures de l’après-midi, la radio s’excite :</p>\\n<p>– Allô, Juby ! Agadir appelle… Le courrier n’a plus donné de signal depuis une heure. Nous appelons sans réponse. Tentez liaison.</p>",
+        "<p>On appelle. Nos pylônes lancent dans le désert leurs appels électriques, stridents et vains. Rien. Le silence de l’éther répond seul. Un silence lourd, opaque, comme cette brume de sable jaune qui commence à masquer les dunes.</p>\\n<p>– On n’entend rien : le moteur s’éteint.</p>\\n<p>– Allô, Juby !… Un message de Cisneros : un avion a été aperçu volant très bas à dix kilomètres au Nord. Moteur ratant. Il a tenté de se poser dans les dunes.</p>\\n<p>Nous partons. La Ford de l’escale bondit sur le sable mou, escalade les crêtes, glisse dans les vallées. Le vent de sable nous fouette le visage, nous aveugle, nous brûle les yeux. On roule à l’aveugle vers la frontière de la dissidence, là où le Sahara redevient mystérieux, menaçant, peuplé de Maures insoumis.</p>",
+        "<h2>II</h2>\\n<p>On s’éveille au Sahara sous une lumière froide, grise, presque polaire. Le vent est tombé. Le sable a repris sa couleur de cendre. Au bout de dix kilomètres de recherche dans le désert vide, nous l’avons aperçu.</p>\\n<p>Un grand moteur s’est tu pour toujours.</p>\\n<p>L’avion était couché sur le flanc, brisé comme un grand oiseau de toile et de bois au milieu d’une arène de sable blanc. L’hélice d’acier était tordue en hélice de navire en panne, le capot noir était éventré, livrant la belle mécanique délicate à l’usure fine du vent de sable.</p>\\n<p>Nous avons marché vers l’épave avec un pas ralenti, presque religieux. Aucun signe de vie ne venait d’elle. Deux Maures, s’étant approchés à notre vue, s’enfuirent vers les collines d’un pas souple, emportant de minces trophées.</p>",
+        "<p>Bernis reposait sur le dos, un peu à l’écart de la carlingue. Son corps habillé de cuir lourd fléchissait doucement dans le sable épais. Il paraissait endormi. Ses yeux fermés gardaient une paix merveilleuse, débarrassés enfin de la hâte des heures, de la fatigue du voyage, de la défaite amère d’une reine évanouie.</p>\\n<p>Sa main serrée sur un carnet de route fut desserrée. Jacques Bernis avait mis de l’ordre dans son carnet.</p>\\n<p>– Le courrier ?</p>\\n<p>– Le courrier est intact. Les trente-neuf sacs sont là, dans le ventre de l’appareil. On va les charger dans la Ford. Les amants recevront leurs messages dans un temps record.</p>\\n<p>La nuit s’est rabattue sur nous avec le premier froid. Nous avons ramené le corps vers le fort espagnol sous la protection de la lune. Le Sahara de nouveau se dépliait dune par dune devant nos phares.</p>\\n<p>Et nous marchions nu-tête, libérés du poids du soleil, libérés de notre propre paix, portant notre ami mort sous les étoiles de sa patrie de sable. La nuit : cette demeure éternelle…</p>\\n<p align=\\\"center\\\">* * * * *</p>\\n<p align=\\\"center\\\">FIN</p>"
+      ];
+    </script>
+
+    <!-- MODULE: App Controller and Renderer -->
+    <script>
+      (function() {
+        // 1. Helper to clean up raw escaped characters in text chunks
+        function cleanHTML(str) {
+          if (!str) return '';
+          return str
+            .replace(/\\n/g, '\n')
+            .replace(/\\"/g, '"')
+            .replace(/\\'/g, "'")
+            .replace(/\\\\"/g, '"');
+        }
+
+        // 2. Initialize App Shell
+        const root = document.getElementById('root');
+        if (!root) return;
+
+        const template = document.getElementById('app-template');
+        if (!template) return;
+
+        // Clone and insert template
+        const appClone = template.content.cloneNode(true);
+        root.appendChild(appClone);
+
+        // 3. Render Chapters / Pages from bM array
+        const chaptersRoot = document.getElementById('chapters-root');
+        if (chaptersRoot && typeof bM !== 'undefined' && Array.isArray(bM)) {
+          bM.forEach((item, index) => {
+            const cleanContent = cleanHTML(item).trim();
+            if (!cleanContent) return;
+
+            const div = document.createElement('div');
+            div.className = 't-chapter-node';
+            div.id = `chapter-${index}`;
+            div.innerHTML = cleanContent;
+            
+            chaptersRoot.appendChild(div);
+          });
+        }
+
+        // 4. Create an elegant, premium global Toast system
+        function showToast(message) {
+          // Remove existing toast if any
+          const oldToast = document.getElementById('cs-toast');
+          if (oldToast) oldToast.remove();
+
+          const toast = document.createElement('div');
+          toast.id = 'cs-toast';
+          toast.style.position = 'fixed';
+          toast.style.bottom = '2rem';
+          toast.style.left = '50%';
+          toast.style.transform = 'translateX(-50%) translateY(20px)';
+          toast.style.backgroundColor = '#1a1a1a';
+          toast.style.color = '#fdfcf8';
+          toast.style.padding = '0.75rem 1.5rem';
+          toast.style.borderRadius = '9999px';
+          toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+          toast.style.fontSize = '0.95rem';
+          toast.style.fontFamily = "'Cormorant Garamond', serif";
+          toast.style.zIndex = '1000';
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          toast.textContent = message;
+
+          document.body.appendChild(toast);
+
+          // Trigger transition
+          setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+          }, 10);
+
+          // Hide and remove
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(20px)';
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }
+
+        // 5. Create Scroll Progress Indicator Bar at the top of viewport
+        const progressBar = document.createElement('div');
+        progressBar.style.position = 'fixed';
+        progressBar.style.top = '0';
+        progressBar.style.left = '0';
+        progressBar.style.height = '3px';
+        progressBar.style.backgroundColor = '#1a1a1a';
+        progressBar.style.width = '0%';
+        progressBar.style.zIndex = '100';
+        progressBar.style.transition = 'width 0.1s ease-out';
+        document.body.appendChild(progressBar);
+
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          if (docHeight > 0) {
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+          }
+        });
+
+        // 6. Support Crypto Modal Listeners with animations
+        const modal = document.getElementById('crypto-modal');
+        const supportBtn = document.getElementById('support-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalBackdrop = document.getElementById('crypto-modal-backdrop');
+        const modalBody = document.getElementById('crypto-modal-body');
+
+        function openModal() {
+          if (!modal) return;
+          modal.classList.remove('hidden');
+          
+          // Apply fade-in to backdrop
+          modalBackdrop.classList.remove('fade-out');
+          modalBackdrop.classList.add('fade-in');
+
+          // Apply scale-up to body
+          modalBody.classList.remove('scale-down');
+          modalBody.classList.add('scale-up');
+        }
+
+        function closeModal() {
+          if (!modal) return;
+          modalBackdrop.classList.remove('fade-in');
+          modalBackdrop.classList.add('fade-out');
+
+          modalBody.classList.remove('scale-up');
+          modalBody.classList.add('scale-down');
+
+          // Hide after animation completes
+          setTimeout(() => {
+            modal.classList.add('hidden');
+          }, 300);
+        }
+
+        if (supportBtn) supportBtn.addEventListener('click', openModal);
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+        // 7. Micro Copy Code Address Interaction
+        const copyBtn = document.getElementById('copy-btn');
+        const walletAddress = document.getElementById('wallet-address');
+
+        if (copyBtn && walletAddress) {
+          copyBtn.addEventListener('click', () => {
+            const addressText = walletAddress.textContent;
+            navigator.clipboard.writeText(addressText).then(() => {
+              showToast('Crypto address copied to clipboard.');
+              
+              const origSVG = copyBtn.innerHTML;
+              // Set checkmark SVG temporarily
+              copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><polyline points="20 6 9 17 4 12"/></svg>`;
+              copyBtn.classList.add('bg-green-600');
+              
+              setTimeout(() => {
+                copyBtn.innerHTML = origSVG;
+                copyBtn.classList.remove('bg-green-600');
+              }, 2000);
+            }).catch(() => {
+              showToast('Failed to copy address.');
+            });
+          });
+        }
+
+        // 8. Share Button Action
+        const shareBtn = document.getElementById('share-btn');
+        if (shareBtn) {
+          shareBtn.addEventListener('click', () => {
+            const shareData = {
+              title: 'Courrier Sud by Antoine de Saint-Exupéry',
+              text: 'Read Courrier Sud in this elegant, offline-supported web companion application.',
+              url: window.location.href
+            };
+
+            if (navigator.share) {
+              navigator.share(shareData)
+                .then(() => showToast('Shared successfully.'))
+                .catch(e => {
+                  if (e.name !== 'AbortError') showToast('Shared failed: ' + e.message);
+                });
+            } else {
+              navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Application link copied to clipboard.');
+              }).catch(() => {
+                showToast('Failed to share.');
+              });
+            }
+          });
+        }
+
+        // 9. Bookmark / Favorite Action (Saves Scroll Position & Chapter Index)
+        const favBtn = document.getElementById('fav-btn');
+
+        // Check if bookmark is already saved
+        const BOOKMARK_KEY = 'cs_reading_progress_y';
+        const BOOKMARK_CHAPTER_KEY = 'cs_reading_progress_chapter';
+        const savedY = localStorage.getItem(BOOKMARK_KEY);
+
+        if (favBtn) {
+          if (savedY) {
+            favBtn.classList.add('text-amber-500', 'border-amber-300', 'bg-amber-50/50');
+            // Change text of button to resume or bookmarked
+            favBtn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-check text-amber-500"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/><path d="m9 10 2 2 4-4"/></svg>
+              Bookmarked
+            `;
+          }
+
+          favBtn.addEventListener('click', () => {
+            const currentScrollY = window.scrollY;
+            
+            // Find current active chapter node
+            const chapterNodes = document.querySelectorAll('.t-chapter-node');
+            let activeChapterId = '';
+            for (const node of chapterNodes) {
+              const rect = node.getBoundingClientRect();
+              if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                activeChapterId = node.id;
+                break;
+              }
+            }
+
+            localStorage.setItem(BOOKMARK_KEY, currentScrollY);
+            if (activeChapterId) {
+              localStorage.setItem(BOOKMARK_CHAPTER_KEY, activeChapterId);
+            }
+
+            favBtn.classList.add('text-amber-500', 'border-amber-300', 'bg-amber-50/50');
+            favBtn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-check text-amber-500"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/><path d="m9 10 2 2 4-4"/></svg>
+              Bookmarked
+            `;
+
+            showToast('Reading progress successfully bookmarked!');
+          });
+        }
+
+        // 10. Auto-resume bookmark if exists
+        if (savedY) {
+          window.addEventListener('load', () => {
+            // Wait slightly for layout rendering (images, sizes) to complete
+            setTimeout(() => {
+              const savedChapterId = localStorage.getItem(BOOKMARK_CHAPTER_KEY);
+              const targetNode = savedChapterId ? document.getElementById(savedChapterId) : null;
+              
+              if (targetNode) {
+                // Scroll directly to target node
+                targetNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                showToast('Resumed reading from your bookmark.');
+              } else if (savedY) {
+                window.scrollTo({ top: parseInt(savedY, 10), behavior: 'smooth' });
+                showToast('Resumed reading from your bookmark.');
+              }
+            }, 500);
+          });
+        }
+
+      })();
+    </script>
+  </body>
+</html>
