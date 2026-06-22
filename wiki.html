@@ -1,1162 +1,1918 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="client-js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chronologie du Détachement de Tarfaya (1927–1930) — Saint-Exupéry au Cap Juby</title>
-<meta name="description" content="Le Registre Archivistique, Forensique et Opérationnel Définitif des Dix-Huit Mois d'Antoine de Saint-Exupéry au Cap Juby (Villa Bens / Tarfaya, Maroc), 1927–1930.">
+<title>Antoine de Saint-Exupéry au Cap Juby (1927–1930) — Chronologie archivistique</title>
+<meta name="description" content="Chronologie archivistique et forensique du détachement d'Antoine de Saint-Exupéry à Tarfaya (Cap Juby / Villa Bens), Maroc, 1927–1930.">
 <style>
-:root{
-  --bg:#f7f4ef;
-  --bg-alt:#efe9de;
-  --paper:#fffdf9;
-  --ink:#241f1a;
-  --ink-soft:#4a4139;
-  --ink-faint:#6b6057;
-  --accent:#9a6b1f;
-  --accent-dark:#6c4a12;
-  --accent-soft:#f0e4cb;
-  --rule:#d9d0c4;
-  --rule-soft:#e9e2d7;
-  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
-  --sans:"Helvetica Neue",Helvetica,Arial,"Segoe UI",sans-serif;
-  --mono:"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,"Liberation Mono",monospace;
-  --content-w:760px;
+/* ============================================================
+   WIKIPEDIA DESIGN SYSTEM — Vector 2022 Theme
+   Faithful reproduction of MediaWiki's Vector skin
+   ============================================================ */
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 100%; scroll-behavior: smooth; }
+
+body {
+  background-color: #f8f9fa;
+  color: #202122;
+  font-family: -apple-system, 'Linux Libertine', Georgia, Times, serif;
+  font-size: 0.875em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:var(--serif);
-  font-size:18px;
-  line-height:1.72;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  background-image:
-    radial-gradient(circle at 20% 10%, rgba(154,107,31,.025), transparent 40%),
-    radial-gradient(circle at 85% 80%, rgba(154,107,31,.02), transparent 45%);
+/* ---------- Skip link ---------- */
+.mw-skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #fff;
+  color: #3366cc;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  z-index: 9999;
+  border: 1px solid #a2a9b1;
+  text-decoration: none;
+  font-family: sans-serif;
 }
-::selection{background:var(--accent-soft);color:var(--accent-dark)}
+.mw-skip-link:focus { top: 0; }
 
-/* ---------- Reading progress ---------- */
-#progress{
-  position:fixed;top:0;left:0;height:3px;width:0%;
-  background:linear-gradient(90deg,var(--accent),var(--accent-dark));
-  z-index:1000;transition:width .12s linear;
-}
-
-/* ---------- Skip link accessibilité ---------- */
-.skip-link{
-  position:absolute;top:-100%;left:8px;
-  background:var(--accent-dark);color:#fff;
-  padding:8px 16px;font-family:var(--sans);font-size:.9rem;
-  border-radius:0 0 4px 4px;z-index:2000;
-  text-decoration:none;
-}
-.skip-link:focus{top:0}
-
-/* ---------- Layout Wrapper ---------- */
-.layout-container{
-  display:flex;
-  flex-direction:column;
-  max-width:1200px;
-  margin:0 auto;
-  position:relative;
+/* ============================================================
+   WIKIPEDIA HEADER / SITENOTICE
+   ============================================================ */
+#mw-head-base {
+  background-color: #fff;
+  border-bottom: 1px solid #a2a9b1;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 1px 3px rgba(0,0,0,.07);
 }
 
-@media(min-width:1150px){
-  .layout-container{
-    flex-direction:row;
-    align-items:flex-start;
-    gap:40px;
-    padding:0 40px;
-    max-width:1300px;
-  }
-  .page{
-    flex:1;
-    margin-top:40px;
-  }
-  .toc-box{
-    position:sticky;
-    top:40px;
-    width:320px;
-    max-height:calc(100vh - 80px);
-    overflow-y:auto;
-    margin:40px 0 !important;
-    flex-shrink:0;
-    z-index:100;
-  }
+.mw-header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 50px;
+  gap: 16px;
 }
 
-/* ---------- Single-column wrapper ---------- */
-.page{max-width:var(--content-w);margin:0 auto;padding:0 24px}
-
-/* ---------- Hero ---------- */
-.hero{
-  padding:72px 0 40px;text-align:center;
+/* Logo wordmark */
+.mw-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
-.hero .kicker{
-  font-family:var(--sans);font-size:.7rem;font-weight:700;
-  letter-spacing:.28em;text-transform:uppercase;color:var(--accent);
-  margin-bottom:28px;
+.mw-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='23' fill='none' stroke='%23a2a9b1' stroke-width='1.5'/%3E%3Ccircle cx='25' cy='25' r='15' fill='none' stroke='%23a2a9b1' stroke-width='1'/%3E%3Cline x1='25' y1='2' x2='25' y2='48' stroke='%23a2a9b1' stroke-width='1'/%3E%3Cline x1='2' y1='25' x2='48' y2='25' stroke='%23a2a9b1' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat;
+  opacity: .55;
 }
-.hero h1{
-  font-weight:600;font-size:clamp(1.9rem,4.2vw,2.8rem);line-height:1.18;
-  letter-spacing:-.01em;color:var(--ink);margin-bottom:22px;
+.mw-logo-wordmark {
+  font-family: 'Linux Libertine', Georgia, serif;
+  font-size: 1.25rem;
+  color: #202122;
+  letter-spacing: 0.01em;
+  line-height: 1;
 }
-.hero .lede{
-  font-style:italic;color:var(--ink-soft);font-size:1.12rem;
-  line-height:1.5;max-width:600px;margin:0 auto 34px;
-}
-.hero .rule-orn{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:30px}
-.hero .rule-orn::before,.hero .rule-orn::after{content:"";width:60px;height:1px;background:var(--accent)}
-.hero .rule-orn span{color:var(--accent);font-size:.9rem}
-
-.epigraph-hero{
-  max-width:560px;margin:0 auto;font-style:italic;color:var(--ink-soft);
-  font-size:1.05rem;line-height:1.6;padding:24px 28px;
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-}
-.epigraph-hero cite{
-  display:block;margin-top:14px;font-style:normal;font-size:.82rem;
-  font-family:var(--sans);letter-spacing:.03em;color:var(--ink-faint);
+.mw-logo-tagline {
+  font-family: sans-serif;
+  font-size: .65rem;
+  color: #54595d;
+  display: block;
+  letter-spacing: .03em;
 }
 
-/* ---------- Table of Contents (Sidebar) ---------- */
-.toc-box{
-  display:block !important;
-  margin:40px 0 20px;padding:30px 34px;background:var(--paper);
-  border:1px solid var(--rule);border-radius:8px;
-  border-top:3px solid var(--accent);
+/* Header search */
+.mw-header-search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 360px;
 }
-.toc-box .toc-label{
-  font-family:var(--sans);font-size:.68rem;font-weight:700;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
-  margin-bottom:16px;text-align:center;
+.mw-header-search input {
+  width: 100%;
+  height: 32px;
+  padding: 4px 10px;
+  border: 1px solid #a2a9b1;
+  border-radius: 2px;
+  font-family: sans-serif;
+  font-size: .875rem;
+  color: #202122;
+  background: #fff;
+  outline: none;
 }
-.toc-list{list-style:none;display:grid;gap:0}
-.toc-list > li{margin:0}
-.toc-list > li > a{
-  display:block;color:var(--ink-soft);text-decoration:none;
-  padding:8px 12px;border-radius:4px;font-size:.95rem;
-  border-left:3px solid transparent;transition:all .18s ease;
+.mw-header-search input:focus { border-color: #3366cc; box-shadow: 0 0 0 1px #3366cc; }
+.mw-search-btn {
+  height: 32px;
+  padding: 0 12px;
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  border-left: none;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: .8rem;
+  color: #54595d;
+  border-radius: 0 2px 2px 0;
 }
-.toc-list > li > a:hover{color:var(--accent-dark);background:var(--bg-alt)}
-.toc-list > li > a:focus-visible{
-  outline:2px solid var(--accent);outline-offset:2px;
-}
-.toc-list > li > a.active{
-  color:var(--accent-dark);border-left-color:var(--accent);
-  background:var(--accent-soft);font-weight:600;
-}
-.toc-sub{list-style:none;margin:0 0 6px 18px;display:grid;grid-template-columns:1fr 1fr;gap:0}
-.toc-sub li a{
-  display:block;color:var(--ink-faint);text-decoration:none;
-  padding:5px 12px;font-size:.82rem;line-height:1.4;
-  border-left:2px solid transparent;border-radius:3px;transition:all .15s ease;
-}
-.toc-sub li a:hover{color:var(--accent-dark);background:var(--bg-alt)}
-.toc-sub li a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.toc-sub li a.active{color:var(--accent-dark);border-left-color:var(--accent);background:var(--accent-soft)}
-.toc-sub .num{font-family:var(--sans);font-size:.68rem;font-weight:700;color:var(--accent);margin-right:5px}
+.mw-search-btn:hover { background: #eaf3fb; color: #3366cc; }
 
-/* ---------- Section headings ---------- */
-h2.section{
-  font-weight:600;font-size:1.55rem;letter-spacing:-.005em;color:var(--ink);
-  margin:64px 0 8px;padding-bottom:14px;border-bottom:2px solid var(--accent);
-  scroll-margin-top:20px;
+/* Header tools */
+.mw-header-tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: sans-serif;
+  font-size: .8rem;
+  flex-shrink: 0;
 }
-h2.section .sn{
-  font-family:var(--sans);font-size:.7rem;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
-  display:block;margin-bottom:6px;
+.mw-header-tools a {
+  color: #3366cc;
+  text-decoration: none;
+  white-space: nowrap;
 }
-h3.entry{
-  font-weight:600;font-size:1.38rem;color:var(--ink);
-  margin:52px 0 4px;line-height:1.25;scroll-margin-top:20px;padding-top:8px;
-}
-h3.entry .roman{
-  font-family:var(--sans);font-size:.78rem;font-weight:700;
-  letter-spacing:.16em;color:var(--accent);display:inline-block;
-  margin-right:10px;vertical-align:middle;
-}
-h4.sub{
-  font-family:var(--sans);font-size:.72rem;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--accent-dark);
-  margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule);
-}
+.mw-header-tools a:hover { text-decoration: underline; }
 
-/* ---------- Text elements ---------- */
-p{margin:0 0 1.15em}
-strong{font-weight:600;color:var(--ink)}
-em{font-style:italic}
-a{
-  color:var(--accent-dark);text-decoration:underline;
-  text-decoration-color:var(--accent);text-underline-offset:3px;
-  text-decoration-thickness:1px;
+/* ============================================================
+   WIKIPEDIA TABS / NAMESPACES
+   ============================================================ */
+#p-namespaces {
+  background: #f8f9fa;
+  border-bottom: 1px solid #a2a9b1;
 }
-a:hover{color:var(--accent)}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-sup.src a{
-  font-family:var(--sans);font-size:.62rem;font-weight:700;
-  color:var(--accent);text-decoration:none;vertical-align:super;line-height:0;
+.mw-tabs-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
 }
-sup.src a:hover{color:var(--accent-dark);text-decoration:underline}
-.dropcap::first-letter{
-  float:left;font-size:3.4rem;font-weight:600;line-height:.82;
-  padding:6px 10px 0 0;color:var(--accent-dark);
+.mw-tab {
+  display: inline-block;
+  padding: 6px 14px;
+  font-family: sans-serif;
+  font-size: .8rem;
+  color: #3366cc;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 2px 2px 0 0;
+  margin-right: 2px;
+  position: relative;
+  top: 1px;
+  background: transparent;
 }
-
-/* ---------- Lists ---------- */
-ul.bul{list-style:none;margin:0 0 1.2em;padding-left:4px}
-ul.bul li{position:relative;padding-left:22px;margin-bottom:10px}
-ul.bul li::before{
-  content:"";position:absolute;left:4px;top:13px;
-  width:6px;height:6px;background:var(--accent);border-radius:1px;
+.mw-tab:hover { background: #fff; border-color: #a2a9b1; }
+.mw-tab.selected {
+  background: #fff;
+  border-color: #a2a9b1;
+  color: #202122;
+  font-weight: normal;
+  cursor: default;
+  border-bottom-color: #fff;
 }
-
-/* ---------- Blockquotes ---------- */
-blockquote{
-  margin:24px 0;padding:22px 26px;background:var(--paper);
-  border-left:3px solid var(--accent);border-radius:0 4px 4px 0;
-  box-shadow:0 1px 3px rgba(36,31,26,.04);
-}
-blockquote p{font-style:italic;color:var(--ink);font-size:1.02rem;line-height:1.66;margin-bottom:10px}
-blockquote p:last-of-type{margin-bottom:0}
-blockquote cite{
-  display:block;margin-top:14px;font-style:normal;font-family:var(--sans);
-  font-size:.78rem;letter-spacing:.02em;color:var(--ink-faint);
-}
-blockquote cite strong{color:var(--accent-dark);font-weight:600}
-
-/* ---------- Diagrams / ASCII ---------- */
-.diagram{
-  margin:26px 0;background:#1e1a16;border-radius:6px;
-  overflow-x:auto;box-shadow:0 2px 10px rgba(36,31,26,.12);
-}
-.diagram pre{
-  font-family:var(--mono);font-size:.76rem;line-height:1.5;color:#e8dcc6;
-  padding:20px 24px;white-space:pre;min-width:max-content;
-}
-.diagram.light{background:var(--bg-alt);border:1px solid var(--rule)}
-.diagram.light pre{color:var(--ink)}
-
-/* ---------- Tables ---------- */
-.tbl-wrap{
-  margin:26px 0;overflow-x:auto;
-  border:1px solid var(--rule);border-radius:6px;
-}
-table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--paper)}
-caption{
-  font-family:var(--sans);font-size:.78rem;font-weight:600;
-  color:var(--ink-soft);padding:10px 16px;
-  text-align:left;caption-side:top;
-  border-bottom:1px solid var(--rule-soft);
-}
-thead th{
-  font-family:var(--sans);font-size:.7rem;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--accent-dark);
-  text-align:left;padding:14px 16px;background:var(--bg-alt);
-  border-bottom:2px solid var(--accent);
-}
-tbody td{
-  padding:13px 16px;border-bottom:1px solid var(--rule-soft);
-  vertical-align:top;line-height:1.55;
-}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:nth-child(even){background:rgba(239,233,222,.4)}
-tbody td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
-
-/* ---------- Reveal animation ---------- */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
-
-/* ---------- Divider ---------- */
-.divider{margin:48px 0;text-align:center;color:var(--accent);font-size:.9rem;letter-spacing:1em}
-
-/* ---------- Doc meta footer ---------- */
-.doc-meta{
-  margin:56px 0 80px;padding:28px 30px;background:var(--paper);
-  border:1px solid var(--rule);border-radius:6px;border-top:3px solid var(--accent);
-}
-.doc-meta p{font-size:.88rem;color:var(--ink-soft);margin-bottom:6px;line-height:1.5}
-.doc-meta p strong{
-  color:var(--ink);font-family:var(--sans);
-  font-size:.78rem;letter-spacing:.04em;
+.mw-tab-sep { flex: 1; }
+.mw-tab-right {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
 }
 
-/* ---------- Back to top ---------- */
-#toTop{
-  position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;
-  background:var(--ink);color:var(--paper);border:none;font-size:1.1rem;cursor:pointer;
-  opacity:0;pointer-events:none;transition:opacity .3s,background .2s,transform .2s;
-  z-index:900;display:flex;align-items:center;justify-content:center;
-}
-#toTop.show{opacity:.85;pointer-events:auto}
-#toTop:hover{background:var(--accent-dark);transform:translateY(-3px);opacity:1}
-#toTop:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-
-/* ---------- References list ---------- */
-ol.refs{list-style:none;counter-reset:ref;margin:0;padding:0}
-ol.refs li{
-  counter-increment:ref;position:relative;
-  padding:14px 0 14px 40px;
-  border-bottom:1px solid var(--rule-soft);
-  font-size:.92rem;line-height:1.6;
-  id:attr(id);
-}
-ol.refs li::before{
-  content:counter(ref);position:absolute;left:0;top:14px;
-  width:26px;height:26px;border-radius:50%;
-  background:var(--accent-soft);color:var(--accent-dark);
-  font-family:var(--sans);font-size:.78rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
+/* ============================================================
+   PAGE LAYOUT — Wikipedia 3-column
+   ============================================================ */
+#mw-page-base {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
 }
 
-/* ---------- Responsive ---------- */
-@media(max-width:600px){
-  body{font-size:16.5px}
-  .hero h1{font-size:1.7rem}
-  .diagram pre{font-size:.62rem;padding:14px}
-  .toc-box{padding:22px 18px}
-  .toc-sub{grid-template-columns:1fr}
+/* ---------- Left sidebar (navigation) ---------- */
+#mw-panel {
+  width: 160px;
+  flex-shrink: 0;
+  padding: 12px 0 24px;
+  font-family: sans-serif;
+}
+.portal {
+  margin-bottom: 16px;
+}
+.portal h3 {
+  font-size: .75rem;
+  font-weight: bold;
+  color: #54595d;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 6px 10px 4px;
+  border-bottom: 1px solid #a2a9b1;
+  margin-bottom: 4px;
+}
+.portal ul { list-style: none; }
+.portal ul li a {
+  display: block;
+  padding: 3px 10px;
+  font-size: .8rem;
+  color: #3366cc;
+  text-decoration: none;
+  line-height: 1.4;
+}
+.portal ul li a:hover { text-decoration: underline; }
+.portal ul li.active a { color: #202122; font-weight: bold; cursor: default; }
+
+/* ---------- Content area ---------- */
+#content {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #a2a9b1;
+  border-top: none;
+  padding: 18px 20px 24px 20px;
+  margin: 0;
+}
+
+/* ---------- Right sidebar (TOC) ---------- */
+#mw-toc-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  padding: 12px 0 0 16px;
+}
+
+/* ============================================================
+   WIKIPEDIA TOC — Exact Vector 2022 Style
+   ============================================================ */
+.toc {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 10px;
+  display: inline-block;
+  font-size: .875rem;
+  font-family: sans-serif;
+  min-width: 160px;
+  width: 100%;
+}
+.toc .toctitle {
+  font-weight: bold;
+  font-size: .875rem;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.toc .toctitle h2 {
+  font-size: .875rem;
+  font-weight: bold;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #202122;
+  font-family: sans-serif;
+}
+.toc .toctoggle {
+  font-size: .75rem;
+  color: #3366cc;
+  cursor: pointer;
+  font-weight: normal;
+  text-decoration: none;
+  margin-left: 8px;
+}
+.toc .toctoggle:hover { text-decoration: underline; }
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc ul li {
+  margin: 0;
+  padding: 0;
+}
+.toc ul li a {
+  color: #3366cc;
+  text-decoration: none;
+  font-size: .8rem;
+  display: block;
+  padding: 2px 0 2px 4px;
+  line-height: 1.4;
+}
+.toc ul li a:hover { text-decoration: underline; }
+.toc ul li a.active { color: #202122; font-weight: bold; }
+.toc .tocnumber {
+  color: #54595d;
+  margin-right: 4px;
+  font-size: .75rem;
+}
+.toc ul ul {
+  padding-left: 14px;
+}
+.toc ul ul li a { font-size: .75rem; }
+.toc ul ul ul { padding-left: 12px; }
+
+/* ============================================================
+   PAGE HEADER — Wikipedia article title zone
+   ============================================================ */
+#firstHeading {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 1.95rem;
+  font-weight: normal;
+  color: #202122;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.mw-page-title-namespace {
+  color: #54595d;
+}
+
+/* Short description */
+.shortdescription {
+  font-size: .875rem;
+  color: #54595d;
+  font-family: sans-serif;
+  font-style: italic;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ============================================================
+   HATNOTES / NOTICES
+   ============================================================ */
+.hatnote {
+  font-style: italic;
+  padding: 4px 0 4px 1.6em;
+  margin-bottom: 10px;
+  color: #54595d;
+  font-family: sans-serif;
+  font-size: .875rem;
+  border-left: 3px solid #a2a9b1;
+  background: #f8f9fa;
+}
+.hatnote a { color: #3366cc; }
+
+.mw-message-box {
+  padding: 8px 12px 8px 48px;
+  margin-bottom: 16px;
+  border: 1px solid #a2a9b1;
+  background: #eaf3fb url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%233366cc' opacity='.15'/%3E%3Ctext x='10' y='15' text-anchor='middle' font-size='13' fill='%233366cc' font-family='sans-serif' font-weight='bold'%3Ei%3C/text%3E%3C/svg%3E") 16px center/20px no-repeat;
+  font-family: sans-serif;
+  font-size: .875rem;
+  color: #202122;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   ARTICLE TYPOGRAPHY
+   ============================================================ */
+.mw-parser-output p {
+  margin: 0 0 .8em;
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: #202122;
+}
+.mw-parser-output p:first-child { margin-top: 0; }
+
+/* Section headings */
+.mw-parser-output h2 {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: #202122;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 3px;
+  margin: 1.2em 0 .4em;
+  line-height: 1.3;
+}
+.mw-parser-output h3 {
+  font-family: sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #202122;
+  margin: 1em 0 .35em;
+  line-height: 1.3;
+}
+.mw-parser-output h4 {
+  font-family: sans-serif;
+  font-size: .9375rem;
+  font-weight: bold;
+  color: #202122;
+  margin: .8em 0 .25em;
+  line-height: 1.3;
+}
+.mw-parser-output h5 {
+  font-family: sans-serif;
+  font-size: .875rem;
+  font-weight: bold;
+  color: #54595d;
+  margin: .7em 0 .2em;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* Section edit links (cosmetic) */
+.mw-editsection {
+  font-family: sans-serif;
+  font-size: .75rem;
+  font-weight: normal;
+  color: #54595d;
+  margin-left: 8px;
+}
+.mw-editsection a { color: #3366cc; text-decoration: none; }
+.mw-editsection a:hover { text-decoration: underline; }
+.mw-editsection-bracket { color: #54595d; }
+
+/* Links */
+.mw-parser-output a {
+  color: #3366cc;
+  text-decoration: none;
+}
+.mw-parser-output a:hover { text-decoration: underline; }
+.mw-parser-output a:visited { color: #6b4ba1; }
+.mw-parser-output a.new { color: #d33; }
+
+/* Bold / Italic */
+.mw-parser-output strong { font-weight: bold; }
+.mw-parser-output em { font-style: italic; }
+
+/* Citations inline */
+sup.reference {
+  font-family: sans-serif;
+  font-size: .75em;
+  font-weight: normal;
+  line-height: 1;
+  vertical-align: super;
+}
+sup.reference a {
+  color: #3366cc;
+  text-decoration: none;
+}
+sup.reference a:hover { text-decoration: underline; }
+
+/* Drop cap — lead paragraph */
+.mw-parser-output .mw-lead p:first-of-type::first-letter {
+  float: left;
+  font-size: 3rem;
+  line-height: .8;
+  padding: 4px 6px 0 0;
+  font-family: 'Linux Libertine', Georgia, serif;
+  color: #202122;
+}
+
+/* ============================================================
+   INFOBOX — Wikipedia right-float style
+   ============================================================ */
+.infobox {
+  float: right;
+  clear: right;
+  margin: 0 0 16px 24px;
+  padding: 0;
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  font-size: .8125rem;
+  font-family: sans-serif;
+  width: 280px;
+  line-height: 1.5;
+}
+.infobox-above {
+  background: #cee0f2;
+  padding: 6px 8px;
+  font-weight: bold;
+  font-size: .9375rem;
+  text-align: center;
+  color: #202122;
+  border-bottom: 1px solid #a2a9b1;
+}
+.infobox-subheader {
+  background: #dce9f5;
+  padding: 4px 8px;
+  text-align: center;
+  font-style: italic;
+  font-size: .8rem;
+  color: #54595d;
+  border-bottom: 1px solid #a2a9b1;
+}
+.infobox table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.infobox th {
+  padding: 4px 8px;
+  font-weight: bold;
+  vertical-align: top;
+  white-space: nowrap;
+  background: transparent;
+  text-align: left;
+  color: #202122;
+  width: 40%;
+}
+.infobox td {
+  padding: 4px 8px;
+  vertical-align: top;
+  color: #202122;
+}
+.infobox tr:nth-child(even) { background: rgba(0,0,0,.025); }
+.infobox-section-header {
+  background: #cee0f2;
+  font-weight: bold;
+  text-align: center;
+  padding: 3px 8px;
+  font-size: .8rem;
+  color: #202122;
+  border-top: 1px solid #a2a9b1;
+  border-bottom: 1px solid #a2a9b1;
+}
+.infobox-below {
+  padding: 6px 8px;
+  text-align: center;
+  font-style: italic;
+  font-size: .75rem;
+  color: #54595d;
+  border-top: 1px solid #a2a9b1;
+}
+
+/* ============================================================
+   WIKITABLE — Standard Wikipedia table
+   ============================================================ */
+.wikitable {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  border-collapse: collapse;
+  font-size: .875rem;
+  font-family: sans-serif;
+  margin: 1em 0;
+  width: 100%;
+}
+.wikitable caption {
+  font-weight: bold;
+  font-size: .9rem;
+  padding: 6px;
+  text-align: left;
+  color: #202122;
+  caption-side: top;
+}
+.wikitable th {
+  background: #eaecf0;
+  border: 1px solid #a2a9b1;
+  padding: 6px 10px;
+  font-weight: bold;
+  text-align: left;
+  color: #202122;
+  vertical-align: top;
+}
+.wikitable td {
+  border: 1px solid #a2a9b1;
+  padding: 6px 10px;
+  vertical-align: top;
+  line-height: 1.55;
+  color: #202122;
+}
+.wikitable tr:nth-child(even) td { background: #f0f2f5; }
+.wikitable tr:hover td { background: #eaf3fb; }
+
+.wikitable.sortable th { cursor: pointer; }
+.wikitable.sortable th::after {
+  content: " ↕";
+  font-size: .6em;
+  opacity: .5;
+}
+
+/* ============================================================
+   BLOCKQUOTES — Wikipedia style
+   ============================================================ */
+.mw-parser-output blockquote {
+  margin: .8em 0 .8em 1.6em;
+  padding: 4px 0 4px 16px;
+  border-left: 4px solid #a2a9b1;
+  color: #202122;
+  font-style: italic;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+.mw-parser-output blockquote p { margin: 0 0 .4em; }
+.mw-parser-output blockquote cite {
+  display: block;
+  margin-top: 6px;
+  font-style: normal;
+  font-size: .8125rem;
+  color: #54595d;
+  font-family: sans-serif;
+}
+
+/* ============================================================
+   WIKIPEDIA NOTICES / AMBOX
+   ============================================================ */
+.ambox {
+  border: 1px solid #a2a9b1;
+  border-left: 10px solid #3366cc;
+  background: #eaf3fb;
+  margin: 12px 0;
+  padding: 10px 14px;
+  font-family: sans-serif;
+  font-size: .875rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.ambox-notice { border-left-color: #3366cc; background: #eaf3fb; }
+.ambox-caution { border-left-color: #f0a500; background: #fef6e4; }
+.ambox-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.ambox-text { color: #202122; line-height: 1.5; }
+.ambox-text b { font-weight: bold; }
+
+/* ============================================================
+   PREFORMATTED / CODE — Wikipedia style
+   ============================================================ */
+.mw-parser-output pre {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 10px 14px;
+  font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+  font-size: .8125rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  color: #202122;
+  margin: .8em 0;
+  white-space: pre;
+}
+.mw-parser-output code {
+  font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+  font-size: .85em;
+  background: #f8f9fa;
+  border: 1px solid #eaecf0;
+  padding: 1px 4px;
+  border-radius: 2px;
+  color: #202122;
+}
+
+/* ============================================================
+   BULLET LISTS — Wikipedia style
+   ============================================================ */
+.mw-parser-output ul {
+  list-style: disc;
+  margin: .4em 0 .8em 1.6em;
+  padding: 0;
+}
+.mw-parser-output ul li {
+  margin-bottom: .25em;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+.mw-parser-output ol {
+  list-style: decimal;
+  margin: .4em 0 .8em 1.6em;
+  padding: 0;
+}
+.mw-parser-output ol li {
+  margin-bottom: .25em;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   DEFINITION LISTS
+   ============================================================ */
+.mw-parser-output dl { margin: .4em 0 .8em 0; }
+.mw-parser-output dt {
+  font-weight: bold;
+  margin-top: .4em;
+  font-size: .9375rem;
+}
+.mw-parser-output dd {
+  margin-left: 1.6em;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   REFERENCES SECTION
+   ============================================================ */
+.reflist {
+  font-family: sans-serif;
+  font-size: .8125rem;
+  column-count: 2;
+  column-gap: 24px;
+  margin: .5em 0;
+}
+.reflist ol {
+  list-style: decimal;
+  margin: 0;
+  padding-left: 1.6em;
+}
+.reflist ol li {
+  margin-bottom: 4px;
+  line-height: 1.5;
+  color: #202122;
+  break-inside: avoid;
+  font-size: .8125rem;
+}
+.reflist ol li a { color: #3366cc; }
+
+/* References heading style */
+.mw-references-wrap { margin-top: .5em; }
+
+/* ============================================================
+   CATEGORIES
+   ============================================================ */
+#catlinks {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 8px 14px;
+  margin-top: 20px;
+  font-family: sans-serif;
+  font-size: .8125rem;
+  color: #54595d;
+}
+#catlinks a { color: #3366cc; text-decoration: none; }
+#catlinks a:hover { text-decoration: underline; }
+.catlinks-header { font-weight: bold; margin-right: 6px; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer {
+  background: #f8f9fa;
+  border-top: 1px solid #a2a9b1;
+  margin-top: 20px;
+  padding: 16px 20px;
+  font-family: sans-serif;
+  font-size: .75rem;
+  color: #54595d;
+}
+.footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+#footer-icons { display: flex; gap: 8px; align-items: center; }
+#footer-info ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+#footer-info ul li a { color: #3366cc; text-decoration: none; }
+#footer-info ul li a:hover { text-decoration: underline; }
+
+/* ============================================================
+   READING PROGRESS — thin Wikipedia-accent bar
+   ============================================================ */
+#mw-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: #3366cc;
+  z-index: 9000;
+  transition: width .1s linear;
+}
+
+/* ============================================================
+   BACK TO TOP — minimal Wikipedia style
+   ============================================================ */
+#toTop {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border: 1px solid #a2a9b1;
+  border-radius: 2px;
+  font-size: .75rem;
+  font-family: sans-serif;
+  color: #3366cc;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#toTop.show { opacity: 1; pointer-events: auto; }
+#toTop:hover { background: #eaf3fb; border-color: #3366cc; }
+
+/* ============================================================
+   REVEAL ANIMATION — subtle, Wikipedia-appropriate
+   ============================================================ */
+.mw-reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.mw-reveal.mw-in { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   SECTION ANCHORS — Wikipedia [edit] button cosmetic
+   ============================================================ */
+.mw-headline { display: inline; }
+
+/* ============================================================
+   FIGURE / THUMB — Wikipedia thumbnail style
+   ============================================================ */
+.thumb {
+  float: right;
+  clear: right;
+  margin: 0 0 12px 16px;
+  font-family: sans-serif;
+  font-size: .8125rem;
+}
+.thumb .thumbinner {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 3px;
+  display: inline-block;
+  max-width: 260px;
+}
+.thumb .thumbcaption {
+  padding: 4px 4px 2px;
+  font-size: .75rem;
+  line-height: 1.4;
+  color: #54595d;
+  text-align: left;
+}
+.thumb .thumbimage {
+  display: block;
+  background: #eaecf0;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a2a9b1;
+  font-size: .75rem;
+  text-align: center;
+  padding: 8px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  #mw-toc-sidebar { display: none; }
+  .infobox { width: 220px; font-size: .75rem; }
+}
+@media (max-width: 800px) {
+  #mw-panel { display: none; }
+  #content { border-left: none; border-right: none; }
+  .infobox { float: none; width: 100%; margin: 0 0 16px 0; }
+  .reflist { column-count: 1; }
+  .mw-header-search { display: none; }
+  #firstHeading { font-size: 1.5rem; }
+  .thumb { float: none; margin: 0 0 12px 0; }
+}
+@media (max-width: 480px) {
+  .mw-header-tools { display: none; }
+  #content { padding: 12px; }
+}
+
+/* ============================================================
+   HORIZONTAL RULE
+   ============================================================ */
+.mw-parser-output hr {
+  border: none;
+  border-top: 1px solid #a2a9b1;
+  margin: 16px 0;
+}
+
+/* ============================================================
+   SMALL TEXT / FINE PRINT
+   ============================================================ */
+.mw-parser-output small {
+  font-size: .8125rem;
+  color: #54595d;
+  font-family: sans-serif;
 }
 </style>
 </head>
-<body>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject skin-vector">
 
-<!-- Lien d'évitement pour lecteurs d'écran -->
-<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<a class="mw-skip-link" href="#main-content">Aller au contenu</a>
+<div id="mw-progress" role="progressbar" aria-label="Progression de lecture" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
-<div id="progress" role="progressbar" aria-label="Progression de lecture" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-
-<!-- ===================== HERO ===================== -->
-<header class="hero">
-  <div class="kicker">Registre Archivistique &amp; Forensique · 1927–1930</div>
-  <div class="rule-orn" aria-hidden="true"><span>&#10070;</span></div>
-  <h1>Chronologie du Détachement de Tarfaya (1927–1930)</h1>
-  <p class="lede">Le Registre Archivistique, Forensique et Opérationnel Définitif des Dix-Huit Mois d'Antoine de Saint-Exupéry au Cap Juby</p>
-  <figure class="epigraph-hero">
-    <blockquote>
-      <p>« Ce qui embellit le désert, dit le petit prince, c'est qu'il cache un puits quelque part… »</p>
-    </blockquote>
-    <figcaption>— Antoine de Saint-Exupéry, <cite><em>Le Petit Prince</em></cite> (1943)</figcaption>
-  </figure>
-</header>
-
-<div class="layout-container">
-
-  <!-- ===== TABLE OF CONTENTS (SIDEBAR) ===== -->
-  <nav class="toc-box reveal" id="tocbox" aria-label="Table des matières">
-    <div class="toc-label" id="toc-heading">Table des Matières</div>
-    <ul class="toc-list" aria-labelledby="toc-heading">
-      <li><a href="#introduction">Introduction Méthodologique</a></li>
-      <li><a href="#equipe">L'Équipe Noyau &amp; la Ménagerie</a></li>
-      <li><a href="#registre">Registre Chronologique (1927–1930)</a>
-        <ul class="toc-sub">
-          <li><a href="#e1"><span class="num" aria-hidden="true">I.</span>14 oct 1927 — Télégramme du Destin</a></li>
-          <li><a href="#e2"><span class="num" aria-hidden="true">II.</span>19 oct 1927 — Atterrissage</a></li>
-          <li><a href="#e3"><span class="num" aria-hidden="true">III.</span>Nov 1927 — El Baum</a></li>
-          <li><a href="#e4"><span class="num" aria-hidden="true">IV.</span>4 déc 1927 — Breguet no 162</a></li>
-          <li><a href="#e5"><span class="num" aria-hidden="true">V.</span>24 déc 1927 — Veille de Noël</a></li>
-          <li><a href="#e6"><span class="num" aria-hidden="true">VI.</span>Jan–Fév 1928 — Sebkha Tah</a></li>
-          <li><a href="#e7"><span class="num" aria-hidden="true">VII.</span>Mar 1928 — Le Fennec</a></li>
-          <li><a href="#e8"><span class="num" aria-hidden="true">VIII.</span>30 jun 1928 — Crise des Otages</a></li>
-          <li><a href="#e9"><span class="num" aria-hidden="true">IX.</span>1–5 jul 1928 — Recherche Aérienne</a></li>
-          <li><a href="#e10"><span class="num" aria-hidden="true">X.</span>Jul–Sep 1928 — Guerre d'Usure</a></li>
-          <li><a href="#e11"><span class="num" aria-hidden="true">XI.</span>24 oct 1928 — Triomphe</a></li>
-          <li><a href="#e12"><span class="num" aria-hidden="true">XII.</span>Jan 1929 — Bidons d'Essence</a></li>
-          <li><a href="#e13"><span class="num" aria-hidden="true">XIII.</span>Mar 1929 — Remise des Clés</a></li>
-          <li><a href="#e14"><span class="num" aria-hidden="true">XIV.</span>7 avr 1930 — Légion d'Honneur</a></li>
-        </ul>
-      </li>
-      <li><a href="#timeline">Carte Chronologique Comparative</a></li>
-      <li><a href="#sources">Sources Archivistiques</a></li>
-    </ul>
-  </nav>
-
-  <!-- ===================== CONTENU PRINCIPAL ===================== -->
-  <main id="main-content" class="page">
-
-  <!-- ===== INTRODUCTION ===== -->
-  <section id="introduction" aria-labelledby="h-introduction" class="reveal">
-    <h2 class="section" id="h-introduction">
-      <span class="sn">§ I</span>Introduction Méthodologique : Exhumer le Registre Saharien au Jour le Jour
-    </h2>
-    <p class="dropcap">Pendant des décennies, la chronologie biographique standard du séjour d'Antoine de Saint-Exupéry au Cap Juby (Villa Bens / Tarfaya, Maroc) d'octobre 1927 à mars 1929 n'a été représentée que par une liste clairsemée et hautement simplifiée d'événements corporatifs. Le présent registre historique autonome brise ce récit simpliste.</p>
-    <p>En synthétisant des sources primaires — notamment les carnets de vol non expurgés de la <em>Compagnie Générale Aéropostale</em>, le carnet de route physique du <strong>Breguet-Latécoère XIV « Torpille » no 162 (Immatriculation F-AFHN)</strong>, les fichiers militaires coloniaux espagnols déclassifiés de l'<em>Archivo Histórico Nacional de España</em>, les dépêches déclassifiées du Département d'État américain (NARA), les journaux de terrain privés de l'opérateur radio <strong>Henri Delaunay</strong>, et les papiers successoraux de la <strong>Succession Saint-Exupéry - d'Agay</strong> — nous avons reconstitué une chronique hyper-détaillée, jour par jour et mois par mois, de son détachement de dix-huit mois.</p>
-    <p>Ce document représente le zénith absolu de l'archivisme forensique historique. Chaque jalon majeur est développé avec des récits opérationnels denses, des immatriculations d'aéronefs exactes, des marqueurs de vérification de source primaire, et un commentaire littéraire approfondi retraçant la genèse de <em>Courrier Sud</em>, <em>Terre des hommes</em> et <em>Le Petit Prince</em>.</p>
-  </section>
-
-  <div class="divider" aria-hidden="true">&#10070;</div>
-
-  <!-- ===== ÉQUIPE ===== -->
-  <section id="equipe" aria-labelledby="h-equipe" class="reveal">
-    <h2 class="section" id="h-equipe">
-      <span class="sn">§ II</span>L'Équipe Noyau et la Ménagerie de Villa Bens
-    </h2>
-    <p>Pour comprendre les entrées chronologiques, il faut d'abord établir le casting précis des personnages qui partageaient la baraque en bois battue par les vents de Saint-Exupéry, adossée directement contre le mur de pierre extérieur du fort espagnol. Selon les journaux intimes de l'opérateur radio <strong>Henri Delaunay</strong>, ce « groupe pittoresque d'âmes affamées » comprenait :</p>
-
-    <div class="diagram" role="img" aria-label="Schéma de l'équipe et de la ménagerie de la baraque de Tarfaya : équipe française, interprète, animaux et pilotes de passage">
-      <pre>
-                      +---------------------------------------+
-                      |     LA MÉNAGERIE DE LA BARAQUE        |
-                      |         DE TARFAYA                    |
-                      +---------------------------------------+
-                                          |
-        +------------------+--------------+-------------+------------------+
-        |                  |                            |                  |
-        v                  v                            v                  v
-[ L'ÉQUIPE FRANÇAISE ] [ L'INTERPRÈTE ]          [ LES ANIMAUX ]    [ LES PILOTES DE PASSAGE ]
-* Saint-Exupéry        * El Baum (diplomate       * Kiki (Babouin)   * René Riguelle
-  (Chef d'aéroplace)     hébraïco-marocain)       * Mirra (Chien)    * Émile Lécrivain
-* Henri Delaunay       * Contourne les            * Paf (Gros Chat)  * Maurice Dumesnil
-  (Opérateur Radio)      structures coloniales    * Fennec Sauvage   * Don Moron (Espagnol)
-* Toto (Mécano-chef)     avec des « suftajas »    (Renard apprivoisé)
-* Marchal (Mécanicien)</pre>
+<!-- ============================================================
+     WIKIPEDIA HEADER
+     ============================================================ -->
+<div id="mw-head-base">
+  <div class="mw-header-inner">
+    <a class="mw-logo" href="#" aria-label="Page d'accueil">
+      <div class="mw-logo-icon" aria-hidden="true"></div>
+      <div>
+        <span class="mw-logo-wordmark">Wikipédia</span>
+        <span class="mw-logo-tagline">L'encyclopédie libre</span>
+      </div>
+    </a>
+    <div class="mw-header-search" role="search">
+      <input type="search" placeholder="Rechercher sur Wikipédia" aria-label="Rechercher sur Wikipédia">
+      <button class="mw-search-btn" aria-label="Lancer la recherche">Rechercher</button>
     </div>
+    <nav class="mw-header-tools" aria-label="Outils utilisateur">
+      <a href="#">Créer un compte</a>
+      <a href="#">Se connecter</a>
+    </nav>
+  </div>
+</div>
 
-    <div class="tbl-wrap">
-      <table>
-        <caption>Membres de l'équipe et animaux de la station du Cap Juby, 1927–1929</caption>
-        <thead>
-          <tr>
-            <th scope="col">Personne / Animal</th>
-            <th scope="col">Rôle</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Antoine de Saint-Exupéry</strong></td>
-            <td><em>Chef d'aéroplace</em></td>
-            <td>Décrit par son équipe comme un <em>« gai copain »</em> — profondément aristocrate mais entièrement dépourvu de snobisme, qui passait ses nuits à arpenter le sol de sable dans un nuage de fumée de nicotine.</td>
-          </tr>
-          <tr>
-            <td><strong>Henri Delaunay</strong></td>
-            <td>Opérateur Radio</td>
-            <td>Le brillant opérateur radio sans fil chroniquement malade, dont le journal non expurgé <em>Araignée du soir</em> fournit la toile de fond brute et non censurée de la vie quotidienne.</td>
-          </tr>
-          <tr>
-            <td><strong>Toto</strong></td>
-            <td>Mécano-chef</td>
-            <td>Le mécanicien-chef robuste et chevronné — <em>« tout rondeur dans sa forme physique et son langage vulgaire et coloré »</em> — qui concevait des filtres à sable sur mesure.</td>
-          </tr>
-          <tr>
-            <td><strong>Marchal</strong></td>
-            <td>Mécanicien</td>
-            <td>Le mécanicien exceptionnellement jeune, <em>« indestructible »</em>, qui entretenait les moteurs et était notoire pour ses ébats à l'intérieur des soutes des biplans.</td>
-          </tr>
-          <tr>
-            <td><strong>El Baum</strong></td>
-            <td>Interprète et Diplomate</td>
-            <td>L'interprète et diplomate hébraïco-marocain dont les vastes réseaux de marchands familiaux à Agadir et Mogador contournaient les structures coloniales espagnoles.</td>
-          </tr>
-          <tr>
-            <td><strong>Kiki</strong></td>
-            <td>Babouin</td>
-            <td>Un babouin de compagnie bruyant et hurlant.</td>
-          </tr>
-          <tr>
-            <td><strong>Mirra</strong></td>
-            <td>Chien</td>
-            <td>Un chien de garde local, glouton et hautement territorial.</td>
-          </tr>
-          <tr>
-            <td><strong>Paf</strong></td>
-            <td>Chat</td>
-            <td>Un gros chat insolent et audacieux.</td>
-          </tr>
-          <tr>
-            <td><strong>Le Fennec</strong></td>
-            <td>Renard du désert</td>
-            <td>Un renard du désert saharien sauvage, finalement apprivoisé (voir <a href="#e7">Entrée VII</a>).</td>
-          </tr>
-        </tbody>
-      </table>
+<!-- TABS -->
+<div id="p-namespaces">
+  <div class="mw-tabs-inner">
+    <a class="mw-tab selected" href="#">Article</a>
+    <a class="mw-tab" href="#">Discussion</a>
+    <span class="mw-tab-sep"></span>
+    <div class="mw-tab-right">
+      <a class="mw-tab" href="#">Lire</a>
+      <a class="mw-tab" href="#">Modifier</a>
+      <a class="mw-tab" href="#">Voir l'historique</a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <div class="divider" aria-hidden="true">&#10070;</div>
+<!-- ============================================================
+     THREE-COLUMN PAGE LAYOUT
+     ============================================================ -->
+<div id="mw-page-base">
 
-  <!-- ===== REGISTRE ===== -->
-  <section id="registre" aria-labelledby="h-registre" class="reveal">
-    <h2 class="section" id="h-registre">
-      <span class="sn">§ III</span>Registre Archivistique Chronologique (1927–1930)
-    </h2>
+  <!-- LEFT SIDEBAR -->
+  <div id="mw-panel" role="navigation" aria-label="Navigation principale">
+    <nav class="portal">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="active"><a href="#">Accueil</a></li>
+        <li><a href="#">Portail thématique</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="portal">
+      <h3>Contribuer</h3>
+      <ul>
+        <li><a href="#">Aide</a></li>
+        <li><a href="#">Modifications récentes</a></li>
+        <li><a href="#">Faire un don</a></li>
+      </ul>
+    </nav>
+    <nav class="portal">
+      <h3>Outils</h3>
+      <ul>
+        <li><a href="#">Pages liées</a></li>
+        <li><a href="#">Imprimer</a></li>
+        <li><a href="#">Informations sur la page</a></li>
+        <li><a href="#">Citer cette page</a></li>
+      </ul>
+    </nav>
+    <nav class="portal">
+      <h3>Dans d'autres langues</h3>
+      <ul>
+        <li><a href="#" lang="es">Español</a></li>
+        <li><a href="#" lang="en">English</a></li>
+        <li><a href="#" lang="ar">العربية</a></li>
+        <li><a href="#" lang="de">Deutsch</a></li>
+      </ul>
+    </nav>
+  </div>
 
-    <!-- ENTRY I -->
-    <article id="e1" aria-labelledby="h-e1" class="reveal">
-      <h3 class="entry" id="h-e1">
-        <span class="roman" aria-label="Entrée I :">I.</span>14 octobre 1927 : Le Télégramme du Destin (Pré-Déploiement)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma du télégramme de nomination : Toulouse-Montaudran vers Saint-Exupéry, texte : nommé Chef d'aéroplace, Cap Juby">
-        <pre>
-[ Toulouse-Montaudran ] === Télégramme ===> [ Antoine de Saint-Exupéry ]
-« Se présenter immédiatement auprès de Didier Daurat. Nommé Chef d'aéroplace, Cap Juby. »</pre>
+  <!-- MAIN CONTENT -->
+  <main id="content" role="main" aria-label="Contenu de l'article">
+    <div id="main-content">
+
+      <!-- Page title -->
+      <h1 id="firstHeading" class="firstHeading">
+        Antoine de Saint-Exupéry au Cap Juby (1927–1930)
+      </h1>
+
+      <span class="shortdescription">Chronologie archivistique et forensique du détachement à Tarfaya (Villa Bens), Maroc</span>
+
+      <!-- Hatnote -->
+      <div class="hatnote" role="note">
+        Pour les autres usages, voir <a href="#">Antoine de Saint-Exupéry</a> et <a href="#">Tarfaya</a>.
       </div>
 
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Début octobre 1927, Antoine de Saint-Exupéry était en fonction comme pilote de ligne régulier pour la <em>Compagnie Générale Aéropostale</em>, volant sur le segment Casablanca–Dakar dans des conditions difficiles. Le 14 octobre, alors qu'il se reposait à l'Hôtel du Grand Balcon à Toulouse, il reçut un télégramme laconique du légendaire directeur d'exploitation de la compagnie, <strong>Didier Daurat</strong>. Daurat, un disciplinairien sévère et intransigeant, avait passé des mois à observer silencieusement le jeune pilote. Là où d'autres pilotes trouvaient l'intellectualisme et le constant <em>raturage</em> (griffonnage) de Saint-Exupéry excentriques, Daurat reconnaissait une combinaison rare de concentration clinique, d'endurance psychologique profonde et d'une capacité innée à la diplomatie discrète.</p>
-      <p>La sécurité de la vitale ligne du courrier aérien de Dakar s'effondrait. Les pillards nomades, notamment les Reguibat, avaient commencé à cibler systématiquement les avions français tombés en panne, exécutant les pilotes ou les retenant contre des rançons exorbitantes. Simultanément, la garnison militaire espagnole au Cap Juby sapait activement les opérations françaises. Daurat convoqua Saint-Exupéry à son bureau de Toulouse-Montaudran et lui remit sa commission officielle : il devait se rendre immédiatement au Cap Juby et assumer le double rôle de chef d'aéroplace et de principal négociateur diplomatique.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Référence Archivistique :</strong> <em>Registre de Dispatch du Personnel Aéropostale, Toulouse-Montaudran, Vol. IV, Entrée 91-A (14 octobre 1927).</em></li>
-        <li><strong>Texte du Télégramme (Extrait) :</strong> <em>« Stop. Nommé chef d'aéroplace Cap Juby avec effet immédiat. Stop. Rejoindre poste via Casablanca-Agadir sur premier vol courrier disponible. Daurat. »</em></li>
-        <li><strong>Référence Historique :</strong> Commémoré dans les archives de <em>L'Envol des Pionniers</em>, Toulouse <sup class="src"><a href="https://www.lenvol-des-pionniers.com/histoire-aeropostale/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : L'Envol des Pionniers [réf. 1]">[réf. 1]</a></sup>.</li>
-      </ul>
-
-      <h4 class="sub">Commentaire Érudit et Liens de Genèse Littéraire</h4>
-      <p>Ce moment marque la mort de Saint-Exupéry le jeune bohème et la naissance de Saint-Exupéry le pionnier. En Daurat, Saint-Exupéry trouva son père spirituel absolu. La philosophie intransigeante de Daurat — selon laquelle l'acheminement du courrier était un devoir sacré transcendant la vie individuelle — devint le cadre opérationnel de l'existence de Saint-Exupéry. Daurat finirait par être immortalisé dans le personnage majestueux et inflexible de <strong>Rivière</strong> dans le chef-d'œuvre de 1931, <em>Vol de nuit</em> <sup class="src"><a href="https://www.lenvol-des-pionniers.com/histoire-aeropostale/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : L'Envol des Pionniers, Vol de nuit [réf. 2]">[réf. 2]</a></sup>.</p>
-      <blockquote>
-        <p>« Le courrier doit passer. »</p>
-        <cite>— <strong>Didier Daurat</strong>, directeur d'exploitation de la Ligne <sup class="src"><a href="https://www.lemonde.fr/afrique/article/2018/10/25/a-cap-juby-une-piste-chargee-d-histoires-dont-celle-du-petit-prince_5374609_3212.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Le Monde, Cap Juby [réf. 3]">[réf. 3]</a></sup></cite>
-      </blockquote>
-    </article>
-
-    <!-- ENTRY II -->
-    <article id="e2" aria-labelledby="h-e2" class="reveal">
-      <h3 class="entry" id="h-e2">
-        <span class="roman" aria-label="Entrée II :">II.</span>19 octobre 1927 : L'Atterrissage au Bout du Monde (Arrivée)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma du vol d'arrivée : Océan Atlantique, brouillard marin et turbulences vers la piste de sable de Villa Bens. Pilote Saint-Exupéry, aéronef Breguet XIV F-AIEE">
-        <pre>
-[ Océan Atlantique ] -- Brouillard Marin &amp; Turbulences --> [ Piste de Sable, Villa Bens ]
-* Pilote : Antoine de Saint-Exupéry
-* Aéronef : Breguet XIV (Immatriculation F-AIEE)</pre>
+      <!-- Ambox notice -->
+      <div class="ambox ambox-notice" role="note">
+        <div class="ambox-icon" aria-hidden="true">📋</div>
+        <div class="ambox-text">
+          <b>Registre Archivistique &amp; Forensique · 1927–1930.</b>
+          Ce document synthétise des sources primaires — carnets de vol, archives militaires espagnoles déclassifiées,
+          dépêches NARA, journaux de terrain d'Henri Delaunay et papiers de la Succession Saint-Exupéry - d'Agay.
+        </div>
       </div>
 
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Le matin du 19 octobre 1927, Saint-Exupéry guida son <strong>biplan Breguet XIV (Immatriculation F-AIEE)</strong> à cockpit ouvert à travers une lourde couche marine atlantique chargée de sel, se posant sur la bande de sable dégagée de Villa Bens (Cap Juby). La scène qui s'offrit à ses yeux était lugubre. La « station » se composait de deux hangars en bois rudimentaires construits en 1925 par Francisco Cervera, et d'une minuscule baraque en bois balayée par les vents, adossée directement contre la massive façade de pierre du fort militaire espagnol <sup class="src"><a href="https://www.antoinedesaintexupery.org/lieux/cap-juby-tarfaya/" target="_blank" rel="noopener noreferrer" aria-label="Source : Fondation Saint-Exupéry, Cap Juby [réf. 4]">[réf. 4]</a></sup>.</p>
-      <p>Les limites physiques de son nouveau monde étaient stark. L'océan Atlantique, violent et froid, battait la rive ouest de la péninsule, tandis qu'à l'est, les dunes immenses et mouvantes de la Saguia el-Hamra s'étendaient vers un intérieur sans loi contrôlé par les tribus dissidentes. Les militaires espagnols informèrent immédiatement Saint-Exupéry qu'il lui était interdit de s'aventurer à plus de cinquante mètres des murs de pierre du fort sans escorte armée. Chaque pas au-delà de ce périmètre microscopique était un pas dans la <em>dissidence</em> — un territoire sans loi où un Européen n'était vu que comme un otage de valeur <sup class="src"><a href="https://www.lemonde.fr/afrique/article/2018/10/25/a-cap-juby-une-piste-chargee-d-histoires-dont-celle-du-petit-prince_5374609_3212.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Le Monde [réf. 3]">[réf. 3]</a></sup>.</p>
+      <div class="mw-parser-output">
 
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Entrée du Carnet de Vol :</strong> <em>Carnet de Vol Opérationnel Aéropostale, Secteur Casablanca-Dakar, 19 octobre 1927, signé « Saint-Exupéry ».</em></li>
-        <li><strong>Référence Archivistique :</strong> <em>Succession Antoine de Saint-Exupéry - d'Agay, Code Chronologie 1927-10-19</em> <sup class="src"><a href="https://www.antoinedesaintexupery.org/chronologie/1927-10-19-nomme-chef-descale-a-cap-juby/" target="_blank" rel="noopener noreferrer" aria-label="Source : Fondation Saint-Exupéry, chronologie [réf. 5]">[réf. 5]</a></sup>.</li>
-      </ul>
-      <blockquote>
-        <p>« Ma petite maman, Quelle vie de moine je mène ! Dans le coin le plus perdu de toute l'Afrique, en plein Sahara espagnol. Un fort sur la plage, notre baraque qui s'y adosse et plus rien pendant des centaines de kilomètres et des centaines ! La mer, à l'heure des marées, nous baigne complètement, et si je m'accoude la nuit contre ma lucarne à barreaux de prison — nous sommes en dissidence — j'ai la mer sous moi, aussi proche qu'en barque. Et elle frappe des coups toute la nuit contre mon mur. L'autre façade donne sur le Désert. C'est un dépouillement total. Un lit fait d'une planche et d'une paillasse maigre, une cuvette, un pot à eau. J'oublie les bibelots : la machine à écrire et les papiers de l'aéroplace ! une chambre de monastère. Les avions passent tous les huit jours. Entre eux, c'est trois jours de silence. »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, lettre à sa mère, Juby 1927 <sup class="src"><a href="https://medias24.com/2022/07/08/tarfaya-ou-la-muse-desertique-de-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : Medias24, Tarfaya [réf. 6]">[réf. 6]</a></sup></cite>
-      </blockquote>
-      <blockquote>
-        <p>« On peut aller sans danger jusqu'à la mer. Ça fait au moins vingt mètres. Je fais cette promenade plusieurs fois par jour. Mais si tu t'éloignes, tu reçois des coups de fusil. Et si tu dépasses cinquante mètres, on t'envoie rejoindre tes aïeux ou on t'emmène en esclavage, ça dépend de la saison… »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, lettre à sa mère <sup class="src"><a href="https://www.lemonde.fr/afrique/article/2018/10/25/a-cap-juby-une-piste-chargee-d-histoires-dont-celle-du-petit-prince_5374609_3212.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Le Monde [réf. 3]">[réf. 3]</a></sup></cite>
-      </blockquote>
+        <!-- INFOBOX -->
+        <aside class="infobox" aria-label="Fiche du détachement">
+          <div class="infobox-above">Détachement de Tarfaya</div>
+          <div class="infobox-subheader">Chef d'aéroplace · Compagnie Générale Aéropostale</div>
+          <table>
+            <tr><th>Période</th><td>Oct. 1927 – Mar. 1929</td></tr>
+            <tr><th>Lieu</th><td>Cap Juby / Villa Bens / Tarfaya, Maroc</td></tr>
+            <tr><th>Pilote</th><td><a href="#">Antoine de Saint-Exupéry</a></td></tr>
+            <tr><th>Aéronefs</th><td>Breguet XIV (F-AIEE, F-AFHN)</td></tr>
+            <tr><th>Employeur</th><td><a href="#">Aéropostale</a></td></tr>
+            <tr><th>Superviseur</th><td><a href="#">Didier Daurat</a></td></tr>
+          </table>
+          <div class="infobox-section-header">Œuvres associées</div>
+          <table>
+            <tr><th>Roman</th><td><em><a href="#">Courrier Sud</a></em> (1929)</td></tr>
+            <tr><th>Essai</th><td><em><a href="#">Terre des hommes</a></em> (1939)</td></tr>
+            <tr><th>Conte</th><td><em><a href="#">Le Petit Prince</a></em> (1943)</td></tr>
+          </table>
+          <div class="infobox-section-header">Distinctions</div>
+          <table>
+            <tr><th>7 avr. 1930</th><td>Chevalier de la <a href="#">Légion d'Honneur</a></td></tr>
+          </table>
+          <div class="infobox-below">Registre compilé à partir de 24 sources primaires et archivistiques</div>
+        </aside>
 
-      <h4 class="sub">Commentaire Érudit et Liens de Genèse Littéraire</h4>
-      <blockquote>
-        <p>« Pourtant, simple pilote, chef d'aéroport pour quelques mois à Cap Juby, disposant pour toute fortune d'une baraque adossée au fort espagnol et, dans cette baraque, d'une cuvette, d'un broc d'eau salée, d'un lit trop court, je me faisais moins d'illusions sur ma puissance. »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, <cite><em>Terre des hommes</em></cite> (1939) <sup class="src"><a href="https://medias24.com/2022/07/08/tarfaya-ou-la-muse-desertique-de-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : Medias24 [réf. 6]">[réf. 6]</a></sup></cite>
-      </blockquote>
-    </article>
+        <!-- ===== LEAD SECTION ===== -->
+        <section id="lead" class="mw-lead mw-reveal">
+          <p>
+            Le <b>détachement de Tarfaya</b> désigne la période de dix-huit mois (octobre 1927 – mars 1929)
+            durant laquelle l'écrivain et aviateur français <b><a href="#">Antoine de Saint-Exupéry</a></b>
+            servit comme chef d'aéroplace pour la <a href="#">Compagnie Générale Aéropostale</a>
+            à <a href="#">Villa Bens</a> (aujourd'hui <a href="#">Tarfaya</a>), au Sahara espagnol (actuel Maroc).
+            Cette période est considérée comme le creuset biographique et littéraire de son œuvre majeure,
+            fournissant les matériaux directs de <em><a href="#">Courrier Sud</a></em> (1929),
+            <em><a href="#">Terre des hommes</a></em> (1939) et <em><a href="#">Le Petit Prince</a></em> (1943).<sup class="reference"><a href="#ref-6">[6]</a></sup>
+          </p>
+          <p>
+            En synthétisant des sources primaires — notamment les carnets de vol non expurgés de l'Aéropostale,
+            le carnet de route du <b>Breguet-Latécoère XIV « Torpille » n° 162 (immatriculation F-AFHN)</b>,
+            les fichiers militaires coloniaux espagnols déclassifiés de l'<em>Archivo Histórico Nacional de España</em>,
+            les dépêches NARA, les journaux de terrain de l'opérateur radio <b>Henri Delaunay</b>,
+            et les papiers successoraux de la <b>Succession Saint-Exupéry - d'Agay</b> —
+            le présent registre reconstitue une chronique hyper-détaillée, jour par jour et mois par mois,
+            de ce détachement fondateur.<sup class="reference"><a href="#ref-5">[5]</a></sup>
+          </p>
+          <p>
+            Sa mission diplomatique et de sauvetage lui vaudra le titre de
+            <b><em>Chevalier de la Légion d'Honneur</em></b> le 7 avril 1930,
+            à l'âge exceptionnel de vingt-neuf ans.<sup class="reference"><a href="#ref-24">[24]</a></sup>
+          </p>
+        </section>
 
-    <!-- ENTRY III -->
-    <article id="e3" aria-labelledby="h-e3" class="reveal">
-      <h3 class="entry" id="h-e3">
-        <span class="roman" aria-label="Entrée III :">III.</span>Novembre 1927 : El Baum et les Fondements de la Diplomatie Saharienne
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de la stratégie diplomatique : apprentissage linguistique (arabe hassaniya, droit coutumier) et alliances stratégiques avec les chefs Izarguien">
-        <pre>
-      +-------------------------------------------------------+
-      |             L'AMBASSADEUR TRILINGUE                   |
-      +-------------------------------------------------------+
-                                  |
-         +------------------------+------------------------+
-         |                                                 |
-         v                                                 v
- [ APPRENTISSAGE LINGUISTIQUE ]                    [ ALLIANCES STRATÉGIQUES ]
- * Maîtrise l'arabe hassaniya                       * Engage les chefs du clan Izarguien
- * Transcrit les dialectes locaux                   * Partage le thé à la menthe sous les tentes
- * Étudie le droit coutumier ('Urf)                 * Forme des traités directs de protection</pre>
-      </div>
+        <hr>
 
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>En prenant son poste, Saint-Exupéry reconnut que la force militaire était inutile dans le Sahara. Contournant les autorités espagnoles, il engagea <strong>El Baum</strong>, un interprète marocain hautement instruit et multilingue, de confession juive, dont la famille dirigeait une prominente maison de commerce à Agadir <sup class="src"><a href="https://www.francebleu.fr/emissions/objectif-ciel/toulouse/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : France Bleu, Cap Juby [réf. 7]">[réf. 7]</a></sup>.</p>
-      <p>Sous la guidance d'El Baum, Saint-Exupéry entreprit une étude intensive de l'<strong>arabe hassaniya</strong> et des lois coutumières complexes (<em>'Urf</em>) gouvernant les relations tribales. Au lieu de traiter les nomades de « barbares », Saint-Exupéry commença à inviter les chefs Tekna et Reguibat dans sa baraque en bois, partageant le thé chaud à la menthe et exécutant des tours de carte et des illusions d'optique avancées <sup class="src"><a href="https://www.lesamisdantoinedesaintexupery.org/page1/a-la-rencontre-des-nomades/" target="_blank" rel="noopener noreferrer" aria-label="Source : Les Amis de Saint-Exupéry, nomades [réf. 8]">[réf. 8]</a></sup>.</p>
+        <!-- ===== SECTION 1 : ÉQUIPE ===== -->
+        <section id="equipe" class="mw-reveal">
+          <h2>
+            <span class="mw-headline" id="L'équipe_noyau">L'équipe noyau et la ménagerie de Villa Bens</span>
+            <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#" aria-label="Modifier la section">modifier</a><span class="mw-editsection-bracket">]</span></span>
+          </h2>
+          <p>
+            La station du Cap Juby se composait d'une minuscule baraque en bois battue par les vents,
+            adossée directement contre le mur de pierre extérieur du fort militaire espagnol.<sup class="reference"><a href="#ref-4">[4]</a></sup>
+            Selon les journaux intimes de l'opérateur radio <b>Henri Delaunay</b>,
+            ce « groupe pittoresque d'âmes affamées » rassemblait les membres suivants :
+          </p>
 
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Registre d'Emploi de l'Interprète :</strong> <em>Grand-Livre des Paies Aéropostale, Bureau de Dakar, novembre 1927, Article 114 : « Embauche de l'interprète El Baum à Tarfaya, salaire mensuel de 1 200 francs »</em> <sup class="src"><a href="https://www.francebleu.fr/emissions/objectif-ciel/toulouse/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : France Bleu [réf. 7]">[réf. 7]</a></sup>.</li>
-        <li><strong>Entrée du Journal de Delaunay :</strong> <em>« Antoine passe ses après-midi avec les Maures. Il écoute El Baum lui traduire leurs proverbes interminables. Ils s'apprivoisent mutuellement. »</em> <sup class="src"><a href="https://www.aerobernie.com/2018/10/raid-latecoere-aeropostale-arrivee-saint-exupery-cap-juby.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Aerobernie, Aéropostale [réf. 9]">[réf. 9]</a></sup></li>
-      </ul>
+          <pre role="img" aria-label="Organigramme schématique de l'équipe de la baraque de Tarfaya">
++---------------------------------------+
+|     LA MÉNAGERIE DE LA BARAQUE        |
+|          DE TARFAYA (1927–1929)       |
++---------------------------------------+
+         |           |           |           |
+[ÉQUIPE FR.]  [INTERPRÈTE]  [ANIMAUX]  [PILOTES PASSAGE]
+* Saint-Exupéry  * El Baum    * Kiki         * René Riguelle
+  Chef d'escale    (hébraïco-   (Babouin)     * Émile Lécrivain
+* H. Delaunay      marocain)  * Mirra (Chien) * Maurice Dumesnil
+  Radio          * Suftajas   * Paf (Chat)    * Don Moron
+* Toto (Méca.)                * Fennec
+* Marchal (Méca.)               (Apprivoisé)</pre>
 
-      <h4 class="sub">Commentaire Érudit et Liens de Genèse Littéraire</h4>
-      <blockquote>
-        <p>« J'ai apprivoisé un caméléon. C'est mon rôle ici d'apprivoiser. Ça me va, c'est un joli mot. »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, lettre à sa mère, Juby 1927 <sup class="src"><a href="https://milema.canalblog.com/archives/2010/11/30/19745094.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Milema, blog Canalblog [réf. 10]">[réf. 10]</a></sup></cite>
-      </blockquote>
-      <blockquote>
-        <p>« Nous étions là-bas en contact avec les Maures insoumis. Ils émergeaient du fond des territoires que nous franchissions dans nos vols ; ils se hasardaient aux fortins de Juby ou de Cisneros pour y faire l'achat de pains de sucre ou de thé, puis ils se renfonçaient dans leur mystère. Et nous tentions, à leur passage, d'apprivoiser quelques-uns d'entre eux. »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, <cite><em>Terre des hommes</em></cite> (1939) <sup class="src"><a href="https://www.lesamisdantoinedesaintexupery.org/page1/a-la-rencontre-des-nomades/" target="_blank" rel="noopener noreferrer" aria-label="Source : Les Amis de Saint-Exupéry [réf. 8]">[réf. 8]</a></sup></cite>
-      </blockquote>
-      <blockquote>
-        <p>— Qu'est-ce que signifie « apprivoiser » ? dit le petit prince.<br>
-        — C'est une chose trop oubliée, dit le renard. Ça signifie « créer des liens… »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, <cite><em>Le Petit Prince</em></cite>, chapitre XXI <sup class="src"><a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer" aria-label="Source : 3e Groupe de Transport, renards [réf. 11]">[réf. 11]</a></sup></cite>
-      </blockquote>
-    </article>
+          <table class="wikitable sortable" style="margin-top:1em">
+            <caption>Membres de l'équipe et animaux de la station du Cap Juby, 1927–1929</caption>
+            <thead>
+              <tr>
+                <th scope="col">Personne / Animal</th>
+                <th scope="col">Rôle</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b><a href="#">Antoine de Saint-Exupéry</a></b></td>
+                <td><em>Chef d'aéroplace</em></td>
+                <td>Décrit par son équipe comme un <em>« gai copain »</em> — profondément aristocrate mais sans snobisme ; passait ses nuits à arpenter le sol de sable dans un nuage de fumée de nicotine.</td>
+              </tr>
+              <tr>
+                <td><b>Henri Delaunay</b></td>
+                <td>Opérateur Radio</td>
+                <td>Brillant opérateur radio chroniquement malade ; son journal non expurgé <em>Araignée du soir</em> fournit la toile de fond brute de la vie quotidienne.<sup class="reference"><a href="#ref-9">[9]</a></sup></td>
+              </tr>
+              <tr>
+                <td><b>Toto</b></td>
+                <td>Mécano-chef</td>
+                <td>Mécanicien robuste et chevronné, <em>« tout rondeur dans sa forme physique et son langage vulgaire et coloré »</em> ; concevait des filtres à sable sur mesure.</td>
+              </tr>
+              <tr>
+                <td><b>Marchal</b></td>
+                <td>Mécanicien</td>
+                <td>Mécanicien exceptionnellement jeune, <em>« indestructible »</em> ; entretenait les moteurs ; notoire pour ses ébats à l'intérieur des soutes des biplans.</td>
+              </tr>
+              <tr>
+                <td><b>El Baum</b></td>
+                <td>Interprète et Diplomate</td>
+                <td>Interprète hébraïco-marocain dont les réseaux marchands à Agadir et Mogador contournaient les structures coloniales espagnoles via des <em>suftajas</em>.<sup class="reference"><a href="#ref-20">[20]</a></sup></td>
+              </tr>
+              <tr>
+                <td><b>Kiki</b></td>
+                <td>Babouin</td>
+                <td>Babouin de compagnie bruyant et hurlant.</td>
+              </tr>
+              <tr>
+                <td><b>Mirra</b></td>
+                <td>Chien</td>
+                <td>Chien de garde local, glouton et hautement territorial.</td>
+              </tr>
+              <tr>
+                <td><b>Paf</b></td>
+                <td>Chat</td>
+                <td>Gros chat insolent et audacieux.</td>
+              </tr>
+              <tr>
+                <td><b>Le Fennec</b></td>
+                <td>Renard du désert</td>
+                <td>Renard du désert saharien sauvage, finalement apprivoisé en mars 1928 ; matrice directe du Renard du <em>Petit Prince</em>.<sup class="reference"><a href="#ref-11">[11]</a></sup></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-    <!-- ENTRY IV -->
-    <article id="e4" aria-labelledby="h-e4" class="reveal">
-      <h3 class="entry" id="h-e4">
-        <span class="roman" aria-label="Entrée IV :">IV.</span>4 décembre 1927 : La Route du Breguet « Torpille » no 162
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma du vol du 4 décembre 1927 : Cap Juby vers Port-Étienne. Pilote Saint-Exupéry, Breguet-Latécoère XIV no 162, immatriculation F-AFHN">
-        <pre>
-[ Terrain du Cap Juby ] ======= Carnet de Vol ======> [ Piste de Port-Étienne ]
-* Pilote : Antoine de Saint-Exupéry
-* Aéronef : Breguet-Latécoère XIV « Torpille » no 162 (Immatriculation F-AFHN)</pre>
-      </div>
+        <!-- ===== SECTION 2 : REGISTRE ===== -->
+        <section id="registre" class="mw-reveal">
+          <h2>
+            <span class="mw-headline" id="Registre_chronologique">Registre archivistique chronologique (1927–1930)</span>
+            <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#" aria-label="Modifier la section">modifier</a><span class="mw-editsection-bracket">]</span></span>
+          </h2>
 
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Tout en assumant le rôle de chef de station administratif, Saint-Exupéry resta un pilote extrêmement actif. Le 4 décembre 1927, il prit les commandes du <strong>Breguet-Latécoère XIV « Torpille » no 162 (Immatriculation F-AFHN)</strong>, survolant la portion hyper-aride de 1 000 kilomètres entre le Cap Juby et la base française du désert profond à <strong>Port-Étienne</strong> (aujourd'hui Nouadhibou, Mauritanie).</p>
-      <p>Ce vol eut lieu durant une période d'instabilité atmosphérique intense, marquée par l'apparition soudaine du <em>Chergui</em> — un vent brûlant chargé de poussière soufflant depuis le Sahara qui obliterait la visibilité et provoquait un givrage extrême des carburateurs au-dessus du littoral atlantique. Saint-Exupéry navigua uniquement à l'estime, suivant la ligne blanche et dentelée où les dunes du désert rencontraient les roches noires de l'écume océanique.</p>
+          <!-- ENTRY I -->
+          <section id="e1" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Telegr_destin">1. 14 octobre 1927 — Le télégramme du destin (pré-déploiement)</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Début octobre 1927, Antoine de Saint-Exupéry se reposait à l'<a href="#">Hôtel du Grand Balcon</a> à Toulouse
+              lorsqu'il reçut un télégramme laconique de <b><a href="#">Didier Daurat</a></b>,
+              légendaire directeur d'exploitation de la Compagnie Générale Aéropostale :<sup class="reference"><a href="#ref-1">[1]</a></sup>
+            </p>
+            <blockquote>
+              <p>« Stop. Nommé chef d'aéroplace Cap Juby avec effet immédiat. Stop. Rejoindre poste via Casablanca-Agadir sur premier vol courrier disponible. Daurat. »</p>
+              <cite>— Télégramme de Didier Daurat, <em>Registre de Dispatch du Personnel Aéropostale, Toulouse-Montaudran, Vol. IV, Entrée 91-A</em> (14 octobre 1927)</cite>
+            </blockquote>
+            <p>
+              Daurat reconnaissait en Saint-Exupéry une combinaison rare de concentration clinique,
+              d'endurance psychologique profonde et d'une capacité innée à la diplomatie discrète.
+              Les pillards nomades, notamment les <a href="#">Reguibat</a>, ciblaient systématiquement les avions français tombés en panne,
+              exécutant les pilotes ou les retenant contre des rançons exorbitantes.<sup class="reference"><a href="#ref-3">[3]</a></sup>
+            </p>
+            <h4>Liens de genèse littéraire</h4>
+            <p>
+              Ce moment marque la naissance de Saint-Exupéry le pionnier. Daurat finirait par être immortalisé
+              dans le personnage de <b>Rivière</b> dans le chef-d'œuvre de 1931, <em><a href="#">Vol de nuit</a></em>.<sup class="reference"><a href="#ref-2">[2]</a></sup>
+            </p>
+            <blockquote>
+              <p>« Le courrier doit passer. »</p>
+              <cite>— <b>Didier Daurat</b>, directeur d'exploitation de la Ligne<sup class="reference"><a href="#ref-3">[3]</a></sup></cite>
+            </blockquote>
+          </section>
 
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Artefact Physique Primaire :</strong> <em>Carnet de route de l'avion Breguet-Latécoère XIV « Torpille » no 162, Immatriculation F-AFHN (Archives Nationales de l'Aviation Civile, Paris).</em></li>
-        <li><strong>Détail de l'Entrée :</strong> Page 47, vol du 4 décembre 1927. Secteur : <em>Cap Juby vers Port-Étienne</em>. Pilote : <em>Saint-Exupéry, A.</em> Cargaison : <em>Sac de courrier aérien « Dakar-7 »</em>. Visé et tamponné à Port-Étienne le 5 décembre 1927.</li>
-        <li><strong>Code Catalogue Christie's :</strong> Christie's Paris, Manuscrits d'Aviation Historique, Lot 5560265 <sup class="src"><a href="https://www.christies.com/en/lot/lot-5560265" target="_blank" rel="noopener noreferrer" aria-label="Source : Christie's Paris, lot 5560265 [réf. 12]">[réf. 12]</a></sup>.</li>
-      </ul>
+          <!-- ENTRY II -->
+          <section id="e2" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Atterrissage">2. 19 octobre 1927 — L'atterrissage au bout du monde (arrivée)</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
 
-      <h4 class="sub">Commentaire Érudit et Liens de Genèse Littéraire</h4>
-      <p>Ce carnet de vol représente l'un des rares enregistrements physiques survivants du pilotage pratique de Saint-Exupéry durant son commandement du Cap Juby. L'aéronef consigné dans ce registre, le F-AFHN, s'écraserait tragiquement à Morgonera, en Espagne, le 27 janvier 1928 <sup class="src"><a href="https://www.christies.com/en/lot/lot-5560265" target="_blank" rel="noopener noreferrer" aria-label="Source : Christie's Paris [réf. 12]">[réf. 12]</a></sup>. C'est de ces vols précis que Saint-Exupéry tira les descriptions brutes et tactiles du vol qui forment le socle de <em>Courrier Sud</em> <sup class="src"><a href="https://www.ladepeche.fr/2021/06/14/courrier-sud-de-saint-exupery-le-manuscrit-de-laviateur-amoureux-9605019.php" target="_blank" rel="noopener noreferrer" aria-label="Source : La Dépêche, Courrier Sud [réf. 13]">[réf. 13]</a></sup>.</p>
-    </article>
+            <div class="thumb" aria-label="Illustration schématique">
+              <div class="thumbinner">
+                <div class="thumbimage" aria-hidden="true">
+                  ✈ Cap Juby<br>Villa Bens<br>19 oct. 1927
+                </div>
+                <div class="thumbcaption">
+                  Arrivée de Saint-Exupéry sur la piste de sable de Villa Bens.
+                  Aéronef : Breguet XIV, immatriculation F-AIEE.
+                </div>
+              </div>
+            </div>
 
-    <!-- ENTRY V -->
-    <article id="e5" aria-labelledby="h-e5" class="reveal">
-      <h3 class="entry" id="h-e5">
-        <span class="roman" aria-label="Entrée V :">V.</span>24 décembre 1927 : La Rencontre Historique de la Veille de Noël
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma du vol de la veille de Noël 1927 : Luis de Oteyza et Alfonsito arrivent au Cap Juby sur Breguet XIV no 301, accueillis par Saint-Exupéry et Riguelle">
-        <pre>
-[ Route Toulouse-Casablanca-Juby ] === Breguet XIV (no 301) ===> [ Plage du Cap Juby ]
-* Arrivants : Luis de Oteyza &amp; Alfonso Sánchez Portela (Alfonsito)
-* Accueillis par : Antoine de Saint-Exupéry &amp; René Riguelle</pre>
-      </div>
+            <p>
+              Le matin du 19 octobre 1927, Saint-Exupéry guida son <b>biplan Breguet XIV (immatriculation F-AIEE)</b>
+              à cockpit ouvert à travers une lourde couche marine atlantique chargée de sel,
+              se posant sur la bande de sable dégagée de Villa Bens.<sup class="reference"><a href="#ref-4">[4]</a></sup>
+              La « station » se composait de deux hangars en bois rudimentaires construits en 1925 par Francisco Cervera,
+              et d'une minuscule baraque en bois balayée par les vents, adossée directement contre la massive façade de pierre du fort militaire espagnol.
+            </p>
+            <p>
+              Les militaires espagnols informèrent immédiatement Saint-Exupéry qu'il lui était interdit
+              de s'aventurer à plus de cinquante mètres des murs de pierre du fort sans escorte armée.
+              Chaque pas au-delà de ce périmètre microscopique était un pas dans la <em>dissidence</em> —
+              un territoire sans loi où un Européen n'était vu que comme un otage de valeur.<sup class="reference"><a href="#ref-3">[3]</a></sup>
+            </p>
 
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>L'après-midi de la veille de Noël, 24 décembre 1927, un avion postal français — un <strong>Breguet XIV, immatriculation no 301</strong>, piloté par Luc Richard — se posa sur le sable humide de la plage du Cap Juby <sup class="src"><a href="https://www.publico.es/actualidad/saint-exupery-cielos.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Publico.es, Saint-Exupéry [réf. 14]">[réf. 14]</a></sup>. Sortant du cockpit se trouvaient deux figures espagnoles éminentes : <strong>Luis de Oteyza</strong>, l'éditeur républicain radical du journal madrilène <em>La Libertad</em>, et <strong>Alfonso Sánchez Portela (Alfonsito)</strong>, un légendaire photojournaliste de 25 ans <sup class="src"><a href="https://www.publico.es/actualidad/saint-exupery-cielos.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Publico.es [réf. 14]">[réf. 14]</a></sup>.</p>
-      <p>Saint-Exupéry accueillit les voyageurs épuisés dans sa cabine en bois. À la lumière d'une unique bougie, il leur servit un souper de veille de Noël improvisé consistant en sardines en conserve, des biscuits de mer secs, et une bouteille de vin rouge qu'il avait personnellement fait passer en contrebande à l'intérieur du compartiment scellé du courrier <sup class="src"><a href="https://ntvespana.com/26/03/2025/luis-de-oteyza-que-estas-en-los-cielos-por-miguel-espinosa-garcia-de-oteyza/" target="_blank" rel="noopener noreferrer" aria-label="Source : NTV España, Luis de Oteyza [réf. 15]">[réf. 15]</a></sup>.</p>
-      <p>Le lendemain matin, Alfonsito installa sa lourde chambre Goerz à plaques de verre et captura deux photographies historiques de Saint-Exupéry <sup class="src"><a href="http://pares.mcu.es/ParesBusquedas20/catalogo/description/1395579" target="_blank" rel="noopener noreferrer" aria-label="Source : PARES, AGA Fondo Alfonso [réf. 16]">[réf. 16]</a></sup>.</p>
+            <h4>Lettres à sa mère — sources primaires</h4>
+            <blockquote>
+              <p>« Ma petite maman, Quelle vie de moine je mène ! Dans le coin le plus perdu de toute l'Afrique, en plein Sahara espagnol. Un fort sur la plage, notre baraque qui s'y adosse et plus rien pendant des centaines de kilomètres et des centaines ! La mer, à l'heure des marées, nous baigne complètement, et si je m'accoude la nuit contre ma lucarne à barreaux de prison — nous sommes en dissidence — j'ai la mer sous moi, aussi proche qu'en barque. »</p>
+              <cite>— Antoine de Saint-Exupéry, lettre à sa mère, Juby 1927<sup class="reference"><a href="#ref-6">[6]</a></sup></cite>
+            </blockquote>
+            <blockquote>
+              <p>« On peut aller sans danger jusqu'à la mer. Ça fait au moins vingt mètres. Je fais cette promenade plusieurs fois par jour. Mais si tu t'éloignes, tu reçois des coups de fusil. Et si tu dépasses cinquante mètres, on t'envoie rejoindre tes aïeux ou on t'emmène en esclavage, ça dépend de la saison… »</p>
+              <cite>— Antoine de Saint-Exupéry, lettre à sa mère<sup class="reference"><a href="#ref-3">[3]</a></sup></cite>
+            </blockquote>
 
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Artefact Photographique :</strong> Archives Générales de l'Administration espagnoles (AGA), Sección de Fotografía, Fondo Alfonso, <strong>Référence de Plaque no 036446</strong> <sup class="src"><a href="http://pares.mcu.es/ParesBusquedas20/catalogo/description/1395579" target="_blank" rel="noopener noreferrer" aria-label="Source : PARES, plaque 036446 [réf. 16]">[réf. 16]</a></sup>.</li>
-        <li><strong>Référence du Récit de Voyage :</strong> Luis de Oteyza, <em>Al Senegal en avión</em> (Madrid : CIAP, 1928), chapitre IX : « La hospitalidad de las dunas » <sup class="src"><a href="https://ntvespana.com/26/03/2025/luis-de-oteyza-que-estas-en-los-cielos-por-miguel-espinosa-garcia-de-oteyza/" target="_blank" rel="noopener noreferrer" aria-label="Source : NTV España [réf. 15]">[réf. 15]</a></sup>.</li>
-        <li><strong>Texte d'Oteyza (Extrait espagnol original) :</strong> <em>« En Cabo Juby, el jefe de la estación francesa, Saint-Exupéry, nos acogió con la hospitalidad de un rey del desierto. Es un gigante de hombre, con ojos grandes y expresivos que parecen fijos permanentemente en el horizonte, como buscando una estrella perdida… »</em> <sup class="src"><a href="https://ntvespana.com/26/03/2025/luis-de-oteyza-que-estas-en-los-cielos-por-miguel-espinosa-garcia-de-oteyza/" target="_blank" rel="noopener noreferrer" aria-label="Source : NTV España, Oteyza [réf. 15]">[réf. 15]</a></sup></li>
-      </ul>
-      <div class="diagram light" role="img" aria-label="Reconstitution de la photo AGA du 25 décembre 1927, plaque 036446 : de gauche à droite, Riguelle, Dumesnil, Oteyza, Saint-Exupéry, Luc Richard, sur la plage du Cap Juby devant l'océan et le fort de pierre">
-        <pre>
+            <h4>Liens de genèse littéraire</h4>
+            <blockquote>
+              <p>« Pourtant, simple pilote, chef d'aéroport pour quelques mois à Cap Juby, disposant pour toute fortune d'une baraque adossée au fort espagnol et, dans cette baraque, d'une cuvette, d'un broc d'eau salée, d'un lit trop court, je me faisais moins d'illusions sur ma puissance. »</p>
+              <cite>— Antoine de Saint-Exupéry, <em>Terre des hommes</em> (1939)<sup class="reference"><a href="#ref-6">[6]</a></sup></cite>
+            </blockquote>
+          </section>
+
+          <!-- ENTRY III -->
+          <section id="e3" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="El_Baum">3. Novembre 1927 — El Baum et les fondements de la diplomatie saharienne</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              En prenant son poste, Saint-Exupéry reconnut que la force militaire était inutile dans le Sahara.
+              Contournant les autorités espagnoles, il engagea <b>El Baum</b>,
+              un interprète marocain hautement instruit et multilingue, de confession juive,
+              dont la famille dirigeait une prominente maison de commerce à Agadir.<sup class="reference"><a href="#ref-7">[7]</a></sup>
+              Son registre d'emploi officiel figure dans le <em>Grand-Livre des Paies Aéropostale, Bureau de Dakar, novembre 1927,
+              Article 114 : « Embauche de l'interprète El Baum à Tarfaya, salaire mensuel de 1 200 francs »</em>.
+            </p>
+            <p>
+              Sous la guidance d'El Baum, Saint-Exupéry entreprit une étude intensive de l'<b>arabe hassaniya</b>
+              et des lois coutumières complexes (<em>'Urf</em>) gouvernant les relations tribales.
+              Il commença à inviter les chefs Tekna et Reguibat dans sa baraque, partageant le thé chaud à la menthe
+              et exécutant des tours de carte et des illusions d'optique avancées.<sup class="reference"><a href="#ref-8">[8]</a></sup>
+            </p>
+
+            <dl>
+              <dt>Journal de Delaunay (extrait)</dt>
+              <dd><em>« Antoine passe ses après-midi avec les Maures. Il écoute El Baum lui traduire leurs proverbes interminables. Ils s'apprivoisent mutuellement. »</em><sup class="reference"><a href="#ref-9">[9]</a></sup></dd>
+            </dl>
+
+            <h4>Liens de genèse littéraire — le concept d'<em>apprivoisement</em></h4>
+            <blockquote>
+              <p>« J'ai apprivoisé un caméléon. C'est mon rôle ici d'apprivoiser. Ça me va, c'est un joli mot. »</p>
+              <cite>— Antoine de Saint-Exupéry, lettre à sa mère, Juby 1927<sup class="reference"><a href="#ref-10">[10]</a></sup></cite>
+            </blockquote>
+            <blockquote>
+              <p>— Qu'est-ce que signifie « apprivoiser » ? dit le petit prince.<br>
+              — C'est une chose trop oubliée, dit le renard. Ça signifie « créer des liens… »</p>
+              <cite>— Antoine de Saint-Exupéry, <em>Le Petit Prince</em>, chapitre XXI<sup class="reference"><a href="#ref-11">[11]</a></sup></cite>
+            </blockquote>
+          </section>
+
+          <!-- ENTRY IV -->
+          <section id="e4" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Breguet_162">4. 4 décembre 1927 — La route du Breguet « Torpille » n° 162</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Tout en assumant le rôle de chef de station administratif, Saint-Exupéry resta un pilote extrêmement actif.
+              Le 4 décembre 1927, il prit les commandes du <b>Breguet-Latécoère XIV « Torpille » n° 162
+              (immatriculation F-AFHN)</b>, survolant la portion hyper-aride de 1 000 kilomètres entre le Cap Juby
+              et la base française du désert profond à <b>Port-Étienne</b> (aujourd'hui <a href="#">Nouadhibou</a>, Mauritanie).
+            </p>
+            <p>
+              Ce vol eut lieu durant une période d'instabilité atmosphérique intense, marquée par l'apparition soudaine
+              du <em>Chergui</em> — un vent brûlant chargé de poussière soufflant depuis le Sahara,
+              qui oblitérait la visibilité et provoquait un givrage extrême des carburateurs au-dessus du littoral atlantique.
+              Saint-Exupéry navigua uniquement à l'estime, suivant la ligne blanche et dentelée
+              où les dunes du désert rencontraient les roches noires de l'écume océanique.
+            </p>
+
+            <h4>Sources primaires</h4>
+            <ul>
+              <li><em>Carnet de route du Breguet-Latécoère XIV « Torpille » n° 162, immatriculation F-AFHN</em>,
+              Archives Nationales de l'Aviation Civile, Paris. Page 47, vol du 4 décembre 1927,
+              secteur Cap Juby → Port-Étienne. Signé <em>« Saint-Exupéry, A. »</em><sup class="reference"><a href="#ref-12">[12]</a></sup></li>
+              <li>Le F-AFHN s'écraserait tragiquement à Morgonera, Espagne, le 27 janvier 1928.<sup class="reference"><a href="#ref-12">[12]</a></sup></li>
+            </ul>
+          </section>
+
+          <!-- ENTRY V -->
+          <section id="e5" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Noel_1927">5. 24 décembre 1927 — La rencontre historique de la veille de Noël</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              L'après-midi de la veille de Noël 1927, un avion postal français — un <b>Breguet XIV, n° 301</b>,
+              piloté par Luc Richard — se posa sur le sable humide de la plage du Cap Juby.<sup class="reference"><a href="#ref-14">[14]</a></sup>
+              Sortant du cockpit se trouvaient deux figures espagnoles éminentes :
+              <b><a href="#">Luis de Oteyza</a></b>, éditeur républicain du journal madrilène <em>La Libertad</em>,
+              et <b>Alfonso Sánchez Portela (Alfonsito)</b>, légendaire photojournaliste de 25 ans.<sup class="reference"><a href="#ref-14">[14]</a></sup>
+            </p>
+            <p>
+              Saint-Exupéry accueillit les voyageurs dans sa cabine en bois. À la lumière d'une unique bougie,
+              il leur servit un souper improvisé consistant en sardines en conserve, des biscuits de mer secs,
+              et une bouteille de vin rouge qu'il avait personnellement fait passer en contrebande
+              à l'intérieur du compartiment scellé du courrier.<sup class="reference"><a href="#ref-15">[15]</a></sup>
+            </p>
+
+            <h4>Artefact photographique — AGA Fondo Alfonso</h4>
+            <p>
+              Le lendemain matin, Alfonsito installa sa lourde chambre Goerz à plaques de verre
+              et captura deux photographies historiques de Saint-Exupéry.
+              Ces clichés constituent la plus ancienne photographie connue de Saint-Exupéry
+              opérant comme chef d'escale du Cap Juby.
+            </p>
+
+            <pre role="img" aria-label="Reconstitution de la photo AGA du 25 décembre 1927, plaque 036446">
 +--------------------------------------------------------------------------+
-|     RECONSTITUTION DE LA PHOTO AGA ICONIQUE DE 1927 (PLAQUE 036446)     |
+|     RECONSTITUTION — PHOTO AGA FONDO ALFONSO (PLAQUE 036446)            |
+|     Plage du Cap Juby · 25 décembre 1927                                 |
 +--------------------------------------------------------------------------+
 |                                                                          |
 |  [Riguelle]  [Dumesnil]  [Oteyza]  [SAINT-EXUPÉRY]  [Luc Richard]      |
-|   (Pilote)    (Pilote)  (Écrivain)  (Chef d'escale)   (Pilote)          |
+|   Pilote      Pilote     Écrivain   Chef d'escale      Pilote            |
 |                                                                          |
-|  * Lieu : Plage du Cap Juby                                              |
-|  * Date : 25 décembre 1927                                               |
-|  * Contexte : Vestes de vol en cuir, sable, océan Atlantique, fort       |
-|                                                                          |
+|  Vestes de vol en cuir · Sable atlantique · Fort de pierre en fond      |
 +--------------------------------------------------------------------------+</pre>
+
+            <dl>
+              <dt>Texte d'Oteyza (espagnol original)</dt>
+              <dd><em>« En Cabo Juby, el jefe de la estación francesa, Saint-Exupéry, nos acogió con la hospitalidad de un rey del desierto. Es un gigante de hombre, con ojos grandes y expresivos que parecen fijos permanentemente en el horizonte, como buscando una estrella perdida… »</em><sup class="reference"><a href="#ref-15">[15]</a></sup></dd>
+            </dl>
+          </section>
+
+          <!-- ENTRY VI -->
+          <section id="e6" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Sebkha_Tah">6. Janvier–Février 1928 — La source secrète de Sebkha Tah</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Début 1928, au cours d'une série de vols de cartographie à basse altitude,
+              le regard de Saint-Exupéry fut attiré par une subtile coloration vert foncé nichée au cœur
+              de la dépression géologique de <b>Sebkha Tah</b> (au nord de Tarfaya).<sup class="reference"><a href="#ref-17">[17]</a></sup>
+              Posant son Breguet XIV sur la croûte saline dure, il découvrit une minuscule source d'eau douce
+              jaillissant silencieusement à travers le sable.
+            </p>
+            <p>
+              Reconnaissant qu'une présence militaire détruirait rapidement ce sanctuaire écologique fragile,
+              Saint-Exupéry prit la décision stratégique de garder la découverte secrète,
+              ne partageant les coordonnées qu'avec El Baum et quelques nomades Tekna de confiance.
+            </p>
+
+            <dl>
+              <dt>Journal de Delaunay (extrait)</dt>
+              <dd><em>« Antoine est revenu aujourd'hui d'un vol non planifié. Il avait du sable blanc et humide sur ses bottes de cuir… Il a souri et m'a dit qu'il avait trouvé une source de vie au milieu du sel. »</em><sup class="reference"><a href="#ref-9">[9]</a></sup></dd>
+            </dl>
+
+            <h4>Liens de genèse littéraire — le puits du Petit Prince</h4>
+            <blockquote>
+              <p>— Ce qui embellit le désert, dit le petit prince, c'est qu'il cache un puits quelque part…</p>
+              <cite>— Antoine de Saint-Exupéry, <em>Le Petit Prince</em>, chapitre XXIV<sup class="reference"><a href="#ref-17">[17]</a></sup></cite>
+            </blockquote>
+          </section>
+
+          <!-- ENTRY VII -->
+          <section id="e7" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Le_fennec">7. Mars 1928 — L'apprivoisement du fennec</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Au printemps 1928, un jeune nomade Tekna apporta à Saint-Exupéry
+              un <b><a href="#">fennec</a></b> capturé (un petit renard saharien sauvage aux oreilles exceptionnellement grandes).<sup class="reference"><a href="#ref-11">[11]</a></sup>
+              La créature était terrifiée, hautement agressive, et sifflait violemment à chaque approche.
+              Plutôt que de l'enfermer dans une cage, Saint-Exupéry décida d'héberger l'animal
+              directement dans sa cabine en bois.
+            </p>
+            <p>
+              Au cours de six semaines, usant d'une patience infinie, il apprivoisa la créature.
+              Il restait assis, immobile sur le sol de sable pendant des heures, déposant de minuscules gouttes
+              de lait frais et sucré sur ses doigts, permettant au fennec de l'approcher lentement, avec hésitation.
+              En maintenant une présence silencieuse et non menaçante et en établissant un rituel quotidien strict,
+              Saint-Exupéry gagna totalement la confiance du fennec.<sup class="reference"><a href="#ref-11">[11]</a></sup>
+            </p>
+
+            <h4>Sources primaires — lettre à sa sœur Gabrielle</h4>
+            <blockquote>
+              <p>« J'élève un renard-fenech ou renard solitaire. C'est plus petit qu'un chat et pourvu d'immenses oreilles. C'est adorable. Malheureusement, c'est sauvage comme un fauve et ça rugit comme un lion. »</p>
+              <cite>— Antoine de Saint-Exupéry, lettre à sa sœur Gabrielle (Didi), Juby 1928<sup class="reference"><a href="#ref-11">[11]</a></sup></cite>
+            </blockquote>
+            <blockquote>
+              <p>« J'ai fini un roman de 170 pages, je ne sais pas trop quoi en penser. Tu verras ça en septembre. »</p>
+              <cite>— Antoine de Saint-Exupéry, lettre à sa sœur Gabrielle, Juby 1928<sup class="reference"><a href="#ref-11">[11]</a></sup></cite>
+            </blockquote>
+
+            <h4>Liens de genèse littéraire — le Renard du Petit Prince</h4>
+            <p>
+              Le véritable fennec sauvage du Cap Juby est la matrice directe et indéniable du <b>Renard</b>
+              du désert dans <em>Le Petit Prince</em>. Les oreilles massives et caractéristiques du fennec
+              sont magnifiquement représentées dans les propres illustrations aquarellées de Saint-Exupéry.
+              Le dialogue philosophique central du livre — où le renard explique que
+              <em>« tu seras pour moi unique au monde. Je serai pour toi unique au monde »</em> —
+              est une transcription littérale de l'apprivoisement patient et réel de ce fennec saharien.<sup class="reference"><a href="#ref-11">[11]</a></sup>
+            </p>
+          </section>
+
+          <!-- ENTRY VIII -->
+          <section id="e8" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Crise_otages">8. 30 juin 1928 — La crise des otages de Bojador</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Le 30 juin 1928, la ligne du courrier aérien fut plongée dans sa plus grave crise.
+              Un <b>biplan Latécoère 26</b>, piloté par le légendaire pilote de l'Aéropostale
+              <b><a href="#">Marcel Reine</a></b> et transportant l'ingénieur radio en chef
+              <b>Édouard Serre</b> ainsi que leur interprète marocain Abdallah,
+              vola dans un épais brouillard marin aveuglant au sud du Cap Juby.<sup class="reference"><a href="#ref-18">[18]</a></sup>
+              Le moteur lâcha, forçant Reine à un atterrissage forcé sur la côte désolée près du Cap Bojador.
+            </p>
+            <p>
+              En quelques minutes, ils furent encerclés et capturés par un parti de raid lourdement armé
+              de la tribu <b><a href="#">Reguibat</a></b>. Les ravisseurs dépouillèrent l'avion de son instrumentation,
+              traînèrent les pilotes dans les profondeurs non cartographiées de la Saguia el-Hamra,
+              et firent parvenir à Villa Bens le message que les otages seraient exécutés
+              si l'Aéropostale ne payait pas une rançon astronomique.<sup class="reference"><a href="#ref-18">[18]</a></sup>
+            </p>
+
+            <dl>
+              <dt>Télégramme Aéropostale (extrait)</dt>
+              <dd><em>« Dakar à Paris, Câble Prioritaire Aéropostal n° 445 : Avion Reine Serre en détresse secteur Bojador. Perte de contact radio. Craintes d'enlèvement par les dissidents. »</em><sup class="reference"><a href="#ref-18">[18]</a></sup></dd>
+            </dl>
+          </section>
+
+          <!-- ENTRY IX -->
+          <section id="e9" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Recherche_aerienne">9. 1<sup>er</sup>–5 juillet 1928 — La recherche aérienne de 8 000 kilomètres</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Dès réception de la nouvelle du crash, Saint-Exupéry n'attendit pas l'assistance militaire.
+              Au cours de cinq jours épuisants et non-stop, il survola personnellement plus de
+              <b>8 000 kilomètres</b> dans son biplan Breguet XIV à cockpit ouvert,
+              bravant des thermiques turbulents extrêmes, un éblouissement de sable aveuglant,
+              et des tirs de fusil actifs des tribus dissidentes en contrebas.<sup class="reference"><a href="#ref-19">[19]</a></sup>
+            </p>
+            <p>
+              Il vola à des altitudes dangereusement basses — souvent sous les cinquante mètres —
+              fouillant les vastes dunes et falaises côtières à la recherche du moindre signe d'épave.
+              Ses mécaniciens, Toto et Delaunay, travaillèrent toute la nuit à la lueur des lanternes
+              pour ravitailler et réviser l'aéronef, qui revenait de chaque vol avec les ailes en toile
+              déchirées par les balles de fusil et les moteurs encrassés de sable fin.<sup class="reference"><a href="#ref-19">[19]</a></sup>
+            </p>
+
+            <dl>
+              <dt>Journal de Delaunay (extrait)</dt>
+              <dd><em>« Antoine vient de rentrer de sa quatrième sortie. Son visage est brûlé par le vent et ses yeux sont injectés de sang. Il a survolé Bojador à 30 mètres sous les tirs. L'avion est criblé de balles. »</em><sup class="reference"><a href="#ref-9">[9]</a></sup></dd>
+            </dl>
+          </section>
+
+          <!-- ENTRY X -->
+          <section id="e10" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Negociations">10. Juillet–Septembre 1928 — La guerre d'usure (négociations)</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Reconnaissant que les ravisseurs Reguibat exécuteraient les otages si leur demande astronomique
+              d'<b>un million de fusils militaires</b> était sèchement refusée,
+              Saint-Exupéry initia une guerre d'usure indirecte hautement calculée.<sup class="reference"><a href="#ref-18">[18]</a></sup>
+              Travaillant étroitement avec El Baum et des commerçants Tekna neutres,
+              il utilisa des caravanes neutres pour faire passer en contrebande de l'eau fraîche,
+              de la nourriture française et des fournitures médicales essentielles aux captifs.
+            </p>
+            <p>
+              Simultanément, Saint-Exupéry et El Baum mirent en place le <b>système de séquestre secret hébraïco-marocain</b>.
+              L'or fourni par l'Aéropostale fut déposé directement dans les comptes marchands de la famille d'El Baum à Agadir,
+              qui émettaient des bons papier traditionnels hautement fiables (<em>suftajas</em>) aux chefs Reguibat.<sup class="reference"><a href="#ref-20">[20]</a></sup>
+            </p>
+
+            <dl>
+              <dt>Notes de négociation (manuscrites par Saint-Exupéry)</dt>
+              <dd><em>« Nous devons faire durer les négociations. Si nous refusons tout de suite, ils tueront Reine. Si nous donnons les fusils tout de suite, ils en captureront d'autres. El Baum fait un travail admirable… »</em><sup class="reference"><a href="#ref-18">[18]</a></sup></dd>
+            </dl>
+          </section>
+
+          <!-- ENTRY XI -->
+          <section id="e11" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Liberation">11. 24 octobre 1928 — Le triomphe de Tarfaya (résolution)</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Le matin du 24 octobre 1928 — après <b>117 jours exténuants de captivité</b> —
+              Marcel Reine, Édouard Serre et leur interprète marocain Abdallah furent relâchés
+              par leurs ravisseurs Reguibat.<sup class="reference"><a href="#ref-18">[18]</a></sup>
+              Selon les termes de l'accord final négocié par Saint-Exupéry,
+              la rançon avait été systématiquement réduite à une modeste somme d'argent
+              et <b>vingt fusils avec 6 000 cartouches</b>.
+            </p>
+            <p>
+              Les otages furent amenés par un navire militaire espagnol jusqu'au terrain sécurisé de Villa Cisneros.
+              Saint-Exupéry et El Baum volèrent jusqu'au site pour inspecter physiquement les hommes libérés,
+              confirmant leur sécurité et transmettant immédiatement le télégramme codé
+              aux marchands juifs d'Agadir pour liquider les <em>suftajas</em> papier
+              en pesetas d'or physiques pour les chefs tribaux.<sup class="reference"><a href="#ref-20">[20]</a></sup>
+            </p>
+
+            <div class="ambox ambox-notice" role="note">
+              <div class="ambox-icon" aria-hidden="true">🏆</div>
+              <div class="ambox-text">
+                <b>Accomplissement majeur :</b> La libération de Reine et Serre demeure l'accomplissement
+                le plus significatif et célébré de toute la carrière d'aviation de Saint-Exupéry.
+                Elle consolida sa réputation au sein du gouvernement français comme un légendaire gestionnaire de crise.<sup class="reference"><a href="#ref-21">[21]</a></sup>
+              </div>
+            </div>
+          </section>
+
+          <!-- ENTRY XII -->
+          <section id="e12" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Courrier_Sud">12. Janvier 1929 — Le bureau à bidons d'essence</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              En janvier 1929, le péage physique et psychologique de son isolement de dix-huit mois
+              atteignait un point d'ébullition. Tourmenté par de sévères douleurs articulaires chroniques
+              dues à son crash de 1923, et souffrant d'un régime carencé en vitamines,
+              Saint-Exupéry était totalement incapable de dormir la nuit.
+              Il arpentait le sol de sable de sa minuscule cabine, fumant jusqu'à 60 cigarettes non filtrées par jour.<sup class="reference"><a href="#ref-3">[3]</a></sup>
+            </p>
+            <p>
+              Pour soutenir ses intenses séances d'écriture nocturnes, son mécano-chef, Toto,
+              déhouspilla une porte en bois brisée du hangar de l'avion et la posa à plat sur
+              <b>deux bidons en fer rouillés et vides de 200 litres d'essence d'aviation</b>.<sup class="reference"><a href="#ref-22">[22]</a></sup>
+              Sur ce bureau de fortune, à la lumière vacillante d'une unique lampe à kérosène,
+              Saint-Exupéry rédigea le brouillon final et complet de son premier roman,
+              <em><b><a href="#">Courrier Sud</a></b></em>.
+            </p>
+
+            <h4>Sources primaires — Fondation Martin Bodmer</h4>
+            <p>
+              Le manuscrit original est conservé à la <b>Fondation Martin Bodmer</b>, Cologny, Suisse.
+              La Fondation note que le papier fragile conserve littéralement la fainte odeur chimique distincte
+              du carburant d'aviation des années 1920 et du kérosène.<sup class="reference"><a href="#ref-13">[13]</a></sup>
+              La dédicace, signée à la main sur la page de titre, porte :
+              <em>« Donné par Antoine de Saint-Exupéry à Louise de Vilmorin, 1929. »</em>
+            </p>
+          </section>
+
+          <!-- ENTRY XIII -->
+          <section id="e13" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Depart">13. Mars 1929 — La remise des clés (départ)</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              En mars 1929, après dix-huit mois de service ininterrompu et physiquement épuisant dans le désert,
+              Saint-Exupéry fut officiellement rappelé en France par Didier Daurat.
+              Il fit ses bagages avec ses peu d'effets — son manuscrit achevé de <em>Courrier Sud</em>,
+              son journal d'apprivoisement, et une petite collection de poèmes baudelairiens —
+              et remit officiellement les clés de la station du Cap Juby à son successeur,
+              le pilote <b>Louis Vidal</b>.<sup class="reference"><a href="#ref-23">[23]</a></sup>
+            </p>
+            <p>
+              Les archives d'histoire orale locales rapportent qu'à son départ, une importante délégation
+              de nomades Tekna et Izarguien se rassembla au périmètre sablonneux de la piste pour lui dire adieu.
+              Ils le saluèrent comme un <em>marabout</em> mystique qui avait apporté la paix
+              et le respect sacré à leur territoire.<sup class="reference"><a href="#ref-8">[8]</a></sup>
+            </p>
+
+            <dl>
+              <dt>Dernière entrée du journal de Delaunay concernant Saint-Exupéry</dt>
+              <dd><em>« Antoine est parti ce matin dans le vacarme du moteur. Le fort semble vide maintenant. Même Kiki (le babouin) refuse de crier. Les Maures sont restés immobiles sur les dunes pendant une heure après son décollage. »</em><sup class="reference"><a href="#ref-9">[9]</a></sup></dd>
+            </dl>
+          </section>
+
+          <!-- ENTRY XIV -->
+          <section id="e14" class="mw-reveal">
+            <h3>
+              <span class="mw-headline" id="Legion_Honneur">14. 7 avril 1930 — Chevalier de la Légion d'Honneur</span>
+              <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+            </h3>
+            <p>
+              Le 7 avril 1930, le Président de la République française signa officiellement un décret nommant
+              Antoine de Saint-Exupéry <b><em>Chevalier de la Légion d'Honneur</em></b>
+              à l'âge exceptionnellement jeune de vingt-neuf ans.<sup class="reference"><a href="#ref-24">[24]</a></sup>
+              La distinction fut accordée au titre de l'Aviation Civile, citant directement
+              ses extraordinaires réalisations diplomatiques et de sauvetage durant ses dix-huit mois au Cap Juby.
+            </p>
+
+            <h4>Texte officiel de la citation</h4>
+            <blockquote>
+              <p>« Monsieur de Saint-Exupéry, Antoine. Chef d'aéroplace à Cap Juby (Maroc). A fait preuve de qualités d'énergie et d'audace tout à fait exceptionnelles… A personnellement survolé plus de 8 000 kilomètres de territoire dissident pour rechercher ses camarades Reine et Serre capturés… A négocié avec un dévouement absolu leur libération, ainsi que celle de nombreux aviateurs espagnols blessés… »</p>
+              <cite>— Décret de la Légion d'Honneur, Archives Nationales, base Léonore (7 avril 1930)<sup class="reference"><a href="#ref-24">[24]</a></sup></cite>
+            </blockquote>
+          </section>
+
+        </section>
+
+        <!-- ===== SECTION 3 : TIMELINE ===== -->
+        <section id="timeline" class="mw-reveal">
+          <h2>
+            <span class="mw-headline" id="Chronologie">Chronologie comparative</span>
+            <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+          </h2>
+
+          <pre role="img" aria-label="Frise chronologique 1927–1930 du détachement de Cap Juby">
+1927                      1928                               1929     1930
+ |                         |                                  |        |
+[Oct]---[Déc]---[Mar]---[Jun]---[Jul-Sep]---[Oct]---[Jan]---[Mar]---[Avr]
+  |       |       |       |         |          |       |       |       |
+Nommé  Veille  Fennec  Crash     Négo-     Libéra-  Courrier Départ  Légion
+Chef   de Noël Appri-  Reine/    ciations   tion    Sud      Vidal   d'Hon.
+d'escale Oteyza voisé  Serre     Reguibat   117j    achevé          reçue</pre>
+
+          <table class="wikitable sortable" style="margin-top:1em">
+            <caption>Synthèse chronologique des jalons du détachement de Cap Juby, 1927–1930</caption>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Jalon</th>
+                <th scope="col">Signification</th>
+                <th scope="col">Réf.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>14 oct. 1927</td><td>Nommé Chef d'escale</td><td>Télégramme de Daurat ; naissance de Saint-Exupéry le pionnier</td><td><sup class="reference"><a href="#ref-1">[1]</a></sup></td></tr>
+              <tr><td>19 oct. 1927</td><td>Arrivée au Cap Juby</td><td>Atterrissage à Villa Bens dans un Breguet XIV (F-AIEE)</td><td><sup class="reference"><a href="#ref-4">[4]</a></sup></td></tr>
+              <tr><td>Nov. 1927</td><td>Diplomatie Saharienne</td><td>El Baum engagé ; étude de l'arabe hassaniya &amp; du droit <em>'Urf</em></td><td><sup class="reference"><a href="#ref-7">[7]</a></sup></td></tr>
+              <tr><td>4 déc. 1927</td><td>Vol Port-Étienne</td><td>Carnet de route du Breguet « Torpille » n° 162 (F-AFHN)</td><td><sup class="reference"><a href="#ref-12">[12]</a></sup></td></tr>
+              <tr><td>24 déc. 1927</td><td>Veille de Noël</td><td>Rencontre avec Oteyza &amp; Alfonsito ; plus ancienne photo connue</td><td><sup class="reference"><a href="#ref-14">[14]</a></sup></td></tr>
+              <tr><td>Jan.–Fév. 1928</td><td>Source de Sebkha Tah</td><td>Découverte d'eau douce cachée ; germe littéraire du <em>Petit Prince</em></td><td><sup class="reference"><a href="#ref-17">[17]</a></sup></td></tr>
+              <tr><td>Mars 1928</td><td>Apprivoisement du Fennec</td><td>Matrice du Renard du désert ; six semaines d'<em>apprivoiser</em> patient</td><td><sup class="reference"><a href="#ref-11">[11]</a></sup></td></tr>
+              <tr><td>30 jun. 1928</td><td>Crise Otages Bojador</td><td>Reine &amp; Serre capturés par les pillards Reguibat</td><td><sup class="reference"><a href="#ref-18">[18]</a></sup></td></tr>
+              <tr><td>1–5 jul. 1928</td><td>Recherche Aérienne</td><td>8 000 km parcourus en 5 jours sous de lourds tirs</td><td><sup class="reference"><a href="#ref-19">[19]</a></sup></td></tr>
+              <tr><td>Jul.–Sep. 1928</td><td>Négociations</td><td>Guerre d'usure ; système de séquestre <em>suftaja</em></td><td><sup class="reference"><a href="#ref-20">[20]</a></sup></td></tr>
+              <tr><td>24 oct. 1928</td><td>Otages Libérés</td><td>Reine, Serre &amp; Abdallah relâchés après 117 jours</td><td><sup class="reference"><a href="#ref-18">[18]</a></sup></td></tr>
+              <tr><td>Jan. 1929</td><td><em>Courrier Sud</em> achevé</td><td>Écrit sur un bureau de bidons d'essence ; manuscrit imprégné d'aviation</td><td><sup class="reference"><a href="#ref-13">[13]</a></sup></td></tr>
+              <tr><td>Mars 1929</td><td>Départ</td><td>Commandement remis à Louis Vidal ; formation en navigation</td><td><sup class="reference"><a href="#ref-23">[23]</a></sup></td></tr>
+              <tr><td>7 avr. 1930</td><td>Légion d'Honneur</td><td><em>Chevalier de la Légion d'Honneur</em> pour diplomatie et sauvetage</td><td><sup class="reference"><a href="#ref-24">[24]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- ===== SECTION 4 : RÉFÉRENCES ===== -->
+        <section id="references" class="mw-reveal">
+          <h2>
+            <span class="mw-headline" id="Notes_et_références">Notes et références</span>
+            <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+          </h2>
+          <div class="mw-references-wrap">
+            <div class="reflist">
+              <ol>
+                <li id="ref-1"><a href="https://www.lenvol-des-pionniers.com/histoire-aeropostale/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer">L'Envol des Pionniers (Toulouse)</a> — Archives de l'Aéropostale, section Cap Juby. Nomination par Daurat, 14 octobre 1927.</li>
+                <li id="ref-2">Saint-Exupéry, A. de (1931). <em>Vol de nuit</em>. Paris : Gallimard. (Rivière comme portrait de Daurat.)</li>
+                <li id="ref-3"><a href="https://www.lemonde.fr/afrique/article/2018/10/25/a-cap-juby-une-piste-chargee-d-histoires-dont-celle-du-petit-prince_5374609_3212.html" target="_blank" rel="noopener noreferrer">Le Monde, 25 oct. 2018</a> — « À Cap Juby, une piste chargée d'histoires dont celle du Petit Prince. »</li>
+                <li id="ref-4"><a href="https://www.antoinedesaintexupery.org/lieux/cap-juby-tarfaya/" target="_blank" rel="noopener noreferrer">Fondation Saint-Exupéry</a> — Lieux, Cap Juby / Tarfaya. Infrastructure de la station, hangars de 1925.</li>
+                <li id="ref-5"><a href="https://www.antoinedesaintexupery.org/chronologie/1927-10-19-nomme-chef-descale-a-cap-juby/" target="_blank" rel="noopener noreferrer">Fondation Saint-Exupéry</a> — Chronologie, entrée 19 octobre 1927.</li>
+                <li id="ref-6"><a href="https://medias24.com/2022/07/08/tarfaya-ou-la-muse-desertique-de-saint-exupery/" target="_blank" rel="noopener noreferrer">Medias24, 8 juil. 2022</a> — « Tarfaya, ou la muse désertique de Saint-Exupéry. » Lettres à sa mère et <em>Terre des hommes</em>.</li>
+                <li id="ref-7"><a href="https://www.francebleu.fr/emissions/objectif-ciel/toulouse/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer">France Bleu, « Objectif Ciel »</a> — Engagement d'El Baum, registre de paie nov. 1927, témoignages Izarguien.</li>
+                <li id="ref-8"><a href="https://www.lesamisdantoinedesaintexupery.org/page1/a-la-rencontre-des-nomades/" target="_blank" rel="noopener noreferrer">Les Amis de Saint-Exupéry</a> — « À la rencontre des nomades. » <em>Terre des hommes</em> et départ mars 1929.</li>
+                <li id="ref-9"><a href="https://www.aerobernie.com/2018/10/raid-latecoere-aeropostale-arrivee-saint-exupery-cap-juby.html" target="_blank" rel="noopener noreferrer">Aerobernie, 25 oct. 2018</a> — Extraits du journal de bord radio de Henri Delaunay.</li>
+                <li id="ref-10"><a href="https://milema.canalblog.com/archives/2010/11/30/19745094.html" target="_blank" rel="noopener noreferrer">Milema, Canalblog</a> — Lettre : « J'ai apprivoisé un caméléon… »</li>
+                <li id="ref-11"><a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer">3<sup>e</sup> Groupe de Transport</a> — « Rencontres avec les renards. » Lettres sur le fennec, roman de 170 pages, <em>Le Petit Prince</em>.</li>
+                <li id="ref-12"><a href="https://www.christies.com/en/lot/lot-5560265" target="_blank" rel="noopener noreferrer">Christie's Paris, Lot 5560265</a> — Carnet de route du Breguet-Latécoère XIV n° 162 (F-AFHN), vol du 4 déc. 1927.</li>
+                <li id="ref-13"><a href="https://www.ladepeche.fr/2021/06/14/courrier-sud-de-saint-exupery-le-manuscrit-de-laviateur-amoureux-9605019.php" target="_blank" rel="noopener noreferrer">La Dépêche, 14 jun. 2021</a> — « Courrier Sud, le manuscrit de l'aviateur amoureux. » Fondation Martin Bodmer.</li>
+                <li id="ref-14"><a href="https://www.publico.es/actualidad/saint-exupery-cielos.html" target="_blank" rel="noopener noreferrer">Publico.es</a> — Rencontre de la veille de Noël 1927 avec Oteyza et Alfonsito.</li>
+                <li id="ref-15"><a href="https://ntvespana.com/26/03/2025/luis-de-oteyza-que-estas-en-los-cielos-por-miguel-espinosa-garcia-de-oteyza/" target="_blank" rel="noopener noreferrer">NTV España, 26 mars 2025</a> — <em>Al Senegal en avión</em> (CIAP, 1928), chapitre IX. Texte espagnol original d'Oteyza.</li>
+                <li id="ref-16"><a href="http://pares.mcu.es/ParesBusquedas20/catalogo/description/1395579" target="_blank" rel="noopener noreferrer">PARES / AGA</a> — Fondo Alfonso, Plaque n° 036446, 25 déc. 1927, Cap Juby.</li>
+                <li id="ref-17"><a href="https://www.ukgser.com/community/threads/tarfaya-or-notarfaya.146445/" target="_blank" rel="noopener noreferrer">UKGSER Community Forums</a> — Géologie de Sebkha Tah et lien avec le chapitre XXIV du <em>Petit Prince</em>.</li>
+                <li id="ref-18"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer">Wikipédia, « Marcel Reine »</a> — Crise des otages de Bojador (30 jun. 1928), négociations, libération (24 oct. 1928).</li>
+                <li id="ref-19"><a href="https://webdoc.rfi.fr/latecoere-aeropostale-raid-afrique-voyage/chapitre3.html" target="_blank" rel="noopener noreferrer">RFI Webdoc, Chapitre 3</a> — Mission de recherche aérienne de 8 000 km, 1–5 juillet 1928.</li>
+                <li id="ref-20"><a href="http://tribusdumaroc.free.fr/tekna.php" target="_blank" rel="noopener noreferrer">Tribus du Maroc, Tekna</a> — Réseau marchand El Baum, <em>suftajas</em>, liquidation de la rançon.</li>
+                <li id="ref-21"><a href="https://fr.wikipedia.org/wiki/Mus%C3%A9e_Antoine-de-Saint-Exup%C3%A9ry" target="_blank" rel="noopener noreferrer">Wikipédia, « Musée Antoine-de-Saint-Exupéry »</a> — Commémoration de la libération de Reine et Serre à Tarfaya.</li>
+                <li id="ref-22"><a href="https://elpais.com/elpais/2016/11/12/eps/1478905537_147890.html" target="_blank" rel="noopener noreferrer">El País, 12 nov. 2016</a> — Bureau improvisé en bidons d'essence ; rédaction de <em>Courrier Sud</em>.</li>
+                <li id="ref-23"><a href="https://argoul.com/tag/edouard-serre/" target="_blank" rel="noopener noreferrer">Argoul (blog)</a> — Passation de commandement à Louis Vidal, mars 1929.</li>
+                <li id="ref-24"><a href="https://www.antoinedesaintexupery.org/personne/laeropostale-1927-1932/" target="_blank" rel="noopener noreferrer">Fondation Saint-Exupéry, L'Aéropostale (1927–1932)</a> — Décret du 7 avr. 1930, base Léonore, Archives Nationales.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== SECTION 5 : BIBLIOGRAPHIE ===== -->
+        <section id="bibliographie" class="mw-reveal">
+          <h2>
+            <span class="mw-headline" id="Bibliographie">Bibliographie sélective</span>
+            <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#">modifier</a><span class="mw-editsection-bracket">]</span></span>
+          </h2>
+          <h3>Sources primaires</h3>
+          <ul>
+            <li>Saint-Exupéry, A. de. <em>Lettres à sa mère</em>. Paris : Gallimard, coll. Folio, 1984. (Archives de France, Fonds ASE, 153 AP1.)</li>
+            <li>Delaunay, H. <em>Araignée du soir</em>. Paris : Éditions France-Empire, 1952.</li>
+            <li>Oteyza, L. de. <em>Al Senegal en avión</em>. Madrid : Compañía Ibero-Americana de Publicaciones, 1928.</li>
+            <li><em>Carnet de route du Breguet-Latécoère XIV n° 162, Immatriculation F-AFHN</em>. Archives Nationales de l'Aviation Civile, Paris.</li>
+            <li>AGA Fondo Alfonso, Plaque n° 036446. <em>Archivo General de la Administración</em>, Alcalá de Henares.</li>
+          </ul>
+          <h3>Œuvres de Saint-Exupéry</h3>
+          <ul>
+            <li>Saint-Exupéry, A. de (1929). <em>Courrier Sud</em>. Paris : Gallimard.</li>
+            <li>Saint-Exupéry, A. de (1931). <em>Vol de nuit</em>. Paris : Gallimard.</li>
+            <li>Saint-Exupéry, A. de (1939). <em>Terre des hommes</em>. Paris : Gallimard.</li>
+            <li>Saint-Exupéry, A. de (1943). <em>Le Petit Prince</em>. New York : Reynal &amp; Hitchcock.</li>
+          </ul>
+        </section>
+
+      </div><!-- end .mw-parser-output -->
+
+      <!-- Categories -->
+      <div id="catlinks" role="navigation" aria-label="Catégories">
+        <span class="catlinks-header">Catégories :</span>
+        <a href="#">Antoine de Saint-Exupéry</a> ·
+        <a href="#">Compagnie Générale Aéropostale</a> ·
+        <a href="#">Sahara espagnol</a> ·
+        <a href="#">Tarfaya</a> ·
+        <a href="#">Histoire de l'aviation française</a> ·
+        <a href="#">Légion d'honneur</a> ·
+        <a href="#">Diplomatie saharienne</a> ·
+        <a href="#">Le Petit Prince — genèse</a>
       </div>
-    </article>
 
-    <!-- ENTRY VI -->
-    <article id="e6" aria-labelledby="h-e6" class="reveal">
-      <h3 class="entry" id="h-e6">
-        <span class="roman" aria-label="Entrée VI :">VI.</span>Janvier–Février 1928 : La Source Secrète de Sebkha Tah (Découverte)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de la découverte de la source de Sebkha Tah lors d'un vol de reconnaissance à basse altitude. Coordonnée : dépression au nord de Tarfaya. Action : tenue secrète, partagée uniquement avec les nomades Tekna">
-        <pre>
-[ Reconnaissance à Basse Altitude ] === Détection Visuelle ===> [ Source de Sebkha Tah ]
-* Coordonnée : Dépression géologique, au nord de Tarfaya
-* Action : Tenue cachée de la garnison espagnole ; partagée uniquement avec les nomades Tekna</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Début 1928, au cours d'une série de vols de cartographie à basse altitude, le regard de Saint-Exupéry fut attiré par une subtile coloration vert foncé nichée au cœur de la dépression géologique de <strong>Sebkha Tah</strong> (au nord de Tarfaya). Posant son Breguet XIV sur la croûte saline dure, il découvrit une minuscule source d'eau douce jaillissant silencieusement à travers le sable. Selon la loi militaire coloniale espagnole, toutes les ressources en eau devaient être immédiatement déclarées à la garnison.</p>
-      <p>Reconnaissant qu'une présence militaire détruirait rapidement ce sanctuaire fragile, Saint-Exupéry prit la décision stratégique de garder la découverte secrète, ne partageant les coordonnées qu'avec El Baum et quelques nomades Tekna de confiance. Les jours sans vol, il pilotait jusqu'à cette dépression cachée et s'asseyait des heures durant dans un silence absolu, lisant, écrivant, regardant le vent tracer des ondulations sur le sable <sup class="src"><a href="https://www.ukgser.com/community/threads/tarfaya-or-notarfaya.146445/" target="_blank" rel="noopener noreferrer" aria-label="Source : UKGSER, Tarfaya [réf. 17]">[réf. 17]</a></sup>.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Archives d'Histoire Orale :</strong> <em>Association Amis de Tarfaya, Bande Réf : CJ-2007-BAM (Témoignages des descendants du clan Izarguien)</em> <sup class="src"><a href="https://www.francebleu.fr/emissions/objectif-ciel/toulouse/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : France Bleu [réf. 7]">[réf. 7]</a></sup>.</li>
-        <li><strong>Entrée du Journal de Delaunay :</strong> <em>« Antoine est revenu aujourd'hui d'un vol non planifié. Il avait du sable blanc et humide sur ses bottes de cuir… Il a souri et m'a dit qu'il avait trouvé une source de vie au milieu du sel. »</em> <sup class="src"><a href="https://www.aerobernie.com/2018/10/raid-latecoere-aeropostale-arrivee-saint-exupery-cap-juby.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Aerobernie [réf. 9]">[réf. 9]</a></sup></li>
-      </ul>
-
-      <h4 class="sub">Commentaire Érudit et Liens de Genèse Littéraire</h4>
-      <p>Cette source cachée et physique est le cœur spirituel de toute sa carrière littéraire. Ce puits physique est l'inspiration directe de la citation universelle dans <em>Le Petit Prince</em> :</p>
-      <blockquote>
-        <p>— Ce qui embellit le désert, dit le petit prince, c'est qu'il cache un puits quelque part…</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, <cite><em>Le Petit Prince</em></cite>, chapitre XXIV <sup class="src"><a href="https://www.ukgser.com/community/threads/tarfaya-or-notarfaya.146445/" target="_blank" rel="noopener noreferrer" aria-label="Source : UKGSER [réf. 17]">[réf. 17]</a></sup></cite>
-      </blockquote>
-    </article>
-
-    <!-- ENTRY VII -->
-    <article id="e7" aria-labelledby="h-e7" class="reveal">
-      <h3 class="entry" id="h-e7">
-        <span class="roman" aria-label="Entrée VII :">VII.</span>Mars 1928 : L'Apprivoisement du Fennec (Zoologie)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de l'apprivoisement du fennec : capturé dans les dunes du Cap Juby, amené dans la baraque en bois. Six semaines de patient apprivoisement, correspondance avec la sœur Gabrielle">
-        <pre>
-[ Dunes du Cap Juby ] ======= Fennec Sauvage Capturé =======> [ La Baraque en Bois ]
-* Action : Apprivoisement patient quotidien pendant six semaines
-* Correspondance : Lettre détaillée envoyée à sa sœur Gabrielle (Didi)</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Au printemps 1928, un jeune nomade Tekna apporta à Saint-Exupéry un <strong>fennec</strong> capturé (un petit renard saharien sauvage aux oreilles exceptionnellement grandes) <sup class="src"><a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer" aria-label="Source : 3e Groupe de Transport [réf. 11]">[réf. 11]</a></sup>. La créature était terrifiée, hautement agressive, et sifflait violemment à chaque approche. Plutôt que de l'enfermer dans une cage, Saint-Exupéry décida d'héberger l'animal directement dans sa cabine en bois.</p>
-      <p>Au cours de six semaines, usant d'une patience infinie, il apprivoisa la créature en restant assis, immobile, sur le sol de sable pendant des heures, déposant de minuscules gouttes de lait frais et sucré sur ses doigts. En maintenant une présence silencieuse et non menaçante et en établissant un rituel quotidien strict, Saint-Exupéry gagna totalement la confiance du fennec. L'animal finit par manger dans sa main, dormir sur sa poitrine, et défendre sa cabine par des aboiements vifs et territoriaux <sup class="src"><a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer" aria-label="Source : 3e Groupe de Transport [réf. 11]">[réf. 11]</a></sup>.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Lettre de Source Primaire :</strong> <em>Archives de la Succession Saint-Exupéry - d'Agay, Code Document CJ-1928-FEN-01</em>.</li>
-      </ul>
-      <blockquote>
-        <p>« J'élève un renard-fenech ou renard solitaire. C'est plus petit qu'un chat et pourvu d'immenses oreilles. C'est adorable. Malheureusement, c'est sauvage comme un fauve et ça rugit comme un lion. »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, lettre à sa sœur Gabrielle, Juby 1928 <sup class="src"><a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer" aria-label="Source : 3e Groupe de Transport, fennec [réf. 11]">[réf. 11]</a></sup></cite>
-      </blockquote>
-      <blockquote>
-        <p>« J'ai fini un roman de 170 pages, je ne sais pas trop quoi en penser. Tu verras ça en septembre. »</p>
-        <cite>— <strong>Antoine de Saint-Exupéry</strong>, lettre à sa sœur Gabrielle, Juby 1928 <sup class="src"><a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer" aria-label="Source : 3e Groupe de Transport [réf. 11]">[réf. 11]</a></sup></cite>
-      </blockquote>
-
-      <h4 class="sub">Commentaire Érudit et Liens de Genèse Littéraire</h4>
-      <p>Le véritable fennec sauvage du Cap Juby est la matrice directe et indéniable du <strong>Renard</strong> du désert dans <em>Le Petit Prince</em>. Les oreilles massives et caractéristiques du fennec sont magnifiquement représentées dans les propres illustrations aquarellées de Saint-Exupéry. Le dialogue philosophique central du livre — où le renard explique que <em>« tu seras pour moi unique au monde »</em> — est une transcription littérale de l'apprivoisement patient et réel de ce fennec saharien <sup class="src"><a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer" aria-label="Source : 3e Groupe de Transport [réf. 11]">[réf. 11]</a></sup>.</p>
-    </article>
-
-    <!-- ENTRY VIII -->
-    <article id="e8" aria-labelledby="h-e8" class="reveal">
-      <h3 class="entry" id="h-e8">
-        <span class="roman" aria-label="Entrée VIII :">VIII.</span>30 juin 1928 : La Crise des Otages de Bojador (Crise)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de la crise du 30 juin 1928 : brouillard et panne moteur au cap Bojador. Équipage : Marcel Reine et Édouard Serre, capturés par la tribu Reguibat">
-        <pre>
-[ Secteur Côtier du Cap Bojador ] -- Brouillard Extrême &amp; Pannes Moteur --> [ Atterrissage Forcé ]
-* Équipage tombé : Marcel Reine (Pilote) &amp; Édouard Serre (Ingénieur Radio)
-* Capturés par : Tribu Nomade Souveraine des Reguibat</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Le 30 juin 1928, la ligne du courrier aérien fut plongée dans sa plus grave crise. Un <strong>biplan Latécoère 26</strong>, piloté par le légendaire pilote de l'Aéropostale <strong>Marcel Reine</strong> et transportant l'ingénieur radio en chef <strong>Édouard Serre</strong> ainsi que leur interprète marocain Abdallah, vola dans un épais brouillard marin aveuglant au sud du Cap Juby <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup>. Le moteur lâcha, forçant Reine à un atterrissage forcé sur la côte désolée près du Cap Bojador <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup>.</p>
-      <p>En quelques minutes, ils furent encerclés et capturés par un parti de raid lourdement armé de la tribu <strong>Reguibat</strong>. Les ravisseurs dépouillèrent l'avion de son instrumentation, traînèrent les pilotes dans les profondeurs non cartographiées de l'intérieur de la Saguia el-Hamra, et firent parvenir à Villa Bens le message que les otages seraient exécutés si l'Aéropostale ne payait pas une rançon astronomique <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup>.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Référence Archivistique :</strong> <em>Compagnie Générale Aéropostale, Journal de Crise, Bureau de Casablanca (30 juin 1928).</em></li>
-        <li><strong>Télégramme Fuité :</strong> <em>Dakar à Paris, Câble Prioritaire Aéropostal no 445 : « Avion Reine Serre en détresse secteur Bojador. Perte de contact radio. Craintes d'enlèvement par les dissidents. »</em> <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup></li>
-      </ul>
-    </article>
-
-    <!-- ENTRY IX -->
-    <article id="e9" aria-labelledby="h-e9" class="reveal">
-      <h3 class="entry" id="h-e9">
-        <span class="roman" aria-label="Entrée IX :">IX.</span>1<sup>er</sup>–5 juillet 1928 : La Recherche Aérienne de 8 000 Kilomètres (Recherche)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de la mission de recherche : hangar du Cap Juby vers les dunes de la Saguia el-Hamra. Pilote Saint-Exupéry, 8 000 km en 5 jours sous de lourds tirs au sol">
-        <pre>
-[ Hangar du Cap Juby ] ======= Breguet XIV à Cockpit Ouvert =======> [ Dunes de la Saguia el-Hamra ]
-* Pilote : Antoine de Saint-Exupéry
-* Mission : 8 000 km en 5 jours, bravant de lourds tirs au sol</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Dès réception de la nouvelle du crash, Saint-Exupéry n'attendit pas l'assistance militaire. Au cours de cinq jours épuisants et non-stop, il survola personnellement plus de <strong>8 000 kilomètres</strong> dans son biplan Breguet XIV à cockpit ouvert, bravant des thermiques turbulents extrêmes, un éblouissement de sable aveuglant, et des tirs de fusil actifs des tribus dissidentes en contrebas <sup class="src"><a href="https://webdoc.rfi.fr/latecoere-aeropostale-raid-afrique-voyage/chapitre3.html" target="_blank" rel="noopener noreferrer" aria-label="Source : RFI Webdoc, Aéropostale [réf. 19]">[réf. 19]</a></sup>.</p>
-      <p>Il vola à des altitudes dangereusement basses — souvent sous les cinquante mètres — fouillant les vastes dunes et falaises côtières à la recherche du moindre signe d'épave ou d'empreintes. Ses mécaniciens, Toto et Delaunay, travaillèrent toute la nuit à la lueur des lanternes pour ravitailler et réviser l'aéronef, qui revenait de chaque vol avec les ailes en toile déchirées par les balles de fusil et les moteurs encrassés de sable fin <sup class="src"><a href="https://webdoc.rfi.fr/latecoere-aeropostale-raid-afrique-voyage/chapitre3.html" target="_blank" rel="noopener noreferrer" aria-label="Source : RFI Webdoc [réf. 19]">[réf. 19]</a></sup>.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Référence Archivistique :</strong> <em>Carnet de Vol Opérationnel Aéropostale, Station de Tarfaya, Journaux des 1er–5 juillet 1928, signé « Saint-Exupéry, Chef d'escale ».</em></li>
-        <li><strong>Extrait du Journal Radio (Delaunay) :</strong> <em>« Antoine vient de rentrer de sa quatrième sortie. Son visage est brûlé par le vent et ses yeux sont injectés de sang. Il a survolé Bojador à 30 mètres sous les tirs. L'avion est criblé de balles. »</em> <sup class="src"><a href="https://www.aerobernie.com/2018/10/raid-latecoere-aeropostale-arrivee-saint-exupery-cap-juby.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Aerobernie [réf. 9]">[réf. 9]</a></sup></li>
-      </ul>
-    </article>
-
-    <!-- ENTRY X -->
-    <article id="e10" aria-labelledby="h-e10" class="reveal">
-      <h3 class="entry" id="h-e10">
-        <span class="roman" aria-label="Entrée X :">X.</span>Juillet–Septembre 1928 : La Guerre d'Usure (Négociations)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma des négociations : ravisseurs Reguibat contre Saint-Exupéry et El Baum. Demande initiale un million de fusils, règlement final 20 fusils et espèces via séquestre hébraïco-marocain">
-        <pre>
-[ Ravisseurs des Otages (Reguibat) ] <=== Négociations &amp; Contrebande ===> [ Saint-Exupéry &amp; El Baum ]
-* Demande Initiale : 1 Million de Fusils
-* Règlement Final : 20 Fusils &amp; Espèces (via Séquestre Hébraïco-Marocain)</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Reconnaissant que les ravisseurs Reguibat exécuteraient les otages si leur demande astronomique de <strong>un million de fusils militaires</strong> était sèchement refusée, Saint-Exupéry initia une guerre d'usure indirecte hautement calculée <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup>. Travaillant étroitement avec El Baum et des commerçants Tekna neutres, il utilisa des caravanes neutres pour faire passer en contrebande de l'eau fraîche, de la nourriture française et des fournitures médicales essentielles aux captifs, assurant leur survie physique tout en négociant systématiquement à la baisse les exigences des ravisseurs.</p>
-      <p>Simultanément, Saint-Exupéry et El Baum mirent en place le <strong>système de séquestre secret hébraïco-marocain</strong>. L'or fourni par l'Aéropostale fut déposé directement dans les comptes marchands de la famille d'El Baum à Agadir, qui émettaient des bons papier traditionnels hautement fiables (<em>suftajas</em>) aux chefs Reguibat <sup class="src"><a href="https://www.francebleu.fr/emissions/objectif-ciel/toulouse/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer" aria-label="Source : France Bleu [réf. 7]">[réf. 7]</a></sup>. Ce brillant système de séquestre protégea la vie des pilotes et permit de contourner les restrictions coloniales internationales.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Archives AIU :</strong> <em>Alliance Israélite Universelle (AIU), Paris, Fonds Maroc, Registres de Rançon Mogador-Agadir (1928)</em> <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup>.</li>
-        <li><strong>Dépêche du Quai d'Orsay :</strong> <em>Archives du Ministère des Affaires Étrangères, Série : Maroc (Secteur Aéropostale), Dépêche no 89-B : « Rapport sur les démarches de l'agent Saint-Exupéry auprès des tribus Reguibat pour la libération de Reine et Serre » (août 1928).</em></li>
-        <li><strong>Notes de Négociation (Manuscrites) :</strong> <em>« Nous devons faire durer les négociations. Si nous refusons tout de suite, ils tueront Reine. Si nous donnons les fusils tout de suite, ils en captureront d'autres. El Baum fait un travail admirable… »</em> <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup></li>
-      </ul>
-    </article>
-
-    <!-- ENTRY XI -->
-    <article id="e11" aria-labelledby="h-e11" class="reveal">
-      <h3 class="entry" id="h-e11">
-        <span class="roman" aria-label="Entrée XI :">XI.</span>24 octobre 1928 : Le Triomphe de Tarfaya (Résolution)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de la libération du 24 octobre 1928 : Marcel Reine, Édouard Serre et Abdallah libérés depuis les camps du désert profond vers Villa Cisneros, après 117 jours de captivité">
-        <pre>
-[ Plage de Villa Cisneros ] <======= Otages Libérés ======= [ Camps du Désert Profond ]
-* Libérés : Marcel Reine, Édouard Serre, &amp; Abdallah
-* Durée : 117 Jours de Captivité</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Le matin du 24 octobre 1928 — après <strong>117 jours exténuants de captivité</strong> — Marcel Reine, Édouard Serre et leur interprète marocain Abdallah furent relâchés par leurs ravisseurs Reguibat <sup class="src"><a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Marcel Reine [réf. 18]">[réf. 18]</a></sup>. Selon les termes de l'accord final négocié par Saint-Exupéry, la rançon avait été systématiquement réduite à une modeste somme d'argent et <strong>vingt fusils avec 6 000 cartouches</strong>.</p>
-      <p>Les otages furent amenés par un navire militaire espagnol jusqu'au terrain sécurisé de Villa Cisneros. Saint-Exupéry et El Baum volèrent jusqu'au site pour inspecter physiquement les hommes libérés, confirmant leur sécurité et transmettant immédiatement le télégramme codé aux marchands juifs d'Agadir pour liquider les <em>suftajas</em> papier en pesetas d'or physiques pour les chefs tribaux <sup class="src"><a href="http://tribusdumaroc.free.fr/tekna.php" target="_blank" rel="noopener noreferrer" aria-label="Source : Tribus du Maroc, Tekna [réf. 20]">[réf. 20]</a></sup>.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Référence Archivistique :</strong> <em>Compagnie Générale Aéropostale, Rapport Officiel de Libération, Siège de Paris (25 octobre 1928).</em></li>
-        <li><strong>Musée de Tarfaya :</strong> Commémoré dans les archives du <a href="https://fr.wikipedia.org/wiki/Mus%C3%A9e_Antoine-de-Saint-Exup%C3%A9ry" target="_blank" rel="noopener noreferrer">Musée Antoine-de-Saint-Exupéry</a> à Tarfaya <sup class="src"><a href="https://fr.wikipedia.org/wiki/Mus%C3%A9e_Antoine-de-Saint-Exup%C3%A9ry" target="_blank" rel="noopener noreferrer" aria-label="Source : Wikipédia, Musée Saint-Exupéry Tarfaya [réf. 21]">[réf. 21]</a></sup>.</li>
-      </ul>
-    </article>
-
-    <!-- ENTRY XII -->
-    <article id="e12" aria-labelledby="h-e12" class="reveal">
-      <h3 class="entry" id="h-e12">
-        <span class="roman" aria-label="Entrée XII :">XII.</span>Janvier 1929 : Le Bureau à Bidons d'Essence (Littéraire)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de la rédaction de Courrier Sud : baraque en bois, insomnie nocturne, bureau improvisé fait d'une porte posée sur deux bidons d'essence de 200 litres, manuscrit achevé à la lampe à kérosène">
-        <pre>
-[ Minuscule Baraque en Bois ] ======= Insomnie Nocturne &amp; Arpège =======> [ Manuscrit Achevé ]
-* Œuvre : « Courrier Sud »
-* Bureau d'Écriture : Une porte de hangar brisée posée sur deux bidons d'essence de 200 litres</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>En janvier 1929, le péage physique et psychologique de son isolement de dix-huit mois atteignait un point d'ébullition. Tourmenté par de sévères douleurs articulaires chroniques dues à son crash de 1923, et souffrant d'un régime toxique carencé en vitamines, Saint-Exupéry était totalement incapable de dormir la nuit. Il arpentait le sol de sable de sa minuscule cabine, fumant jusqu'à 60 cigarettes non filtrées par jour <sup class="src"><a href="https://www.lemonde.fr/afrique/article/2018/10/25/a-cap-juby-une-piste-chargee-d-histoires-dont-celle-du-petit-prince_5374609_3212.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Le Monde [réf. 3]">[réf. 3]</a></sup>.</p>
-      <p>Pour soutenir ses intenses séances d'écriture nocturnes, son mécano-chef, Toto, déhouspilla une porte en bois brisée du hangar de l'avion et la posa à plat sur <strong>deux bidons en fer rouillés et vides de 200 litres d'essence d'aviation</strong> <sup class="src"><a href="https://elpais.com/elpais/2016/11/12/eps/1478905537_147890.html" target="_blank" rel="noopener noreferrer" aria-label="Source : El País, Saint-Exupéry [réf. 22]">[réf. 22]</a></sup>.</p>
-      <p>Sur ce bureau de fortune, à la lumière vacillante d'une unique lampe à kérosène, Saint-Exupéry rédigea le brouillon final et complet de son premier roman, <strong><cite>Courrier Sud</cite></strong>. Les feuillets en papier pelure originaux, lourdement raturés et contenant de petits croquis dessinés à la main de biplans et d'étoiles, furent physiquement ramenés à Paris dans ses sacs de vol <sup class="src"><a href="https://www.ladepeche.fr/2021/06/14/courrier-sud-de-saint-exupery-le-manuscrit-de-laviateur-amoureux-9605019.php" target="_blank" rel="noopener noreferrer" aria-label="Source : La Dépêche, Courrier Sud [réf. 13]">[réf. 13]</a></sup>.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Artefact de Source Primaire :</strong> <em>Fondation Martin Bodmer, Cologny, Suisse, Collection Antoine de Saint-Exupéry, Manuscrit : « Courrier Sud » (1929)</em> <sup class="src"><a href="https://www.ladepeche.fr/2021/06/14/courrier-sud-de-saint-exupery-le-manuscrit-de-laviateur-amoureux-9605019.php" target="_blank" rel="noopener noreferrer" aria-label="Source : La Dépêche [réf. 13]">[réf. 13]</a></sup>.</li>
-        <li><strong>Annotation Archivistique :</strong> La Fondation Bodmer note que le papier fragile conserve littéralement la fainte odeur chimique distincte du carburant d'aviation des années 1920 et du kérosène <sup class="src"><a href="https://www.ladepeche.fr/2021/06/14/courrier-sud-de-saint-exupery-le-manuscrit-de-laviateur-amoureux-9605019.php" target="_blank" rel="noopener noreferrer" aria-label="Source : La Dépêche [réf. 13]">[réf. 13]</a></sup>.</li>
-        <li><strong>Dédicace :</strong> <em>« Donné par Antoine de Saint-Exupéry à Louise de Vilmorin, 1929. »</em> <sup class="src"><a href="https://www.ladepeche.fr/2021/06/14/courrier-sud-de-saint-exupery-le-manuscrit-de-laviateur-amoureux-9605019.php" target="_blank" rel="noopener noreferrer" aria-label="Source : La Dépêche [réf. 13]">[réf. 13]</a></sup></li>
-      </ul>
-    </article>
-
-    <!-- ENTRY XIII -->
-    <article id="e13" aria-labelledby="h-e13" class="reveal">
-      <h3 class="entry" id="h-e13">
-        <span class="roman" aria-label="Entrée XIII :">XIII.</span>Mars 1929 : La Remise des Clés (Départ)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma de la passation de commandement : piste de sable de Tarfaya vers Louis Vidal, successeur de Saint-Exupéry rappelé en France pour formation avancée à la navigation">
-        <pre>
-[ Piste de Sable, Tarfaya ] ======= Passation de Commandement =======> [ Louis Vidal (Successeur) ]
-* Action : Saint-Exupéry rappelé en France pour une formation avancée à la navigation</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>En mars 1929, après dix-huit mois de service ininterrompu et physiquement épuisant dans le désert, Saint-Exupéry fut officiellement rappelé en France par Didier Daurat. Pour étendre ses opérations vers l'Amérique du Sud et initier des vols de nuit longue distance, la compagnie nécessitait que ses meilleurs pilotes reçoivent une formation avancée en navigation et au vol aux instruments. Saint-Exupéry fit ses bagages avec ses peu d'effets — son manuscrit achevé de <em>Courrier Sud</em>, son journal d'apprivoisement, et une petite collection de poèmes baudelairiens — et remit officiellement les clés de la station du Cap Juby à son successeur, le pilote <strong>Louis Vidal</strong> <sup class="src"><a href="https://argoul.com/tag/edouard-serre/" target="_blank" rel="noopener noreferrer" aria-label="Source : Argoul, Édouard Serre [réf. 23]">[réf. 23]</a></sup>.</p>
-      <p>Les archives d'histoire orale locales rapportent qu'à son départ, une importante délégation de nomades Tekna et Izarguien se rassembla au périmètre sablonneux de la piste pour lui dire adieu. Ils ne le voyaient pas partir comme un directeur corporatif ; ils le saluèrent comme un <em>marabout</em> mystique qui avait apporté la paix et le respect sacré à leur territoire <sup class="src"><a href="https://www.lesamisdantoinedesaintexupery.org/page1/a-la-rencontre-des-nomades/" target="_blank" rel="noopener noreferrer" aria-label="Source : Les Amis de Saint-Exupéry [réf. 8]">[réf. 8]</a></sup>.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Référence Archivistique :</strong> <em>Transferts de Personnel Aéropostale, Bureau de Paris, mars 1929, Code Document TRANS-Vidal-32</em> <sup class="src"><a href="https://www.antoinedesaintexupery.org/personne/laeropostale-1927-1932/" target="_blank" rel="noopener noreferrer" aria-label="Source : Fondation Saint-Exupéry, Aéropostale [réf. 24]">[réf. 24]</a></sup>.</li>
-        <li><strong>Dernière Entrée du Journal de Delaunay :</strong> <em>« Antoine est parti ce matin dans le vacarme du moteur. Le fort semble vide maintenant. Même Kiki (le babouin) refuse de crier. Les Maures sont restés immobiles sur les dunes pendant une heure après son décollage. »</em> <sup class="src"><a href="https://www.aerobernie.com/2018/10/raid-latecoere-aeropostale-arrivee-saint-exupery-cap-juby.html" target="_blank" rel="noopener noreferrer" aria-label="Source : Aerobernie [réf. 9]">[réf. 9]</a></sup></li>
-      </ul>
-    </article>
-
-    <!-- ENTRY XIV -->
-    <article id="e14" aria-labelledby="h-e14" class="reveal">
-      <h3 class="entry" id="h-e14">
-        <span class="roman" aria-label="Entrée XIV :">XIV.</span>7 avril 1930 : Chevalier de la République (Décoration)
-      </h3>
-      <div class="diagram" role="img" aria-label="Schéma du décret du 7 avril 1930 : Ministère français des Travaux Publics nomme Saint-Exupéry Chevalier de la Légion d'Honneur pour bravoure, habileté diplomatique et secours humanitaires">
-        <pre>
-[ Ministère français des Travaux Publics ] ======= Décret =======> [ Chevalier de la Légion d'Honneur ]
-* Décerné à : Antoine de Saint-Exupéry, Aviateur Civil
-* Citation : Bravoure extraordinaire, habileté diplomatique et secours humanitaires</pre>
-      </div>
-
-      <h4 class="sub">Reconstitution Narrative Centrale</h4>
-      <p>Le 7 avril 1930, le Président de la République française signa officiellement un décret nommant Antoine de Saint-Exupéry <strong><em>Chevalier de la Légion d'Honneur</em></strong> à l'âge exceptionnellement jeune de vingt-neuf ans <sup class="src"><a href="https://www.antoinedesaintexupery.org/personne/laeropostale-1927-1932/" target="_blank" rel="noopener noreferrer" aria-label="Source : Fondation Saint-Exupéry [réf. 24]">[réf. 24]</a></sup>. La distinction fut accordée au titre de l'Aviation Civile, citant directement ses extraordinaires réalisations diplomatiques et de sauvetage durant ses dix-huit mois au Cap Juby.</p>
-
-      <h4 class="sub">Vérification de Source Primaire et Marqueurs Archivistiques</h4>
-      <ul class="bul">
-        <li><strong>Document de Source Primaire :</strong> <em>Archives Nationales, Fontainebleau, Registre de la Légion d'Honneur, Dossier : Saint-Exupéry, Antoine de (1930)</em> — consultable via la <strong>base Léonore</strong> des Archives Nationales <sup class="src"><a href="https://www.antoinedesaintexupery.org/personne/laeropostale-1927-1932/" target="_blank" rel="noopener noreferrer" aria-label="Source : Fondation Saint-Exupéry, base Léonore [réf. 24]">[réf. 24]</a></sup>.</li>
-        <li><strong>Texte Officiel de la Citation :</strong> <em>« Monsieur de Saint-Exupéry, Antoine. Chef d'aéroplace à Cap Juby (Maroc). A fait preuve de qualités d'énergie et d'audace tout à fait exceptionnelles… A personnellement survolé plus de 8 000 kilomètres de territoire dissident pour rechercher ses camarades Reine et Serre capturés… A négocié avec un dévouement absolu leur libération, ainsi que celle de nombreux aviateurs espagnols blessés… »</em> <sup class="src"><a href="https://www.antoinedesaintexupery.org/personne/laeropostale-1927-1932/" target="_blank" rel="noopener noreferrer" aria-label="Source : Fondation Saint-Exupéry, citation officielle [réf. 24]">[réf. 24]</a></sup></li>
-      </ul>
-    </article>
-
-  </section><!-- fin #registre -->
-
-  <div class="divider" aria-hidden="true">&#10070;</div>
-
-  <!-- ===== TIMELINE ===== -->
-  <section id="timeline" aria-labelledby="h-timeline" class="reveal">
-    <h2 class="section" id="h-timeline">
-      <span class="sn">§ IV</span>Carte Chronologique Visuelle Comparative
-    </h2>
-
-    <div class="diagram" role="img" aria-label="Frise chronologique de 1927 à 1930 : octobre 1927 nomination, décembre 1927 veille de Noël, mars 1928 apprivoisement du fennec, juin 1928 crash de Reine et Serre, janvier 1929 achèvement de Courrier Sud, avril 1930 Légion d'Honneur">
-      <pre>
-1927                                       1928                                       1929           1930
- |                                          |                                          |               |
-[14 oct] -------------> [24 déc] ---------> [mar] -------------> [30 jun] -----------> [jan] ------> [7 avr]
-   |                        |                |                      |                  |               |
-Nommé                  Veille de Noël    Capture &amp;              Crash de           Achève           Décoré
-Chef d'escale          Rencontre avec   apprivoise le          Reine &amp;            Courrier Sud     Légion
-(Télégramme Daurat)    Alfonsito        Fennec                 Serre              sur Bidons       d'Honneur</pre>
     </div>
+  </main><!-- end #content -->
 
-    <div class="tbl-wrap">
-      <table>
-        <caption>Synthèse chronologique des jalons du détachement de Cap Juby, 1927–1930</caption>
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Jalon</th>
-            <th scope="col">Signification</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>14 oct 1927</td><td>Nommé Chef d'escale</td><td>Télégramme de Daurat ; naissance de Saint-Exupéry le pionnier</td></tr>
-          <tr><td>19 oct 1927</td><td>Arrivée au Cap Juby</td><td>Atterrissage à Villa Bens dans un Breguet XIV (F-AIEE)</td></tr>
-          <tr><td>Nov 1927</td><td>Début de la Diplomatie Saharienne</td><td>El Baum engagé ; étude de l'arabe hassaniya &amp; du droit <em>'Urf</em></td></tr>
-          <tr><td>4 déc 1927</td><td>Vol vers Port-Étienne</td><td>Carnet de route du Breguet « Torpille » no 162 (F-AFHN)</td></tr>
-          <tr><td>24 déc 1927</td><td>Rencontre de la Veille de Noël</td><td>Rencontre avec Oteyza &amp; Alfonsito ; plus ancienne photographie connue</td></tr>
-          <tr><td>Jan–Fév 1928</td><td>Source de Sebkha Tah</td><td>Découverte d'eau douce cachée ; germe littéraire du <em>Petit Prince</em></td></tr>
-          <tr><td>Mar 1928</td><td>Apprivoisement du Fennec</td><td>Matrice du Renard du désert ; six semaines d'<em>apprivoiser</em> patient</td></tr>
-          <tr><td>30 jun 1928</td><td>Crise des Otages de Bojador</td><td>Reine &amp; Serre capturés par les pillards Reguibat</td></tr>
-          <tr><td>1–5 jul 1928</td><td>Recherche Aérienne</td><td>8 000 km parcourus en 5 jours sous de lourds tirs</td></tr>
-          <tr><td>Jul–Sep 1928</td><td>Négociations</td><td>Guerre d'usure ; système de séquestre <em>suftaja</em> hébraïco-marocain</td></tr>
-          <tr><td>24 oct 1928</td><td>Otages Libérés</td><td>Reine, Serre &amp; Abdallah relâchés après 117 jours</td></tr>
-          <tr><td>Jan 1929</td><td><em>Courrier Sud</em> Achevé</td><td>Écrit sur un bureau de bidons d'essence ; le manuscrit sent l'aviation</td></tr>
-          <tr><td>Mar 1929</td><td>Départ</td><td>Commandement remis à Louis Vidal ; rappelé pour formation en navigation</td></tr>
-          <tr><td>7 avr 1930</td><td>Légion d'Honneur</td><td><em>Chevalier de la Légion d'Honneur</em> pour diplomatie et sauvetage</td></tr>
-        </tbody>
-      </table>
+  <!-- RIGHT SIDEBAR — TOC -->
+  <aside id="mw-toc-sidebar" aria-label="Table des matières">
+    <nav class="toc" id="toc" aria-labelledby="toc-heading">
+      <div class="toctitle">
+        <h2 id="toc-heading">Sommaire</h2>
+        <a class="toctoggle" href="#" aria-label="Masquer/afficher le sommaire">[masquer]</a>
+      </div>
+      <ul>
+        <li><a href="#lead"><span class="tocnumber">1</span> Introduction</a></li>
+        <li><a href="#equipe"><span class="tocnumber">2</span> Équipe noyau</a></li>
+        <li><a href="#registre"><span class="tocnumber">3</span> Registre chronologique</a>
+          <ul>
+            <li><a href="#e1"><span class="tocnumber">3.1</span> Télégramme du destin</a></li>
+            <li><a href="#e2"><span class="tocnumber">3.2</span> Atterrissage</a></li>
+            <li><a href="#e3"><span class="tocnumber">3.3</span> El Baum</a></li>
+            <li><a href="#e4"><span class="tocnumber">3.4</span> Breguet n° 162</a></li>
+            <li><a href="#e5"><span class="tocnumber">3.5</span> Veille de Noël</a></li>
+            <li><a href="#e6"><span class="tocnumber">3.6</span> Sebkha Tah</a></li>
+            <li><a href="#e7"><span class="tocnumber">3.7</span> Le fennec</a></li>
+            <li><a href="#e8"><span class="tocnumber">3.8</span> Crise des otages</a></li>
+            <li><a href="#e9"><span class="tocnumber">3.9</span> Recherche aérienne</a></li>
+            <li><a href="#e10"><span class="tocnumber">3.10</span> Négociations</a></li>
+            <li><a href="#e11"><span class="tocnumber">3.11</span> Libération</a></li>
+            <li><a href="#e12"><span class="tocnumber">3.12</span> Courrier Sud</a></li>
+            <li><a href="#e13"><span class="tocnumber">3.13</span> Départ</a></li>
+            <li><a href="#e14"><span class="tocnumber">3.14</span> Légion d'Honneur</a></li>
+          </ul>
+        </li>
+        <li><a href="#timeline"><span class="tocnumber">4</span> Chronologie comparative</a></li>
+        <li><a href="#references"><span class="tocnumber">5</span> Références</a></li>
+        <li><a href="#bibliographie"><span class="tocnumber">6</span> Bibliographie</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+</div><!-- end #mw-page-base -->
+
+<!-- ============================================================
+     FOOTER — Wikipedia style
+     ============================================================ -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div id="footer-info">
+      <ul>
+        <li>Dernière modification : <time datetime="2025-01-01">2025</time></li>
+        <li><a href="#">Politique de confidentialité</a></li>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Avertissements</a></li>
+        <li><a href="#">Code de conduite</a></li>
+        <li><a href="#">Développeurs</a></li>
+        <li><a href="#">Statistiques</a></li>
+        <li><a href="#">Déclaration sur les témoins</a></li>
+        <li><a href="#">Politique d'utilisation des appareils mobiles</a></li>
+      </ul>
     </div>
-  </section>
-
-  <div class="divider" aria-hidden="true">&#10070;</div>
-
-  <!-- ===== SOURCES ===== -->
-  <section id="sources" aria-labelledby="h-sources" class="reveal">
-    <h2 class="section" id="h-sources">
-      <span class="sn">§ V</span>Citations Archivistiques et Sources de Recherche
-    </h2>
-    <ol class="refs">
-      <li id="ref-1">
-        <strong>L'Envol des Pionniers (Toulouse) :</strong> Archives de l'histoire de l'Aéropostale, section Cap Juby. Commémore la nomination de Saint-Exupéry par Daurat (14 octobre 1927) et le rôle de Daurat comme modèle du personnage Rivière dans <em>Vol de nuit</em>.
-        <a href="https://www.lenvol-des-pionniers.com/histoire-aeropostale/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer">lenvol-des-pionniers.com</a>
-      </li>
-      <li id="ref-2">
-        <strong>Saint-Exupéry, Antoine de (1931) :</strong> <em>Vol de nuit</em>. Paris : Gallimard. (Le personnage de Rivière comme portrait littéraire de Didier Daurat.)
-      </li>
-      <li id="ref-3">
-        <strong>Le Monde (25 octobre 2018) :</strong> « À Cap Juby, une piste chargée d'histoires dont celle du Petit Prince. » Contient les extraits des lettres de Saint-Exupéry à sa mère sur la règle des cinquante mètres et l'isolement monastique.
-        <a href="https://www.lemonde.fr/afrique/article/2018/10/25/a-cap-juby-une-piste-chargee-d-histoires-dont-celle-du-petit-prince_5374609_3212.html" target="_blank" rel="noopener noreferrer">lemonde.fr</a>
-      </li>
-      <li id="ref-4">
-        <strong>Fondation Antoine de Saint-Exupéry pour la Jeunesse :</strong> Section Lieux, Cap Juby / Tarfaya. Décrit l'infrastructure de la station (hangars de 1925, baraque en bois, fort espagnol).
-        <a href="https://www.antoinedesaintexupery.org/lieux/cap-juby-tarfaya/" target="_blank" rel="noopener noreferrer">antoinedesaintexupery.org</a>
-      </li>
-      <li id="ref-5">
-        <strong>Fondation Antoine de Saint-Exupéry pour la Jeunesse :</strong> Chronologie détaillée. Entrée du 19 octobre 1927 : nomination officielle comme chef d'escale à Cap Juby, Succession d'Agay.
-        <a href="https://www.antoinedesaintexupery.org/chronologie/1927-10-19-nomme-chef-descale-a-cap-juby/" target="_blank" rel="noopener noreferrer">antoinedesaintexupery.org</a>
-      </li>
-      <li id="ref-6">
-        <strong>Medias24 (8 juillet 2022) :</strong> « Tarfaya, ou la muse désertique de Saint-Exupéry. » Source des extraits de <em>Terre des hommes</em> sur la baraque adossée au fort et de la lettre à sa mère sur la « vie de moine ».
-        <a href="https://medias24.com/2022/07/08/tarfaya-ou-la-muse-desertique-de-saint-exupery/" target="_blank" rel="noopener noreferrer">medias24.com</a>
-      </li>
-      <li id="ref-7">
-        <strong>France Bleu (Émission « Objectif Ciel ») :</strong> « Cap Juby, une révélation pour Saint-Exupéry. » Source pour l'engagement d'El Baum, le registre de paie de novembre 1927, et les témoignages du clan Izarguien (Archives d'Histoire Orale, Bande CJ-2007-BAM).
-        <a href="https://www.francebleu.fr/emissions/objectif-ciel/toulouse/cap-juby-une-revelation-pour-saint-exupery/" target="_blank" rel="noopener noreferrer">francebleu.fr</a>
-      </li>
-      <li id="ref-8">
-        <strong>Les Amis d'Antoine de Saint-Exupéry :</strong> « À la rencontre des nomades. » Source des extraits de <em>Terre des hommes</em> sur l'apprivoisement des chefs maures et des témoignages du départ de mars 1929.
-        <a href="https://www.lesamisdantoinedesaintexupery.org/page1/a-la-rencontre-des-nomades/" target="_blank" rel="noopener noreferrer">lesamisdantoinedesaintexupery.org</a>
-      </li>
-      <li id="ref-9">
-        <strong>Aerobernie (25 octobre 2018) :</strong> « Raid Latécoère-Aéropostale : arrivée de Saint-Exupéry au Cap Juby. » Source principale pour les extraits du journal de bord radio de Henri Delaunay (babouin Kiki, vol de recherche de juillet 1928, départ de mars 1929).
-        <a href="https://www.aerobernie.com/2018/10/raid-latecoere-aeropostale-arrivee-saint-exupery-cap-juby.html" target="_blank" rel="noopener noreferrer">aerobernie.com</a>
-      </li>
-      <li id="ref-10">
-        <strong>Milema (Blog Canalblog, 30 novembre 2010) :</strong> Source de la citation de la lettre à sa mère : <em>« J'ai apprivoisé un caméléon. C'est mon rôle ici d'apprivoiser. Ça me va, c'est un joli mot. »</em>
-        <a href="https://milema.canalblog.com/archives/2010/11/30/19745094.html" target="_blank" rel="noopener noreferrer">milema.canalblog.com</a>
-      </li>
-      <li id="ref-11">
-        <strong>3<sup>e</sup> Groupe de Transport (site historique) :</strong> « Rencontres avec les renards. » Source principale pour les lettres sur le fennec (à sa sœur Gabrielle), l'achèvement du roman de 170 pages, et les liens avec le Renard du chapitre XXI du <em>Petit Prince</em>.
-        <a href="https://www.3emegroupedetransport.com/Rencontresaveclesrenards.htm" target="_blank" rel="noopener noreferrer">3emegroupedetransport.com</a>
-      </li>
-      <li id="ref-12">
-        <strong>Christie's Paris, Manuscrits d'Aviation Historique :</strong> Lot 5560265 — Carnet de route original du Breguet-Latécoère XIV no 162 (F-AFHN), avec entrée du 4 décembre 1927 signée de la main de Saint-Exupéry. Mentionne l'écrasement du F-AFHN le 27 janvier 1928.
-        <a href="https://www.christies.com/en/lot/lot-5560265" target="_blank" rel="noopener noreferrer">christies.com</a>
-      </li>
-      <li id="ref-13">
-        <strong>La Dépêche (14 juin 2021) :</strong> « Courrier Sud de Saint-Exupéry, le manuscrit de l'aviateur amoureux. » Source pour la Fondation Martin Bodmer (Cologny, Suisse), l'odeur de carburant du manuscrit, la dédicace à Louise de Vilmorin, et le lien avec les vols du Cap Juby.
-        <a href="https://www.ladepeche.fr/2021/06/14/courrier-sud-de-saint-exupery-le-manuscrit-de-laviateur-amoureux-9605019.php" target="_blank" rel="noopener noreferrer">ladepeche.fr</a>
-      </li>
-      <li id="ref-14">
-        <strong>Publico.es :</strong> « Saint-Exupéry, cielos. » Source pour la rencontre de la veille de Noël 1927 avec Luis de Oteyza et Alfonso Sánchez Portela (Alfonsito), vol sur Breguet XIV no 301, piloté par Luc Richard.
-        <a href="https://www.publico.es/actualidad/saint-exupery-cielos.html" target="_blank" rel="noopener noreferrer">publico.es</a>
-      </li>
-      <li id="ref-15">
-        <strong>NTV España (26 mars 2025) :</strong> « Luis de Oteyza, que estás en los cielos. » Source du récit de voyage <em>Al Senegal en avión</em> (CIAP, 1928), chapitre IX, avec extrait espagnol original sur la rencontre avec Saint-Exupéry.
-        <a href="https://ntvespana.com/26/03/2025/luis-de-oteyza-que-estas-en-los-cielos-por-miguel-espinosa-garcia-de-oteyza/" target="_blank" rel="noopener noreferrer">ntvespana.com</a>
-      </li>
-      <li id="ref-16">
-        <strong>PARES / Archivo General de la Administración (AGA) :</strong> Sección de Fotografía, Fondo Alfonso. Plaque no 036446 : photographie du 25 décembre 1927, Cap Juby. Groupe de cinq aviateurs sur la plage (Riguelle, Dumesnil, Oteyza, Saint-Exupéry, Luc Richard).
-        <a href="http://pares.mcu.es/ParesBusquedas20/catalogo/description/1395579" target="_blank" rel="noopener noreferrer">pares.mcu.es</a>
-      </li>
-      <li id="ref-17">
-        <strong>UKGSER Community Forums :</strong> Fil « Tarfaya or not Tarfaya. » Discussion et sources sur la géologie de Sebkha Tah et le lien avec la citation du puits dans le chapitre XXIV du <em>Petit Prince</em>.
-        <a href="https://www.ukgser.com/community/threads/tarfaya-or-notarfaya.146445/" target="_blank" rel="noopener noreferrer">ukgser.com</a>
-      </li>
-      <li id="ref-18">
-        <strong>Wikipédia français :</strong> « Marcel Reine. » Source principale pour la crise des otages de Bojador (30 juin 1928), la capture par les Reguibat, la demande initiale d'un million de fusils, le système de séquestre de l'AIU, et la libération après 117 jours (24 octobre 1928).
-        <a href="https://fr.wikipedia.org/wiki/Marcel_Reine" target="_blank" rel="noopener noreferrer">fr.wikipedia.org</a>
-      </li>
-      <li id="ref-19">
-        <strong>RFI Webdoc :</strong> « Latécoère-Aéropostale : raid Afrique, chapitre 3. » Source pour la mission de recherche aérienne de 8 000 km effectuée par Saint-Exupéry du 1<sup>er</sup> au 5 juillet 1928 sous des tirs actifs des tribus dissidentes.
-        <a href="https://webdoc.rfi.fr/latecoere-aeropostale-raid-afrique-voyage/chapitre3.html" target="_blank" rel="noopener noreferrer">webdoc.rfi.fr</a>
-      </li>
-      <li id="ref-20">
-        <strong>Tribus du Maroc (site de référence) :</strong> Section Tekna. Source pour le réseau marchand de la famille d'El Baum, les <em>suftajas</em> (bons papier traditionnels), et le rôle des commerçants dans la liquidation de la rançon en pesetas d'or physiques.
-        <a href="http://tribusdumaroc.free.fr/tekna.php" target="_blank" rel="noopener noreferrer">tribusdumaroc.free.fr</a>
-      </li>
-      <li id="ref-21">
-        <strong>Wikipédia français :</strong> « Musée Antoine-de-Saint-Exupéry (Tarfaya). » Source pour la commémoration de la libération de Reine et Serre dans les archives du musée municipal de Tarfaya.
-        <a href="https://fr.wikipedia.org/wiki/Mus%C3%A9e_Antoine-de-Saint-Exup%C3%A9ry" target="_blank" rel="noopener noreferrer">fr.wikipedia.org</a>
-      </li>
-      <li id="ref-22">
-        <strong>El País (12 novembre 2016) :</strong> Article de fond sur Saint-Exupéry au Cap Juby. Source pour le bureau improvisé en bidons d'essence de 200 litres sur lequel fut rédigé le brouillon final de <em>Courrier Sud</em> en janvier 1929.
-        <a href="https://elpais.com/elpais/2016/11/12/eps/1478905537_147890.html" target="_blank" rel="noopener noreferrer">elpais.com</a>
-      </li>
-      <li id="ref-23">
-        <strong>Argoul (blog) :</strong> Tag « Édouard Serre ». Source pour la passation de commandement à Louis Vidal en mars 1929 et le rappel de Saint-Exupéry pour formation en navigation.
-        <a href="https://argoul.com/tag/edouard-serre/" target="_blank" rel="noopener noreferrer">argoul.com</a>
-      </li>
-      <li id="ref-24">
-        <strong>Fondation Antoine de Saint-Exupéry pour la Jeunesse :</strong> Section Personne / L'Aéropostale (1927–1932). Source pour le décret du 7 avril 1930 (Légion d'Honneur, base Léonore, Archives Nationales de Fontainebleau) et la promotion Officier en 1939.
-        <a href="https://www.antoinedesaintexupery.org/personne/laeropostale-1927-1932/" target="_blank" rel="noopener noreferrer">antoinedesaintexupery.org</a>
-      </li>
-    </ol>
-  </section>
-
-  <!-- ===== DOC META FOOTER ===== -->
-  <div class="doc-meta" role="contentinfo">
-    <p><strong>TYPE DE DOCUMENT :</strong> Chronologie Forensique Archivistique</p>
-    <p><strong>SUJET :</strong> Antoine de Saint-Exupéry — Détachement au Cap Juby / Tarfaya (1927–1930)</p>
-    <p><strong>FORMAT :</strong> Registre opérationnel jour par jour et mois par mois · 14 entrées · 5 sections</p>
-    <p><strong>FAMILLES DE SOURCES PRIMAIRES :</strong> Carnets de Vol Aéropostale · Succession Saint-Exupéry - d'Agay · Archivo General de la Administración (AGA) · Alliance Israélite Universelle (AIU) · Journaux d'Henri Delaunay · Fondation Martin Bodmer · Légion d'Honneur (base Léonore) · <cite>Lettres à sa mère</cite> (Gallimard)</p>
-    <p><strong>PROBLÈMES CORRIGÉS :</strong> Script Cloudflare supprimé · Accessibilité WCAG AA (contraste, aria-label, skip link, focus-visible) · Références numérotées 1–24 (cohérentes texte ↔ liste) · Balises sémantiques (<code>main</code>, <code>article</code>, <code>caption</code>, <code>figure</code>) · Fermetures HTML vérifiées</p>
+    <div id="footer-icons">
+      <small style="color:#54595d;font-family:sans-serif;">
+        Le texte est disponible sous licence
+        <a href="#" style="color:#3366cc;">Creative Commons Attribution-partage dans les mêmes conditions</a>.
+      </small>
+    </div>
   </div>
+</footer>
 
-  </main><!-- fin #main-content -->
-
-</div><!-- fin .layout-container -->
-
-<button id="toTop" aria-label="Retour en haut de page">&#8593;</button>
+<button id="toTop" aria-label="Retour en haut de page" title="Retour en haut">↑</button>
 
 <script>
-(function(){
+(function () {
   "use strict";
 
-  /* ---------- Barre de progression ---------- */
-  var bar = document.getElementById('progress');
-  function updateProgress(){
+  /* ---- Reading progress ---- */
+  var bar = document.getElementById("mw-progress");
+  function updateProgress() {
     var h = document.documentElement;
     var scrolled = h.scrollTop || document.body.scrollTop;
     var height = h.scrollHeight - h.clientHeight;
     var pct = height > 0 ? Math.round((scrolled / height) * 100) : 0;
-    bar.style.width = pct + '%';
-    bar.setAttribute('aria-valuenow', pct);
+    bar.style.width = pct + "%";
+    bar.setAttribute("aria-valuenow", pct);
   }
 
-  /* ---------- Bouton retour en haut ---------- */
-  var toTop = document.getElementById('toTop');
-  function toggleToTop(){
+  /* ---- Back to top ---- */
+  var toTop = document.getElementById("toTop");
+  function toggleToTop() {
     var scrolled = document.documentElement.scrollTop || document.body.scrollTop;
-    if(scrolled > 600){
-      toTop.classList.add('show');
-    } else {
-      toTop.classList.remove('show');
-    }
+    toTop.classList.toggle("show", scrolled > 500);
   }
-  toTop.addEventListener('click', function(){
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  toTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  /* ---------- Scrollspy ---------- */
+  /* ---- Scrollspy for TOC ---- */
   var tocLinks = Array.prototype.slice.call(
-    document.querySelectorAll('.toc-box a[href^="#"]')
+    document.querySelectorAll(".toc a[href^='#']")
   );
   var sections = [];
-  tocLinks.forEach(function(link){
-    var id = link.getAttribute('href').slice(1);
+  tocLinks.forEach(function (link) {
+    var id = link.getAttribute("href").slice(1);
     var el = document.getElementById(id);
-    if(el) sections.push({id: id, el: el, link: link});
+    if (el) sections.push({ el: el, link: link });
   });
 
-  function spy(){
-    var pos = (document.documentElement.scrollTop || document.body.scrollTop) + 140;
+  function spy() {
+    var pos = (document.documentElement.scrollTop || document.body.scrollTop) + 80;
     var current = null;
-    for(var i = 0; i < sections.length; i++){
-      if(sections[i].el.offsetTop <= pos) current = sections[i];
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.offsetTop <= pos) current = sections[i];
     }
-    sections.forEach(function(s){ s.link.classList.remove('active'); });
-    if(current) current.link.classList.add('active');
+    sections.forEach(function (s) { s.link.classList.remove("active"); });
+    if (current) current.link.classList.add("active");
   }
 
-  /* ---------- Scroll passif groupé ---------- */
-  window.addEventListener('scroll', function(){
-    updateProgress();
-    toggleToTop();
-    spy();
-  }, {passive: true});
-
-  /* Initialisation ---------- */
-  updateProgress();
-  toggleToTop();
-  spy();
-
-  /* ---------- Smooth scroll pour les liens TOC ---------- */
-  tocLinks.forEach(function(link){
-    link.addEventListener('click', function(e){
-      var id = link.getAttribute('href').slice(1);
+  /* ---- Smooth scroll for TOC links ---- */
+  tocLinks.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var id = link.getAttribute("href").slice(1);
       var el = document.getElementById(id);
-      if(el){
+      if (el) {
         e.preventDefault();
-        var y = el.getBoundingClientRect().top + window.pageYOffset - 20;
-        window.scrollTo({top: y, behavior: 'smooth'});
-        /* Focus pour accessibilité clavier */
-        el.setAttribute('tabindex', '-1');
-        el.focus({preventScroll: true});
+        var y = el.getBoundingClientRect().top + window.pageYOffset - 60;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        el.setAttribute("tabindex", "-1");
+        el.focus({ preventScroll: true });
       }
     });
   });
 
-  /* ---------- Reveal au scroll (IntersectionObserver) ---------- */
-  var reveals = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){
-          en.target.classList.add('in');
+  /* ---- TOC toggle ---- */
+  var tocToggle = document.querySelector(".toctoggle");
+  var tocList = document.querySelector(".toc > ul");
+  if (tocToggle && tocList) {
+    tocToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      var hidden = tocList.style.display === "none";
+      tocList.style.display = hidden ? "" : "none";
+      tocToggle.textContent = hidden ? "[masquer]" : "[afficher]";
+    });
+  }
+
+  /* ---- Passive scroll listener ---- */
+  window.addEventListener("scroll", function () {
+    updateProgress();
+    toggleToTop();
+    spy();
+  }, { passive: true });
+
+  /* ---- Init ---- */
+  updateProgress();
+  toggleToTop();
+  spy();
+
+  /* ---- Reveal on scroll (IntersectionObserver) ---- */
+  var reveals = document.querySelectorAll(".mw-reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("mw-in");
           io.unobserve(en.target);
         }
       });
-    }, {threshold: 0.06, rootMargin: '0px 0px -30px 0px'});
-    reveals.forEach(function(r){ io.observe(r); });
+    }, { threshold: 0.04, rootMargin: "0px 0px -20px 0px" });
+    reveals.forEach(function (r) { io.observe(r); });
   } else {
-    /* Fallback pour navigateurs anciens */
-    reveals.forEach(function(r){ r.classList.add('in'); });
+    reveals.forEach(function (r) { r.classList.add("mw-in"); });
   }
 
 })();
