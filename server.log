@@ -1,6 +1,0 @@
-127.0.0.1 - - [13/Jun/2026 23:06:53] "GET /biography.html HTTP/1.1" 200 -
-127.0.0.1 - - [13/Jun/2026 23:06:53] code 404, message File not found
-127.0.0.1 - - [13/Jun/2026 23:06:53] "GET /_aistudio-iframe.js HTTP/1.1" 404 -
-127.0.0.1 - - [13/Jun/2026 23:07:56] "GET /biography.html HTTP/1.1" 200 -
-127.0.0.1 - - [13/Jun/2026 23:07:56] code 404, message File not found
-127.0.0.1 - - [13/Jun/2026 23:07:56] "GET /_aistudio-iframe.js HTTP/1.1" 404 -
