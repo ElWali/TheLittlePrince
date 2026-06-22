@@ -47,6 +47,39 @@ body{
   z-index:1000;transition:width .12s linear;
 }
 
+/* ---------- Layout Wrapper ---------- */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media (min-width: 1150px) {
+  .layout-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 0 40px;
+    max-width: 1300px;
+  }
+  .page {
+    flex: 1;
+    margin-top: 40px;
+  }
+  .toc-box {
+    position: sticky;
+    top: 40px;
+    width: 320px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    margin: 40px 0 !important;
+    flex-shrink: 0;
+    z-index: 100;
+  }
+}
+
 /* ---------- Single-column wrapper ---------- */
 .page{max-width:var(--content-w);margin:0 auto;padding:0 24px}
 
@@ -81,8 +114,9 @@ body{
   font-family:var(--sans);letter-spacing:.03em;color:var(--ink-faint);
 }
 
-/* ---------- Inline Table of Contents ---------- */
+/* ---------- Table of Contents (Sidebar) ---------- */
 .toc-box{
+  display: block !important; /* Force visibility to counter external Tilda CSS */
   margin:40px 0 20px;padding:30px 34px;background:var(--paper);
   border:1px solid var(--rule);border-radius:8px;
   border-top:3px solid var(--accent);
@@ -258,11 +292,9 @@ ol.refs li::before{
   </div>
 </header>
 
-<!-- ===================== CONTENT ===================== -->
-<div class="page">
-
-  <!-- ===== INLINE TABLE OF CONTENTS ===== -->
-  <nav class="toc-box reveal" id="tocbox">
+<div class="layout-container">
+  <!-- ===== TABLE OF CONTENTS (SIDEBAR) ===== -->
+  <nav class="toc-box reveal toc" id="tocbox">
     <div class="toc-label">Table des Matières</div>
     <ul class="toc-list">
       <li><a href="#introduction">Introduction Méthodologique</a></li>
@@ -289,6 +321,9 @@ ol.refs li::before{
       <li><a href="#sources">Citations Archivistiques et Sources de Recherche</a></li>
     </ul>
   </nav>
+
+  <!-- ===================== CONTENT ===================== -->
+  <div class="page">
 
   <!-- ===== INTRODUCTION ===== -->
   <section id="introduction" class="reveal">
@@ -771,9 +806,9 @@ Chef d'escale          Rencontre avec   apprivoise le          Reine &amp;      
     <p><strong>SUJET :</strong> Antoine de Saint-Exupéry — Détachement au Cap Juby / Tarfaya (1927–1930)</p>
     <p><strong>FORMAT :</strong> Registre opérationnel jour par jour et mois par mois</p>
     <p><strong>FAMILLES DE SOURCES PRIMAIRES :</strong> Carnets de Vol Aéropostale · Succession Saint-Exupéry - d'Agay · Archivo Histórico Nacional de España · NARA · Journaux d'Henri Delaunay · Fondation Martin Bodmer · <em>Lettres à sa mère</em> (Gallimard)</p>
-  </div>
+  </div> <!-- end .page -->
 
-</div>
+</div> <!-- end .layout-container -->
 
 <button id="toTop" aria-label="Retour en haut">&#8593;</button>
 
